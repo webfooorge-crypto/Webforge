@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Future Course</title>
+    <style>
+        :root { --primary-blue: #0046ad; --matrix-green: #00FF41; --sky-blue: #00d4ff; }
+
+        /* --- 1. ثيم البداية --- */
+        #matrix-intro { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: black; display: flex; justify-content: center; 
+            align-items: center; z-index: 10000; transition: opacity 1s ease; 
+        }
+        .matrix-text { 
+            color: var(--matrix-green); font-family: 'Courier New', monospace; 
+            font-size: 1.8rem; font-weight: bold; opacity: 0;
+            animation: explosive-glow 4s ease-in-out forwards;
+        }
+        @keyframes explosive-glow {
+            0% { transform: scale(0.5); opacity: 0; text-shadow: 0 0 0 var(--matrix-green); }
+            50% { transform: scale(1.1); opacity: 1; text-shadow: 0 0 30px var(--matrix-green); }
+            100% { transform: scale(1); opacity: 1; text-shadow: 0 0 10px var(--matrix-green); }
+        }
+
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; background: #f4f7f6; color: #333; overflow-x: hidden; }
+
+        /* --- 2. الهيدر --- */
+        header { background: #fff; padding: 15px; text-align: center; border-bottom: 4px solid var(--primary-blue); position: relative; z-index: 100; }
+        .logo-circle { width: 50px; height: 50px; background: var(--primary-blue); border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; font-weight: bold; }
+        .brand-title { 
+            font-size: 1.4rem; font-weight: 900;
+            background: linear-gradient(to right, #2ecc71, #f1c40f, #9b59b6, #2ecc71);
+            background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: shine 4s linear infinite;
+        }
+        @keyframes shine { to { background-position: 200% center; } }
+
+        /* --- 3. الغلاف البصري (Hero AI) --- */
+        .hero { 
+            position: relative; padding: 80px 20px; text-align: center;
+            background: url('https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+            min-height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .hero::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1; }
+        .hero-content { position: relative; z-index: 10; animation: fadeInUp 1.5s ease-out; }
+        .hero h2 { font-size: 1.8rem; color: #fff; font-weight: 900; margin: 0; }
+        .future-title { 
+            font-size: 1.1rem; color: var(--sky-blue); margin-top: 15px; font-weight: 600;
+            text-shadow: 0 0 15px var(--sky-blue); display: inline-block;
+            animation: float-glow 3s ease-in-out infinite;
+        }
+        @keyframes float-glow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- 4. باقات VIP --- */
+        .container { padding: 30px 15px; display: flex; flex-direction: column; align-items: center; gap: 25px; }
+        .card { background: #fff; width: 100%; max-width: 340px; border-radius: 25px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; position: relative; }
+        .header-box { padding: 45px 20px; position: relative; overflow: hidden; color: white; }
+        .vip-title { font-size: 2.5rem; font-weight: 900; position: relative; z-index: 10; }
+        .fall-item { position: absolute; top: -40px; font-size: 25px; animation: fallAnim linear infinite; z-index: 1; pointer-events: none; }
+        @keyframes fallAnim { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 10% { opacity: 1; } 100% { transform: translateY(200px) rotate(360deg); opacity: 0; } }
+        .header-v1 { background: linear-gradient(135deg, #1d976c, #93f9b9); }
+        .header-v2 { background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728); }
+        .header-v3 { background: linear-gradient(135deg, #4b0082, #8e44ad, #6a0dad); }
+        .price { font-size: 2.1rem; font-weight: 800; padding: 20px; color: #222; }
+        .btn { border: none; padding: 15px; border-radius: 12px; color: #fff; font-weight: bold; cursor: pointer; width: 85%; margin-bottom: 25px; font-size: 1.1rem; }
+
+        /* --- 5. آراء الزبناء --- */
+        #reviews-container { padding: 40px 15px; background: #fff; text-align: center; }
+        .reviews-wrapper { display: flex; overflow-x: auto; gap: 15px; padding: 15px; scrollbar-width: none; }
+        .reviews-wrapper::-webkit-scrollbar { display: none; }
+        .review-card { min-width: 280px; background: #fdfdfd; padding: 25px; border-radius: 20px; border-right: 6px solid var(--primary-blue); text-align: right; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+
+        /* --- 6. الفوتر المبدع (صورة AI) --- */
+        .modern-footer {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover; background-position: center; padding: 60px 20px; text-align: center; color: white; border-top: 4px solid var(--sky-blue);
+        }
+        .footer-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; max-width: 500px; margin: 30px auto; }
+        .footer-item {
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 20px; border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2); text-decoration: none; color: white; display: flex; flex-direction: column; align-items: center; transition: 0.3s; cursor: pointer;
+        }
+        .footer-item:hover { transform: translateY(-5px); border-color: var(--sky-blue); }
+        .footer-item span { font-weight: bold; margin-top: 10px; font-size: 0.9rem; }
+
+        /* --- 7. النوافذ (Modals) --- */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 20000; justify-content: center; align-items: center; padding: 15px; }
+        .modal-content { background: #fff; padding: 30px; border-radius: 25px; width: 100%; max-width: 400px; text-align: center; color: #333; position: relative; }
+        .about-modal { background: linear-gradient(145deg, #ffffff, #f0f9ff); border: 2px solid var(--sky-blue); text-align: right; }
+        .team-list { background: rgba(0, 212, 255, 0.05); padding: 15px; border-radius: 15px; list-style: none; padding-right: 15px; }
+        .team-list li { margin: 8px 0; font-weight: bold; }
+        input, textarea { width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 10px; margin-top: 10px; box-sizing: border-box; }
+        footer { background: #000; color: #666; padding: 20px; text-align: center; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+    <div id="matrix-intro"><div class="matrix-text">WELCOME TO THE FUTURE</div></div>
+
+    <header>
+        <div class="logo-circle">P</div>
+        <div class="brand-title">PROFESSIONAL FUTURE COURSE</div>
+        <div style="font-size: 0.8rem; color: #666; font-weight: bold;">By Mohammed Ait Saleh</div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>اكتشف مستقبل التجارة والبرمجة</h2>
+            <div class="future-title">دورة المستقبل المحترف باب لك نحو مستقبل مزهر</div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="card">
+            <div class="header-box header-v1"><div class="vip-title">VIP 1</div><span class="fall-item" style="left:10%; animation-duration: 3s;">🍃</span><span class="fall-item" style="left:80%; animation-duration: 4s;">🌿</span></div>
+            <div class="price">99 درهم</div>
+            <button class="btn" style="background: #27ae60;" onclick="openPkg('VIP 1')">عرض المحتويات</button>
+        </div>
+        <div class="card">
+            <div class="header-box header-v2"><div class="vip-title">VIP 2</div><span class="fall-item" style="left:15%; animation-duration: 3s;">💰</span><span class="fall-item" style="left:75%; animation-duration: 2s;">🟡</span></div>
+            <div class="price">149 درهم</div>
+            <button class="btn" style="background: #e67e22;" onclick="openPkg('VIP 2')">عرض المحتويات</button>
+        </div>
+        <div class="card">
+            <div class="header-box header-v3"><div class="vip-title">VIP 3</div><span class="fall-item" style="left:10%; animation-duration: 2.5s;">💎</span><span class="fall-item" style="left:85%; animation-duration: 3.5s;">✨</span></div>
+            <div class="price">249 درهم</div>
+            <button class="btn" style="background: #8e44ad;" onclick="openPkg('VIP 3')">عرض المحتويات</button>
+        </div>
+    </div>
+
+    <div id="reviews-container">
+        <h3 style="color: var(--primary-blue);">آراء الزبناء ⭐</h3>
+        <div class="reviews-wrapper" id="reviews-list"></div>
+        <button onclick="openRatingModal()" style="background:none; border:2px solid var(--primary-blue); padding:10px 20px; border-radius:12px; cursor:pointer; font-weight:bold; margin-top:15px; color:var(--primary-blue);">أضف تقييمك</button>
+    </div>
+
+    <section class="modern-footer">
+        <h3 style="color: var(--sky-blue); margin-bottom: 5px;">مركز الدعم والخدمات</h3>
+        <div class="footer-grid">
+            <a href="https://wa.me/212717146434" class="footer-item"><i>🚨</i><span>تقديم شكاية</span></a>
+            <a href="https://wa.me/212602056662" class="footer-item"><i>💬</i><span>الدعم الفني</span></a>
+            <a href="mailto:mohaitsalh1337@gmail.com" class="footer-item"><i>📧</i><span>البريد</span></a>
+            <div class="footer-item" onclick="openAbout()"><i>ℹ️</i><span>من نحن</span></div>
+        </div>
+    </section>
+
+    <div id="aboutModal" class="modal">
+        <div class="modal-content about-modal">
+            <h3 style="color: var(--primary-blue);">من نحن</h3>
+            <p>نحن مجموعة <strong>Professional Future Course</strong></p>
+            <p>الأعضاء:</p>
+            <ul class="team-list">
+                <li>Mohammed Ait Saleh</li>
+                <li>Hajar Ait Belaid</li>
+                <li>Aissa</li>
+                <li>Omayma</li>
+            </ul>
+            <p style="font-size: 0.9rem; line-height: 1.6;">نقدم دورات تكوينية إلكترونية للعمل على الإنترنت وأدوات الحاسوب (Word, PowerPoint وغيره)، وكذلك خدمة إنشاء مواقع إلكترونية شخصية وللعمل.</p>
+            <button class="btn" style="background: var(--primary-blue); width: 100%; margin-top: 15px;" onclick="closeAbout()">إغلاق</button>
+        </div>
+    </div>
+
+    <div id="orderModal" class="modal">
+        <div class="modal-content"><h2 id="mTitle" style="color: var(--primary-blue); margin-top:0;"></h2><div id="step1"><ul id="featList" style="text-align:right; list-style:none; padding:0; font-weight:bold; line-height:2.2;"></ul><button class="btn" style="background: #27ae60; width:100%;" onclick="toStep2()">اطلب الآن</button></div><div id="step2" style="display: none;"><input type="text" id="uName" placeholder="الاسم الكامل"><input type="tel" id="uPhone" placeholder="رقم واتساب"><button class="btn" style="background: #8e44ad; width:100%; margin-top:15px;" onclick="finishOrder()">تأكيد</button></div></div>
+    </div>
+
+    <div id="ratingModal" class="modal">
+        <div class="modal-content"><h3>قيم تجربتك</h3><div id="stars" style="font-size: 2.5rem; cursor: pointer; color:#ccc; margin-bottom:15px;"><span onclick="setRate(1)">★</span><span onclick="setRate(2)">★</span><span onclick="setRate(3)">★</span><span onclick="setRate(4)">★</span><span onclick="setRate(5)">★</span></div><button class="btn" style="background: var(--primary-blue); width:100%;" onclick="document.getElementById('ratingModal').style.display='none'">إغلاق</button></div>
+    </div>
+
+    <footer>© 2026 PROFESSIONAL FUTURE COURSE | BY MOHAMMED AIT SALEH</footer>
+
+    <script>
+        window.onload = () => { setTimeout(() => { document.getElementById('matrix-intro').style.display = 'none'; }, 5000); loadReviews(); };
+        function openAbout() { document.getElementById('aboutModal').style.display = 'flex'; }
+        function closeAbout() { document.getElementById('aboutModal').style.display = 'none'; }
+        
+        let currentPkg = "";
+        const data = { 'VIP 1': ["دورة AliExpress", "أساسيات التجارة"], 'VIP 2': ["محتويات VIP 1", "دورة البرمجة"], 'VIP 3': ["جميع الدورات والدروس", "حساب Canva Pro"] };
+        function openPkg(v) {
+            currentPkg = v; document.getElementById('mTitle').innerText = "باقة " + v;
+            const l = document.getElementById('featList'); l.innerHTML = "";
+            data[v].forEach(i => l.innerHTML += `<li>⚡ ${i}</li>`);
+            document.getElementById('step1').style.display="block"; document.getElementById('step2').style.display="none";
+            document.getElementById('orderModal').style.display="flex";
+        }
+        function toStep2() { document.getElementById('step1').style.display="none"; document.getElementById('step2').style.display="block"; }
+        function finishOrder() {
+            const n=document.getElementById('uName').value, p=document.getElementById('uPhone').value;
+            if(!n||!p) return alert("يرجى إكمال البيانات!");
+            window.location.href=`https://wa.me/212602056662?text=${encodeURIComponent('طلب '+currentPkg+'\nالاسم: '+n+'\nهاتف: '+p)}`;
+        }
+        function setRate(r) { const s = document.querySelectorAll('#stars span'); s.forEach((x,i) => x.style.color = i<r ? '#f1c40f' : '#ccc'); }
+        function loadReviews() {
+            const list = document.getElementById('reviews-list');
+            let revs = JSON.parse(localStorage.getItem('futureRevs') || "[]");
+            list.innerHTML = revs.length ? "" : "<p>لا توجد تقييمات حالياً.</p>";
+            revs.reverse().forEach(r => { list.innerHTML += `<div class="review-card"><strong>${r.name}</strong><div style="color:#f1c40f">${"★".repeat(r.stars)}</div><p>${r.text}</p></div>`; });
+        }
+        window.onclick = (e) => { if(e.target.className === 'modal') e.target.style.display = 'none'; }
+    </script>
+</body>
+</html>
