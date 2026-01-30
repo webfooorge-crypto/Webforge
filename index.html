@@ -49,6 +49,8 @@
             font-weight: bold;
             text-decoration: none;
             transition: 0.3s;
+            cursor: pointer;
+            font-size: 1rem;
         }
         .nav-btn:hover { background: var(--accent); color: var(--bg-dark); box-shadow: 0 0 15px var(--accent-glow); }
 
@@ -156,7 +158,6 @@
         .client-info h4 { color: var(--text-main); font-size: 1.1rem; margin-bottom: 5px; }
         .client-info span { color: var(--accent); font-size: 0.9rem; }
 
-        /* زر إضافة رأي */
         .add-review-btn {
             margin-top: 3rem;
             background: transparent;
@@ -193,103 +194,66 @@
             max-height: 90vh;
             overflow-y: auto;
         }
+        
+        /* تنسيقات خاصة لنافذة "من نحن" */
+        .about-text { text-align: right; color: var(--text-secondary); line-height: 1.7; margin-top: 15px; }
+        .about-text h4 { color: var(--text-main); margin-top: 20px; margin-bottom: 10px; font-size: 1.1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; display: inline-block;}
+        .about-text ul { list-style: none; margin-right: 10px; }
+        .about-text ul li { margin-bottom: 8px; position: relative; }
+        .about-text ul li::before { content: "•"; color: var(--forge-orange); font-weight: bold; margin-left: 8px; }
+        
+        .team-container { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
+        .team-member { 
+            background: rgba(245, 158, 11, 0.1); 
+            color: var(--forge-orange); 
+            padding: 8px 15px; 
+            border-radius: 20px; 
+            font-size: 0.9rem; 
+            font-weight: bold; 
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
         .close-btn { position: absolute; top: 15px; left: 20px; font-size: 1.5rem; cursor: pointer; color: var(--text-secondary); }
         .modal-title { color: var(--accent); margin-bottom: 1.5rem; font-size: 1.4rem; }
         
-        /* عناصر النموذج */
         .form-input, .form-textarea, .form-select {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            background-color: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 8px;
-            color: white;
-            outline: none;
-            font-size: 1rem;
-            text-align: right;
+            width: 100%; padding: 12px; margin-bottom: 15px; background-color: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; outline: none; font-size: 1rem; text-align: right;
         }
         .form-textarea { height: 100px; resize: none; }
-        .form-select { color: var(--text-main); cursor: pointer; }
         .form-select option { background-color: var(--bg-card); }
-        .form-input:focus, .form-textarea:focus { border-color: var(--forge-orange); }
+        .form-input:focus { border-color: var(--forge-orange); }
         
         .submit-btn {
-            width: 100%;
-            padding: 12px;
-            background: var(--forge-orange);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: 0.3s;
+            width: 100%; padding: 12px; background: var(--forge-orange); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: 0.3s;
         }
         .submit-btn:hover { background: #d97706; }
 
-        /* قائمة أنواع المواقع */
-        .types-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
+        .types-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 20px; }
         .type-btn {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--accent);
-            color: var(--text-main);
-            padding: 15px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: 0.3s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
+            background: rgba(255,255,255,0.05); border: 1px solid var(--accent); color: var(--text-main);
+            padding: 15px; border-radius: 10px; cursor: pointer; font-size: 1rem; transition: 0.3s;
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
         }
-        .type-btn i { font-size: 1.5rem; color: var(--forge-orange); }
-        .type-btn:hover { background: var(--accent); color: var(--bg-dark); transform: translateY(-3px); }
-        .type-btn:hover i { color: var(--bg-dark); }
-
+        .type-btn:hover { background: var(--accent); color: var(--bg-dark); }
+        
         /* --- شريط المطور --- */
         .developer-bar {
-            background: linear-gradient(90deg, #1e293b, #0f172a);
-            padding: 2rem;
-            text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            margin-top: 3rem;
+            background: linear-gradient(90deg, #1e293b, #0f172a); padding: 2rem; text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1); margin-top: 3rem;
         }
         .developer-name { color: var(--forge-orange); font-weight: bold; font-size: 1.2rem; }
 
         /* --- Footer --- */
         footer { background-color: #020617; padding: 2rem 5%; text-align: center; color: var(--text-secondary); font-size: 0.9rem; }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 15px;
-        }
-        
+        .social-links { display: flex; justify-content: center; gap: 20px; margin-top: 15px; }
         .social-btn {
-            width: 45px; height: 45px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            color: var(--text-secondary);
-            font-size: 1.2rem;
-            transition: 0.3s;
-            text-decoration: none;
+            width: 45px; height: 45px; background: rgba(255,255,255,0.05); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: var(--text-secondary);
+            font-size: 1.2rem; transition: 0.3s; text-decoration: none;
         }
-        
         .social-btn:hover { background: var(--accent); color: var(--bg-dark); transform: translateY(-5px); }
-        .social-btn.tiktok:hover { background: #000; color: #fff; border: 1px solid #333; }
-        .social-btn.insta:hover { background: #e1306c; color: #fff; }
 
-        /* --- Responsive --- */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
             .header { flex-direction: column; gap: 15px; }
@@ -304,13 +268,13 @@
             <i class="fas fa-code"></i>
             Web Forge
         </div>
-        <a href="#services" class="nav-btn">ابدأ مشروعك</a>
+        <button onclick="openAboutModal()" class="nav-btn">من نحن</button>
     </header>
 
     <section class="hero">
         <div class="hero-content">
             <h1>نحول أفكارك إلى <br><span>واقع رقمي احترافي</span></h1>
-            <p>مجموعة محمد أيت صالح تقدم لك حلولاً تقنية متكاملة. متخصصون في صناعة الهوية الرقمية، تطوير متاجر YouCan و Shopify، وتصميم المواقع العصرية.</p>
+            <p></p>مجموعة  web forge  تقدم لك حلولاً تقنية متكاملة. متخصصون في صناعة الهوية الرقمية، تطوير متاجر YouCan و Shopify، وتصميم المواقع العصرية.</p>
             <div class="cta-group">
                 <a href="#services" class="btn-primary">استعرض خدماتنا</a>
             </div>
@@ -383,31 +347,52 @@
         </button>
     </section>
 
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeAboutModal()">&times;</span>
+            <h3 class="modal-title">🚀 Web Forge</h3>
+            <p style="color: var(--accent); font-weight: bold;">مجموعة web forge</p>
+            
+            <div class="about-text">
+                <p style="margin-bottom: 15px;">
+                    نحول أفكارك إلى واقع رقمي احترافي! متخصصون في صناعة الهوية الرقمية وتطوير المواقع والمتاجر الإلكترونية.
+                </p>
+                
+                <h4>🛠️ خدماتنا:</h4>
+                <ul>
+                    <li>إنشاء متاجر YouCan احترافية ومخصصة.</li>
+                    <li>تطوير متاجر Shopify عالمية لتحقيق المبيعات.</li>
+                    <li>تصميم مواقع شخصية (Portfolio) وتجارية عصرية.</li>
+                </ul>
+
+                <h4>✨ لماذا نحن؟</h4>
+                <p>تصاميم متجاوبة، دعم فني مستمر، وتهيئة شاملة لمحركات البحث (SEO).</p>
+                
+                <p style="margin-top: 20px; color: var(--text-main); font-weight: bold; text-align: center;">
+                    🎯 ابدأ رحلة نجاحك الرقمي معنا الآن
+                </p>
+
+                <h4>👥 فريق العمل:</h4>
+                <div class="team-container">
+                    <span class="team-member">Mohammed Ait Saleh</span>
+                    <span class="team-member">Hajar Ait Belaid</span>
+                    <span class="team-member">Aissa Ed-dahil</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="typeModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeTypeSelection()">&times;</span>
             <h3 class="modal-title">اختر نوع الموقع</h3>
-            <p style="color: var(--text-secondary); margin-bottom: 20px;">ما هو هدفك من الموقع الجديد؟</p>
-            
             <div class="types-grid">
-                <button class="type-btn" onclick="selectType('مدونة شخصية')">
-                    <i class="fas fa-pen-nib"></i> مدونة شخصية
-                </button>
-                <button class="type-btn" onclick="selectType('موقع طبيب')">
-                    <i class="fas fa-user-md"></i> موقع طبيب
-                </button>
-                <button class="type-btn" onclick="selectType('موقع محامي')">
-                    <i class="fas fa-gavel"></i> موقع محامي
-                </button>
-                <button class="type-btn" onclick="selectType('موقع نشاط تجاري')">
-                    <i class="fas fa-briefcase"></i> موقع نشاط تجاري
-                </button>
-                <button class="type-btn" onclick="selectType('موقع شخصي (Portfolio)')">
-                    <i class="fas fa-user-tie"></i> موقع شخصي
-                </button>
-                <button class="type-btn" onclick="selectType('موقع لنشر الكتب')">
-                    <i class="fas fa-book"></i> موقع لنشر الكتب
-                </button>
+                <button class="type-btn" onclick="selectType('مدونة شخصية')"><i class="fas fa-pen-nib"></i> مدونة شخصية</button>
+                <button class="type-btn" onclick="selectType('موقع طبيب')"><i class="fas fa-user-md"></i> موقع طبيب</button>
+                <button class="type-btn" onclick="selectType('موقع محامي')"><i class="fas fa-gavel"></i> موقع محامي</button>
+                <button class="type-btn" onclick="selectType('موقع نشاط تجاري')"><i class="fas fa-briefcase"></i> موقع نشاط تجاري</button>
+                <button class="type-btn" onclick="selectType('موقع شخصي (Portfolio)')"><i class="fas fa-user-tie"></i> موقع شخصي</button>
+                <button class="type-btn" onclick="selectType('موقع لنشر الكتب')"><i class="fas fa-book"></i> موقع لنشر الكتب</button>
             </div>
         </div>
     </div>
@@ -416,11 +401,9 @@
         <div class="modal-content">
             <span class="close-btn" onclick="closeForm()">&times;</span>
             <h3 class="modal-title">إتمام الطلب</h3>
-            <p style="color: var(--text-secondary); margin-bottom: 20px;">الخدمة المطلوبة: <br><span id="serviceName" style="color: var(--forge-orange); font-weight: bold; font-size: 1.1rem;"></span></p>
-            
+            <p style="color: var(--text-secondary); margin-bottom: 20px;">الخدمة: <span id="serviceName" style="color: var(--forge-orange);"></span></p>
             <input type="text" id="clientName" class="form-input" placeholder="الاسم الكريم">
             <input type="tel" id="clientPhone" class="form-input" placeholder="رقم الواتساب">
-            
             <button onclick="submitToWhatsApp()" class="submit-btn">إرسال الطلب الآن <i class="fab fa-whatsapp"></i></button>
         </div>
     </div>
@@ -429,107 +412,77 @@
         <div class="modal-content">
             <span class="close-btn" onclick="closeReviewModal()">&times;</span>
             <h3 class="modal-title">شاركنا رأيك</h3>
-            <p style="color: var(--text-secondary); margin-bottom: 20px;">رأيك يهمنا لتطوير خدماتنا</p>
-            
-            <input type="text" id="reviewName" class="form-input" placeholder="الاسم أو الصفة (مثال: تاجر)">
+            <input type="text" id="reviewName" class="form-input" placeholder="الاسم">
             <select id="reviewRating" class="form-select">
-                <option value="5">⭐⭐⭐⭐⭐ (ممتاز)</option>
-                <option value="4">⭐⭐⭐⭐ (جيد جداً)</option>
-                <option value="3">⭐⭐⭐ (جيد)</option>
+                <option value="5">⭐⭐⭐⭐⭐</option>
+                <option value="4">⭐⭐⭐⭐</option>
+                <option value="3">⭐⭐⭐</option>
             </select>
-            <textarea id="reviewText" class="form-textarea" placeholder="اكتب تجربتك هنا..."></textarea>
-            
-            <button onclick="submitReviewToWhatsApp()" class="submit-btn">إرسال التقييم للإدارة <i class="fab fa-whatsapp"></i></button>
+            <textarea id="reviewText" class="form-textarea" placeholder="تجربتك..."></textarea>
+            <button onclick="submitReviewToWhatsApp()" class="submit-btn">إرسال <i class="fab fa-whatsapp"></i></button>
         </div>
     </div>
 
     <div class="developer-bar">
-        <p>🚀 <strong>Web Forge</strong> | إحدى مشاريع <span class="developer-name">مجموعة محمد أيت صالح</span></p>
+        <p>🚀 <strong>Web Forge</strong> | إحدى مشاريع <span class="developer-name">مجموعة web forge</span></p>
         <p style="font-size: 0.9rem; margin-top: 5px; color: #94a3b8;">شغف التقنية.. ودقة التنفيذ.</p>
     </div>
 
     <footer>
         <p>جميع الحقوق محفوظة &copy; 2026 Web Forge</p>
         <div class="social-links">
-            <a href="https://www.instagram.com/la_rider_rubia?igsh=dmNxOGhoMmYxdjZw" target="_blank" class="social-btn insta">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://www.tiktok.com/@webfoorge?_r=1&_t=ZS-93Vxg0zFCdQ" target="_blank" class="social-btn tiktok">
-                <i class="fab fa-tiktok"></i>
-            </a>
+            <a href="https://www.instagram.com/la_rider_rubia?igsh=dmNxOGhoMmYxdjZw" target="_blank" class="social-btn insta"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@webfoorge?_r=1&_t=ZS-93Vxg0zFCdQ" target="_blank" class="social-btn tiktok"><i class="fab fa-tiktok"></i></a>
         </div>
     </footer>
 
     <script>
-        // المتغيرات العامة
         const targetNumber = "212602056662"; 
 
-        // 1. دوال نافذة اختيار نوع الموقع
-        function openTypeSelection() {
-            document.getElementById('typeModal').style.display = 'flex';
+        // دوال نافذة "من نحن" (الجديدة)
+        function openAboutModal() {
+            document.getElementById('aboutModal').style.display = 'flex';
         }
-        function closeTypeSelection() {
-            document.getElementById('typeModal').style.display = 'none';
-        }
-        function selectType(typeName) {
-            closeTypeSelection();
-            openForm('تصميم ' + typeName);
+        function closeAboutModal() {
+            document.getElementById('aboutModal').style.display = 'none';
         }
 
-        // 2. دوال نافذة الطلب (الخدمات)
+        // باقي الدوال (كما هي)
+        function openTypeSelection() { document.getElementById('typeModal').style.display = 'flex'; }
+        function closeTypeSelection() { document.getElementById('typeModal').style.display = 'none'; }
+        function selectType(typeName) { closeTypeSelection(); openForm('تصميم ' + typeName); }
+
         function openForm(serviceName) {
             document.getElementById('serviceName').innerText = serviceName;
             document.getElementById('orderModal').style.display = 'flex';
         }
-        function closeForm() {
-            document.getElementById('orderModal').style.display = 'none';
-        }
+        function closeForm() { document.getElementById('orderModal').style.display = 'none'; }
+        
         function submitToWhatsApp() {
             const name = document.getElementById('clientName').value;
             const phone = document.getElementById('clientPhone').value;
             const service = document.getElementById('serviceName').innerText;
-
-            if(name === "" || phone === "") {
-                alert("المرجو كتابة الاسم ورقم الهاتف");
-                return;
-            }
-            const message = `🚀 *طلب خدمة جديد*%0a%0a🛠️ *الخدمة:* ${service}%0a👤 *الاسم:* ${name}%0a📱 *رقم الهاتف:* ${phone}`;
-            window.open(`https://wa.me/${targetNumber}?text=${message}`, '_blank');
+            if(!name || !phone) { alert("المرجو إدخال البيانات"); return; }
+            window.open(`https://wa.me/${targetNumber}?text=🚀 *طلب خدمة*%0a${service}%0a👤 ${name}%0a📱 ${phone}`, '_blank');
             closeForm();
         }
 
-        // 3. دوال نافذة التقييم (الآراء) - جديدة
-        function openReviewModal() {
-            document.getElementById('reviewModal').style.display = 'flex';
-        }
-        function closeReviewModal() {
-            document.getElementById('reviewModal').style.display = 'none';
-        }
+        function openReviewModal() { document.getElementById('reviewModal').style.display = 'flex'; }
+        function closeReviewModal() { document.getElementById('reviewModal').style.display = 'none'; }
         function submitReviewToWhatsApp() {
             const name = document.getElementById('reviewName').value;
             const rating = document.getElementById('reviewRating').value;
             const text = document.getElementById('reviewText').value;
-
-            if(name === "" || text === "") {
-                alert("المرجو ملء الخانات لإرسال رأيك");
-                return;
-            }
-
-            // تحويل رقم التقييم لنجوم
-            let stars = "";
-            for(let i=0; i<rating; i++) stars += "⭐";
-
-            const message = `🌟 *تقييم جديد للموقع*%0a%0a👤 *الاسم:* ${name}%0a✨ *التقييم:* ${rating}/5 ${stars}%0a💬 *التعليق:* ${text}%0a%0a(يمكنك نسخ هذا التعليق وإضافته للموقع إذا أعجبك)`;
-            
-            window.open(`https://wa.me/${targetNumber}?text=${message}`, '_blank');
+            if(!name || !text) { alert("البيانات ناقصة"); return; }
+            window.open(`https://wa.me/${targetNumber}?text=🌟 *تقييم*%0a👤 ${name}%0a✨ ${rating}/5%0a💬 ${text}`, '_blank');
             closeReviewModal();
         }
 
-        // إغلاق النوافذ عند الضغط خارجها
         window.onclick = function(event) {
             if (event.target == document.getElementById('orderModal')) closeForm();
             if (event.target == document.getElementById('typeModal')) closeTypeSelection();
             if (event.target == document.getElementById('reviewModal')) closeReviewModal();
+            if (event.target == document.getElementById('aboutModal')) closeAboutModal();
         }
     </script>
 
