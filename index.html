@@ -8,46 +8,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- المتغيرات --- */
+        /* --- المتغيرات الأصلية --- */
         :root {
-            --bg-dark: #0f172a;
-            --bg-card: #1e293b;
-            --accent: #38bdf8;
-            --accent-glow: rgba(56, 189, 248, 0.3);
-            --forge-orange: #f59e0b;
-            --text-main: #f8fafc;
-            --text-secondary: #94a3b8;
-            --header-bg: rgba(15, 23, 42, 0.95);
+            --bg-dark: #0f172a; --bg-card: #1e293b; --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.3); --forge-orange: #f59e0b;
+            --text-main: #f8fafc; --text-secondary: #94a3b8; --header-bg: rgba(15, 23, 42, 0.95);
         }
-
         [data-theme="light"] {
-            --bg-dark: #f8fafc;
-            --bg-card: #ffffff;
-            --accent: #0284c7;
-            --accent-glow: rgba(2, 132, 199, 0.1);
-            --forge-orange: #d97706;
-            --text-main: #0f172a;
-            --text-secondary: #475569;
-            --header-bg: rgba(248, 250, 252, 0.95);
+            --bg-dark: #f8fafc; --bg-card: #ffffff; --accent: #0284c7;
+            --accent-glow: rgba(2, 132, 199, 0.1); --forge-orange: #d97706;
+            --text-main: #0f172a; --text-secondary: #475569; --header-bg: rgba(248, 250, 252, 0.95);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; scroll-behavior: smooth; transition: background 0.3s ease, color 0.3s ease; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; transition: 0.3s; }
         body { background-color: var(--bg-dark); color: var(--text-main); overflow-x: hidden; }
 
-        header {
-            background-color: var(--header-bg);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(128, 128, 128, 0.1);
-            backdrop-filter: blur(10px);
-        }
-
-        /* الشعار المتحرك */
+        header { background-color: var(--header-bg); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(128,128,128,0.1); backdrop-filter: blur(10px); }
         .logo { 
             font-size: 1.8rem; font-weight: 900; display: flex; align-items: center; gap: 10px; 
             background: linear-gradient(90deg, var(--accent), var(--forge-orange), var(--accent));
@@ -58,71 +34,61 @@
         .logo i { color: var(--forge-orange); -webkit-text-fill-color: initial; }
 
         .header-actions { display: flex; align-items: center; gap: 15px; }
-        .theme-btn { background: var(--bg-card); border: 1px solid var(--accent); color: var(--accent); width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+        .theme-btn { background: var(--bg-card); border: 1px solid var(--accent); color: var(--accent); width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         .nav-btn { background: transparent; border: 2px solid var(--accent); color: var(--accent); padding: 8px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; }
 
-        /* --- الغلاف (Hero) المطور --- */
+        /* --- الغلاف (Hero) الأصلي المستعاد --- */
         .hero {
-            min-height: 95vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 0 5%;
+            min-height: 95vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 5%;
             background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.85)), 
                         url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            position: relative;
+            background-size: cover; background-position: center; background-attachment: fixed;
         }
-
         .hero-glass {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            padding: 3rem;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            max-width: 900px;
+            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); padding: 3rem; 
+            border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.1); max-width: 900px;
         }
-
         .hero h1 { font-size: 3.5rem; line-height: 1.2; margin-bottom: 1.5rem; color: #fff; }
         .hero h1 span { color: var(--forge-orange); }
         .hero p { font-size: 1.2rem; color: #cbd5e1; margin-bottom: 2.5rem; line-height: 1.8; }
 
-        .btn-primary { 
-            padding: 18px 45px; background: linear-gradient(45deg, var(--accent), #0284c7); 
-            color: white; text-decoration: none; font-weight: bold; border-radius: 50px; 
-            transition: 0.3s; box-shadow: 0 4px 15px var(--accent-glow); display: inline-block;
-        }
-
-        /* --- الأقسام المستعادة بدقة --- */
-        .services { padding: 5rem 5%; background-color: rgba(0,0,0,0.02); }
+        /* --- الخدمات --- */
+        .services { padding: 5rem 5%; }
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .service-card { background-color: var(--bg-card); padding: 2.5rem; border-radius: 15px; border: 1px solid rgba(128,128,128,0.1); transition: 0.3s; display: flex; flex-direction: column; }
-        .service-card:hover { transform: translateY(-10px); border-color: var(--accent); }
+        .service-card { background-color: var(--bg-card); padding: 2.5rem; border-radius: 15px; border: 1px solid rgba(128,128,128,0.1); display: flex; flex-direction: column; }
         .icon-box { width: 70px; height: 70px; background: var(--accent-glow); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: var(--accent); margin-bottom: 1.5rem; }
         .card-btn { color: var(--accent); text-decoration: none; font-weight: bold; cursor: pointer; border: none; background: none; font-size: 1rem; margin-top: auto; display: flex; align-items: center; gap: 8px; }
 
-        /* نافذة من نحن (الأصلية) */
-        .about-text { text-align: right; color: var(--text-secondary); line-height: 1.7; margin-top: 15px; }
-        .about-text h4 { color: var(--text-main); margin-top: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; display: inline-block;}
-        .team-container { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
-        .team-member { background: rgba(245, 158, 11, 0.1); color: var(--forge-orange); padding: 8px 15px; border-radius: 20px; font-weight: bold; border: 1px solid rgba(245, 158, 11, 0.3); }
+        /* --- قصص النجاح (بالصور المحدثة) --- */
+        .success-stories { padding: 5rem 5%; background: rgba(0,0,0,0.1); }
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 3rem; }
+        .work-card { background: var(--bg-card); border-radius: 15px; overflow: hidden; border: 1px solid rgba(128,128,128,0.1); }
+        .browser-header { background: #2d3748; padding: 10px; display: flex; gap: 6px; }
+        .dot { width: 8px; height: 8px; border-radius: 50%; background: #fc8181; }
+        .dot:nth-child(2) { background: #f6e05e; }
+        .dot:nth-child(3) { background: #68d391; }
+        .screen-box { height: 400px; overflow: hidden; cursor: s-resize; }
+        .screen-box img { width: 100%; transition: 6s ease-in-out; object-position: top; object-fit: cover; }
+        .work-card:hover img { object-position: bottom; }
+        .work-label { padding: 15px; text-align: center; font-weight: bold; border-top: 1px solid rgba(128,128,128,0.1); }
 
-        /* المودالات */
+        /* --- المودالات الأصلية --- */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); justify-content: center; align-items: center; }
         .modal-content { background-color: var(--bg-card); padding: 2.5rem; border-radius: 15px; width: 90%; max-width: 500px; position: relative; border: 2px solid var(--accent); max-height: 90vh; overflow-y: auto; }
         .close-btn { position: absolute; top: 15px; left: 20px; font-size: 1.5rem; cursor: pointer; }
+        .modal-content input { width: 100%; padding: 12px; margin-bottom: 15px; background: rgba(128,128,128,0.1); border: 1px solid #444; border-radius: 8px; color: #fff; }
+        
         .types-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 20px; }
         .type-btn { background: rgba(128,128,128,0.05); border: 1px solid var(--accent); color: var(--text-main); padding: 15px; border-radius: 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 10px; }
 
+        .about-text { text-align: right; color: var(--text-secondary); line-height: 1.7; margin-top: 15px; }
+        .about-text h4 { color: var(--text-main); margin-top: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px; display: inline-block; }
+        .team-container { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
+        .team-member { background: rgba(245, 158, 11, 0.1); color: var(--forge-orange); padding: 8px 15px; border-radius: 20px; font-weight: bold; border: 1px solid rgba(245, 158, 11, 0.3); }
+
         footer { background-color: var(--bg-card); padding: 2.5rem; text-align: center; border-top: 1px solid rgba(128,128,128,0.1); }
         .social-links { display: flex; justify-content: center; gap: 20px; margin-top: 15px; }
-        .social-btn { width: 45px; height: 45px; background: rgba(128,128,128,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); text-decoration: none; transition: 0.3s; }
-        .social-btn:hover { background: var(--accent); color: white; transform: translateY(-5px); }
-
-        @media (max-width: 768px) { .hero h1 { font-size: 2.5rem; } .types-grid { grid-template-columns: 1fr; } }
+        .social-btn { width: 45px; height: 45px; background: rgba(128,128,128,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); text-decoration: none; }
     </style>
 </head>
 <body>
@@ -139,54 +105,57 @@
         <div class="hero-glass">
             <h1>نحول أفكارك إلى <br><span>واقع رقمي احترافي</span></h1>
             <p>مجموعة web forge تقدم لك حلولاً تقنية متكاملة. متخصصون في صناعة الهوية الرقمية، تطوير متاجر YouCan و Shopify، وتصميم المواقع العصرية.</p>
-            <a href="#services" class="btn-primary">استعرض خدماتنا</a>
         </div>
     </section>
 
     <section class="services" id="services">
         <div class="section-header" style="text-align:center; margin-bottom:4rem;">
             <h2 style="font-size:2.5rem;">خدماتنا الرقمية</h2>
-            <p style="color:var(--text-secondary)">نقدم لك أدوات النجاح في عالم التجارة الإلكترونية</p>
         </div>
-
         <div class="services-grid">
             <div class="service-card">
                 <div class="icon-box"><i class="fas fa-store"></i></div>
                 <h3>متاجر YouCan</h3>
-                <p>تصميم وتجهيز متاجر YouCan احترافية بالكامل. نضبط لك التصميم، ونربط وسائل الدفع، لتبدأ البيع فوراً في السوق المحلي.</p>
+                <p>تصميم وتجهيز متاجر YouCan احترافية بالكامل.</p>
                 <button onclick="openForm('متجر YouCan')" class="card-btn">اطلب الخدمة <i class="fas fa-arrow-left"></i></button>
             </div>
-
             <div class="service-card">
                 <div class="icon-box" style="color: #96bf48;"><i class="fab fa-shopify"></i></div>
-                <h3>متاجر Shopify عالمية</h3>
-                <p>تطوير متاجر دروبشيبينغ أو براند خاص على منصة شوبيفاي. تصاميم عالمية تساعدك على تحقيق مبيعات بالدولار واليورو.</p>
-                <button onclick="openForm('متجر Shopify')" class="card-btn" style="color:#96bf48;">اطلب الخدمة <i class="fas fa-arrow-left"></i></button>
+                <h3>متاجر Shopify</h3>
+                <p>تطوير متاجر دروبشيبينغ أو براند خاص عالمي.</p>
+                <button onclick="openForm('متجر Shopify')" class="card-btn">اطلب الخدمة <i class="fas fa-arrow-left"></i></button>
             </div>
-
             <div class="service-card">
                 <div class="icon-box" style="color: var(--forge-orange);"><i class="fas fa-laptop-code"></i></div>
                 <h3>مواقع Web Forge</h3>
-                <p>تصميم مواقع خاصة تناسب احتياجاتك. سواء كنت طبيباً، محامياً، أو كاتباً، نصمم لك واجهة تعكس احترافيتك.</p>
-                <button onclick="openTypeSelection()" class="card-btn" style="color: var(--forge-orange);">اطلب الخدمة <i class="fas fa-arrow-left"></i></button>
+                <p>مواقع خاصة: مدونة، طبيب، محامي، Portfolio، كتب.</p>
+                <button onclick="openTypeSelection()" class="card-btn">اطلب الخدمة <i class="fas fa-arrow-left"></i></button>
             </div>
         </div>
     </section>
 
-    <div id="typeModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeTypeSelection()">&times;</span>
-            <h3 style="text-align:center; color:var(--accent)">اختر نوع الموقع</h3>
-            <div class="types-grid">
-                <button class="type-btn" onclick="selectType('مدونة شخصية')"><i class="fas fa-pen-nib"></i> مدونة شخصية</button>
-                <button class="type-btn" onclick="selectType('موقع طبيب')"><i class="fas fa-user-md"></i> موقع طبيب</button>
-                <button class="type-btn" onclick="selectType('موقع محامي')"><i class="fas fa-gavel"></i> موقع محامي</button>
-                <button class="type-btn" onclick="selectType('موقع نشاط تجاري')"><i class="fas fa-briefcase"></i> موقع نشاط تجاري</button>
-                <button class="type-btn" onclick="selectType('موقع شخصي (Portfolio)')"><i class="fas fa-user-tie"></i> موقع شخصي</button>
-                <button class="type-btn" onclick="selectType('موقع لنشر الكتب')"><i class="fas fa-book"></i> موقع لنشر الكتب</button>
+    <section class="success-stories">
+        <div style="text-align:center;">
+            <h2 style="font-size:2.2rem;">🏆 قصص النجاح</h2>
+        </div>
+        <div class="portfolio-grid">
+            <div class="work-card">
+                <div class="browser-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+                <div class="screen-box"><img src="https://i.ibb.co/W4BhL518/IMG-20260128-WA0010.jpg" alt="موقع محامي"></div>
+                <div class="work-label">نموذج موقع محامي</div>
+            </div>
+            <div class="work-card">
+                <div class="browser-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+                <div class="screen-box"><img src="https://i.ibb.co/0pTkqypt/IMG-20260128-WA0011.jpg" alt="موقع بائع ساعات"></div>
+                <div class="work-label">نموذج موقع بائع ساعات</div>
+            </div>
+            <div class="work-card">
+                <div class="browser-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+                <div class="screen-box"><img src="https://i.ibb.co/mVNQDLLX/IMG-20260128-WA0012.jpg" alt="موقع ملابس"></div>
+                <div class="work-label">نموذج موقع بيع ملابس</div>
             </div>
         </div>
-    </div>
+    </section>
 
     <div id="aboutModal" class="modal">
         <div class="modal-content">
@@ -200,8 +169,6 @@
                     <li>تطوير متاجر Shopify عالمية لتحقيق المبيعات.</li>
                     <li>تصميم مواقع شخصية (Portfolio) وتجارية عصرية.</li>
                 </ul>
-                <h4>✨ لماذا نحن؟</h4>
-                <p>تصاميم متجاوبة، دعم فني مستمر، وتهيئة شاملة (SEO).</p>
                 <h4>👥 فريق العمل:</h4>
                 <div class="team-container">
                     <span class="team-member">Mohammed Ait Saleh</span>
@@ -212,21 +179,36 @@
         </div>
     </div>
 
+    <div id="typeModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeTypeSelection()">&times;</span>
+            <h3 style="text-align:center; color:var(--accent)">اختر نوع الموقع الخاص</h3>
+            <div class="types-grid">
+                <button class="type-btn" onclick="selectType('مدونة شخصية')"><i class="fas fa-pen-nib"></i> مدونة شخصية</button>
+                <button class="type-btn" onclick="selectType('موقع طبيب')"><i class="fas fa-user-md"></i> موقع طبيب</button>
+                <button class="type-btn" onclick="selectType('موقع محامي')"><i class="fas fa-gavel"></i> موقع محامي</button>
+                <button class="type-btn" onclick="selectType('موقع نشاط تجاري')"><i class="fas fa-briefcase"></i> نشاط تجاري</button>
+                <button class="type-btn" onclick="selectType('Portfolio')"><i class="fas fa-user-tie"></i> Portfolio</button>
+                <button class="type-btn" onclick="selectType('موقع كتب')"><i class="fas fa-book"></i> موقع كتب</button>
+            </div>
+        </div>
+    </div>
+
     <div id="orderModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeForm()">&times;</span>
-            <h3 id="serviceName" style="text-align:center; margin-bottom:15px; color:var(--forge-orange)"></h3>
-            <input type="text" id="clientName" style="width:100%; padding:12px; margin-bottom:10px; background:rgba(128,128,128,0.1); border:1px solid rgba(128,128,128,0.2); border-radius:8px; color:white;" placeholder="الاسم الكريم">
-            <input type="tel" id="clientPhone" style="width:100%; padding:12px; margin-bottom:10px; background:rgba(128,128,128,0.1); border:1px solid rgba(128,128,128,0.2); border-radius:8px; color:white;" placeholder="رقم الواتساب">
-            <button onclick="submitToWhatsApp()" style="width:100%; padding:12px; background:var(--forge-orange); color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">إرسال الطلب الآن <i class="fab fa-whatsapp"></i></button>
+            <h3 id="serviceName" style="text-align:center; color:var(--forge-orange); margin-bottom:20px;"></h3>
+            <input type="text" id="clientName" placeholder="الاسم الكامل">
+            <input type="tel" id="clientPhone" placeholder="رقم الواتساب">
+            <button onclick="submitToWhatsApp()" style="width:100%; padding:12px; background:var(--forge-orange); color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">إرسال الطلب عبر واتساب</button>
         </div>
     </div>
 
     <footer>
         <p>جميع الحقوق محفوظة &copy; 2026 Web Forge</p>
         <div class="social-links">
-            <a href="https://www.instagram.com/la_rider_rubia?igsh=dmNxOGhoMmYxdjZw" target="_blank" class="social-btn"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.tiktok.com/@webfoorge?_r=1&_t=ZS-93Vxg0zFCdQ" target="_blank" class="social-btn"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.instagram.com/la_rider_rubia" target="_blank" class="social-btn"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@webfoorge" target="_blank" class="social-btn"><i class="fab fa-tiktok"></i></a>
         </div>
     </footer>
 
@@ -235,17 +217,11 @@
             const body = document.body;
             const icon = document.getElementById('themeIcon');
             if (body.hasAttribute('data-theme')) {
-                body.removeAttribute('data-theme');
-                icon.className = 'fas fa-moon';
-                localStorage.setItem('theme', 'dark');
+                body.removeAttribute('data-theme'); icon.className = 'fas fa-moon';
             } else {
-                body.setAttribute('data-theme', 'light');
-                icon.className = 'fas fa-sun';
-                localStorage.setItem('theme', 'light');
+                body.setAttribute('data-theme', 'light'); icon.className = 'fas fa-sun';
             }
         }
-        if(localStorage.getItem('theme') === 'light') { document.body.setAttribute('data-theme', 'light'); document.getElementById('themeIcon').className = 'fas fa-sun'; }
-
         function openAboutModal() { document.getElementById('aboutModal').style.display = 'flex'; }
         function closeAboutModal() { document.getElementById('aboutModal').style.display = 'none'; }
         function openTypeSelection() { document.getElementById('typeModal').style.display = 'flex'; }
@@ -253,16 +229,13 @@
         function selectType(t) { closeTypeSelection(); openForm('تصميم ' + t); }
         function openForm(s) { document.getElementById('serviceName').innerText = s; document.getElementById('orderModal').style.display = 'flex'; }
         function closeForm() { document.getElementById('orderModal').style.display = 'none'; }
-        
         function submitToWhatsApp() {
             const n = document.getElementById('clientName').value;
             const p = document.getElementById('clientPhone').value;
             const s = document.getElementById('serviceName').innerText;
-            if(!n || !p) return alert("المرجو إدخال البيانات");
-            window.open(`https://wa.me/212602056662?text=🚀 *طلب خدمة*%0a${s}%0a👤 ${n}%0a📱 ${p}`, '_blank');
-            closeForm();
+            if(!n || !p) return alert("يرجى إدخال البيانات");
+            window.open(`https://wa.me/212602056662?text=طلب: ${s}%0aالاسم: ${n}%0aالهاتف: ${p}`, '_blank');
         }
-
         window.onclick = function(e) { if(e.target.className === 'modal') { closeAboutModal(); closeTypeSelection(); closeForm(); } }
     </script>
 </body>
