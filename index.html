@@ -24,28 +24,9 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; transition: 0.3s; }
         body { background-color: var(--bg-dark); color: var(--text-main); overflow-x: hidden; }
 
-        /* --- شريط العروض العاجلة (الاقتراح 1) --- */
-        .promo-bar {
-            background: var(--forge-orange);
-            color: white;
-            padding: 8px 0;
-            font-weight: bold;
-            font-size: 0.9rem;
-            text-align: center;
-            position: relative;
-            z-index: 1001;
-            overflow: hidden;
-            cursor: pointer;
-        }
-        .promo-content {
-            display: inline-block;
-            white-space: nowrap;
-            animation: marquee 20s linear infinite;
-        }
-        @keyframes marquee {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
+        .promo-bar { background: var(--forge-orange); color: white; padding: 8px 0; font-weight: bold; font-size: 0.9rem; text-align: center; position: relative; z-index: 1001; overflow: hidden; cursor: pointer; }
+        .promo-content { display: inline-block; white-space: nowrap; animation: marquee 20s linear infinite; }
+        @keyframes marquee { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 
         header { background-color: var(--header-bg); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(128,128,128,0.1); backdrop-filter: blur(10px); }
         .logo { font-size: 1.8rem; font-weight: 900; display: flex; align-items: center; gap: 10px; background: linear-gradient(90deg, var(--accent), var(--forge-orange), var(--accent)); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: forge-shine 3s linear infinite; }
@@ -64,6 +45,14 @@
 
         .stats-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; padding: 4rem 5%; background: var(--bg-card); text-align: center; border-bottom: 1px solid rgba(128,128,128,0.1); }
         .stat-item h2 { font-size: 2.5rem; color: var(--accent); margin-bottom: 0.5rem; }
+
+        /* --- قسم "لماذا تختارنا" الجديد --- */
+        .why-us { padding: 5rem 5%; background: var(--bg-dark); }
+        .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .why-card { text-align: center; padding: 2rem; background: var(--bg-card); border-radius: 20px; border: 1px solid rgba(128,128,128,0.1); }
+        .why-card i { font-size: 2.5rem; color: var(--forge-orange); margin-bottom: 1rem; }
+        .why-card h4 { margin-bottom: 10px; font-size: 1.3rem; }
+        .why-card p { color: var(--text-secondary); font-size: 0.95rem; }
 
         .process-section { padding: 5rem 5%; background: rgba(0,0,0,0.05); }
         .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 3rem; }
@@ -137,6 +126,35 @@
         <div class="stat-item"><h2>+50</h2><p>مشروع منجز</p></div>
         <div class="stat-item"><h2>100%</h2><p>رضا العملاء</p></div>
         <div class="stat-item"><h2>24/7</h2><p>دعم فني</p></div>
+    </section>
+
+    <section class="why-us">
+        <div style="text-align:center;">
+            <h2>🛡️ لماذا تختار Web Forge؟</h2>
+            <p>نحن لا نبني مجرد أكواد، بل نصنع تجربة مستخدم فريدة</p>
+        </div>
+        <div class="why-grid">
+            <div class="why-card">
+                <i class="fas fa-bolt"></i>
+                <h4>سرعة فائقة</h4>
+                <p>نضمن لك سرعة تحميل استثنائية لتحسين تجربة الزائر وتصدر محركات البحث.</p>
+            </div>
+            <div class="why-card">
+                <i class="fas fa-mobile-alt"></i>
+                <h4>تجاوب كامل</h4>
+                <p>موقعك سيظهر بشكل أنيق واحترافي على كافة الأجهزة والهواتف الذكية.</p>
+            </div>
+            <div class="why-card">
+                <i class="fas fa-headset"></i>
+                <h4>دعم فني متميز</h4>
+                <p>فريقنا معك دائماً للإجابة على استفساراتك وضمان استقرار موقعك 24/7.</p>
+            </div>
+            <div class="why-card">
+                <i class="fas fa-paint-brush"></i>
+                <h4>تصميم مخصص</h4>
+                <p>نبتعد عن القوالب المكررة لنمنح مشروعك لمسة إبداعية فريدة تميزك عن المنافسين.</p>
+            </div>
+        </div>
     </section>
 
     <section class="process-section">
