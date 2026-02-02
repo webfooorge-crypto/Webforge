@@ -6,7 +6,6 @@
     <title>Web Forge | مجموعة محمد أيت صالح</title>
     
     <link rel="icon" type="image/png" href="https://i.ibb.co/3qzt7ks/2-2-2026-15329-webforge-it-com.jpg">
-    
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -24,6 +23,29 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; transition: 0.3s; }
         body { background-color: var(--bg-dark); color: var(--text-main); overflow-x: hidden; }
+
+        /* --- شريط العروض العاجلة (الاقتراح 1) --- */
+        .promo-bar {
+            background: var(--forge-orange);
+            color: white;
+            padding: 8px 0;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-align: center;
+            position: relative;
+            z-index: 1001;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .promo-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
 
         header { background-color: var(--header-bg); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(128,128,128,0.1); backdrop-filter: blur(10px); }
         .logo { font-size: 1.8rem; font-weight: 900; display: flex; align-items: center; gap: 10px; background: linear-gradient(90deg, var(--accent), var(--forge-orange), var(--accent)); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: forge-shine 3s linear infinite; }
@@ -89,6 +111,12 @@
     </style>
 </head>
 <body>
+
+    <div class="promo-bar" onclick="openForm('عرض الخصم الخاص')">
+        <div class="promo-content">
+            🚀 عرض لفترة محدودة: احصل على خصم 20% عند طلب أول متجر YouCan أو Shopify هذا الأسبوع! — اطلب الآن واستفد من العرض — 🎁 استشارة مجانية عند طلب موقع خاص!
+        </div>
+    </div>
 
     <header>
         <div class="logo"><i class="fas fa-code"></i> Web Forge</div>
