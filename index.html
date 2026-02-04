@@ -27,6 +27,9 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; transition: 0.3s; }
         body { background-color: var(--bg-dark); color: var(--text-main); overflow-x: hidden; }
 
+        /* إصلاح: إضافة مسافة أعلى للهيدر الثابت */
+        body { padding-top: 70px; }
+
         /* --- Preloader --- */
         #preloader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -55,11 +58,24 @@
         .cursor { display: inline-block; width: 3px; background-color: var(--text-main); animation: blink 1s infinite; margin-right: 5px; vertical-align: middle; height: 1em; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        .promo-bar { background: var(--forge-orange); color: white; padding: 8px 0; font-weight: bold; font-size: 0.9rem; text-align: center; position: relative; z-index: 1001; overflow: hidden; cursor: pointer; }
+        .promo-bar { background: var(--forge-orange); color: white; padding: 8px 0; font-weight: bold; font-size: 0.9rem; text-align: center; position: fixed; top: 0; width: 100%; z-index: 1001; overflow: hidden; cursor: pointer; }
         .promo-content { display: inline-block; white-space: nowrap; animation: marquee 20s linear infinite; }
         @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-        header { background-color: var(--header-bg); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(128,128,128,0.1); backdrop-filter: blur(10px); }
+        /* إصلاح: جعل الهيدر ثابتًا تحت شريط العرض */
+        header { 
+            background-color: var(--header-bg); 
+            padding: 1rem 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: fixed; 
+            top: 30px; /* تحت شريط العرض */
+            width: 100%; 
+            z-index: 1000; 
+            border-bottom: 1px solid rgba(128,128,128,0.1); 
+            backdrop-filter: blur(10px); 
+        }
         .logo { font-size: 1.8rem; font-weight: 900; display: flex; align-items: center; gap: 10px; background: linear-gradient(90deg, var(--accent), var(--forge-orange), var(--accent)); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: forge-shine 3s linear infinite; text-decoration: none; }
         @keyframes forge-shine { to { background-position: 200% center; } }
         .logo i { color: var(--forge-orange); -webkit-text-fill-color: initial; }
@@ -68,7 +84,7 @@
         .theme-btn { background: var(--bg-card); border: 1px solid var(--accent); color: var(--accent); width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         .order-now-btn { background: var(--forge-orange); color: white; padding: 8px 18px; border-radius: 5px; font-weight: bold; cursor: pointer; border: none; text-decoration: none; font-size: 0.9rem; }
 
-        .hero { min-height: 95vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 5%; position: relative; overflow: hidden; background: #0f172a; }
+        .hero { min-height: 95vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 5%; position: relative; overflow: hidden; background: #0f172a; margin-top: 0; }
         #particles-js { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 1; }
         .hero-glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); padding: 3rem; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.1); max-width: 900px; z-index: 2; position: relative; animation: zoomInFade 1.2s ease-out; }
         .hero h1 { font-size: 3.5rem; line-height: 1.2; margin-bottom: 1.5rem; color: #fff; min-height: 140px; } 
@@ -180,6 +196,27 @@
         .rope i { position: absolute; bottom: -25px; color: var(--gold); font-size: 1.5rem; text-shadow: 0 0 10px var(--gold); animation: swing 3s ease-in-out infinite; }
         .ramadan-msg { position: absolute; top: 130px; background: var(--forge-orange); color: white; padding: 5px 25px; border-radius: 50px; font-weight: bold; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
         @keyframes swing { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
+
+        /* تحسينات بسيطة للجوال */
+        @media (max-width: 768px) {
+            .hero h1 { 
+                font-size: 2.5rem; 
+                min-height: 120px;
+            }
+            .hero-glass {
+                padding: 2rem;
+            }
+            .tech-item {
+                font-size: 1.2rem;
+                min-width: 150px;
+            }
+            .types-grid {
+                grid-template-columns: 1fr;
+            }
+            .process-steps {
+                flex-direction: column;
+            }
+        }
 
     </style>
 </head>
@@ -492,13 +529,32 @@
         });
 
         /* --- 3D Tilt Initialization --- */
-        VanillaTilt.init(document.querySelectorAll(".js-tilt"), {
-            max: 15, speed: 400, glare: true, "max-glare": 0.2,
-        });
+        if (typeof VanillaTilt !== 'undefined') {
+            VanillaTilt.init(document.querySelectorAll(".js-tilt"), {
+                max: 15, speed: 400, glare: true, "max-glare": 0.2,
+            });
+        }
 
-        particlesJS('particles-js', {
-            "particles": { "number": { "value": 60 }, "color": { "value": "#38bdf8" }, "shape": { "type": "circle" }, "opacity": { "value": 0.5 }, "size": { "value": 3 }, "line_linked": { "enable": true, "distance": 150, "color": "#38bdf8", "opacity": 0.4, "width": 1 }, "move": { "enable": true, "speed": 1.5 } }
-        });
+        /* --- Particles.js --- */
+        if (typeof particlesJS !== 'undefined') {
+            particlesJS('particles-js', {
+                particles: { 
+                    number: { value: 60 }, 
+                    color: { value: "#38bdf8" }, 
+                    shape: { type: "circle" }, 
+                    opacity: { value: 0.5 }, 
+                    size: { value: 3 }, 
+                    line_linked: { 
+                        enable: true, 
+                        distance: 150, 
+                        color: "#38bdf8", 
+                        opacity: 0.4, 
+                        width: 1 
+                    }, 
+                    move: { enable: true, speed: 1.5 } 
+                }
+            });
+        }
 
         /* --- Scroll Reveal --- */
         const observerOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
@@ -510,7 +566,10 @@
                 }
             });
         }, observerOptions);
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        
+        document.querySelectorAll('.reveal').forEach(el => {
+            if (el) observer.observe(el);
+        });
 
         /* --- FAST TYPEWRITER CONFIGURATION --- */
         const typedTextSpan = document.querySelector(".typewriter-text");
@@ -523,7 +582,7 @@
         let charIndex = 0;
 
         function type() {
-            if (charIndex < textArray[textArrayIndex].length) {
+            if (typedTextSpan && charIndex < textArray[textArrayIndex].length) {
                 typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
                 charIndex++;
                 setTimeout(type, typingDelay);
@@ -531,8 +590,9 @@
                 setTimeout(erase, newTextDelay);
             }
         }
+        
         function erase() {
-            if (charIndex > 0) {
+            if (typedTextSpan && charIndex > 0) {
                 typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
                 charIndex--;
                 setTimeout(erase, erasingDelay);
@@ -542,8 +602,9 @@
                 setTimeout(type, typingDelay + 1100);
             }
         }
+        
         document.addEventListener("DOMContentLoaded", function() { 
-            if(textArray.length) setTimeout(type, newTextDelay + 2500); 
+            if(textArray.length && typedTextSpan) setTimeout(type, newTextDelay + 250); 
         });
 
         /* --- Counters --- */
@@ -554,13 +615,15 @@
                     const counter = entry.target;
                     const target = +counter.getAttribute('data-target');
                     const increment = target / 50;
+                    let current = 0;
+                    
                     const updateCounter = () => {
-                        const c = +counter.innerText;
-                        if (c < target) {
-                            counter.innerText = Math.ceil(c + increment);
+                        if (current < target) {
+                            current = Math.min(current + increment, target);
+                            counter.innerText = Math.ceil(current);
                             setTimeout(updateCounter, 30);
                         } else {
-                            counter.innerText = target + (counter.nextElementSibling.innerText.includes('%') ? '' : '+');
+                            counter.innerText = target;
                         }
                     };
                     updateCounter();
@@ -568,65 +631,103 @@
                 }
             });
         }, { threshold: 0.5 });
+        
         counters.forEach(c => counterObserver.observe(c));
 
         /* --- Functions --- */
-        function toggleFaq(item) { item.classList.toggle('active'); }
+        function toggleFaq(item) { 
+            item.classList.toggle('active'); 
+        }
 
         let selectedSiteType = '';
+        
         function toggleTheme() {
             const body = document.body;
             const icon = document.getElementById('themeIcon');
-            if (body.hasAttribute('data-theme')) { body.removeAttribute('data-theme'); icon.className = 'fas fa-moon'; }
-            else { body.setAttribute('data-theme', 'light'); icon.className = 'fas fa-sun'; }
+            if (body.hasAttribute('data-theme')) { 
+                body.removeAttribute('data-theme'); 
+                icon.className = 'fas fa-moon'; 
+            } else { 
+                body.setAttribute('data-theme', 'light'); 
+                icon.className = 'fas fa-sun'; 
+            }
         }
-        function openAboutModal() { document.getElementById('aboutModal').style.display = 'flex'; }
-        function closeAboutModal() { document.getElementById('aboutModal').style.display = 'none'; }
+        
+        function openAboutModal() { 
+            document.getElementById('aboutModal').style.display = 'flex'; 
+        }
+        function closeAboutModal() { 
+            document.getElementById('aboutModal').style.display = 'none'; 
+        }
         
         // Process Modal Logic
-        function openProcessModal() { document.getElementById('processModal').style.display = 'flex'; }
-        function closeProcessModal() { document.getElementById('processModal').style.display = 'none'; }
+        function openProcessModal() { 
+            document.getElementById('processModal').style.display = 'flex'; 
+        }
+        function closeProcessModal() { 
+            document.getElementById('processModal').style.display = 'none'; 
+        }
 
         // Gift Modal Logic
         function openGiftModal() { 
             document.getElementById('giftModal').style.display = 'flex';
-            document.querySelector('.mystery-box').style.display = 'none'; // Hide box after opening
+            const mysteryBox = document.querySelector('.mystery-box');
+            if (mysteryBox) {
+                mysteryBox.style.display = 'none';
+            }
             startConfetti();
             startCountdown();
         }
-        function closeGiftModal() { document.getElementById('giftModal').style.display = 'none'; }
+        
+        function closeGiftModal() { 
+            document.getElementById('giftModal').style.display = 'none'; 
+        }
 
         function startConfetti() {
-            for(let i=0; i<30; i++) {
+            const modal = document.getElementById('giftModal');
+            if (!modal) return;
+            
+            for(let i = 0; i < 30; i++) {
                 let conf = document.createElement('div');
                 conf.classList.add('confetti');
                 conf.style.left = Math.random() * 100 + 'vw';
                 conf.style.animationDuration = (Math.random() * 2 + 2) + 's';
                 conf.style.backgroundColor = ['#f00', '#0f0', '#00f', '#ff0', '#0ff'][Math.floor(Math.random()*5)];
-                document.getElementById('giftModal').appendChild(conf);
+                modal.appendChild(conf);
             }
         }
         
         function startCountdown() {
             let time = 900; // 15 mins
             const el = document.getElementById('countdown');
-            setInterval(() => {
+            if (!el) return;
+            
+            const countdownInterval = setInterval(() => {
                 if(time > 0) {
                     time--;
                     let m = Math.floor(time / 60);
                     let s = time % 60;
                     el.innerText = `${m}:${s < 10 ? '0'+s : s}`;
+                } else {
+                    clearInterval(countdownInterval);
                 }
             }, 1000);
         }
 
-        function openTypeSelection() { document.getElementById('typeModal').style.display = 'flex'; }
-        function closeTypeSelection() { document.getElementById('typeModal').style.display = 'none'; }
+        function openTypeSelection() { 
+            document.getElementById('typeModal').style.display = 'flex'; 
+        }
+        function closeTypeSelection() { 
+            document.getElementById('typeModal').style.display = 'none'; 
+        }
         
         function selectType(t) {
             selectedSiteType = t;
             closeTypeSelection();
-            document.getElementById('pkgTitle').innerText = "باقة " + t;
+            const pkgTitle = document.getElementById('pkgTitle');
+            if (pkgTitle) {
+                pkgTitle.innerText = "باقة " + t;
+            }
             document.getElementById('packageModal').style.display = 'flex';
         }
 
@@ -636,33 +737,67 @@
         }
 
         function openForm(s) {
-            closeGiftModal(); // If opened from gift
-            document.getElementById('serviceName').innerText = s;
+            closeGiftModal();
+            const serviceName = document.getElementById('serviceName');
+            if (serviceName) {
+                serviceName.innerText = s;
+            }
             document.getElementById('orderModal').style.display = 'flex';
         }
-        function closeForm() { document.getElementById('orderModal').style.display = 'none'; }
+        
+        function closeForm() { 
+            document.getElementById('orderModal').style.display = 'none'; 
+        }
         
         function submitToWhatsApp() {
             const n = document.getElementById('clientName').value;
             const p = document.getElementById('clientPhone').value;
             const s = document.getElementById('serviceName').innerText;
-            if(!n || !p) return alert("يرجى إدخال البيانات");
-            window.open(`https://wa.me/212627713979?text=طلب جديد من الموقع:%0aالخدمة: ${s}%0aالاسم: ${n}%0aالهاتف: ${p}`, '_blank');
+            
+            if(!n || !p) {
+                alert("يرجى إدخال الاسم ورقم الهاتف");
+                return;
+            }
+            
+            const message = `طلب جديد من موقع Web Forge:%0a%0aالخدمة: ${s}%0aالاسم: ${n}%0aالهاتف: ${p}%0a%0aشكراً لاختياركم Web Forge!`;
+            
+            window.open(`https://wa.me/212627713979?text=${message}`, '_blank');
         }
 
         function copyLink() {
-            navigator.clipboard.writeText(window.location.href);
-            const toast = document.getElementById('shareToast');
-            toast.style.opacity = '1';
-            setTimeout(() => toast.style.opacity = '0', 2000);
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                const toast = document.getElementById('shareToast');
+                if (toast) {
+                    toast.style.opacity = '1';
+                    setTimeout(() => {
+                        toast.style.opacity = '0';
+                    }, 2000);
+                }
+            });
         }
 
         window.onclick = function(e) { 
             if(e.target.className === 'modal') { 
-                closeAboutModal(); closeTypeSelection(); closeForm(); closeProcessModal(); closeGiftModal();
-                document.getElementById('packageModal').style.display='none'; 
+                closeAboutModal(); 
+                closeTypeSelection(); 
+                closeForm(); 
+                closeProcessModal(); 
+                closeGiftModal();
+                document.getElementById('packageModal').style.display = 'none'; 
             } 
         }
+        
+        // إغلاق المودالات عند الضغط على ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeAboutModal(); 
+                closeTypeSelection(); 
+                closeForm(); 
+                closeProcessModal(); 
+                closeGiftModal();
+                document.getElementById('packageModal').style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html>
