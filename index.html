@@ -84,6 +84,10 @@
         .header-actions { display: flex; align-items: center; gap: 15px; }
         
         /* زر اللغة الجديد */
+        .language-container {
+            position: relative;
+        }
+        
         .language-btn {
             background: var(--bg-card);
             border: 1px solid var(--accent);
@@ -328,7 +332,7 @@
                 </div>
             </div>
             
-            <a href="#services" class="order-now-btn">اطلب خدمتك</a>
+            <a href="#services" class="order-now-btn" data-translate="orderNowBtn">اطلب خدمتك</a>
             <button class="theme-btn" onclick="toggleTheme()"><i class="fas fa-moon" id="themeIcon"></i></button>
         </div>
     </header>
@@ -336,11 +340,11 @@
     <section class="hero">
         <div id="particles-js"></div>
         <div class="hero-glass">
-            <h1>نحول أفكارك إلى <br><span class="typewriter-text"></span><span class="cursor"></span></h1>
-            <p>مجموعة web forge تقدم لك حلولاً تقنية متكاملة. متخصصون في صناعة الهوية الرقمية، تطوير متاجر YouCan و Shopify، وتصميم المواقع العصرية.</p>
+            <h1 data-translate="heroText1">نحول أفكارك إلى <br><span class="typewriter-text"></span><span class="cursor"></span></h1>
+            <p data-translate="heroText2">مجموعة web forge تقدم لك حلولاً تقنية متكاملة. متخصصون في صناعة الهوية الرقمية، تطوير متاجر YouCan و Shopify، وتصميم المواقع العصرية.</p>
             <div class="hero-btns">
-                <a href="#services" class="btn-primary">استعرض خدماتنا</a>
-                <a href="mailto:webfooorge@gmail.com?subject=استفسار عن خدمات Web Forge" class="btn-secondary">تواصل مباشرة</a>
+                <a href="#services" class="btn-primary" data-translate="primaryBtn">استعرض خدماتنا</a>
+                <a href="mailto:webfooorge@gmail.com?subject=استفسار عن خدمات Web Forge" class="btn-secondary" data-translate="secondaryBtn">تواصل مباشرة</a>
             </div>
         </div>
     </section>
@@ -375,97 +379,118 @@
     <section class="stats-bar">
         <div class="stat-item reveal delay-1">
             <h2 class="counter" data-target="50">0</h2>
-            <p>مشروع منجز</p>
+            <p data-translate="statsProjects">مشروع منجز</p>
         </div>
         <div class="stat-item reveal delay-2">
             <h2 class="counter" data-target="100">0</h2>
-            <p>رضا العملاء %</p>
+            <p data-translate="statsSatisfaction">رضا العملاء %</p>
         </div>
         <div class="stat-item reveal delay-3">
             <h2>24/7</h2>
-            <p>دعم فني</p>
+            <p data-translate="statsSupport">دعم فني</p>
         </div>
     </section>
 
     <section class="why-us">
         <div style="text-align:center;" class="reveal">
-            <h2>🛡️ لماذا تختار Web Forge؟</h2>
-            <p>نحن لا نبني مجرد أكواد، بل نصنع تجربة مستخدم فريدة</p>
+            <h2 data-translate="whyTitle">🛡️ لماذا تختار Web Forge؟</h2>
+            <p data-translate="whyDesc">نحن لا نبني مجرد أكواد، بل نصنع تجربة مستخدم فريدة</p>
         </div>
         <div class="why-grid">
-            <div class="why-card reveal delay-1 js-tilt"><i class="fas fa-bolt"></i><h4>سرعة فائقة</h4><p>نضمن لك سرعة تحميل استثنائية لتصدر محركات البحث.</p></div>
-            <div class="why-card reveal delay-2 js-tilt"><i class="fas fa-mobile-alt"></i><h4>تجاوب كامل</h4><p>موقعك سيظهر بشكل أنيق على كافة الأجهزة الذكية.</p></div>
-            <div class="why-card reveal delay-3 js-tilt"><i class="fas fa-headset"></i><h4>دعم فني</h4><p>فريقنا معك دائماً لضمان استقرار موقعك 24/7.</p></div>
-            <div class="why-card reveal delay-4 js-tilt"><i class="fas fa-paint-brush"></i><h4>تصميم مخصص</h4><p>نمنح مشروعك لمسة إبداعية تميزك عن المنافسين.</p></div>
+            <div class="why-card reveal delay-1 js-tilt">
+                <i class="fas fa-bolt"></i>
+                <h4 data-translate="speedTitle">سرعة فائقة</h4>
+                <p data-translate="speedDesc">نضمن لك سرعة تحميل استثنائية لتصدر محركات البحث.</p>
+            </div>
+            <div class="why-card reveal delay-2 js-tilt">
+                <i class="fas fa-mobile-alt"></i>
+                <h4 data-translate="responsiveTitle">تجاوب كامل</h4>
+                <p data-translate="responsiveDesc">موقعك سيظهر بشكل أنيق على كافة الأجهزة الذكية.</p>
+            </div>
+            <div class="why-card reveal delay-3 js-tilt">
+                <i class="fas fa-headset"></i>
+                <h4 data-translate="supportTitle">دعم فني</h4>
+                <p data-translate="supportDesc">فريقنا معك دائماً لضمان استقرار موقعك 24/7.</p>
+            </div>
+            <div class="why-card reveal delay-4 js-tilt">
+                <i class="fas fa-paint-brush"></i>
+                <h4 data-translate="designTitle">تصميم مخصص</h4>
+                <p data-translate="designDesc">نمنح مشروعك لمسة إبداعية تميزك عن المنافسين.</p>
+            </div>
         </div>
     </section>
 
     <section class="services" id="services">
         <div style="text-align:center; margin-bottom: 3rem;" class="reveal">
-            <h2>💼 خدماتنا الاحترافية</h2>
-            <p>اختر الخدمة التي تناسب طموحاتك</p>
+            <h2 data-translate="servicesTitle">💼 خدماتنا الاحترافية</h2>
+            <p data-translate="servicesDesc">اختر الخدمة التي تناسب طموحاتك</p>
         </div>
         <div class="services-grid">
             <div class="service-card reveal delay-1 js-tilt">
                 <div class="icon-box"><i class="fas fa-store"></i></div>
-                <h3>متاجر YouCan</h3>
-                <p>تصميم وتجهيز متاجر YouCan احترافية بالكامل.</p>
-                <button onclick="openForm('متجر YouCan')" class="card-btn">اطلب الخدمة <i class="fas fa-arrow-left"></i></button>
+                <h3 data-translate="youcanTitle">متاجر YouCan</h3>
+                <p data-translate="youcanDesc">تصميم وتجهيز متاجر YouCan احترافية بالكامل.</p>
+                <button onclick="openForm('متجر YouCan')" class="card-btn" data-translate="youcanBtn">اطلب الخدمة <i class="fas fa-arrow-left"></i></button>
             </div>
             <div class="service-card reveal delay-2 js-tilt">
                 <div class="icon-box" style="color: #96bf48;"><i class="fab fa-shopify"></i></div>
-                <h3>متاجر Shopify</h3>
-                <p>تطوير متاجر دروبشيبينغ أو براند خاص عالمي.</p>
-                <button onclick="openForm('متجر Shopify')" class="card-btn">اطلب الخدمة <i class="fas fa-arrow-left"></i></button>
+                <h3 data-translate="shopifyTitle">متاجر Shopify</h3>
+                <p data-translate="shopifyDesc">تطوير متاجر دروبشيبينغ أو براند خاص عالمي.</p>
+                <button onclick="openForm('متجر Shopify')" class="card-btn" data-translate="shopifyBtn">اطلب الخدمة <i class="fas fa-arrow-left"></i></button>
             </div>
             <div class="service-card reveal delay-3 js-tilt">
                 <div class="icon-box" style="color: var(--forge-orange);"><i class="fas fa-laptop-code"></i></div>
-                <h3>مواقع Web Forge</h3>
-                <p>مواقع خاصة: مدونة، طبيب، محامي، Portfolio، كتب.</p>
-                <button onclick="openTypeSelection()" class="card-btn">اطلب الخدمة <i class="fas fa-arrow-left"></i></button>
+                <h3 data-translate="websitesTitle">مواقع Web Forge</h3>
+                <p data-translate="websitesDesc">مواقع خاصة: مدونة، طبيب، محامي، Portfolio، كتب.</p>
+                <button onclick="openTypeSelection()" class="card-btn" data-translate="websitesBtn">اطلب الخدمة <i class="fas fa-arrow-left"></i></button>
             </div>
         </div>
     </section>
 
     <section class="success-stories">
-        <div style="text-align:center;" class="reveal"><h2>🏆 قصص النجاح بالصور</h2></div>
+        <div style="text-align:center;" class="reveal">
+            <h2 data-translate="portfolioTitle">🏆 قصص النجاح بالصور</h2>
+        </div>
         <div class="portfolio-grid">
             <div class="work-card reveal delay-1">
                 <div class="browser-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
                 <div class="screen-box"><img src="https://i.ibb.co/W4BhL518/IMG-20260128-WA0010.jpg" alt="موقع محامي"></div>
-                <div class="work-label">نموذج موقع محامي</div>
+                <div class="work-label" data-translate="work1">نموذج موقع محامي</div>
             </div>
             <div class="work-card reveal delay-2">
                 <div class="browser-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
                 <div class="screen-box"><img src="https://i.ibb.co/0pTkqypt/IMG-20260128-WA0011.jpg" alt="موقع بائع ساعات"></div>
-                <div class="work-label">نموذج موقع بائع ساعات</div>
+                <div class="work-label" data-translate="work2">نموذج موقع بائع ساعات</div>
             </div>
             <div class="work-card reveal delay-3">
                 <div class="browser-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
                 <div class="screen-box"><img src="https://i.ibb.co/mVNQDLLX/IMG-20260128-WA0012.jpg" alt="موقع ملابس"></div>
-                <div class="work-label">نموذج موقع بيع ملابس</div>
+                <div class="work-label" data-translate="work3">نموذج موقع بيع ملابس</div>
             </div>
         </div>
     </section>
 
     <section class="faq-section reveal">
-        <div style="text-align:center;"><h2>🤔 أسئلة شائعة</h2><p>كل ما تحتاج معرفته قبل البدء</p></div>
+        <div style="text-align:center;">
+            <h2 data-translate="faqTitle">🤔 أسئلة شائعة</h2>
+            <p data-translate="faqDesc">كل ما تحتاج معرفته قبل البدء</p>
+        </div>
         <div class="faq-container">
             <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-question">كم تستغرق مدة تجهيز الموقع؟ <i class="fas fa-plus"></i></div>
-                <div class="faq-answer">تختلف المدة حسب نوع الباقة، ولكن غالباً ما يستغرق العمل من 3 إلى 7 أيام عمل للمواقع العادية والمتاجر.</div>
+                <div class="faq-question" data-translate="faq1">كم تستغرق مدة تجهيز الموقع؟ <i class="fas fa-plus"></i></div>
+                <div class="faq-answer" data-translate="faq1a">تختلف المدة حسب نوع الباقة، ولكن غالباً ما يستغرق العمل من 3 إلى 7 أيام عمل للمواقع العادية والمتاجر.</div>
             </div>
             <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-question">هل النطاق (Domain) مجاني؟ <i class="fas fa-plus"></i></div>
-                <div class="faq-answer">في بعض الباقات الاحترافية نقدم اسم نطاق مجاني للسنة الأولى، تواصل معنا لمعرفة التفاصيل.</div>
+                <div class="faq-question" data-translate="faq2">هل النطاق (Domain) مجاني؟ <i class="fas fa-plus"></i></div>
+                <div class="faq-answer" data-translate="faq2a">في بعض الباقات الاحترافية نقدم اسم نطاق مجاني للسنة الأولى، تواصل معنا لمعرفة التفاصيل.</div>
             </div>
             <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-question">هل يوجد دعم فني بعد التسليم؟ <i class="fas fa-plus"></i></div>
-                <div class="faq-answer">نعم، نوفر دعماً فنياً شاملاً لضمان عمل موقعك بكفاءة عالية وحل أي مشكلة تقنية تواجهها.</div>
+                <div class="faq-question" data-translate="faq3">هل يوجد دعم فني بعد التسليم؟ <i class="fas fa-plus"></i></div>
+                <div class="faq-answer" data-translate="faq3a">نعم، نوفر دعماً فنياً شاملاً لضمان عمل موقعك بكفاءة عالية وحل أي مشكلة تقنية تواجهها.</div>
             </div>
             <div class="faq-item" onclick="toggleFaq(this)">
-                <div class="faq-question">ما هي طرق الدفع المتاحة؟ <i class="fas fa-plus"></i></div>
-                <div class="faq-answer">نقبل التحويل البنكي والعديد من وسائل الدفع المحلية والدولية لتسهيل الأمر على عملائنا.</div>
+                <div class="faq-question" data-translate="faq4">ما هي طرق الدفع المتاحة؟ <i class="fas fa-plus"></i></div>
+                <div class="faq-answer" data-translate="faq4a">نقبل التحويل البنكي والعديد من وسائل الدفع المحلية والدولية لتسهيل الأمر على عملائنا.</div>
             </div>
         </div>
     </section>
@@ -474,39 +499,39 @@
         <div class="modal-content" style="text-align:center; overflow:hidden;">
             <span class="close-btn" onclick="closeGiftModal()">&times;</span>
             <div style="font-size: 3rem; margin-bottom: 10px;">🎉</div>
-            <h3 style="color:var(--forge-orange); margin-bottom:10px;">مبروك! حصلت على هدية</h3>
-            <p>كود خصم حصري صالح لمدة 15 دقيقة فقط!</p>
+            <h3 style="color:var(--forge-orange); margin-bottom:10px;" data-translate="giftTitle">مبروك! حصلت على هدية</h3>
+            <p data-translate="giftDesc">كود خصم حصري صالح لمدة 15 دقيقة فقط!</p>
             <div style="background:var(--bg-dark); padding:15px; border:2px dashed var(--accent); margin:15px 0; font-size:1.5rem; font-weight:bold; letter-spacing:2px;">FORGE2026</div>
-            <p style="color:var(--text-secondary); font-size:0.9rem;">ينتهي العرض خلال: <span id="countdown" style="color:red; font-weight:bold;">15:00</span></p>
-            <button onclick="openForm('طلب باستخدام كود FORGE2026')" style="margin-top:15px; background:var(--accent); color:#000; padding:10px 20px; border:none; border-radius:5px; font-weight:bold; cursor:pointer; width:100%;">استخدم الكود الآن</button>
+            <p style="color:var(--text-secondary); font-size:0.9rem;" data-translate="giftTimer">ينتهي العرض خلال: <span id="countdown" style="color:red; font-weight:bold;">15:00</span></p>
+            <button onclick="openForm('طلب باستخدام كود FORGE2026')" style="margin-top:15px; background:var(--accent); color:#000; padding:10px 20px; border:none; border-radius:5px; font-weight:bold; cursor:pointer; width:100%;" data-translate="giftBtn">استخدم الكود الآن</button>
         </div>
     </div>
 
     <div id="processModal" class="modal">
         <div class="modal-content" style="max-width: 900px;">
             <span class="close-btn" onclick="closeProcessModal()">&times;</span>
-            <h3 style="text-align:center; color:var(--accent); margin-bottom: 20px;">⚙️ كيف نعمل؟</h3>
-            <p style="text-align:center; margin-bottom: 20px; color:var(--text-secondary);">رحلة نجاح مشروعك في 4 خطوات بسيطة</p>
+            <h3 style="text-align:center; color:var(--accent); margin-bottom: 20px;" data-translate="processTitle">⚙️ كيف نعمل؟</h3>
+            <p style="text-align:center; margin-bottom: 20px; color:var(--text-secondary);" data-translate="processDesc">رحلة نجاح مشروعك في 4 خطوات بسيطة</p>
             <div class="process-steps">
                 <div class="step-card">
                     <div class="step-number">1</div>
-                    <h4>استلام الطلب</h4>
-                    <p>نستمع لفكرتك ونحلل متطلباتك بدقة لتحديد الأهداف.</p>
+                    <h4 data-translate="step1">استلام الطلب</h4>
+                    <p data-translate="step1Desc">نستمع لفكرتك ونحلل متطلباتك بدقة لتحديد الأهداف.</p>
                 </div>
                 <div class="step-card">
                     <div class="step-number">2</div>
-                    <h4>التخطيط والتصميم</h4>
-                    <p>نرسم خارطة الطريق ونصمم واجهة مستخدم جذابة.</p>
+                    <h4 data-translate="step2">التخطيط والتصميم</h4>
+                    <p data-translate="step2Desc">نرسم خارطة الطريق ونصمم واجهة مستخدم جذابة.</p>
                 </div>
                 <div class="step-card">
                     <div class="step-number">3</div>
-                    <h4>التطوير والبرمجة</h4>
-                    <p>نحول التصاميم إلى كود نظيف وسريع وآمن.</p>
+                    <h4 data-translate="step3">التطوير والبرمجة</h4>
+                    <p data-translate="step3Desc">نحول التصاميم إلى كود نظيف وسريع وآمن.</p>
                 </div>
                 <div class="step-card">
                     <div class="step-number">4</div>
-                    <h4>الإطلاق والدعم</h4>
-                    <p>ننشر موقعك للعالم ونقدم لك الدعم الفني اللازم.</p>
+                    <h4 data-translate="step4">الإطلاق والدعم</h4>
+                    <p data-translate="step4Desc">ننشر موقعك للعالم ونقدم لك الدعم الفني اللازم.</p>
                 </div>
             </div>
         </div>
@@ -560,9 +585,9 @@
         <div class="modal-content">
             <span class="close-btn" onclick="closeForm()">&times;</span>
             <h3 id="serviceName" style="text-align:center; color:var(--forge-orange); margin-bottom:20px;"></h3>
-            <input type="text" id="clientName" placeholder="الاسم الكامل">
-            <input type="tel" id="clientPhone" placeholder="رقم الواتساب">
-            <button onclick="submitToWhatsApp()" style="width:100%; padding:12px; background:var(--forge-orange); color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">إرسال الطلب عبر واتساب</button>
+            <input type="text" id="clientName" placeholder="الاسم الكامل" data-translate="namePlaceholder">
+            <input type="tel" id="clientPhone" placeholder="رقم الواتساب" data-translate="phonePlaceholder">
+            <button onclick="submitToWhatsApp()" style="width:100%; padding:12px; background:var(--forge-orange); color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;" data-translate="submitBtn">إرسال الطلب عبر واتساب</button>
         </div>
     </div>
 
@@ -585,12 +610,12 @@
 
     <footer>
         <div class="footer-nav">
-            <button onclick="openAboutModal()" class="footer-link">من نحن</button>
-            <button onclick="openProcessModal()" class="footer-link">كيف نعمل؟</button>
-            <a href="#services" class="footer-link">الخدمات</a>
-            <a href="mailto:webfooorge@gmail.com" class="footer-link">اتصل بنا</a>
+            <button onclick="openAboutModal()" class="footer-link" data-translate="aboutBtn">من نحن</button>
+            <button onclick="openProcessModal()" class="footer-link" data-translate="processBtn">كيف نعمل؟</button>
+            <a href="#services" class="footer-link" data-translate="servicesBtn">الخدمات</a>
+            <a href="mailto:webfooorge@gmail.com" class="footer-link" data-translate="contactLink">اتصل بنا</a>
         </div>
-        <p>جميع الحقوق محفوظة &copy; 2026 Web Forge</p>
+        <p data-translate="copyright">جميع الحقوق محفوظة &copy; 2026 Web Forge</p>
         <div class="social-links">
             <a href="https://www.instagram.com/web_forge4?igsh=dmNxOGhoMmYxdjZw" target="_blank" class="social-btn"><i class="fab fa-instagram"></i></a>
             <a href="https://www.tiktok.com/@webfoorge" target="_blank" class="social-btn"><i class="fab fa-tiktok"></i></a>
@@ -599,155 +624,232 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // بيانات الترجمة (نفس البيانات السابقة)
+        // بيانات الترجمة
         const translations = {
             ar: {
-                projectsText: "مشروع منجز",
-                satisfactionText: "رضا العملاء %",
-                supportText: "دعم فني",
-                whyTitle: "🛡️ لماذا تختار Web Forge؟",
-                whyDesc: "نحن لا نبني مجرد أكواد، بل نصنع تجربة مستخدم فريدة",
-                speedTitle: "سرعة فائقة",
-                speedDesc: "نضمن لك سرعة تحميل استثنائية لتصدر محركات البحث.",
-                responsiveTitle: "تجاوب كامل",
-                responsiveDesc: "موقعك سيظهر بشكل أنيق على كافة الأجهزة الذكية.",
-                designTitle: "تصميم مخصص",
-                designDesc: "نمنح مشروعك لمسة إبداعية تميزك عن المنافسين.",
-                servicesTitle: "💼 خدماتنا الاحترافية",
-                servicesDesc: "اختر الخدمة التي تناسب طموحاتك",
-                youcanTitle: "متاجر YouCan",
-                youcanDesc: "تصميم وتجهيز متاجر YouCan احترافية بالكامل.",
-                youcanBtn: "اطلب الخدمة",
-                shopifyTitle: "متاجر Shopify",
-                shopifyDesc: "تطوير متاجر دروبشيبينغ أو براند خاص عالمي.",
-                shopifyBtn: "اطلب الخدمة",
-                websitesTitle: "مواقع Web Forge",
-                websitesDesc: "مواقع خاصة: مدونة، طبيب، محامي، Portfolio، كتب.",
-                websitesBtn: "اطلب الخدمة",
-                portfolioTitle: "🏆 قصص النجاح بالصور",
-                work1: "نموذج موقع محامي",
-                work2: "نموذج موقع بائع ساعات",
-                work3: "نموذج موقع بيع ملابس",
-                faqTitle: "🤔 أسئلة شائعة",
-                faqDesc: "كل ما تحتاج معرفته قبل البدء",
-                faq1: "كم تستغرق مدة تجهيز الموقع؟",
-                faq1a: "تختلف المدة حسب نوع الباقة، ولكن غالباً ما يستغرق العمل من 3 إلى 7 أيام عمل للمواقع العادية والمتاجر.",
-                faq2: "هل النطاق (Domain) مجاني؟",
-                faq2a: "في بعض الباقات الاحترافية نقدم اسم نطاق مجاني للسنة الأولى، تواصل معنا لمعرفة التفاصيل.",
-                faq3: "هل يوجد دعم فني بعد التسليم؟",
-                faq3a: "نعم، نوفر دعماً فنياً شاملاً لضمان عمل موقعك بكفاءة عالية وحل أي مشكلة تقنية تواجهها.",
-                faq4: "ما هي طرق الدفع المتاحة؟",
-                faq4a: "نقبل التحويل البنكي والعديد من وسائل الدفع المحلية والدولية لتسهيل الأمر على عملائنا.",
-                giftTitle: "مبروك! حصلت على هدية",
-                giftDesc: "كود خصم حصري صالح لمدة 15 دقيقة فقط!",
-                giftTimer: "ينتهي العرض خلال:",
-                giftBtn: "استخدم الكود الآن",
-                aboutBtn: "من نحن",
-                processBtn: "كيف نعمل؟",
-                servicesBtn: "الخدمات",
-                contactLink: "اتصل بنا",
-                copyright: "جميع الحقوق محفوظة &copy; 2026 Web Forge",
-                submitBtn: "إرسال الطلب عبر واتساب"
+                // النصوص الرئيسية
+                "orderNowBtn": "اطلب خدمتك",
+                "heroText1": "نحول أفكارك إلى ",
+                "heroText2": "مجموعة web forge تقدم لك حلولاً تقنية متكاملة. متخصصون في صناعة الهوية الرقمية، تطوير متاجر YouCan و Shopify، وتصميم المواقع العصرية.",
+                "primaryBtn": "استعرض خدماتنا",
+                "secondaryBtn": "تواصل مباشرة",
+                
+                // الإحصائيات
+                "statsProjects": "مشروع منجز",
+                "statsSatisfaction": "رضا العملاء %",
+                "statsSupport": "دعم فني",
+                
+                // قسم لماذا تختارنا
+                "whyTitle": "🛡️ لماذا تختار Web Forge؟",
+                "whyDesc": "نحن لا نبني مجرد أكواد، بل نصنع تجربة مستخدم فريدة",
+                "speedTitle": "سرعة فائقة",
+                "speedDesc": "نضمن لك سرعة تحميل استثنائية لتصدر محركات البحث.",
+                "responsiveTitle": "تجاوب كامل",
+                "responsiveDesc": "موقعك سيظهر بشكل أنيق على كافة الأجهزة الذكية.",
+                "supportTitle": "دعم فني",
+                "supportDesc": "فريقنا معك دائماً لضمان استقرار موقعك 24/7.",
+                "designTitle": "تصميم مخصص",
+                "designDesc": "نمنح مشروعك لمسة إبداعية تميزك عن المنافسين.",
+                
+                // قسم الخدمات
+                "servicesTitle": "💼 خدماتنا الاحترافية",
+                "servicesDesc": "اختر الخدمة التي تناسب طموحاتك",
+                "youcanTitle": "متاجر YouCan",
+                "youcanDesc": "تصميم وتجهيز متاجر YouCan احترافية بالكامل.",
+                "youcanBtn": "اطلب الخدمة",
+                "shopifyTitle": "متاجر Shopify",
+                "shopifyDesc": "تطوير متاجر دروبشيبينغ أو براند خاص عالمي.",
+                "shopifyBtn": "اطلب الخدمة",
+                "websitesTitle": "مواقع Web Forge",
+                "websitesDesc": "مواقع خاصة: مدونة، طبيب، محامي، Portfolio، كتب.",
+                "websitesBtn": "اطلب الخدمة",
+                
+                // قسم الأعمال
+                "portfolioTitle": "🏆 قصص النجاع بالصور",
+                "work1": "نموذج موقع محامي",
+                "work2": "نموذج موقع بائع ساعات",
+                "work3": "نموذج موقع بيع ملابس",
+                
+                // قسم الأسئلة الشائعة
+                "faqTitle": "🤔 أسئلة شائعة",
+                "faqDesc": "كل ما تحتاج معرفته قبل البدء",
+                "faq1": "كم تستغرق مدة تجهيز الموقع؟",
+                "faq1a": "تختلف المدة حسب نوع الباقة، ولكن غالباً ما يستغرق العمل من 3 إلى 7 أيام عمل للمواقع العادية والمتاجر.",
+                "faq2": "هل النطاق (Domain) مجاني؟",
+                "faq2a": "في بعض الباقات الاحترافية نقدم اسم نطاق مجاني للسنة الأولى، تواصل معنا لمعرفة التفاصيل.",
+                "faq3": "هل يوجد دعم فني بعد التسليم؟",
+                "faq3a": "نعم، نوفر دعماً فنياً شاملاً لضمان عمل موقعك بكفاءة عالية وحل أي مشكلة تقنية تواجهها.",
+                "faq4": "ما هي طرق الدفع المتاحة؟",
+                "faq4a": "نقبل التحويل البنكي والعديد من وسائل الدفع المحلية والدولية لتسهيل الأمر على عملائنا.",
+                
+                // المودالات
+                "giftTitle": "مبروك! حصلت على هدية",
+                "giftDesc": "كود خصم حصري صالح لمدة 15 دقيقة فقط!",
+                "giftTimer": "ينتهي العرض خلال:",
+                "giftBtn": "استخدم الكود الآن",
+                "processTitle": "⚙️ كيف نعمل؟",
+                "processDesc": "رحلة نجاح مشروعك في 4 خطوات بسيطة",
+                "step1": "استلام الطلب",
+                "step1Desc": "نستمع لفكرتك ونحلل متطلباتك بدقة لتحديد الأهداف.",
+                "step2": "التخطيط والتصميم",
+                "step2Desc": "نرسم خارطة الطريق ونصمم واجهة مستخدم جذابة.",
+                "step3": "التطوير والبرمجة",
+                "step3Desc": "نحول التصاميم إلى كود نظيف وسريع وآمن.",
+                "step4": "الإطلاق والدعم",
+                "step4Desc": "ننشر موقعك للعالم ونقدم لك الدعم الفني اللازم.",
+                
+                // نموذج الطلب
+                "namePlaceholder": "الاسم الكامل",
+                "phonePlaceholder": "رقم الواتساب",
+                "submitBtn": "إرسال الطلب عبر واتساب",
+                
+                // الفوتر
+                "aboutBtn": "من نحن",
+                "processBtn": "كيف نعمل؟",
+                "servicesBtn": "الخدمات",
+                "contactLink": "اتصل بنا",
+                "copyright": "جميع الحقوق محفوظة &copy; 2026 Web Forge"
             },
             en: {
-                projectsText: "Completed Projects",
-                satisfactionText: "Client Satisfaction %",
-                supportText: "Technical Support",
-                whyTitle: "🛡️ Why Choose Web Forge?",
-                whyDesc: "We don't just build code, we create unique user experiences",
-                speedTitle: "Ultra Fast",
-                speedDesc: "We guarantee exceptional loading speed to rank high in search engines.",
-                responsiveTitle: "Fully Responsive",
-                responsiveDesc: "Your site will appear elegantly on all smart devices.",
-                designTitle: "Custom Design",
-                designDesc: "We give your project a creative touch that distinguishes you from competitors.",
-                servicesTitle: "💼 Our Professional Services",
-                servicesDesc: "Choose the service that fits your ambitions",
-                youcanTitle: "YouCan Stores",
-                youcanDesc: "Complete design and setup of professional YouCan stores.",
-                youcanBtn: "Order Service",
-                shopifyTitle: "Shopify Stores",
-                shopifyDesc: "Development of dropshipping stores or global private brands.",
-                shopifyBtn: "Order Service",
-                websitesTitle: "Web Forge Websites",
-                websitesDesc: "Private websites: Blog, Doctor, Lawyer, Portfolio, Books.",
-                websitesBtn: "Order Service",
-                portfolioTitle: "🏆 Success Stories in Pictures",
-                work1: "Lawyer Website Template",
-                work2: "Watch Seller Website Template",
-                work3: "Clothing Store Website Template",
-                faqTitle: "🤔 Frequently Asked Questions",
-                faqDesc: "Everything you need to know before starting",
-                faq1: "How long does website preparation take?",
-                faq1a: "Duration varies by package type, but typically takes 3 to 7 working days for regular sites and stores.",
-                faq2: "Is the Domain free?",
-                faq2a: "In some professional packages, we offer a free domain name for the first year. Contact us for details.",
-                faq3: "Is there technical support after delivery?",
-                faq3a: "Yes, we provide comprehensive technical support to ensure your site operates efficiently and solve any technical issues you face.",
-                faq4: "What payment methods are available?",
-                faq4a: "We accept bank transfers and many local and international payment methods to make it easy for our clients.",
-                giftTitle: "Congratulations! You Got a Gift",
-                giftDesc: "Exclusive discount code valid for 15 minutes only!",
-                giftTimer: "Offer ends in:",
-                giftBtn: "Use Code Now",
-                aboutBtn: "About Us",
-                processBtn: "How We Work",
-                servicesBtn: "Services",
-                contactLink: "Contact Us",
-                copyright: "All rights reserved &copy; 2026 Web Forge",
-                submitBtn: "Send Request via WhatsApp"
+                "orderNowBtn": "Order Your Service",
+                "heroText1": "We turn your ideas into ",
+                "heroText2": "Web Forge group offers you integrated technical solutions. Specialized in digital identity, YouCan and Shopify store development, and modern website design.",
+                "primaryBtn": "Browse Our Services",
+                "secondaryBtn": "Contact Directly",
+                "statsProjects": "Completed Projects",
+                "statsSatisfaction": "Client Satisfaction %",
+                "statsSupport": "Technical Support",
+                "whyTitle": "🛡️ Why Choose Web Forge?",
+                "whyDesc": "We don't just build code, we create unique user experiences",
+                "speedTitle": "Ultra Fast",
+                "speedDesc": "We guarantee exceptional loading speed to rank high in search engines.",
+                "responsiveTitle": "Fully Responsive",
+                "responsiveDesc": "Your site will appear elegantly on all smart devices.",
+                "supportTitle": "Technical Support",
+                "supportDesc": "Our team is always with you to ensure your site's stability 24/7.",
+                "designTitle": "Custom Design",
+                "designDesc": "We give your project a creative touch that distinguishes you from competitors.",
+                "servicesTitle": "💼 Our Professional Services",
+                "servicesDesc": "Choose the service that fits your ambitions",
+                "youcanTitle": "YouCan Stores",
+                "youcanDesc": "Complete design and setup of professional YouCan stores.",
+                "youcanBtn": "Order Service",
+                "shopifyTitle": "Shopify Stores",
+                "shopifyDesc": "Development of dropshipping stores or global private brands.",
+                "shopifyBtn": "Order Service",
+                "websitesTitle": "Web Forge Websites",
+                "websitesDesc": "Private websites: Blog, Doctor, Lawyer, Portfolio, Books.",
+                "websitesBtn": "Order Service",
+                "portfolioTitle": "🏆 Success Stories in Pictures",
+                "work1": "Lawyer Website Template",
+                "work2": "Watch Seller Website Template",
+                "work3": "Clothing Store Website Template",
+                "faqTitle": "🤔 Frequently Asked Questions",
+                "faqDesc": "Everything you need to know before starting",
+                "faq1": "How long does website preparation take?",
+                "faq1a": "Duration varies by package type, but typically takes 3 to 7 working days for regular sites and stores.",
+                "faq2": "Is the Domain free?",
+                "faq2a": "In some professional packages, we offer a free domain name for the first year. Contact us for details.",
+                "faq3": "Is there technical support after delivery?",
+                "faq3a": "Yes, we provide comprehensive technical support to ensure your site operates efficiently and solve any technical issues you face.",
+                "faq4": "What payment methods are available?",
+                "faq4a": "We accept bank transfers and many local and international payment methods to make it easy for our clients.",
+                "giftTitle": "Congratulations! You Got a Gift",
+                "giftDesc": "Exclusive discount code valid for 15 minutes only!",
+                "giftTimer": "Offer ends in:",
+                "giftBtn": "Use Code Now",
+                "processTitle": "⚙️ How We Work?",
+                "processDesc": "Your project's success journey in 4 simple steps",
+                "step1": "Order Receipt",
+                "step1Desc": "We listen to your idea and analyze your requirements accurately to define goals.",
+                "step2": "Planning & Design",
+                "step2Desc": "We draw the roadmap and design an attractive user interface.",
+                "step3": "Development & Programming",
+                "step3Desc": "We convert designs into clean, fast, and secure code.",
+                "step4": "Launch & Support",
+                "step4Desc": "We publish your site to the world and provide necessary technical support.",
+                "namePlaceholder": "Full Name",
+                "phonePlaceholder": "WhatsApp Number",
+                "submitBtn": "Send Request via WhatsApp",
+                "aboutBtn": "About Us",
+                "processBtn": "How We Work",
+                "servicesBtn": "Services",
+                "contactLink": "Contact Us",
+                "copyright": "All rights reserved &copy; 2026 Web Forge"
             },
             fr: {
-                projectsText: "Projets Réalisés",
-                satisfactionText: "Satisfaction Clients %",
-                supportText: "Support Technique",
-                whyTitle: "🛡️ Pourquoi Choisir Web Forge?",
-                whyDesc: "Nous ne construisons pas juste du code, nous créons des expériences utilisateur uniques",
-                speedTitle: "Ultra Rapide",
-                speedDesc: "Nous garantissons une vitesse de chargement exceptionnelle pour bien classer dans les moteurs de recherche.",
-                responsiveTitle: "Entièrement Responsive",
-                responsiveDesc: "Votre site apparaîtra élégamment sur tous les appareils intelligents.",
-                designTitle: "Design Personnalisé",
-                designDesc: "Nous donnons à votre projet une touche créative qui vous distingue des concurrents.",
-                servicesTitle: "💼 Nos Services Professionnels",
-                servicesDesc: "Choisissez le service qui correspond à vos ambitions",
-                youcanTitle: "Boutiques YouCan",
-                youcanDesc: "Conception et configuration complètes de boutiques YouCan professionnelles.",
-                youcanBtn: "Commander le Service",
-                shopifyTitle: "Boutiques Shopify",
-                shopifyDesc: "Développement de boutiques dropshipping ou de marques privées mondiales.",
-                shopifyBtn: "Commander le Service",
-                websitesTitle: "Sites Web Forge",
-                websitesDesc: "Sites privés: Blog, Médecin, Avocat, Portfolio, Livres.",
-                websitesBtn: "Commander le Service",
-                portfolioTitle: "🏆 Histoires de Succès en Images",
-                work1: "Modèle de Site d'Avocat",
-                work2: "Modèle de Site de Vendeur de Montres",
-                work3: "Modèle de Site de Vente de Vêtements",
-                faqTitle: "🤔 Questions Fréquemment Posées",
-                faqDesc: "Tout ce que vous devez savoir avant de commencer",
-                faq1: "Combien de temps prend la préparation du site web?",
-                faq1a: "La durée varie selon le type de forfait, mais prend généralement de 3 à 7 jours ouvrables pour les sites et boutiques réguliers.",
-                faq2: "Le domaine est-il gratuit?",
-                faq2a: "Dans certains forfaits professionnels, nous offrons un nom de domaine gratuit pour la première année. Contactez-nous pour plus de détails.",
-                faq3: "Y a-t-il un support technique après la livraison?",
-                faq3a: "Oui, nous fournissons un support technique complet pour garantir le fonctionnement efficace de votre site et résoudre tout problème technique que vous rencontrez.",
-                faq4: "Quelles méthodes de paiement sont disponibles?",
-                faq4a: "Nous acceptons les virements bancaires et de nombreux moyens de paiement locaux et internationaux pour faciliter la tâche à nos clients.",
-                giftTitle: "Félicitations! Vous Avez un Cadeau",
-                giftDesc: "Code de réduction exclusif valable 15 minutes seulement!",
-                giftTimer: "L'offre se termine dans:",
-                giftBtn: "Utiliser le Code Maintenant",
-                aboutBtn: "À Propos",
-                processBtn: "Comment Nous Travaillons",
-                servicesBtn: "Services",
-                contactLink: "Contactez-Nous",
-                copyright: "Tous droits réservés &copy; 2026 Web Forge",
-                submitBtn: "Envoyer la Demande via WhatsApp"
+                "orderNowBtn": "Commander Votre Service",
+                "heroText1": "Nous transformons vos idées en ",
+                "heroText2": "Le groupe Web Forge vous propose des solutions techniques intégrées. Spécialisés dans l'identité numérique, le développement de boutiques YouCan et Shopify, et la conception de sites web modernes.",
+                "primaryBtn": "Parcourir Nos Services",
+                "secondaryBtn": "Contacter Directement",
+                "statsProjects": "Projets Réalisés",
+                "statsSatisfaction": "Satisfaction Clients %",
+                "statsSupport": "Support Technique",
+                "whyTitle": "🛡️ Pourquoi Choisir Web Forge?",
+                "whyDesc": "Nous ne construisons pas juste du code, nous créons des expériences utilisateur uniques",
+                "speedTitle": "Ultra Rapide",
+                "speedDesc": "Nous garantissons une vitesse de chargement exceptionnelle pour bien classer dans les moteurs de recherche.",
+                "responsiveTitle": "Entièrement Responsive",
+                "responsiveDesc": "Votre site apparaîtra élégamment sur tous les appareils intelligents.",
+                "supportTitle": "Support Technique",
+                "supportDesc": "Notre équipe est toujours avec vous pour assurer la stabilité de votre site 24h/24 et 7j/7.",
+                "designTitle": "Design Personnalisé",
+                "designDesc": "Nous donnons à votre projet une touche créative qui vous distingue des concurrents.",
+                "servicesTitle": "💼 Nos Services Professionnels",
+                "servicesDesc": "Choisissez le service qui correspond à vos ambitions",
+                "youcanTitle": "Boutiques YouCan",
+                "youcanDesc": "Conception et configuration complètes de boutiques YouCan professionnelles.",
+                "youcanBtn": "Commander le Service",
+                "shopifyTitle": "Boutiques Shopify",
+                "shopifyDesc": "Développement de boutiques dropshipping ou de marques privées mondiales.",
+                "shopifyBtn": "Commander le Service",
+                "websitesTitle": "Sites Web Forge",
+                "websitesDesc": "Sites privés: Blog, Médecin, Avocat, Portfolio, Livres.",
+                "websitesBtn": "Commander le Service",
+                "portfolioTitle": "🏆 Histoires de Succès en Images",
+                "work1": "Modèle de Site d'Avocat",
+                "work2": "Modèle de Site de Vendeur de Montres",
+                "work3": "Modèle de Site de Vente de Vêtements",
+                "faqTitle": "🤔 Questions Fréquemment Posées",
+                "faqDesc": "Tout ce que vous devez savoir avant de commencer",
+                "faq1": "Combien de temps prend la préparation du site web?",
+                "faq1a": "La durée varie selon le type de forfait, mais prend généralement de 3 à 7 jours ouvrables pour les sites et boutiques réguliers.",
+                "faq2": "Le domaine est-il gratuit?",
+                "faq2a": "Dans certains forfaits professionnels, nous offrons un nom de domaine gratuit pour la première année. Contactez-nous pour plus de détails.",
+                "faq3": "Y a-t-il un support technique après la livraison?",
+                "faq3a": "Oui, nous fournissons un support technique complet pour garantir le fonctionnement efficace de votre site et résoudre tout problème technique que vous rencontrez.",
+                "faq4": "Quelles méthodes de paiement sont disponibles?",
+                "faq4a": "Nous acceptons les virements bancaires et de nombreux moyens de paiement locaux et internationaux pour faciliter la tâche à nos clients.",
+                "giftTitle": "Félicitations! Vous Avez un Cadeau",
+                "giftDesc": "Code de réduction exclusif valable 15 minutes seulement!",
+                "giftTimer": "L'offre se termine dans:",
+                "giftBtn": "Utiliser le Code Maintenant",
+                "processTitle": "⚙️ Comment Nous Travaillons?",
+                "processDesc": "Le parcours de réussite de votre projet en 4 étapes simples",
+                "step1": "Réception de la Commande",
+                "step1Desc": "Nous écoutons votre idée et analysons vos besoins avec précision pour définir les objectifs.",
+                "step2": "Planification & Conception",
+                "step2Desc": "Nous dessinons la feuille de route et concevons une interface utilisateur attrayante.",
+                "step3": "Développement & Programmation",
+                "step3Desc": "Nous convertissons les conceptions en code propre, rapide et sécurisé.",
+                "step4": "Lancement & Support",
+                "step4Desc": "Nous publions votre site au monde et fournissons le support technique nécessaire.",
+                "namePlaceholder": "Nom Complet",
+                "phonePlaceholder": "Numéro WhatsApp",
+                "submitBtn": "Envoyer la Demande via WhatsApp",
+                "aboutBtn": "À Propos",
+                "processBtn": "Comment Nous Travaillons",
+                "servicesBtn": "Services",
+                "contactLink": "Contactez-Nous",
+                "copyright": "Tous droits réservés &copy; 2026 Web Forge"
             }
         };
 
         let currentLang = 'ar';
+        let textArray = ["هوية رقمية قوية", "متاجر إلكترونية احترافية", "براندات عالمية", "واقع رقمي متكامل"];
+        let textArrayIndex = 0;
+        let charIndex = 0;
 
         /* --- Preloader & Initialization --- */
         window.addEventListener('load', () => {
@@ -760,6 +862,10 @@
             const h = document.getElementById('ramadanHanger');
             setTimeout(() => h.classList.add('active'), 2500);
             setTimeout(() => h.classList.remove('active'), 6500);
+            
+            // تحميل اللغة المحفوظة
+            const savedLang = localStorage.getItem('preferredLanguage') || 'ar';
+            changeLanguage(savedLang);
         });
 
         /* --- 3D Tilt Initialization --- */
@@ -790,14 +896,10 @@
 
         /* --- FAST TYPEWRITER CONFIGURATION --- */
         const typedTextSpan = document.querySelector(".typewriter-text");
-        const textArray = ["هوية رقمية قوية", "متاجر إلكترونية احترافية", "براندات عالمية", "واقع رقمي متكامل"];
         const typingDelay = 50; 
         const erasingDelay = 25; 
         const newTextDelay = 1200; 
         
-        let textArrayIndex = 0;
-        let charIndex = 0;
-
         function type() {
             if (charIndex < textArray[textArrayIndex].length) {
                 typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
@@ -856,20 +958,16 @@
             currentLang = lang;
             const trans = translations[lang];
             
-            // تحديث جميع النصوص (الصفحة العربية تبقى كما هي)
+            // تحديث جميع النصوص
             Object.keys(trans).forEach(key => {
-                const element = document.getElementById(key);
-                if (element) {
-                    element.textContent = trans[key];
-                }
-            });
-            
-            // تحديث النصوص في الأزرار
-            document.querySelectorAll('.card-btn').forEach(btn => {
-                const btnId = btn.id;
-                if (trans[btnId]) {
-                    btn.innerHTML = trans[btnId] + ' <i class="fas fa-arrow-left"></i>';
-                }
+                const elements = document.querySelectorAll(`[data-translate="${key}"]`);
+                elements.forEach(element => {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = trans[key];
+                    } else {
+                        element.textContent = trans[key];
+                    }
+                });
             });
             
             // تحديث زر اللغة في الهيدر
@@ -879,18 +977,22 @@
             document.getElementById('currentLanguageFlag').textContent = flag;
             document.getElementById('currentLanguageName').textContent = name;
             
+            // تحديث اتجاه الصفحة
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            document.documentElement.lang = lang;
+            
             // تحديث Typewriter بناءً على اللغة
             updateTypewriterForLanguage(lang);
             
             // إغلاق القائمة المنسدلة
             document.getElementById('languageDropdown').classList.remove('active');
+            
+            // حفظ اللغة في LocalStorage
+            localStorage.setItem('preferredLanguage', lang);
         }
-        
+
         // تحديث Typewriter بناءً على اللغة
         function updateTypewriterForLanguage(lang) {
-            const typedTextSpan = document.querySelector(".typewriter-text");
-            if (!typedTextSpan) return;
-            
             let newTextArray;
             switch(lang) {
                 case 'ar':
@@ -906,39 +1008,24 @@
                     newTextArray = ["هوية رقمية قوية", "متاجر إلكترونية احترافية", "براندات عالمية", "واقع رقمي متكامل"];
             }
             
-            // إعادة تعيين Typewriter
+            // تحديث المصفوفة وإعادة تعيين المؤشرات
+            textArray = newTextArray;
             textArrayIndex = 0;
             charIndex = 0;
-            typedTextSpan.textContent = "";
             
-            // بدء Typewriter مع النصوص الجديدة
-            const textArray = newTextArray;
-            
-            function type() {
-                if (typedTextSpan && charIndex < textArray[textArrayIndex].length) {
-                    typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
-                    charIndex++;
-                    setTimeout(type, 50);
-                } else {
-                    setTimeout(erase, 1200);
-                }
+            // مسح النص الحالي
+            if (typedTextSpan) {
+                typedTextSpan.textContent = "";
+                
+                // إعادة تشغيل Typewriter بعد فترة قصيرة
+                setTimeout(() => {
+                    if (textArray.length) {
+                        type();
+                    }
+                }, 100);
             }
-            
-            function erase() {
-                if (typedTextSpan && charIndex > 0) {
-                    typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
-                    charIndex--;
-                    setTimeout(erase, 25);
-                } else {
-                    textArrayIndex++;
-                    if (textArrayIndex >= textArray.length) textArrayIndex = 0;
-                    setTimeout(type, 50 + 1100);
-                }
-            }
-            
-            if(textArray.length && typedTextSpan) setTimeout(type, 1200 + 250);
         }
-
+        
         // أحداث القائمة المنسدلة للغة
         document.getElementById('headerLanguageBtn').addEventListener('click', function(e) {
             e.stopPropagation();
