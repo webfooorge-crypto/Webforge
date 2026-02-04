@@ -460,6 +460,51 @@
         .tech-item:hover { color: var(--accent); opacity: 1; }
         @keyframes scrollLogos { 0% { transform: translateX(0); } 100% { transform: translateX(50%); } } /* RTL direction */
 
+        /* --- NEW FEATURE 3: Referral Program Button (أضيف حديثاً) --- */
+        .referral-box { 
+            position: fixed; 
+            bottom: 105px; /* فوق زر الهدية */
+            left: 30px; 
+            z-index: 999; 
+            cursor: pointer; 
+            animation: floatShake2 4s ease-in-out infinite;
+            transition: all 0.3s ease;
+        }
+        .referral-box:hover {
+            transform: translateY(-5px) scale(1.05);
+        }
+        .referral-icon { 
+            width: 60px; 
+            height: 60px; 
+            background: linear-gradient(135deg, #10b981, #34d399); 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 1.8rem; 
+            color: white; 
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4); 
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+        }
+        .referral-tag { 
+            position: absolute; 
+            top: -10px; 
+            right: -10px; 
+            background: #f59e0b; 
+            color: #000; 
+            font-size: 0.7rem; 
+            font-weight: bold; 
+            padding: 3px 8px; 
+            border-radius: 10px; 
+            animation: pulse 2s infinite;
+        }
+        @keyframes floatShake2 { 
+            0%, 100% { transform: translateY(0) rotate(0); } 
+            50% { transform: translateY(-8px) rotate(3deg); } 
+            80% { transform: rotate(-3deg); } 
+        }
+
         /* --- NEW FEATURE 2: Mystery Gift Box --- */
         .mystery-box { position: fixed; bottom: 30px; left: 30px; z-index: 1000; cursor: pointer; animation: floatShake 3s ease-in-out infinite; }
         .box-icon { width: 60px; height: 60px; background: linear-gradient(135deg, var(--forge-orange), #fbbf24); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: white; box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4); border: 2px solid rgba(255,255,255,0.3); }
@@ -590,6 +635,21 @@
             h1, h2, h3 {
                 line-height: 1.3;
             }
+            /* تعديل موقع أزرار الإحالة والهدية على الجوال */
+            .referral-box {
+                left: 20px;
+                bottom: 100px;
+                z-index: 999;
+            }
+            .mystery-box {
+                left: 20px;
+                bottom: 30px;
+                z-index: 998;
+            }
+            .share-float {
+                right: 20px;
+                bottom: 30px;
+            }
         }
 
     </style>
@@ -636,6 +696,107 @@
                 <p>لأي استفسار حول سياسة الخصوصية: <strong>webfooorge@gmail.com</strong></p>
             </div>
         </div>
+    </div>
+
+    <!-- مودال برنامج الإحالة (جديد) -->
+    <div id="referralModal" class="modal">
+        <div class="modal-content" style="max-width: 700px; text-align:center;">
+            <span class="close-btn" onclick="closeReferralModal()">&times;</span>
+            <div style="font-size: 3rem; margin-bottom: 10px; color: #10b981;">🤝</div>
+            <h3 style="color:#10b981; margin-bottom:15px;">🎁 برنامج الإحالة الخاص بنا</h3>
+            <p style="color:var(--text-secondary); margin-bottom:20px; font-size:1.1rem;" class="arabic-text">انضم إلى برنامج الإحالة الخاص بنا واكسب مكافآت رائعة!</p>
+            
+            <div style="background:rgba(16, 185, 129, 0.1); padding:20px; border-radius:15px; border:2px solid #10b981; margin-bottom:25px;">
+                <h4 style="color:var(--text-main); margin-bottom:15px;">✨ كيف يعمل البرنامج:</h4>
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:15px; text-align:center;">
+                    <div style="padding:15px; background:rgba(255,255,255,0.05); border-radius:10px;">
+                        <div style="font-size:1.8rem; color:#10b981; margin-bottom:10px;">1</div>
+                        <h5 style="color:var(--text-main); margin-bottom:8px;">قم بالإحالة</h5>
+                        <p style="color:var(--text-secondary); font-size:0.9rem;">أحِل أصدقائك أو عملائك إلينا</p>
+                    </div>
+                    <div style="padding:15px; background:rgba(255,255,255,0.05); border-radius:10px;">
+                        <div style="font-size:1.8rem; color:#10b981; margin-bottom:10px;">2</div>
+                        <h5 style="color:var(--text-main); margin-bottom:8px;">اكسب العميل</h5>
+                        <p style="color:var(--text-secondary); font-size:0.9rem;">عندما يقوم العميل بالطلب</p>
+                    </div>
+                    <div style="padding:15px; background:rgba(255,255,255,0.05); border-radius:10px;">
+                        <div style="font-size:1.8rem; color:#10b981; margin-bottom:10px;">3</div>
+                        <h5 style="color:var(--text-main); margin-bottom:8px;">احصل على المكافأة</h5>
+                        <p style="color:var(--text-secondary); font-size:0.9rem;">نسبة 15% من قيمة كل طلب</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="background:rgba(245, 158, 11, 0.1); padding:15px; border-radius:10px; border:2px dashed var(--forge-orange); margin-bottom:25px;">
+                <h4 style="color:var(--forge-orange); margin-bottom:10px;">🎯 المكافآت:</h4>
+                <ul style="text-align:right; list-style:none; padding:0; color:var(--text-main);" class="arabic-text">
+                    <li style="margin-bottom:8px; display:flex; align-items:center; justify-content:flex-end;">
+                        <i class="fas fa-check-circle" style="color:#10b981; margin-left:10px;"></i>
+                        <span>15% من قيمة كل طلب أحلت به عميلاً</span>
+                    </li>
+                    <li style="margin-bottom:8px; display:flex; align-items:center; justify-content:flex-end;">
+                        <i class="fas fa-check-circle" style="color:#10b981; margin-left:10px;"></i>
+                        <span>خصم إضافي 10% على طلباتك القادمة</span>
+                    </li>
+                    <li style="display:flex; align-items:center; justify-content:flex-end;">
+                        <i class="fas fa-check-circle" style="color:#10b981; margin-left:10px;"></i>
+                        <span>هدية مجانية بعد 5 إحالات ناجحة</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div style="background:rgba(56, 189, 248, 0.1); padding:15px; border-radius:10px; border:1px solid var(--accent); margin-bottom:25px;">
+                <h4 style="color:var(--accent); margin-bottom:10px;">📋 شروط البرنامج:</h4>
+                <p style="color:var(--text-secondary); font-size:0.95rem;" class="arabic-text">
+                    - يجب أن يكون العميل الجديد لم يتعامل معنا من قبل<br>
+                    - يتم احتساب المكافأة بعد سداد العميل للطلب<br>
+                    - يمكنك سحب مكافآتك عبر تحويل بنكي أو استخدامها في خدماتنا
+                </p>
+            </div>
+            
+            <button onclick="openReferralForm()" style="width:100%; padding:15px; background:linear-gradient(135deg, #10b981, #34d399); color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; font-size:1.1rem; margin-bottom:15px;">
+                <i class="fas fa-user-plus" style="margin-left:10px;"></i>
+                انضم إلى برنامج الإحالة الآن
+            </button>
+            
+            <button onclick="copyReferralCode()" style="width:100%; padding:12px; background:var(--bg-dark); color:var(--accent); border:2px solid var(--accent); border-radius:8px; font-weight:bold; cursor:pointer;">
+                <i class="fas fa-copy" style="margin-left:10px;"></i>
+                نسخ كود الإحالة الخاص بك
+            </button>
+            
+            <div id="referralCodeToast" style="display:none; margin-top:15px; padding:10px; background:#10b981; color:white; border-radius:5px; font-size:0.9rem;">
+                تم نسخ كود الإحالة بنجاح! 🎉
+            </div>
+        </div>
+    </div>
+
+    <!-- نموذج انضمام برنامج الإحالة -->
+    <div id="referralFormModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeReferralForm()">&times;</span>
+            <h3 style="text-align:center; color:#10b981; margin-bottom:20px;">🎯 انضم إلى برنامج الإحالة</h3>
+            
+            <input type="text" id="referralName" placeholder="الاسم الكامل" style="margin-bottom:15px;">
+            <input type="tel" id="referralPhone" placeholder="رقم الواتساب" style="margin-bottom:15px;">
+            <input type="email" id="referralEmail" placeholder="البريد الإلكتروني (اختياري)" style="margin-bottom:20px;">
+            
+            <div style="background:rgba(16, 185, 129, 0.1); padding:15px; border-radius:10px; margin-bottom:20px;">
+                <p style="color:var(--text-secondary); font-size:0.9rem; text-align:center;" class="arabic-text">
+                    بعد التسجيل، سنرسل لك كود الإحالة الخاص بك عبر واتساب، يمكنك استخدامه لإحالة الآخرين وربح المكافآت!
+                </p>
+            </div>
+            
+            <button onclick="submitReferralForm()" style="width:100%; padding:15px; background:linear-gradient(135deg, #10b981, #34d399); color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; font-size:1.1rem;">
+                <i class="fab fa-whatsapp" style="margin-left:10px;"></i>
+                التسجيل وإرسال الكود عبر واتساب
+            </button>
+        </div>
+    </div>
+
+    <!-- زر الإحالة الجديد -->
+    <div class="referral-box" onclick="openReferralModal()" role="button" aria-label="برنامج الإحالة">
+        <div class="referral-icon"><i class="fas fa-user-friends"></i></div>
+        <div class="referral-tag">اكسب معنا</div>
     </div>
 
     <div class="promo-bar" onclick="openForm('عرض الخصم الخاص')">
@@ -1252,6 +1413,11 @@
             
             // إضافة event listeners للأمان
             initSecurityFeatures();
+            
+            // إنشاء كود الإحالة للزائر إذا لم يكن موجوداً
+            if (!localStorage.getItem('referralCode')) {
+                generateReferralCode();
+            }
         });
 
         /* --- 3D Tilt Initialization --- */
@@ -1496,6 +1662,70 @@
             document.body.style.overflow = 'auto';
         }
 
+        // Referral Modal Logic (جديد)
+        function openReferralModal() { 
+            document.getElementById('referralModal').style.display = 'flex'; 
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeReferralModal() { 
+            document.getElementById('referralModal').style.display = 'none'; 
+            document.body.style.overflow = 'auto';
+        }
+        
+        function openReferralForm() {
+            closeReferralModal();
+            document.getElementById('referralFormModal').style.display = 'flex';
+        }
+        
+        function closeReferralForm() {
+            document.getElementById('referralFormModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        function submitReferralForm() {
+            const name = document.getElementById('referralName').value.trim();
+            const phone = document.getElementById('referralPhone').value.trim();
+            const email = document.getElementById('referralEmail').value.trim();
+            
+            if (!name || name.length < 2) {
+                alert("يرجى إدخال اسم صحيح (أكثر من حرفين)");
+                return;
+            }
+            
+            if (!phone || !/^[\+]?[0-9\s\-\(\)]{8,}$/.test(phone)) {
+                alert("يرجى إدخال رقم هاتف صحيح");
+                return;
+            }
+            
+            const referralCode = localStorage.getItem('referralCode') || 'WF' + Math.random().toString(36).substr(2, 8).toUpperCase();
+            const message = `طلب انضمام لبرنامج الإحالة:\nالاسم: ${name}\nالهاتف: ${phone}\n${email ? `البريد: ${email}\n` : ''}كود الإحالة: ${referralCode}\nالتاريخ: ${new Date().toLocaleString('ar-MA')}`;
+            
+            window.open(`https://wa.me/212627713979?text=${encodeURIComponent(message)}`, '_blank');
+            
+            closeReferralForm();
+            
+            // عرض رسالة تأكيد
+            alert(`تم إرسال طلبك بنجاح! كود الإحالة الخاص بك هو: ${referralCode}\nيمكنك استخدامه لإحالة الآخرين وربح المكافآت.`);
+        }
+        
+        function copyReferralCode() {
+            const referralCode = localStorage.getItem('referralCode') || 'WF' + Math.random().toString(36).substr(2, 8).toUpperCase();
+            navigator.clipboard.writeText(referralCode);
+            
+            const toast = document.getElementById('referralCodeToast');
+            toast.style.display = 'block';
+            setTimeout(() => toast.style.display = 'none', 3000);
+        }
+        
+        function generateReferralCode() {
+            const prefix = 'WF';
+            const randomPart = Math.random().toString(36).substr(2, 8).toUpperCase();
+            const referralCode = prefix + randomPart;
+            localStorage.setItem('referralCode', referralCode);
+            return referralCode;
+        }
+
         function startConfetti() {
             for(let i=0; i<30; i++) {
                 let conf = document.createElement('div');
@@ -1587,7 +1817,11 @@
             const encodedPhone = encodeURIComponent(p);
             const timestamp = new Date().toLocaleString('ar-MA');
             
-            window.open(`https://wa.me/212627713979?text=طلب جديد من الموقع:%0aالخدمة: ${encodedService}%0aالاسم: ${encodedName}%0aالهاتف: ${encodedPhone}%0aالتوقيت: ${encodeURIComponent(timestamp)}`, '_blank');
+            // إضافة كود الإحالة إذا كان موجوداً
+            const referralCode = localStorage.getItem('referralCode');
+            const referralText = referralCode ? `%0aكود الإحالة: ${referralCode}` : '';
+            
+            window.open(`https://wa.me/212627713979?text=طلب جديد من الموقع:%0aالخدمة: ${encodedService}%0aالاسم: ${encodedName}%0aالهاتف: ${encodedPhone}${referralText}%0aالتوقيت: ${encodeURIComponent(timestamp)}`, '_blank');
             
             // إغلاق النموذج بعد الإرسال
             closeForm();
@@ -1608,6 +1842,8 @@
                 closeProcessModal(); 
                 closeGiftModal();
                 closePolicyModal();
+                closeReferralModal();
+                closeReferralForm();
                 document.getElementById('packageModal').style.display='none'; 
             } 
         }
