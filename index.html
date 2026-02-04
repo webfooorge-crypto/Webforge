@@ -2,10 +2,10 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Web Forge | مجموعة محمد أيت صالح</title>
     
-    <!-- تحسينات SEO (رقم 4) -->
+    <!-- تحسينات SEO -->
     <meta name="description" content="Web Forge - متخصصون في تصميم وتطوير المواقع الإلكترونية والمتاجر (YouCan و Shopify). تحويل أفكارك إلى واقع رقمي احترافي.">
     <meta name="keywords" content="تصميم مواقع, متاجر إلكترونية, YouCan, Shopify, تطوير ويب, هوية رقمية, المغرب">
     <meta name="author" content="Web Forge Team">
@@ -88,14 +88,14 @@
     </script>
     
     <link rel="icon" type="image/png" href="https://i.ibb.co/3qzt7ks/2-2-2026-15329-webforge-it-com.jpg">
-    <!-- تحسينات الواجهة العربية (رقم 10) - إضافة خطوط عربية أفضل -->
+    <!-- تحسينات الواجهة العربية - إضافة خطوط عربية أفضل -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
 
     <style>
-        /* تحسينات الواجهة العربية (رقم 10) */
+        /* تحسينات الواجهة العربية */
         :root {
             --bg-dark: #0f172a; --bg-card: #1e293b; --accent: #38bdf8;
             --accent-glow: rgba(56, 189, 248, 0.3); --forge-orange: #f59e0b;
@@ -119,7 +119,8 @@
             color: var(--text-main); 
             overflow-x: hidden; 
             font-family: var(--arabic-ui-font);
-            line-height: 1.8; /* زيادة لتحسين قراءة النص العربي */
+            line-height: 1.8;
+            -webkit-tap-highlight-color: transparent;
         }
 
         /* تحسينات الترقيم العربي */
@@ -289,7 +290,11 @@
         }
 
         /* إصلاح: إضافة مسافة أعلى للهيدر الثابت */
-        body { padding-top: 70px; }
+        body { 
+            padding-top: 70px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
 
         /* --- Preloader --- */
         #preloader {
@@ -348,7 +353,7 @@
             justify-content: space-between; 
             align-items: center; 
             position: fixed; 
-            top: 30px; /* تحت شريط العرض */
+            top: 30px;
             width: 100%; 
             z-index: 1000; 
             border-bottom: 1px solid rgba(128,128,128,0.1); 
@@ -420,12 +425,56 @@
             color: #000;
         }
 
-        .theme-btn { background: var(--bg-card); border: 1px solid var(--accent); color: var(--accent); width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .order-now-btn { background: var(--forge-orange); color: white; padding: 8px 18px; border-radius: 5px; font-weight: bold; cursor: pointer; border: none; text-decoration: none; font-size: 0.9rem; }
+        .theme-btn { 
+            background: var(--bg-card); 
+            border: 1px solid var(--accent); 
+            color: var(--accent); 
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            flex-shrink: 0;
+        }
+        .order-now-btn { 
+            background: var(--forge-orange); 
+            color: white; 
+            padding: 8px 18px; 
+            border-radius: 5px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            border: none; 
+            text-decoration: none; 
+            font-size: 0.9rem; 
+            white-space: nowrap;
+        }
 
-        .hero { min-height: 95vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 5%; position: relative; overflow: hidden; background: #0f172a; margin-top: 0; }
+        .hero { 
+            min-height: 95vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            padding: 0 5%; 
+            position: relative; 
+            overflow: hidden; 
+            background: #0f172a; 
+            margin-top: 0; 
+        }
         #particles-js { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 1; }
-        .hero-glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); padding: 3rem; border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.1); max-width: 900px; z-index: 2; position: relative; animation: zoomInFade 1.2s ease-out; }
+        .hero-glass { 
+            background: rgba(255, 255, 255, 0.03); 
+            backdrop-filter: blur(10px); 
+            padding: 3rem; 
+            border-radius: 30px; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            max-width: 900px; 
+            z-index: 2; 
+            position: relative; 
+            animation: zoomInFade 1.2s ease-out; 
+        }
         .hero h1 { 
             font-size: 3.5rem; 
             line-height: 1.2; 
@@ -454,16 +503,33 @@
         .btn-primary:hover, .btn-secondary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
 
         /* --- NEW FEATURE 1: Tech Stack Strip --- */
-        .tech-strip { background: var(--bg-card); padding: 15px 0; border-top: 1px solid rgba(128,128,128,0.1); border-bottom: 1px solid rgba(128,128,128,0.1); overflow: hidden; position: relative; }
+        .tech-strip { 
+            background: var(--bg-card); 
+            padding: 15px 0; 
+            border-top: 1px solid rgba(128,128,128,0.1); 
+            border-bottom: 1px solid rgba(128,128,128,0.1); 
+            overflow: hidden; 
+            position: relative; 
+        }
         .tech-track { display: flex; gap: 50px; width: max-content; animation: scrollLogos 30s linear infinite; }
-        .tech-item { display: flex; align-items: center; gap: 10px; color: var(--text-secondary); font-size: 1.5rem; font-weight: bold; opacity: 0.7; transition: 0.3s; }
+        .tech-item { 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            color: var(--text-secondary); 
+            font-size: 1.5rem; 
+            font-weight: bold; 
+            opacity: 0.7; 
+            transition: 0.3s; 
+            flex-shrink: 0;
+        }
         .tech-item:hover { color: var(--accent); opacity: 1; }
-        @keyframes scrollLogos { 0% { transform: translateX(0); } 100% { transform: translateX(50%); } } /* RTL direction */
+        @keyframes scrollLogos { 0% { transform: translateX(0); } 100% { transform: translateX(50%); } }
 
-        /* --- NEW FEATURE 3: Referral Program Button (أضيف حديثاً) --- */
+        /* --- NEW FEATURE 3: Referral Program Button --- */
         .referral-box { 
             position: fixed; 
-            bottom: 105px; /* فوق زر الهدية */
+            bottom: 105px;
             left: 30px; 
             z-index: 999; 
             cursor: pointer; 
@@ -506,9 +572,40 @@
         }
 
         /* --- NEW FEATURE 2: Mystery Gift Box --- */
-        .mystery-box { position: fixed; bottom: 30px; left: 30px; z-index: 1000; cursor: pointer; animation: floatShake 3s ease-in-out infinite; }
-        .box-icon { width: 60px; height: 60px; background: linear-gradient(135deg, var(--forge-orange), #fbbf24); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: white; box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4); border: 2px solid rgba(255,255,255,0.3); }
-        .box-tag { position: absolute; top: -10px; right: -10px; background: var(--accent); color: #000; font-size: 0.7rem; font-weight: bold; padding: 3px 8px; border-radius: 10px; animation: pulse 2s infinite; }
+        .mystery-box { 
+            position: fixed; 
+            bottom: 30px; 
+            left: 30px; 
+            z-index: 1000; 
+            cursor: pointer; 
+            animation: floatShake 3s ease-in-out infinite;
+            touch-action: manipulation;
+        }
+        .box-icon { 
+            width: 60px; 
+            height: 60px; 
+            background: linear-gradient(135deg, var(--forge-orange), #fbbf24); 
+            border-radius: 12px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 1.8rem; 
+            color: white; 
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4); 
+            border: 2px solid rgba(255,255,255,0.3); 
+        }
+        .box-tag { 
+            position: absolute; 
+            top: -10px; 
+            right: -10px; 
+            background: var(--accent); 
+            color: #000; 
+            font-size: 0.7rem; 
+            font-weight: bold; 
+            padding: 3px 8px; 
+            border-radius: 10px; 
+            animation: pulse 2s infinite; 
+        }
         
         @keyframes floatShake { 
             0%, 100% { transform: translateY(0) rotate(0); } 
@@ -521,7 +618,14 @@
         .confetti { position: absolute; width: 10px; height: 10px; background-color: #f00; animation: fall linear forwards; opacity: 0; }
         @keyframes fall { to { transform: translateY(300px) rotate(720deg); opacity: 1; } }
 
-        .stats-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; padding: 4rem 5%; background: var(--bg-card); text-align: center; }
+        .stats-bar { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            gap: 2rem; 
+            padding: 4rem 5%; 
+            background: var(--bg-card); 
+            text-align: center; 
+        }
         .stat-item h2 { font-size: 2.5rem; color: var(--accent); margin-bottom: 0.5rem; }
 
         .why-us { padding: 5rem 5%; background: var(--bg-dark); }
@@ -547,9 +651,23 @@
         .work-card { background: var(--bg-card); border-radius: 15px; overflow: hidden; border: 1px solid rgba(128,128,128,0.1); }
         .browser-header { background: #2d3748; padding: 10px; display: flex; gap: 6px; }
         .dot { width: 8px; height: 8px; border-radius: 50%; background: #fc8181; }
-        .screen-box { height: 400px; overflow: hidden; cursor: s-resize; }
-        .screen-box img { width: 100%; transition: 6s ease-in-out; object-position: top; object-fit: cover; }
-        .work-card:hover img { object-position: bottom; }
+        .screen-box { 
+            height: 400px; 
+            overflow: hidden; 
+            cursor: s-resize; 
+            position: relative;
+        }
+        .screen-box img { 
+            width: 100%; 
+            height: 100%;
+            transition: transform 6s ease-in-out; 
+            object-position: top; 
+            object-fit: cover;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            transform: translateZ(0);
+        }
+        .work-card:hover img { transform: translateY(calc(-100% + 400px)); }
         .work-label { padding: 15px; text-align: center; font-weight: bold; border-top: 1px solid rgba(128,128,128,0.1); }
 
         .faq-section { padding: 5rem 5%; background: var(--bg-dark); }
@@ -562,10 +680,35 @@
         .faq-item.active .faq-question i { transform: rotate(135deg); color: var(--forge-orange); }
 
         /* Modals */
-        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); justify-content: center; align-items: center; }
-        .modal-content { background-color: var(--bg-card); padding: 2.5rem; border-radius: 15px; width: 90%; max-width: 600px; position: relative; border: 2px solid var(--accent); max-height: 90vh; overflow-y: auto; animation: zoomInFade 0.3s ease; }
-        .close-btn { position: absolute; top: 15px; left: 20px; font-size: 1.5rem; cursor: pointer; }
-        .modal-content input { width: 100%; padding: 12px; margin-bottom: 15px; background: rgba(128,128,128,0.1); border: 1px solid #444; border-radius: 8px; color: #fff; }
+        .modal { 
+            display: none; 
+            position: fixed; 
+            z-index: 2000; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0,0,0,0.8); 
+            backdrop-filter: blur(5px); 
+            justify-content: center; 
+            align-items: center; 
+            padding: 20px;
+        }
+        .modal-content { 
+            background-color: var(--bg-card); 
+            padding: 2.5rem; 
+            border-radius: 15px; 
+            width: 100%; 
+            max-width: 600px; 
+            position: relative; 
+            border: 2px solid var(--accent); 
+            max-height: 90vh; 
+            overflow-y: auto; 
+            animation: zoomInFade 0.3s ease; 
+            -webkit-overflow-scrolling: touch;
+        }
+        .close-btn { position: absolute; top: 15px; left: 20px; font-size: 1.5rem; cursor: pointer; z-index: 10; }
+        .modal-content input { width: 100%; padding: 12px; margin-bottom: 15px; background: rgba(128,128,128,0.1); border: 1px solid #444; border-radius: 8px; color: #fff; font-size: 16px; }
         .types-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 20px; }
         .type-btn { background: rgba(128,128,128,0.05); border: 1px solid var(--accent); color: var(--text-main); padding: 15px; border-radius: 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
         .type-btn:hover { background: var(--accent); color: #000; transform: translateY(-5px); }
@@ -586,7 +729,25 @@
         .social-btn { width: 45px; height: 45px; background: rgba(128,128,128,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); text-decoration: none; }
         .social-btn:hover { background: var(--accent); color: #fff; transform: translateY(-5px); }
         
-        .share-float { position: fixed; bottom: 30px; right: 30px; width: 55px; height: 55px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 5px 20px var(--accent-glow); z-index: 1000; border: none; font-size: 1.3rem; }
+        .share-float { 
+            position: fixed; 
+            bottom: 30px; 
+            right: 30px; 
+            width: 55px; 
+            height: 55px; 
+            background: var(--accent); 
+            color: white; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            cursor: pointer; 
+            box-shadow: 0 5px 20px var(--accent-glow); 
+            z-index: 1000; 
+            border: none; 
+            font-size: 1.3rem; 
+            touch-action: manipulation;
+        }
         .share-toast { position: fixed; bottom: 100px; right: 30px; background: #10b981; color: white; padding: 10px 20px; border-radius: 8px; font-size: 0.9rem; opacity: 0; transition: 0.5s; pointer-events: none; z-index: 1000; }
         
         /* Ramadan Decoration */
@@ -601,32 +762,126 @@
         .ramadan-msg { position: absolute; top: 130px; background: var(--forge-orange); color: white; padding: 5px 25px; border-radius: 50px; font-weight: bold; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
         @keyframes swing { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
 
-        /* تحسينات بسيطة للجوال */
-        @media (max-width: 768px) {
+        /* ========= تحسينات الجوال ========= */
+        @media (max-width: 1200px) {
             .hero h1 { 
-                font-size: 2.5rem; 
-                min-height: 120px;
+                font-size: 3rem; 
+                min-height: 140px;
             }
             .typewriter-text {
-                font-size: 2rem;
-                min-width: 300px;
+                font-size: 2.5rem;
+                min-width: 350px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero h1 { 
+                font-size: 2.8rem; 
+                min-height: 130px;
+            }
+            .typewriter-text {
+                font-size: 2.2rem;
+                min-width: 320px;
             }
             .hero-glass {
-                padding: 2rem;
+                padding: 2.5rem;
             }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { 
+                font-size: 2.2rem; 
+                min-height: 110px;
+            }
+            .typewriter-text {
+                font-size: 1.8rem;
+                min-width: 280px;
+            }
+            .hero-glass {
+                padding: 2rem 1.5rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            /* تحسين الهيدر على الجوال */
+            header {
+                padding: 1rem 3%;
+                top: 30px;
+            }
+            .logo {
+                font-size: 1.5rem;
+            }
+            .header-actions {
+                gap: 8px;
+            }
+            .order-now-btn {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+            .language-btn span:last-child {
+                display: none;
+            }
+            .language-btn {
+                padding: 8px 10px;
+            }
+            
+            /* تحسين التقنيات */
             .tech-item {
-                font-size: 1.2rem;
-                min-width: 150px;
+                font-size: 1.1rem;
+                min-width: 120px;
             }
+            
+            /* تحسين الأقسام */
+            .services, .why-us, .success-stories, .faq-section, .stats-bar {
+                padding: 3rem 3%;
+            }
+            
+            .services-grid, .why-grid, .portfolio-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
             .types-grid {
                 grid-template-columns: 1fr;
             }
+            
             .process-steps {
                 flex-direction: column;
             }
-            .header-actions {
-                gap: 10px;
+            
+            /* تحسين النماذج */
+            .modal-content {
+                padding: 2rem 1.5rem;
+                margin: 10px;
             }
+            
+            /* تحسين الأزرار العائمة */
+            .referral-box, .mystery-box {
+                left: 15px;
+            }
+            .referral-box {
+                bottom: 90px;
+            }
+            .referral-icon, .box-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            .share-float {
+                right: 15px;
+                bottom: 25px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            /* تحسين الفوتر */
+            .footer-nav {
+                gap: 15px;
+                flex-direction: column;
+            }
+            
             /* تحسين الخطوط العربية على الجوال */
             body {
                 font-size: 16px;
@@ -635,23 +890,169 @@
             h1, h2, h3 {
                 line-height: 1.3;
             }
-            /* تعديل موقع أزرار الإحالة والهدية على الجوال */
-            .referral-box {
-                left: 20px;
-                bottom: 100px;
-                z-index: 999;
+            .arabic-heading {
+                font-size: 1.8rem;
             }
-            .mystery-box {
-                left: 20px;
-                bottom: 30px;
-                z-index: 998;
-            }
-            .share-float {
-                right: 20px;
-                bottom: 30px;
+            
+            /* إصلاح مشكلة zoom على iOS */
+            input, textarea, select {
+                font-size: 16px;
             }
         }
 
+        @media (max-width: 576px) {
+            .hero h1 { 
+                font-size: 1.8rem; 
+                min-height: 100px;
+            }
+            .typewriter-text {
+                font-size: 1.5rem;
+                min-width: 250px;
+            }
+            .hero-btns {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                padding: 10px;
+            }
+            
+            .stats-bar {
+                grid-template-columns: 1fr;
+                padding: 2rem 3%;
+                gap: 1.5rem;
+            }
+            
+            .tech-item {
+                font-size: 1rem;
+                min-width: 100px;
+            }
+            
+            .promo-bar {
+                font-size: 0.75rem;
+                padding: 6px 0;
+            }
+            
+            .service-card, .why-card {
+                padding: 1.5rem;
+            }
+            
+            .screen-box {
+                height: 300px;
+            }
+            
+            .modal-content {
+                padding: 1.5rem 1rem;
+            }
+            
+            /* تحسين الصور على الجوال */
+            .screen-box img {
+                image-rendering: -webkit-optimize-contrast;
+                image-rendering: crisp-edges;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .hero h1 { 
+                font-size: 1.6rem; 
+                min-height: 90px;
+            }
+            .typewriter-text {
+                font-size: 1.3rem;
+                min-width: 220px;
+            }
+            
+            .logo {
+                font-size: 1.3rem;
+            }
+            
+            .header-actions {
+                gap: 5px;
+            }
+            
+            .theme-btn, .language-btn {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .language-btn span {
+                display: none;
+            }
+            
+            .referral-box, .mystery-box {
+                left: 10px;
+            }
+            .referral-box {
+                bottom: 80px;
+            }
+            .referral-icon, .box-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+        }
+
+        /* تحسينات للأجهزة ذات الشاشات الصغيرة جداً */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .hero {
+                min-height: 120vh;
+                padding-top: 80px;
+            }
+            
+            .promo-bar {
+                position: absolute;
+            }
+            
+            header {
+                position: absolute;
+            }
+        }
+
+        /* تحسينات للشاشات عالية الدقة */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            img {
+                image-rendering: -webkit-optimize-contrast;
+                image-rendering: crisp-edges;
+            }
+        }
+
+        /* إصلاح مشاكل اللمس على iOS */
+        @supports (-webkit-touch-callout: none) {
+            .hero {
+                min-height: -webkit-fill-available;
+            }
+            
+            .modal-content {
+                max-height: 80vh;
+            }
+            
+            input, textarea {
+                font-size: 16px !important;
+            }
+        }
+
+        /* تحسينات للأجهزة التي تدعم hover */
+        @media (hover: hover) and (pointer: fine) {
+            .type-btn:hover, .pkg-card:hover, .service-card:hover {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* تحسينات للأجهزة التي لا تدعم hover (الجوال) */
+        @media (hover: none) and (pointer: coarse) {
+            .type-btn:active, .pkg-card:active, .service-card:active {
+                transform: translateY(-3px);
+            }
+            
+            .work-card:hover img {
+                transform: none;
+            }
+            
+            .work-card:active img {
+                transform: translateY(calc(-100% + 400px));
+            }
+        }
     </style>
 </head>
 <body>
@@ -669,7 +1070,7 @@
         <div class="rope"><i class="fas fa-star"></i></div>
     </div>
 
-    <!-- سياسة الخصوصية (تحسينات الأمان رقم 6) -->
+    <!-- سياسة الخصوصية -->
     <div id="policyModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closePolicyModal()">&times;</span>
@@ -698,7 +1099,7 @@
         </div>
     </div>
 
-    <!-- مودال برنامج الإحالة (جديد) -->
+    <!-- مودال برنامج الإحالة -->
     <div id="referralModal" class="modal">
         <div class="modal-content" style="max-width: 700px; text-align:center;">
             <span class="close-btn" onclick="closeReferralModal()">&times;</span>
@@ -823,7 +1224,7 @@
     <header role="banner">
         <a href="#" class="logo" aria-label="Web Forge الرئيسية"><i class="fas fa-code"></i> Web Forge</a>
         <div class="header-actions">
-            <!-- زر اللغة الجديد -->
+            <!-- زر اللغة -->
             <div class="language-container">
                 <button class="language-btn" id="headerLanguageBtn" aria-label="تغيير اللغة" aria-expanded="false">
                     <span id="currentLanguageFlag">🇸🇦</span>
@@ -974,17 +1375,38 @@
             <div class="portfolio-grid">
                 <div class="work-card reveal delay-1">
                     <div class="browser-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-                    <div class="screen-box"><img src="https://i.ibb.co/W4BhL518/IMG-20260128-WA0010.jpg" alt="موقع محامي - تصميم احترافي"></div>
+                    <div class="screen-box">
+                        <img 
+                            src="https://i.ibb.co/W4BhL518/IMG-20260128-WA0010.jpg" 
+                            alt="موقع محامي - تصميم احترافي"
+                            loading="lazy"
+                            decoding="async"
+                        >
+                    </div>
                     <div class="work-label" data-translate="work1">نموذج موقع محامي</div>
                 </div>
                 <div class="work-card reveal delay-2">
                     <div class="browser-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-                    <div class="screen-box"><img src="https://i.ibb.co/0pTkqypt/IMG-20260128-WA0011.jpg" alt="موقع بائع ساعات - متجر إلكتروني"></div>
+                    <div class="screen-box">
+                        <img 
+                            src="https://i.ibb.co/0pTkqypt/IMG-20260128-WA0011.jpg" 
+                            alt="موقع بائع ساعات - متجر إلكتروني"
+                            loading="lazy"
+                            decoding="async"
+                        >
+                    </div>
                     <div class="work-label" data-translate="work2">نموذج موقع بائع ساعات</div>
                 </div>
                 <div class="work-card reveal delay-3">
                     <div class="browser-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-                    <div class="screen-box"><img src="https://i.ibb.co/mVNQDLLX/IMG-20260128-WA0012.jpg" alt="موقع ملابس - تصميم عصري"></div>
+                    <div class="screen-box">
+                        <img 
+                            src="https://i.ibb.co/mVNQDLLX/IMG-20260128-WA0012.jpg" 
+                            alt="موقع ملابس - تصميم عصري"
+                            loading="lazy"
+                            decoding="async"
+                        >
+                    </div>
                     <div class="work-label" data-translate="work3">نموذج موقع بيع ملابس</div>
                 </div>
             </div>
@@ -1166,7 +1588,7 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // بيانات الترجمة
+        // بيانات الترجمة (تمت إضافتها مرة أخرى)
         const translations = {
             ar: {
                 // النصوص الرئيسية
@@ -1420,15 +1842,6 @@
         let isDeleting = false;
         let typewriterTimeout;
 
-        /* --- تحسينات الأمان (رقم 6) --- */
-        let lastSubmissionTime = 0;
-        
-        // التحقق من استخدام HTTPS
-        if (window.location.protocol !== 'https:' && window.location.hostname !== 'localhost' && !window.location.hostname.includes('127.0.0.1')) {
-            // لا نقوم بإعادة التوجيه تلقائياً لتجنب المشاكل
-            console.log('ينصح باستخدام HTTPS لزيادة الأمان');
-        }
-
         /* --- Preloader & Initialization --- */
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
@@ -1452,6 +1865,9 @@
             setTimeout(() => {
                 document.getElementById('referralField').style.display = 'block';
             }, 2000);
+            
+            // تحسين تجربة الجوال
+            enhanceMobileExperience();
         });
 
         /* --- 3D Tilt Initialization --- */
@@ -1464,12 +1880,29 @@
         /* --- Particles.js --- */
         if (typeof particlesJS !== 'undefined') {
             particlesJS('particles-js', {
-                "particles": { "number": { "value": 60 }, "color": { "value": "#38bdf8" }, "shape": { "type": "circle" }, "opacity": { "value": 0.5 }, "size": { "value": 3 }, "line_linked": { "enable": true, "distance": 150, "color": "#38bdf8", "opacity": 0.4, "width": 1 }, "move": { "enable": true, "speed": 1.5 } }
+                "particles": { 
+                    "number": { "value": window.innerWidth < 768 ? 30 : 60 }, 
+                    "color": { "value": "#38bdf8" }, 
+                    "shape": { "type": "circle" }, 
+                    "opacity": { "value": 0.5 }, 
+                    "size": { "value": window.innerWidth < 768 ? 2 : 3 }, 
+                    "line_linked": { 
+                        "enable": true, 
+                        "distance": window.innerWidth < 768 ? 100 : 150, 
+                        "color": "#38bdf8", 
+                        "opacity": 0.4, 
+                        "width": 1 
+                    }, 
+                    "move": { "enable": true, "speed": 1.5 } 
+                }
             });
         }
 
         /* --- Scroll Reveal --- */
-        const observerOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+        const observerOptions = { 
+            threshold: 0.15, 
+            rootMargin: "0px 0px -50px 0px" 
+        };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1488,32 +1921,27 @@
             const currentText = textArray[textArrayIndex];
             const cursor = document.querySelector(".cursor");
             
-            // إذا كنا نحذف
             if (isDeleting) {
                 if (charIndex > 0) {
                     typedTextSpan.textContent = currentText.substring(0, charIndex - 1);
                     charIndex--;
                     typewriterTimeout = setTimeout(type, erasingDelay);
                 } else {
-                    // انتهى الحذف، انتقل إلى النص التالي
                     isDeleting = false;
                     textArrayIndex = (textArrayIndex + 1) % textArray.length;
                     typewriterTimeout = setTimeout(type, 500);
                 }
             } else {
-                // إذا كنا نكتب
                 if (charIndex <= currentText.length) {
                     typedTextSpan.textContent = currentText.substring(0, charIndex);
                     charIndex++;
                     typewriterTimeout = setTimeout(type, typingDelay);
                 } else {
-                    // انتهى الكتابة، انتظر ثم ابدأ الحذف
                     isDeleting = true;
                     typewriterTimeout = setTimeout(type, newTextDelay);
                 }
             }
             
-            // إظهار أو إخفاء المؤشر أثناء الحذف
             if (cursor) {
                 cursor.style.opacity = '1';
             }
@@ -1560,26 +1988,61 @@
         counters.forEach(c => counterObserver.observe(c));
 
         /* --- Functions --- */
-        function toggleFaq(item) { item.classList.toggle('active'); }
+        function toggleFaq(item) { 
+            item.classList.toggle('active'); 
+        }
 
         let selectedSiteType = '';
         
-        // وظيفة تغيير اللغة
+        // وظيفة تحسين تجربة الجوال
+        function enhanceMobileExperience() {
+            // منع zoom غير المرغوب فيه على iOS
+            document.addEventListener('touchstart', function(event) {
+                if (event.touches.length > 1) {
+                    event.preventDefault();
+                }
+            }, { passive: false });
+            
+            // تحسين استجابة اللمس
+            document.addEventListener('touchmove', function(event) {
+                if (event.scale !== 1) {
+                    event.preventDefault();
+                }
+            }, { passive: false });
+            
+            // تحسين أداء الصور على الجوال
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.setAttribute('loading', 'lazy');
+                img.setAttribute('decoding', 'async');
+            });
+            
+            // تعديل سرعة الرسوم المتحركة على الجوال
+            if (window.innerWidth < 768) {
+                document.querySelectorAll('.tech-item').forEach(item => {
+                    item.style.animationDuration = '40s';
+                });
+            }
+        }
+
+        // دالة تغيير اللغة
         function changeLanguage(lang) {
             currentLang = lang;
-            const trans = translations[lang];
             
-            // تحديث جميع النصوص
-            Object.keys(trans).forEach(key => {
-                const elements = document.querySelectorAll(`[data-translate="${key}"]`);
-                elements.forEach(element => {
-                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                        element.placeholder = trans[key];
-                    } else {
-                        element.textContent = trans[key];
-                    }
+            // تحديث النصوص
+            if (typeof translations !== 'undefined' && translations[lang]) {
+                const trans = translations[lang];
+                Object.keys(trans).forEach(key => {
+                    const elements = document.querySelectorAll(`[data-translate="${key}"]`);
+                    elements.forEach(element => {
+                        if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                            element.placeholder = trans[key];
+                        } else {
+                            element.textContent = trans[key];
+                        }
+                    });
                 });
-            });
+            }
             
             // تحديث زر اللغة في الهيدر
             const flag = lang === 'ar' ? '🇸🇦' : lang === 'en' ? '🇺🇸' : '🇫🇷';
@@ -1685,7 +2148,7 @@
         // Gift Modal Logic
         function openGiftModal() { 
             document.getElementById('giftModal').style.display = 'flex';
-            document.querySelector('.mystery-box').style.display = 'none'; // Hide box after opening
+            document.querySelector('.mystery-box').style.display = 'none';
             document.body.style.overflow = 'hidden';
             startConfetti();
             startCountdown();
@@ -1696,7 +2159,7 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Referral Modal Logic (جديد)
+        // Referral Modal Logic
         function openReferralModal() { 
             document.getElementById('referralModal').style.display = 'flex'; 
             document.body.style.overflow = 'hidden';
@@ -1895,7 +2358,7 @@
         }
 
         function openForm(s) {
-            closeGiftModal(); // If opened from gift
+            closeGiftModal();
             document.getElementById('serviceName').innerText = s;
             document.getElementById('orderModal').style.display = 'flex';
             document.body.style.overflow = 'hidden';
@@ -1911,14 +2374,7 @@
             document.body.style.overflow = 'auto';
         }
         
-        /* --- تحسينات الأمان للنماذج (رقم 6) --- */
         function submitToWhatsApp() {
-            const currentTime = Date.now();
-            if (currentTime - lastSubmissionTime < 30000) { // 30 ثانية بين الطلبات
-                alert('يرجى الانتظار 30 ثانية قبل إرسال طلب جديد');
-                return;
-            }
-            
             const n = document.getElementById('clientName').value.trim();
             const p = document.getElementById('clientPhone').value.trim();
             const s = document.getElementById('serviceName').innerText;
@@ -1987,25 +2443,13 @@
                 // إضافة معلومات الإحالة للرسالة الرئيسية
                 const referralText = `%0a%0a🎁 *إحالة صديق:*%0aتم إرسال عرض خاص لصديق على الرقم: ${friendPhone}%0aكود الإحالة: ${referralCode}`;
                 
-                lastSubmissionTime = currentTime;
-                
-                // تشفير البيانات قبل الإرسال
-                const encodedService = encodeURIComponent(s);
-                const encodedName = encodeURIComponent(n);
-                const encodedPhone = encodeURIComponent(p);
                 const timestamp = new Date().toLocaleString('ar-MA');
                 
-                window.open(`https://wa.me/212627713979?text=طلب جديد من الموقع:%0aالخدمة: ${encodedService}%0aالاسم: ${encodedName}%0aالهاتف: ${encodedPhone}${referralText}%0aالتوقيت: ${encodeURIComponent(timestamp)}`, '_blank');
+                window.open(`https://wa.me/212627713979?text=طلب جديد من الموقع:%0aالخدمة: ${encodeURIComponent(s)}%0aالاسم: ${encodeURIComponent(n)}%0aالهاتف: ${encodeURIComponent(p)}${referralText}%0aالتوقيت: ${encodeURIComponent(timestamp)}`, '_blank');
             } else {
-                lastSubmissionTime = currentTime;
-                
-                // تشفير البيانات قبل الإرسال
-                const encodedService = encodeURIComponent(s);
-                const encodedName = encodeURIComponent(n);
-                const encodedPhone = encodeURIComponent(p);
                 const timestamp = new Date().toLocaleString('ar-MA');
                 
-                window.open(`https://wa.me/212627713979?text=طلب جديد من الموقع:%0aالخدمة: ${encodedService}%0aالاسم: ${encodedName}%0aالهاتف: ${encodedPhone}%0aالتوقيت: ${encodeURIComponent(timestamp)}`, '_blank');
+                window.open(`https://wa.me/212627713979?text=طلب جديد من الموقع:%0aالخدمة: ${encodeURIComponent(s)}%0aالاسم: ${encodeURIComponent(n)}%0aالهاتف: ${encodeURIComponent(p)}%0aالتوقيت: ${encodeURIComponent(timestamp)}`, '_blank');
             }
             
             // إغلاق النموذج بعد الإرسال
@@ -2050,19 +2494,13 @@
             }
         });
         
-        /* --- وظائف إضافية للواجهة العربية (رقم 10) --- */
+        /* --- وظائف إضافية للواجهة العربية --- */
         // دالة لتنسيق الأرقام العربية
         function formatArabicNumber(number) {
             return new Intl.NumberFormat('ar-MA').format(number);
         }
         
-        // تحسين عرض الأسعار
-        function displayPrice(amount, currency = 'MAD') {
-            const formattedAmount = formatArabicNumber(amount);
-            return `${formattedAmount} ${currency === 'MAD' ? 'درهم' : currency}`;
-        }
-        
-        /* --- وظائف الأمان (رقم 6) --- */
+        /* --- وظائف الأمان --- */
         function initSecurityFeatures() {
             // منع right-click على الصور (اختياري)
             document.addEventListener('contextmenu', function(e) {
@@ -2089,24 +2527,6 @@
             });
         }
         
-        // تحديث Structured Data ديناميكياً
-        function updateStructuredData() {
-            const script = document.querySelector('script[type="application/ld+json"]');
-            if (script) {
-                try {
-                    const data = JSON.parse(script.textContent);
-                    // تحديث التاريخ
-                    data['@graph'][0]['dateModified'] = new Date().toISOString();
-                    script.textContent = JSON.stringify(data, null, 2);
-                } catch (e) {
-                    console.log('خطأ في تحديث Structured Data:', e);
-                }
-            }
-        }
-        
-        // تحديث Structured Data عند تحميل الصفحة
-        setTimeout(updateStructuredData, 1000);
-        
         // تحسين جودة الاتصال
         function checkConnectionQuality() {
             if ('connection' in navigator) {
@@ -2115,9 +2535,6 @@
                     // تقليل جودة الصور عند الاتصال البطيء
                     document.querySelectorAll('img').forEach(img => {
                         img.loading = 'lazy';
-                        if (img.src.includes('https://i.ibb.co/')) {
-                            // يمكن إضافة src منخفض الجودة هنا
-                        }
                     });
                 }
             }
@@ -2126,41 +2543,52 @@
         // التحقق من جودة الاتصال
         window.addEventListener('load', checkConnectionQuality);
         
-        // Breadcrumb Schema (SEO تحسين)
-        function generateBreadcrumbSchema() {
-            const breadcrumbSchema = {
-                "@context": "https://schema.org",
-                "@type": "BreadcrumbList",
-                "itemListElement": [
-                    {
-                        "@type": "ListItem",
-                        "position": 1,
-                        "name": "الرئيسية",
-                        "item": window.location.origin
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 2,
-                        "name": "الخدمات",
-                        "item": window.location.origin + "#services"
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 3,
-                        "name": "اتصل بنا",
-                        "item": window.location.origin + "#contact"
+        // إضافة event listener لتحسين أداء الصور عند التمرير
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.add('loaded');
+                        observer.unobserve(img);
                     }
-                ]
-            };
+                });
+            });
             
-            const script = document.createElement('script');
-            script.type = 'application/ld+json';
-            script.textContent = JSON.stringify(breadcrumbSchema);
-            document.head.appendChild(script);
+            document.querySelectorAll('img[data-src]').forEach(img => imageObserver.observe(img));
         }
         
-        // إضافة Breadcrumb Schema
-        setTimeout(generateBreadcrumbSchema, 500);
+        // تحسين الأداء على الجوال
+        window.addEventListener('resize', function() {
+            clearTimeout(window.resizingFinished);
+            window.resizingFinished = setTimeout(function() {
+                // إعادة تهيئة particles.js عند تغيير حجم الشاشة
+                if (typeof particlesJS !== 'undefined' && window.pJSDom && window.pJSDom.length > 0) {
+                    window.pJSDom[0].pJS.fn.vendors.destroypJS();
+                    particlesJS('particles-js', {
+                        "particles": { 
+                            "number": { "value": window.innerWidth < 768 ? 30 : 60 }, 
+                            "color": { "value": "#38bdf8" }, 
+                            "shape": { "type": "circle" }, 
+                            "opacity": { "value": 0.5 }, 
+                            "size": { "value": window.innerWidth < 768 ? 2 : 3 }, 
+                            "line_linked": { 
+                                "enable": true, 
+                                "distance": window.innerWidth < 768 ? 100 : 150, 
+                                "color": "#38bdf8", 
+                                "opacity": 0.4, 
+                                "width": 1 
+                            }, 
+                            "move": { "enable": true, "speed": 1.5 } 
+                        }
+                    });
+                }
+            }, 250);
+        });
+        
+        // إصلاح مشكلة hover على الجوال
+        document.addEventListener('touchstart', function() {}, {passive: true});
     </script>
 </body>
 </html>
