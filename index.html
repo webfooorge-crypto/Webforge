@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -81,6 +82,63 @@
         .logo i { color: var(--forge-orange); -webkit-text-fill-color: initial; }
 
         .header-actions { display: flex; align-items: center; gap: 15px; }
+        
+        /* زر اللغة الجديد */
+        .language-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--accent);
+            color: var(--text-main);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .language-btn:hover {
+            background: var(--accent);
+            color: #000;
+            transform: translateY(-2px);
+        }
+        
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 10px;
+            min-width: 150px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 1px solid var(--accent);
+            display: none;
+            z-index: 1001;
+        }
+        
+        .language-dropdown.active {
+            display: block;
+        }
+        
+        .language-dropdown-item {
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+        
+        .language-dropdown-item:hover {
+            background: var(--accent);
+            color: #000;
+        }
+
         .theme-btn { background: var(--bg-card); border: 1px solid var(--accent); color: var(--accent); width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         .order-now-btn { background: var(--forge-orange); color: white; padding: 8px 18px; border-radius: 5px; font-weight: bold; cursor: pointer; border: none; text-decoration: none; font-size: 0.9rem; }
 
@@ -216,6 +274,9 @@
             .process-steps {
                 flex-direction: column;
             }
+            .header-actions {
+                gap: 10px;
+            }
         }
 
     </style>
@@ -244,6 +305,29 @@
     <header>
         <a href="#" class="logo"><i class="fas fa-code"></i> Web Forge</a>
         <div class="header-actions">
+            <!-- زر اللغة المضاف -->
+            <div class="language-container">
+                <button class="language-btn" id="headerLanguageBtn">
+                    <span id="currentLanguageFlag">🇸🇦</span>
+                    <span id="currentLanguageName">العربية</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="language-dropdown" id="languageDropdown">
+                    <div class="language-dropdown-item" data-lang="ar" onclick="changeLanguage('ar')">
+                        <span>🇸🇦</span>
+                        <span>العربية</span>
+                    </div>
+                    <div class="language-dropdown-item" data-lang="en" onclick="changeLanguage('en')">
+                        <span>🇺🇸</span>
+                        <span>English</span>
+                    </div>
+                    <div class="language-dropdown-item" data-lang="fr" onclick="changeLanguage('fr')">
+                        <span>🇫🇷</span>
+                        <span>Français</span>
+                    </div>
+                </div>
+            </div>
+            
             <a href="#services" class="order-now-btn">اطلب خدمتك</a>
             <button class="theme-btn" onclick="toggleTheme()"><i class="fas fa-moon" id="themeIcon"></i></button>
         </div>
@@ -515,6 +599,156 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
+        // بيانات الترجمة (نفس البيانات السابقة)
+        const translations = {
+            ar: {
+                projectsText: "مشروع منجز",
+                satisfactionText: "رضا العملاء %",
+                supportText: "دعم فني",
+                whyTitle: "🛡️ لماذا تختار Web Forge؟",
+                whyDesc: "نحن لا نبني مجرد أكواد، بل نصنع تجربة مستخدم فريدة",
+                speedTitle: "سرعة فائقة",
+                speedDesc: "نضمن لك سرعة تحميل استثنائية لتصدر محركات البحث.",
+                responsiveTitle: "تجاوب كامل",
+                responsiveDesc: "موقعك سيظهر بشكل أنيق على كافة الأجهزة الذكية.",
+                designTitle: "تصميم مخصص",
+                designDesc: "نمنح مشروعك لمسة إبداعية تميزك عن المنافسين.",
+                servicesTitle: "💼 خدماتنا الاحترافية",
+                servicesDesc: "اختر الخدمة التي تناسب طموحاتك",
+                youcanTitle: "متاجر YouCan",
+                youcanDesc: "تصميم وتجهيز متاجر YouCan احترافية بالكامل.",
+                youcanBtn: "اطلب الخدمة",
+                shopifyTitle: "متاجر Shopify",
+                shopifyDesc: "تطوير متاجر دروبشيبينغ أو براند خاص عالمي.",
+                shopifyBtn: "اطلب الخدمة",
+                websitesTitle: "مواقع Web Forge",
+                websitesDesc: "مواقع خاصة: مدونة، طبيب، محامي، Portfolio، كتب.",
+                websitesBtn: "اطلب الخدمة",
+                portfolioTitle: "🏆 قصص النجاح بالصور",
+                work1: "نموذج موقع محامي",
+                work2: "نموذج موقع بائع ساعات",
+                work3: "نموذج موقع بيع ملابس",
+                faqTitle: "🤔 أسئلة شائعة",
+                faqDesc: "كل ما تحتاج معرفته قبل البدء",
+                faq1: "كم تستغرق مدة تجهيز الموقع؟",
+                faq1a: "تختلف المدة حسب نوع الباقة، ولكن غالباً ما يستغرق العمل من 3 إلى 7 أيام عمل للمواقع العادية والمتاجر.",
+                faq2: "هل النطاق (Domain) مجاني؟",
+                faq2a: "في بعض الباقات الاحترافية نقدم اسم نطاق مجاني للسنة الأولى، تواصل معنا لمعرفة التفاصيل.",
+                faq3: "هل يوجد دعم فني بعد التسليم؟",
+                faq3a: "نعم، نوفر دعماً فنياً شاملاً لضمان عمل موقعك بكفاءة عالية وحل أي مشكلة تقنية تواجهها.",
+                faq4: "ما هي طرق الدفع المتاحة؟",
+                faq4a: "نقبل التحويل البنكي والعديد من وسائل الدفع المحلية والدولية لتسهيل الأمر على عملائنا.",
+                giftTitle: "مبروك! حصلت على هدية",
+                giftDesc: "كود خصم حصري صالح لمدة 15 دقيقة فقط!",
+                giftTimer: "ينتهي العرض خلال:",
+                giftBtn: "استخدم الكود الآن",
+                aboutBtn: "من نحن",
+                processBtn: "كيف نعمل؟",
+                servicesBtn: "الخدمات",
+                contactLink: "اتصل بنا",
+                copyright: "جميع الحقوق محفوظة &copy; 2026 Web Forge",
+                submitBtn: "إرسال الطلب عبر واتساب"
+            },
+            en: {
+                projectsText: "Completed Projects",
+                satisfactionText: "Client Satisfaction %",
+                supportText: "Technical Support",
+                whyTitle: "🛡️ Why Choose Web Forge?",
+                whyDesc: "We don't just build code, we create unique user experiences",
+                speedTitle: "Ultra Fast",
+                speedDesc: "We guarantee exceptional loading speed to rank high in search engines.",
+                responsiveTitle: "Fully Responsive",
+                responsiveDesc: "Your site will appear elegantly on all smart devices.",
+                designTitle: "Custom Design",
+                designDesc: "We give your project a creative touch that distinguishes you from competitors.",
+                servicesTitle: "💼 Our Professional Services",
+                servicesDesc: "Choose the service that fits your ambitions",
+                youcanTitle: "YouCan Stores",
+                youcanDesc: "Complete design and setup of professional YouCan stores.",
+                youcanBtn: "Order Service",
+                shopifyTitle: "Shopify Stores",
+                shopifyDesc: "Development of dropshipping stores or global private brands.",
+                shopifyBtn: "Order Service",
+                websitesTitle: "Web Forge Websites",
+                websitesDesc: "Private websites: Blog, Doctor, Lawyer, Portfolio, Books.",
+                websitesBtn: "Order Service",
+                portfolioTitle: "🏆 Success Stories in Pictures",
+                work1: "Lawyer Website Template",
+                work2: "Watch Seller Website Template",
+                work3: "Clothing Store Website Template",
+                faqTitle: "🤔 Frequently Asked Questions",
+                faqDesc: "Everything you need to know before starting",
+                faq1: "How long does website preparation take?",
+                faq1a: "Duration varies by package type, but typically takes 3 to 7 working days for regular sites and stores.",
+                faq2: "Is the Domain free?",
+                faq2a: "In some professional packages, we offer a free domain name for the first year. Contact us for details.",
+                faq3: "Is there technical support after delivery?",
+                faq3a: "Yes, we provide comprehensive technical support to ensure your site operates efficiently and solve any technical issues you face.",
+                faq4: "What payment methods are available?",
+                faq4a: "We accept bank transfers and many local and international payment methods to make it easy for our clients.",
+                giftTitle: "Congratulations! You Got a Gift",
+                giftDesc: "Exclusive discount code valid for 15 minutes only!",
+                giftTimer: "Offer ends in:",
+                giftBtn: "Use Code Now",
+                aboutBtn: "About Us",
+                processBtn: "How We Work",
+                servicesBtn: "Services",
+                contactLink: "Contact Us",
+                copyright: "All rights reserved &copy; 2026 Web Forge",
+                submitBtn: "Send Request via WhatsApp"
+            },
+            fr: {
+                projectsText: "Projets Réalisés",
+                satisfactionText: "Satisfaction Clients %",
+                supportText: "Support Technique",
+                whyTitle: "🛡️ Pourquoi Choisir Web Forge?",
+                whyDesc: "Nous ne construisons pas juste du code, nous créons des expériences utilisateur uniques",
+                speedTitle: "Ultra Rapide",
+                speedDesc: "Nous garantissons une vitesse de chargement exceptionnelle pour bien classer dans les moteurs de recherche.",
+                responsiveTitle: "Entièrement Responsive",
+                responsiveDesc: "Votre site apparaîtra élégamment sur tous les appareils intelligents.",
+                designTitle: "Design Personnalisé",
+                designDesc: "Nous donnons à votre projet une touche créative qui vous distingue des concurrents.",
+                servicesTitle: "💼 Nos Services Professionnels",
+                servicesDesc: "Choisissez le service qui correspond à vos ambitions",
+                youcanTitle: "Boutiques YouCan",
+                youcanDesc: "Conception et configuration complètes de boutiques YouCan professionnelles.",
+                youcanBtn: "Commander le Service",
+                shopifyTitle: "Boutiques Shopify",
+                shopifyDesc: "Développement de boutiques dropshipping ou de marques privées mondiales.",
+                shopifyBtn: "Commander le Service",
+                websitesTitle: "Sites Web Forge",
+                websitesDesc: "Sites privés: Blog, Médecin, Avocat, Portfolio, Livres.",
+                websitesBtn: "Commander le Service",
+                portfolioTitle: "🏆 Histoires de Succès en Images",
+                work1: "Modèle de Site d'Avocat",
+                work2: "Modèle de Site de Vendeur de Montres",
+                work3: "Modèle de Site de Vente de Vêtements",
+                faqTitle: "🤔 Questions Fréquemment Posées",
+                faqDesc: "Tout ce que vous devez savoir avant de commencer",
+                faq1: "Combien de temps prend la préparation du site web?",
+                faq1a: "La durée varie selon le type de forfait, mais prend généralement de 3 à 7 jours ouvrables pour les sites et boutiques réguliers.",
+                faq2: "Le domaine est-il gratuit?",
+                faq2a: "Dans certains forfaits professionnels, nous offrons un nom de domaine gratuit pour la première année. Contactez-nous pour plus de détails.",
+                faq3: "Y a-t-il un support technique après la livraison?",
+                faq3a: "Oui, nous fournissons un support technique complet pour garantir le fonctionnement efficace de votre site et résoudre tout problème technique que vous rencontrez.",
+                faq4: "Quelles méthodes de paiement sont disponibles?",
+                faq4a: "Nous acceptons les virements bancaires et de nombreux moyens de paiement locaux et internationaux pour faciliter la tâche à nos clients.",
+                giftTitle: "Félicitations! Vous Avez un Cadeau",
+                giftDesc: "Code de réduction exclusif valable 15 minutes seulement!",
+                giftTimer: "L'offre se termine dans:",
+                giftBtn: "Utiliser le Code Maintenant",
+                aboutBtn: "À Propos",
+                processBtn: "Comment Nous Travaillons",
+                servicesBtn: "Services",
+                contactLink: "Contactez-Nous",
+                copyright: "Tous droits réservés &copy; 2026 Web Forge",
+                submitBtn: "Envoyer la Demande via WhatsApp"
+            }
+        };
+
+        let currentLang = 'ar';
+
         /* --- Preloader & Initialization --- */
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
@@ -538,21 +772,7 @@
         /* --- Particles.js --- */
         if (typeof particlesJS !== 'undefined') {
             particlesJS('particles-js', {
-                particles: { 
-                    number: { value: 60 }, 
-                    color: { value: "#38bdf8" }, 
-                    shape: { type: "circle" }, 
-                    opacity: { value: 0.5 }, 
-                    size: { value: 3 }, 
-                    line_linked: { 
-                        enable: true, 
-                        distance: 150, 
-                        color: "#38bdf8", 
-                        opacity: 0.4, 
-                        width: 1 
-                    }, 
-                    move: { enable: true, speed: 1.5 } 
-                }
+                "particles": { "number": { "value": 60 }, "color": { "value": "#38bdf8" }, "shape": { "type": "circle" }, "opacity": { "value": 0.5 }, "size": { "value": 3 }, "line_linked": { "enable": true, "distance": 150, "color": "#38bdf8", "opacity": 0.4, "width": 1 }, "move": { "enable": true, "speed": 1.5 } }
             });
         }
 
@@ -566,10 +786,7 @@
                 }
             });
         }, observerOptions);
-        
-        document.querySelectorAll('.reveal').forEach(el => {
-            if (el) observer.observe(el);
-        });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
         /* --- FAST TYPEWRITER CONFIGURATION --- */
         const typedTextSpan = document.querySelector(".typewriter-text");
@@ -582,7 +799,7 @@
         let charIndex = 0;
 
         function type() {
-            if (typedTextSpan && charIndex < textArray[textArrayIndex].length) {
+            if (charIndex < textArray[textArrayIndex].length) {
                 typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
                 charIndex++;
                 setTimeout(type, typingDelay);
@@ -590,9 +807,8 @@
                 setTimeout(erase, newTextDelay);
             }
         }
-        
         function erase() {
-            if (typedTextSpan && charIndex > 0) {
+            if (charIndex > 0) {
                 typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
                 charIndex--;
                 setTimeout(erase, erasingDelay);
@@ -602,9 +818,8 @@
                 setTimeout(type, typingDelay + 1100);
             }
         }
-        
         document.addEventListener("DOMContentLoaded", function() { 
-            if(textArray.length && typedTextSpan) setTimeout(type, newTextDelay + 250); 
+            if(textArray.length) setTimeout(type, newTextDelay + 250); 
         });
 
         /* --- Counters --- */
@@ -615,15 +830,13 @@
                     const counter = entry.target;
                     const target = +counter.getAttribute('data-target');
                     const increment = target / 50;
-                    let current = 0;
-                    
                     const updateCounter = () => {
-                        if (current < target) {
-                            current = Math.min(current + increment, target);
-                            counter.innerText = Math.ceil(current);
+                        const c = +counter.innerText;
+                        if (c < target) {
+                            counter.innerText = Math.ceil(c + increment);
                             setTimeout(updateCounter, 30);
                         } else {
-                            counter.innerText = target;
+                            counter.innerText = target + (counter.nextElementSibling.innerText.includes('%') ? '' : '+');
                         }
                     };
                     updateCounter();
@@ -631,103 +844,167 @@
                 }
             });
         }, { threshold: 0.5 });
-        
         counters.forEach(c => counterObserver.observe(c));
 
         /* --- Functions --- */
-        function toggleFaq(item) { 
-            item.classList.toggle('active'); 
-        }
+        function toggleFaq(item) { item.classList.toggle('active'); }
 
         let selectedSiteType = '';
+        
+        // وظيفة تغيير اللغة
+        function changeLanguage(lang) {
+            currentLang = lang;
+            const trans = translations[lang];
+            
+            // تحديث جميع النصوص (الصفحة العربية تبقى كما هي)
+            Object.keys(trans).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.textContent = trans[key];
+                }
+            });
+            
+            // تحديث النصوص في الأزرار
+            document.querySelectorAll('.card-btn').forEach(btn => {
+                const btnId = btn.id;
+                if (trans[btnId]) {
+                    btn.innerHTML = trans[btnId] + ' <i class="fas fa-arrow-left"></i>';
+                }
+            });
+            
+            // تحديث زر اللغة في الهيدر
+            const flag = lang === 'ar' ? '🇸🇦' : lang === 'en' ? '🇺🇸' : '🇫🇷';
+            const name = lang === 'ar' ? 'العربية' : lang === 'en' ? 'English' : 'Français';
+            
+            document.getElementById('currentLanguageFlag').textContent = flag;
+            document.getElementById('currentLanguageName').textContent = name;
+            
+            // تحديث Typewriter بناءً على اللغة
+            updateTypewriterForLanguage(lang);
+            
+            // إغلاق القائمة المنسدلة
+            document.getElementById('languageDropdown').classList.remove('active');
+        }
+        
+        // تحديث Typewriter بناءً على اللغة
+        function updateTypewriterForLanguage(lang) {
+            const typedTextSpan = document.querySelector(".typewriter-text");
+            if (!typedTextSpan) return;
+            
+            let newTextArray;
+            switch(lang) {
+                case 'ar':
+                    newTextArray = ["هوية رقمية قوية", "متاجر إلكترونية احترافية", "براندات عالمية", "واقع رقمي متكامل"];
+                    break;
+                case 'en':
+                    newTextArray = ["Strong Digital Identity", "Professional E-commerce", "Global Brands", "Integrated Digital Reality"];
+                    break;
+                case 'fr':
+                    newTextArray = ["Identité Numérique Forte", "E-commerce Professionnel", "Marques Mondiales", "Réalité Numérique Intégrée"];
+                    break;
+                default:
+                    newTextArray = ["هوية رقمية قوية", "متاجر إلكترونية احترافية", "براندات عالمية", "واقع رقمي متكامل"];
+            }
+            
+            // إعادة تعيين Typewriter
+            textArrayIndex = 0;
+            charIndex = 0;
+            typedTextSpan.textContent = "";
+            
+            // بدء Typewriter مع النصوص الجديدة
+            const textArray = newTextArray;
+            
+            function type() {
+                if (typedTextSpan && charIndex < textArray[textArrayIndex].length) {
+                    typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+                    charIndex++;
+                    setTimeout(type, 50);
+                } else {
+                    setTimeout(erase, 1200);
+                }
+            }
+            
+            function erase() {
+                if (typedTextSpan && charIndex > 0) {
+                    typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
+                    charIndex--;
+                    setTimeout(erase, 25);
+                } else {
+                    textArrayIndex++;
+                    if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+                    setTimeout(type, 50 + 1100);
+                }
+            }
+            
+            if(textArray.length && typedTextSpan) setTimeout(type, 1200 + 250);
+        }
+
+        // أحداث القائمة المنسدلة للغة
+        document.getElementById('headerLanguageBtn').addEventListener('click', function(e) {
+            e.stopPropagation();
+            document.getElementById('languageDropdown').classList.toggle('active');
+        });
+        
+        // إغلاق القائمة عند النقر خارجها
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.language-container')) {
+                document.getElementById('languageDropdown').classList.remove('active');
+            }
+        });
         
         function toggleTheme() {
             const body = document.body;
             const icon = document.getElementById('themeIcon');
-            if (body.hasAttribute('data-theme')) { 
-                body.removeAttribute('data-theme'); 
-                icon.className = 'fas fa-moon'; 
-            } else { 
-                body.setAttribute('data-theme', 'light'); 
-                icon.className = 'fas fa-sun'; 
-            }
+            if (body.hasAttribute('data-theme')) { body.removeAttribute('data-theme'); icon.className = 'fas fa-moon'; }
+            else { body.setAttribute('data-theme', 'light'); icon.className = 'fas fa-sun'; }
         }
-        
-        function openAboutModal() { 
-            document.getElementById('aboutModal').style.display = 'flex'; 
-        }
-        function closeAboutModal() { 
-            document.getElementById('aboutModal').style.display = 'none'; 
-        }
+        function openAboutModal() { document.getElementById('aboutModal').style.display = 'flex'; }
+        function closeAboutModal() { document.getElementById('aboutModal').style.display = 'none'; }
         
         // Process Modal Logic
-        function openProcessModal() { 
-            document.getElementById('processModal').style.display = 'flex'; 
-        }
-        function closeProcessModal() { 
-            document.getElementById('processModal').style.display = 'none'; 
-        }
+        function openProcessModal() { document.getElementById('processModal').style.display = 'flex'; }
+        function closeProcessModal() { document.getElementById('processModal').style.display = 'none'; }
 
         // Gift Modal Logic
         function openGiftModal() { 
             document.getElementById('giftModal').style.display = 'flex';
-            const mysteryBox = document.querySelector('.mystery-box');
-            if (mysteryBox) {
-                mysteryBox.style.display = 'none';
-            }
+            document.querySelector('.mystery-box').style.display = 'none'; // Hide box after opening
             startConfetti();
             startCountdown();
         }
-        
-        function closeGiftModal() { 
-            document.getElementById('giftModal').style.display = 'none'; 
-        }
+        function closeGiftModal() { document.getElementById('giftModal').style.display = 'none'; }
 
         function startConfetti() {
-            const modal = document.getElementById('giftModal');
-            if (!modal) return;
-            
-            for(let i = 0; i < 30; i++) {
+            for(let i=0; i<30; i++) {
                 let conf = document.createElement('div');
                 conf.classList.add('confetti');
                 conf.style.left = Math.random() * 100 + 'vw';
                 conf.style.animationDuration = (Math.random() * 2 + 2) + 's';
                 conf.style.backgroundColor = ['#f00', '#0f0', '#00f', '#ff0', '#0ff'][Math.floor(Math.random()*5)];
-                modal.appendChild(conf);
+                document.getElementById('giftModal').appendChild(conf);
             }
         }
         
         function startCountdown() {
             let time = 900; // 15 mins
             const el = document.getElementById('countdown');
-            if (!el) return;
-            
-            const countdownInterval = setInterval(() => {
+            setInterval(() => {
                 if(time > 0) {
                     time--;
                     let m = Math.floor(time / 60);
                     let s = time % 60;
                     el.innerText = `${m}:${s < 10 ? '0'+s : s}`;
-                } else {
-                    clearInterval(countdownInterval);
                 }
             }, 1000);
         }
 
-        function openTypeSelection() { 
-            document.getElementById('typeModal').style.display = 'flex'; 
-        }
-        function closeTypeSelection() { 
-            document.getElementById('typeModal').style.display = 'none'; 
-        }
+        function openTypeSelection() { document.getElementById('typeModal').style.display = 'flex'; }
+        function closeTypeSelection() { document.getElementById('typeModal').style.display = 'none'; }
         
         function selectType(t) {
             selectedSiteType = t;
             closeTypeSelection();
-            const pkgTitle = document.getElementById('pkgTitle');
-            if (pkgTitle) {
-                pkgTitle.innerText = "باقة " + t;
-            }
+            document.getElementById('pkgTitle').innerText = "باقة " + t;
             document.getElementById('packageModal').style.display = 'flex';
         }
 
@@ -737,65 +1014,38 @@
         }
 
         function openForm(s) {
-            closeGiftModal();
-            const serviceName = document.getElementById('serviceName');
-            if (serviceName) {
-                serviceName.innerText = s;
-            }
+            closeGiftModal(); // If opened from gift
+            document.getElementById('serviceName').innerText = s;
             document.getElementById('orderModal').style.display = 'flex';
         }
-        
-        function closeForm() { 
-            document.getElementById('orderModal').style.display = 'none'; 
-        }
+        function closeForm() { document.getElementById('orderModal').style.display = 'none'; }
         
         function submitToWhatsApp() {
             const n = document.getElementById('clientName').value;
             const p = document.getElementById('clientPhone').value;
             const s = document.getElementById('serviceName').innerText;
-            
-            if(!n || !p) {
-                alert("يرجى إدخال الاسم ورقم الهاتف");
-                return;
-            }
-            
-            const message = `طلب جديد من موقع Web Forge:%0a%0aالخدمة: ${s}%0aالاسم: ${n}%0aالهاتف: ${p}%0a%0aشكراً لاختياركم Web Forge!`;
-            
-            window.open(`https://wa.me/212627713979?text=${message}`, '_blank');
+            if(!n || !p) return alert("يرجى إدخال البيانات");
+            window.open(`https://wa.me/212627713979?text=طلب جديد من الموقع:%0aالخدمة: ${s}%0aالاسم: ${n}%0aالهاتف: ${p}`, '_blank');
         }
 
         function copyLink() {
-            navigator.clipboard.writeText(window.location.href).then(() => {
-                const toast = document.getElementById('shareToast');
-                if (toast) {
-                    toast.style.opacity = '1';
-                    setTimeout(() => {
-                        toast.style.opacity = '0';
-                    }, 2000);
-                }
-            });
+            navigator.clipboard.writeText(window.location.href);
+            const toast = document.getElementById('shareToast');
+            toast.style.opacity = '1';
+            setTimeout(() => toast.style.opacity = '0', 2000);
         }
 
         window.onclick = function(e) { 
             if(e.target.className === 'modal') { 
-                closeAboutModal(); 
-                closeTypeSelection(); 
-                closeForm(); 
-                closeProcessModal(); 
-                closeGiftModal();
-                document.getElementById('packageModal').style.display = 'none'; 
+                closeAboutModal(); closeTypeSelection(); closeForm(); closeProcessModal(); closeGiftModal();
+                document.getElementById('packageModal').style.display='none'; 
             } 
         }
         
-        // إغلاق المودالات عند الضغط على ESC
+        // إغلاق القائمة المنسدلة عند الضغط على ESC
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
-                closeAboutModal(); 
-                closeTypeSelection(); 
-                closeForm(); 
-                closeProcessModal(); 
-                closeGiftModal();
-                document.getElementById('packageModal').style.display = 'none';
+                document.getElementById('languageDropdown').classList.remove('active');
             }
         });
     </script>
