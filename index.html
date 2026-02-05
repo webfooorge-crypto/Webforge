@@ -700,6 +700,64 @@
         .tech-item:hover { color: var(--accent); opacity: 1; }
         @keyframes scrollLogos { 0% { transform: translateX(0); } 100% { transform: translateX(50%); } }
 
+        /* --- Referral Button --- */
+        .referral-float { 
+            position: fixed; 
+            bottom: 100px; 
+            left: 30px; 
+            z-index: 1000; 
+            cursor: pointer; 
+            animation: floatBounce 4s ease-in-out infinite; 
+        }
+        
+        @media (max-width: 768px) {
+            .referral-float {
+                left: 15px;
+                bottom: 90px;
+            }
+        }
+        
+        .referral-icon { 
+            width: 55px; 
+            height: 55px; 
+            background: linear-gradient(135deg, #10b981, #059669); 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 1.5rem; 
+            color: white; 
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4); 
+            border: 2px solid rgba(255,255,255,0.3); 
+        }
+        
+        @media (max-width: 768px) {
+            .referral-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+        }
+        
+        .referral-tag { 
+            position: absolute; 
+            top: -8px; 
+            right: -8px; 
+            background: #10b981; 
+            color: #000; 
+            font-size: 0.65rem; 
+            font-weight: bold; 
+            padding: 3px 8px; 
+            border-radius: 10px; 
+            animation: pulse 2s infinite; 
+        }
+        
+        @keyframes floatBounce { 
+            0%, 100% { transform: translateY(0); } 
+            50% { transform: translateY(-10px); } 
+            25%, 75% { transform: rotate(-3deg); } 
+        }
+
         /* --- Mystery Gift Box --- */
         .mystery-box { 
             position: fixed; 
@@ -1210,6 +1268,9 @@
                 min-width: 90px;
                 padding: 5px 8px;
             }
+            .referral-float {
+                bottom: 85px;
+            }
         }
 
         /* منع تكبير النص على iOS */
@@ -1247,6 +1308,21 @@
             .service-card, .why-card, .work-card, .modal-content {
                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             }
+        }
+
+        /* إضافة أنماط لزر الإحالة */
+        .referral-form {
+            margin-top: 20px;
+        }
+        
+        .referral-note {
+            background: rgba(16, 185, 129, 0.1);
+            border-right: 4px solid #10b981;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
         }
     </style>
 </head>
@@ -1290,6 +1366,37 @@
                 
                 <h4 data-translate="contactUs">اتصل بنا</h4>
                 <p data-translate="contactText">لأي استفسار حول سياسة الخصوصية: <strong>webfooorge@gmail.com</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- مودال الإحالة -->
+    <div id="referralModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeReferralModal()">&times;</span>
+            <h3 style="text-align:center; color:#10b981; margin-bottom:20px;" data-translate="referralTitle">🎁 دعوة صديق للحصول على مكافأة</h3>
+            
+            <div class="referral-note" data-translate="referralNote">
+                ادعُ صديقك واحصل على خصم إضافي 5% على طلبك القادم! عند طلب صديقك للخدمة، سيحصل هو أيضاً على خصم 15%.
+            </div>
+            
+            <div class="referral-form">
+                <input type="text" id="referrerName" placeholder="اسمك" data-translate="referrerNamePlaceholder" value="محمد">
+                <input type="tel" id="friendPhone" placeholder="رقم صديقك (واتساب)" data-translate="friendPhonePlaceholder">
+                
+                <div class="referral-note" style="background: rgba(245, 158, 11, 0.1); border-right-color: var(--forge-orange);">
+                    <strong data-translate="howItWorks">كيف تعمل الإحالة:</strong>
+                    <ul style="margin-top: 5px; padding-right: 15px;">
+                        <li data-translate="referralStep1">أدخل رقم صديقك</li>
+                        <li data-translate="referralStep2">سنرسل له دعوة خاصة على واتساب</li>
+                        <li data-translate="referralStep3">عند طلبه للخدمة، يحصل على خصم 15%</li>
+                        <li data-translate="referralStep4">تحصل أنت على خصم 5% على طلبك القادم</li>
+                    </ul>
+                </div>
+                
+                <button onclick="sendReferral()" style="width:100%; padding:12px; background:#10b981; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; margin-top:10px;" data-translate="sendReferralBtn">
+                    أرسل الدعوة الآن
+                </button>
             </div>
         </div>
     </div>
@@ -1368,6 +1475,13 @@
             </div>
         </div>
 
+        <!-- زر الإحالة -->
+        <div class="referral-float" onclick="openReferralModal()" role="button" aria-label="ادعُ صديقاً واحصل على مكافأة">
+            <div class="referral-icon"><i class="fas fa-user-plus"></i></div>
+            <div class="referral-tag" data-translate="referralTag">+5%</div>
+        </div>
+
+        <!-- زر الهدية -->
         <div class="mystery-box" onclick="openGiftModal()" role="button" aria-label="افتح الهدية المجانية">
             <div class="box-icon"><i class="fas fa-gift"></i></div>
             <div class="box-tag" data-translate="giftTag">افتح الهدية</div>
@@ -1628,7 +1742,7 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // بيانات الترجمة المعدلة بدون نظام الإحالة
+        // بيانات الترجمة المعدلة مع إضافة الإحالة
         const translations = {
             ar: {
                 // الميتادات
@@ -1658,6 +1772,19 @@
                 "dataProtectionText": "نستخدم تقنيات تشفير متقدمة لحماية بياناتك من الوصول غير المصرح به. نحافظ على سرية معلوماتك طوال فترة تعاملنا معك.",
                 "contactUs": "اتصل بنا",
                 "contactText": "لأي استفسار حول سياسة الخصوصية: webfooorge@gmail.com",
+                
+                // الإحالة
+                "referralTitle": "🎁 دعوة صديق للحصول على مكافأة",
+                "referralTag": "+5%",
+                "referralNote": "ادعُ صديقك واحصل على خصم إضافي 5% على طلبك القادم! عند طلب صديقك للخدمة، سيحصل هو أيضاً على خصم 15%.",
+                "referrerNamePlaceholder": "اسمك",
+                "friendPhonePlaceholder": "رقم صديقك (واتساب)",
+                "howItWorks": "كيف تعمل الإحالة:",
+                "referralStep1": "أدخل رقم صديقك",
+                "referralStep2": "سنرسل له دعوة خاصة على واتساب",
+                "referralStep3": "عند طلبه للخدمة، يحصل على خصم 15%",
+                "referralStep4": "تحصل أنت على خصم 5% على طلبك القادم",
+                "sendReferralBtn": "أرسل الدعوة الآن",
                 
                 // الأزرار والعناصر
                 "promoText": "🚀 عرض لفترة محدودة: احصل على خصم 20% عند طلب أول متجر YouCan أو Shopify هذا الأسبوع! — اطلب الآن واستفد من العرض — 🎁 استشارة مجانية عند طلب موقع خاص!",
@@ -1800,6 +1927,17 @@
                 "dataProtectionText": "We use advanced encryption technologies to protect your data from unauthorized access. We maintain the confidentiality of your information throughout our collaboration.",
                 "contactUs": "Contact Us",
                 "contactText": "For any inquiries about the privacy policy: webfooorge@gmail.com",
+                "referralTitle": "🎁 Invite a Friend & Get Rewarded",
+                "referralTag": "+5%",
+                "referralNote": "Invite your friend and get an extra 5% discount on your next order! When your friend orders a service, they'll also get 15% off.",
+                "referrerNamePlaceholder": "Your Name",
+                "friendPhonePlaceholder": "Friend's WhatsApp Number",
+                "howItWorks": "How it works:",
+                "referralStep1": "Enter your friend's number",
+                "referralStep2": "We'll send them a special invitation via WhatsApp",
+                "referralStep3": "When they order a service, they get 15% off",
+                "referralStep4": "You get 5% off on your next order",
+                "sendReferralBtn": "Send Invitation Now",
                 "promoText": "🚀 Limited Time Offer: Get 20% discount on your first YouCan or Shopify store this week! — Order now and take advantage of the offer — 🎁 Free consultation when ordering a custom website!",
                 "logoText": "Web Forge",
                 "orderNowBtn": "Order Your Service",
@@ -1916,6 +2054,17 @@
                 "dataProtectionText": "Nous utilisons des technologies de chiffrement avancées pour protéger vos données contre tout accès non autorisé. Nous maintenons la confidentialité de vos informations tout au long de notre collaboration.",
                 "contactUs": "Contactez-nous",
                 "contactText": "Pour toute question concernant la politique de confidentialité : webfooorge@gmail.com",
+                "referralTitle": "🎁 Invitez un Ami et Soyez Récompensé",
+                "referralTag": "+5%",
+                "referralNote": "Invitez votre ami et obtenez une réduction supplémentaire de 5% sur votre prochaine commande! Lorsque votre ami commande un service, il bénéficiera également de 15% de réduction.",
+                "referrerNamePlaceholder": "Votre Nom",
+                "friendPhonePlaceholder": "Numéro WhatsApp de l'ami",
+                "howItWorks": "Comment ça marche:",
+                "referralStep1": "Entrez le numéro de votre ami",
+                "referralStep2": "Nous lui enverrons une invitation spéciale via WhatsApp",
+                "referralStep3": "Lorsqu'il commande un service, il obtient 15% de réduction",
+                "referralStep4": "Vous obtenez 5% de réduction sur votre prochaine commande",
+                "sendReferralBtn": "Envoyer l'invitation maintenant",
                 "promoText": "🚀 Offre Limitée : Obtenez 20% de réduction sur votre première boutique YouCan ou Shopify cette semaine ! — Commandez maintenant et profitez de l'offre — 🎁 Consultation gratuite lors de la commande d'un site web personnalisé !",
                 "logoText": "Web Forge",
                 "orderNowBtn": "Commander Votre Service",
@@ -2264,6 +2413,63 @@
                 body.setAttribute('data-theme', 'light'); 
                 icon.className = 'fas fa-sun';
             }
+        }
+        
+        // دالات الإحالة
+        function openReferralModal() {
+            showModal('referralModal');
+        }
+        
+        function closeReferralModal() {
+            hideModal('referralModal');
+        }
+        
+        function sendReferral() {
+            const referrerName = document.getElementById('referrerName').value.trim() || "محمد";
+            const friendPhone = document.getElementById('friendPhone').value.trim();
+            
+            if (!friendPhone || !/^[\+]?[0-9\s\-\(\)]{8,}$/.test(friendPhone)) {
+                alert("يرجى إدخال رقم هاتف صحيح لصديقك");
+                return;
+            }
+            
+            // كود إحالة عشوائي
+            const referralCode = 'REF' + Math.random().toString(36).substring(2, 8).toUpperCase();
+            
+            // رسالة الإحالة
+            const message = `مرحباً! 👋
+
+صديقك *${referrerName}* يدعوك للاستفادة من عروض Web Forge المميزة! 🚀
+
+✨ *العروض الخاصة:*
+• خصم 15% على أول طلب لك
+• استشارة مجانية لتقييم مشروعك
+• دعم فني لمدة شهر مجاناً
+
+🎁 *الخدمات المتاحة:*
+• تصميم متاجر YouCan و Shopify
+• تطوير مواقع إلكترونية احترافية
+• صناعة الهوية الرقمية
+
+للاستفادة من العرض، تواصل معنا مباشرة:
+📞 https://wa.me/212627713979
+
+أو زر موقعنا:
+🌐 https://webforge-it.com
+
+*كود الإحالة: ${referralCode}*
+(استخدم هذا الكود عند طلبك للحصول على الخصم)
+
+مع تحيات فريق Web Forge 💙`;
+            
+            // إرسال رسالة واتساب
+            const whatsappUrl = `https://wa.me/${friendPhone.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            
+            // عرض رسالة نجاح
+            alert(`تم إرسال الدعوة بنجاح إلى صديقك! 🎉\n\nكود الإحالة الخاص بك: ${referralCode}\nسيحصل صديقك على خصم 15% وستحصل أنت على خصم 5% على طلبك القادم.`);
+            
+            closeReferralModal();
         }
         
         function openAboutModal() { 
