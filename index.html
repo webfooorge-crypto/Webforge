@@ -758,6 +758,85 @@
             25%, 75% { transform: rotate(-3deg); } 
         }
 
+        /* --- الاستشارة Button --- */
+        .consult-float { 
+            position: fixed; 
+            bottom: 170px; 
+            left: 30px; 
+            z-index: 1000; 
+            cursor: pointer; 
+            animation: floatConsult 5s ease-in-out infinite; 
+        }
+
+        @media (max-width: 768px) {
+            .consult-float {
+                left: 15px;
+                bottom: 160px;
+            }
+        }
+
+        .consult-icon { 
+            width: 55px; 
+            height: 55px; 
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed); 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 1.5rem; 
+            color: white; 
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4); 
+            border: 2px solid rgba(255,255,255,0.3); 
+        }
+
+        @media (max-width: 768px) {
+            .consult-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+        }
+
+        .consult-tag { 
+            position: absolute; 
+            top: -8px; 
+            right: -8px; 
+            background: #8b5cf6; 
+            color: white; 
+            font-size: 0.65rem; 
+            font-weight: bold; 
+            padding: 3px 8px; 
+            border-radius: 10px; 
+            animation: pulse 2s infinite; 
+        }
+
+        .consult-option {
+            background: var(--bg-card);
+            border: 1px solid rgba(128,128,128,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .consult-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        @keyframes floatConsult { 
+            0%, 100% { transform: translateY(0) rotate(0); } 
+            50% { transform: translateY(-15px) rotate(5deg); } 
+            25% { transform: rotate(-5deg); } 
+            75% { transform: rotate(3deg); } 
+        }
+
+        @media (max-width: 480px) {
+            .consult-float {
+                bottom: 155px;
+            }
+        }
+
         /* --- Mystery Gift Box --- */
         .mystery-box { 
             position: fixed; 
@@ -1271,6 +1350,9 @@
             .referral-float {
                 bottom: 85px;
             }
+            .consult-float {
+                bottom: 155px;
+            }
         }
 
         /* منع تكبير النص على iOS */
@@ -1401,6 +1483,91 @@
         </div>
     </div>
 
+    <!-- مودال الاستشارة -->
+    <div id="consultModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeConsultModal()">&times;</span>
+            <h3 style="text-align:center; color:var(--accent); margin-bottom:20px;" data-translate="consultTitle">💼 استشارة Web Forge الاحترافية</h3>
+            
+            <div style="display: flex; flex-direction: column; gap: 20px; margin-top: 20px;">
+                <!-- الخيار الأول: استشارة مجانية عبر واتساب -->
+                <div class="consult-option" onclick="openFreeConsult()">
+                    <div class="option-header" style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
+                        <div class="option-icon" style="width: 50px; height: 50px; background: rgba(56, 189, 248, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--accent);">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--text-main); margin: 0;" data-translate="freeConsultTitle">استشارة مجانية عبر واتساب</h4>
+                            <p style="color: var(--text-secondary); margin: 5px 0 0 0; font-size: 0.9rem;" data-translate="freeConsultDesc">إجابات سريعة على استفساراتك التقنية</p>
+                        </div>
+                    </div>
+                    <div class="option-features" style="padding-right: 65px;">
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li style="margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-check" style="color: #10b981;"></i>
+                                <span data-translate="featureFree1">تحليل أولي لمشروعك</span>
+                            </li>
+                            <li style="margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-check" style="color: #10b981;"></i>
+                                <span data-translate="featureFree2">توصيات تقنية مبدئية</span>
+                            </li>
+                            <li style="margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-check" style="color: #10b981;"></i>
+                                <span data-translate="featureFree3">توجيه لاختيار المنصة المناسبة</span>
+                            </li>
+                            <li style="display: flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-check" style="color: #10b981;"></i>
+                                <span data-translate="featureFree4">إجابة على استفسارات فنية</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <button style="width: 100%; margin-top: 15px; padding: 12px; background: var(--accent); color: #000; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;" data-translate="freeConsultBtn">
+                        <i class="fab fa-whatsapp"></i> ابدأ الاستشارة المجانية
+                    </button>
+                </div>
+                
+                <!-- الخيار الثاني: استشارة مكثفة مدفوعة -->
+                <div class="consult-option" onclick="openPaidConsult()" style="border: 2px solid var(--forge-orange); border-radius: 10px; padding: 15px;">
+                    <div class="option-header" style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
+                        <div class="option-icon" style="width: 50px; height: 50px; background: rgba(245, 158, 11, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--forge-orange);">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <h4 style="color: var(--text-main); margin: 0;" data-translate="paidConsultTitle">استشارة مكثفة مدفوعة</h4>
+                                <span style="background: var(--forge-orange); color: #000; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;">200 درهم</span>
+                            </div>
+                            <p style="color: var(--text-secondary); margin: 5px 0 0 0; font-size: 0.9rem;" data-translate="paidConsultDesc">جلسة استشارية متعمقة مع خبرائنا</p>
+                        </div>
+                    </div>
+                    <div class="option-features" style="padding-right: 65px;">
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li style="margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-star" style="color: var(--forge-orange);"></i>
+                                <span data-translate="featurePaid1">تحليل كامل لمشروعك (60 دقيقة)</span>
+                            </li>
+                            <li style="margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-star" style="color: var(--forge-orange);"></i>
+                                <span data-translate="featurePaid2">خطة عمل تفصيلية</span>
+                            </li>
+                            <li style="margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-star" style="color: var(--forge-orange);"></i>
+                                <span data-translate="featurePaid3">اختيار عبر المكالمة/اللقاء في أكادير</span>
+                            </li>
+                            <li style="display: flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-star" style="color: var(--forge-orange);"></i>
+                                <span data-translate="featurePaid4">تقرير مفصل بعد الجلسة</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <button style="width: 100%; margin-top: 15px; padding: 12px; background: var(--forge-orange); color: #000; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;" data-translate="paidConsultBtn">
+                        <i class="fas fa-calendar-check"></i> حجز استشارة مدفوعة
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="promo-bar" onclick="openForm('عرض الخصم الخاص')">
         <div class="promo-content" data-translate="promoText">
             🚀 عرض لفترة محدودة: احصل على خصم 20% عند طلب أول متجر YouCan أو Shopify هذا الأسبوع! — اطلب الآن واستفد من العرض — 🎁 استشارة مجانية عند طلب موقع خاص!
@@ -1473,6 +1640,12 @@
                 <div class="tech-item"><i class="fab fa-html5"></i> HTML5</div>
                 <div class="tech-item"><i class="fab fa-js"></i> JavaScript</div>
             </div>
+        </div>
+
+        <!-- زر الاستشارة -->
+        <div class="consult-float" onclick="openConsultModal()" role="button" aria-label="استشارة مجانية عبر واتساب">
+            <div class="consult-icon"><i class="fas fa-comments"></i></div>
+            <div class="consult-tag" data-translate="consultTag">استشارة</div>
         </div>
 
         <!-- زر الإحالة -->
@@ -1742,7 +1915,7 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // بيانات الترجمة المعدلة مع إضافة الإحالة
+        // بيانات الترجمة المعدلة مع إضافة الإحالة والاستشارة
         const translations = {
             ar: {
                 // الميتادات
@@ -1785,6 +1958,26 @@
                 "referralStep3": "عند طلبه للخدمة، يحصل على خصم 15%",
                 "referralStep4": "تحصل أنت على خصم 5% على طلبك القادم",
                 "sendReferralBtn": "أرسل الدعوة الآن",
+                
+                // الاستشارة
+                "consultTag": "استشارة",
+                "consultTitle": "💼 استشارة Web Forge الاحترافية",
+                "freeConsultTitle": "استشارة مجانية عبر واتساب",
+                "freeConsultDesc": "إجابات سريعة على استفساراتك التقنية",
+                "featureFree1": "تحليل أولي لمشروعك",
+                "featureFree2": "توصيات تقنية مبدئية",
+                "featureFree3": "توجيه لاختيار المنصة المناسبة",
+                "featureFree4": "إجابة على استفسارات فنية",
+                "freeConsultBtn": "ابدأ الاستشارة المجانية",
+                "paidConsultTitle": "استشارة مكثفة مدفوعة",
+                "paidConsultDesc": "جلسة استشارية متعمقة مع خبرائنا",
+                "featurePaid1": "تحليل كامل لمشروعك (60 دقيقة)",
+                "featurePaid2": "خطة عمل تفصيلية",
+                "featurePaid3": "اختيار عبر المكالمة/اللقاء في أكادير",
+                "featurePaid4": "تقرير مفصل بعد الجلسة",
+                "paidConsultBtn": "حجز استشارة مدفوعة",
+                "consultSuccess": "✅ تم إرسال طلب الاستشارة بنجاح! سيتواصل معك فريقنا خلال 24 ساعة.",
+                "consultPaidSuccess": "✅ تم إرسال طلب الاستشارة المدفوعة بنجاح! سيتواصل معك فريقنا خلال ساعتين لتحديد موعد الجلسة.",
                 
                 // الأزرار والعناصر
                 "promoText": "🚀 عرض لفترة محدودة: احصل على خصم 20% عند طلب أول متجر YouCan أو Shopify هذا الأسبوع! — اطلب الآن واستفد من العرض — 🎁 استشارة مجانية عند طلب موقع خاص!",
@@ -1938,6 +2131,24 @@
                 "referralStep3": "When they order a service, they get 15% off",
                 "referralStep4": "You get 5% off on your next order",
                 "sendReferralBtn": "Send Invitation Now",
+                "consultTag": "Consult",
+                "consultTitle": "💼 Web Forge Professional Consultation",
+                "freeConsultTitle": "Free Consultation via WhatsApp",
+                "freeConsultDesc": "Quick answers to your technical inquiries",
+                "featureFree1": "Initial project analysis",
+                "featureFree2": "Preliminary technical recommendations",
+                "featureFree3": "Guidance for choosing the right platform",
+                "featureFree4": "Answers to technical questions",
+                "freeConsultBtn": "Start Free Consultation",
+                "paidConsultTitle": "Intensive Paid Consultation",
+                "paidConsultDesc": "In-depth consultation session with our experts",
+                "featurePaid1": "Complete project analysis (60 minutes)",
+                "featurePaid2": "Detailed action plan",
+                "featurePaid3": "Choice via call/meeting in Agadir",
+                "featurePaid4": "Detailed report after the session",
+                "paidConsultBtn": "Book Paid Consultation",
+                "consultSuccess": "✅ Consultation request sent successfully! Our team will contact you within 24 hours.",
+                "consultPaidSuccess": "✅ Paid consultation request sent successfully! Our team will contact you within 2 hours to schedule the session.",
                 "promoText": "🚀 Limited Time Offer: Get 20% discount on your first YouCan or Shopify store this week! — Order now and take advantage of the offer — 🎁 Free consultation when ordering a custom website!",
                 "logoText": "Web Forge",
                 "orderNowBtn": "Order Your Service",
@@ -2065,6 +2276,24 @@
                 "referralStep3": "Lorsqu'il commande un service, il obtient 15% de réduction",
                 "referralStep4": "Vous obtenez 5% de réduction sur votre prochaine commande",
                 "sendReferralBtn": "Envoyer l'invitation maintenant",
+                "consultTag": "Consultation",
+                "consultTitle": "💼 Consultation Professionnelle Web Forge",
+                "freeConsultTitle": "Consultation Gratuite via WhatsApp",
+                "freeConsultDesc": "Réponses rapides à vos questions techniques",
+                "featureFree1": "Analyse initiale du projet",
+                "featureFree2": "Recommandations techniques préliminaires",
+                "featureFree3": "Guide pour choisir la bonne plateforme",
+                "featureFree4": "Réponses aux questions techniques",
+                "freeConsultBtn": "Commencer la Consultation Gratuite",
+                "paidConsultTitle": "Consultation Payante Intensive",
+                "paidConsultDesc": "Session de consultation approfondie avec nos experts",
+                "featurePaid1": "Analyse complète du projet (60 minutes)",
+                "featurePaid2": "Plan d'action détaillé",
+                "featurePaid3": "Choix via appel/rencontre à Agadir",
+                "featurePaid4": "Rapport détaillé après la session",
+                "paidConsultBtn": "Réserver une Consultation Payante",
+                "consultSuccess": "✅ Demande de consultation envoyée avec succès! Notre équipe vous contactera dans les 24 heures.",
+                "consultPaidSuccess": "✅ Demande de consultation payante envoyée avec succès! Notre équipe vous contactera dans les 2 heures pour planifier la session.",
                 "promoText": "🚀 Offre Limitée : Obtenez 20% de réduction sur votre première boutique YouCan ou Shopify cette semaine ! — Commandez maintenant et profitez de l'offre — 🎁 Consultation gratuite lors de la commande d'un site web personnalisé !",
                 "logoText": "Web Forge",
                 "orderNowBtn": "Commander Votre Service",
@@ -2413,6 +2642,81 @@
                 body.setAttribute('data-theme', 'light'); 
                 icon.className = 'fas fa-sun';
             }
+        }
+        
+        // دوال الاستشارة
+        function openConsultModal() {
+            showModal('consultModal');
+        }
+        
+        function closeConsultModal() {
+            hideModal('consultModal');
+        }
+        
+        function openFreeConsult() {
+            const message = `مرحباً، أريد استشارة مجانية حول: 
+
+📌 *نوع المشروع:* 
+(مثال: موقع إلكتروني، متجر إلكتروني، هوية رقمية)
+
+📌 *الهدف من المشروع:*
+
+📌 *الميزانية المتوقعة:*
+
+📌 *الموعد المستهدف للإطلاق:*
+
+📌 *أي استفسارات أخرى:*
+
+────────────────────
+*معلومات الاتصال:*
+الاسم: _______
+الهاتف: _______
+البريد الإلكتروني: _______
+
+🚀 شكراً لاختيارك Web Forge!
+فريقنا سيتواصل معك خلال 24 ساعة عمل.`;
+
+            const whatsappUrl = `https://wa.me/212627713979?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            
+            alert(document.querySelector('[data-translate="consultSuccess"]').textContent);
+            closeConsultModal();
+        }
+        
+        function openPaidConsult() {
+            const message = `🔔 *طلب استشارة مدفوعة - 200 درهم*
+
+مرحباً، أريد حجز استشارة مدفوعة مع خبراء Web Forge:
+
+📋 *تفاصيل الطلب:*
+- المبلغ: 200 درهم مغربي
+- المدة: 60 دقيقة
+- الطريقة: □ مكالمة □ لقاء في أكادير
+- التاريخ والوقت المناسب: __________________
+
+📌 *ملخص المشروع:*
+(اذكر فكرة مشروعك وأهدافه باختصار)
+
+────────────────────
+*معلومات العميل:*
+الاسم الكامل: _______
+رقم الهاتف: _______
+البريد الإلكتروني: _______
+المدينة: _______
+
+💳 *طريقة الدفع المفضلة:*
+□ تحويل بنكي
+□ أخرى (حدد): _______
+
+✅ *التزام:* أوافق على شروط الخدمة وألتزم بدفع 200 درهم مقابل جلسة الاستشارة.
+
+🚀 *ملاحظة:* سيتواصل معك فريقنا خلال ساعتين لتأكيد الموعد وتفاصيل الدفع.`;
+
+            const whatsappUrl = `https://wa.me/212627713979?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            
+            alert(document.querySelector('[data-translate="consultPaidSuccess"]').textContent);
+            closeConsultModal();
         }
         
         // دالات الإحالة
