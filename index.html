@@ -700,77 +700,6 @@
         .tech-item:hover { color: var(--accent); opacity: 1; }
         @keyframes scrollLogos { 0% { transform: translateX(0); } 100% { transform: translateX(50%); } }
 
-        /* --- Referral Program Button --- */
-        .referral-box { 
-            position: fixed; 
-            bottom: 105px;
-            left: 30px; 
-            z-index: 999; 
-            cursor: pointer; 
-            animation: floatShake2 4s ease-in-out infinite;
-            transition: all 0.3s ease;
-        }
-        
-        @media (max-width: 768px) {
-            .referral-box {
-                left: 15px;
-                bottom: 95px;
-            }
-        }
-        
-        .referral-box:hover {
-            transform: translateY(-5px) scale(1.05);
-        }
-        .referral-icon { 
-            width: 60px; 
-            height: 60px; 
-            background: linear-gradient(135deg, #10b981, #34d399); 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-size: 1.8rem; 
-            color: white; 
-            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4); 
-            border: 2px solid rgba(255,255,255,0.3);
-            transition: all 0.3s ease;
-        }
-        
-        @media (max-width: 768px) {
-            .referral-icon {
-                width: 50px;
-                height: 50px;
-                font-size: 1.5rem;
-            }
-        }
-        
-        .referral-tag { 
-            position: absolute; 
-            top: -10px; 
-            right: -10px; 
-            background: #f59e0b; 
-            color: #000; 
-            font-size: 0.7rem; 
-            font-weight: bold; 
-            padding: 3px 8px; 
-            border-radius: 10px; 
-            animation: pulse 2s infinite;
-        }
-        
-        @media (max-width: 768px) {
-            .referral-tag {
-                font-size: 0.6rem;
-                padding: 2px 6px;
-                right: -5px;
-            }
-        }
-        
-        @keyframes floatShake2 { 
-            0%, 100% { transform: translateY(0) rotate(0); } 
-            50% { transform: translateY(-8px) rotate(3deg); } 
-            80% { transform: rotate(-3deg); } 
-        }
-
         /* --- Mystery Gift Box --- */
         .mystery-box { 
             position: fixed; 
@@ -1218,7 +1147,7 @@
         @media (max-width: 768px) {
             .share-float {
                 right: 15px;
-                bottom: 90px;
+                bottom: 25px;
                 width: 50px;
                 height: 50px;
             }
@@ -1242,7 +1171,7 @@
         @media (max-width: 768px) {
             .share-toast {
                 right: 15px;
-                bottom: 150px;
+                bottom: 85px;
                 font-size: 0.8rem;
             }
         }
@@ -1343,7 +1272,7 @@
             <h3 style="text-align:center; color:var(--accent); margin-bottom:20px;" data-translate="privacyTitle">سياسة الخصوصية</h3>
             <div style="max-height:400px; overflow-y:auto; text-align:right; line-height:1.6; padding:0 10px;" class="arabic-text">
                 <h4 data-translate="privacyIntro">مقدمة</h4>
-                <p data-translate="privacyIntroText">نحن في Web Forge نحترم خصوصيتك ونلتزم بحماية بياناتك الشخصية. هذه السياسة توضح كيفية جمع واستخدام وحماية معلوماتك.</p>
+                <p data-translate="privacyIntroText">نحن في Web Forge نحترم خصوصيتك ونلتكم بحماية بياناتك الشخصية. هذه السياسة توضح كيفية جمع واستخدام وحماية معلوماتك.</p>
                 
                 <h4 data-translate="dataCollection">البيانات التي نجمعها</h4>
                 <ul style="list-style-type: arabic-indic; padding-right: 25px;">
@@ -1363,90 +1292,6 @@
                 <p data-translate="contactText">لأي استفسار حول سياسة الخصوصية: <strong>webfooorge@gmail.com</strong></p>
             </div>
         </div>
-    </div>
-
-    <!-- مودال برنامج الإحالة -->
-    <div id="referralModal" class="modal">
-        <div class="modal-content" style="max-width: 700px; text-align:center;">
-            <span class="close-btn" onclick="closeReferralModal()">&times;</span>
-            <div style="font-size: 3rem; margin-bottom: 10px; color: #10b981;">🤝</div>
-            <h3 style="color:#10b981; margin-bottom:15px;" data-translate="referralTitle">🎁 برنامج الإحالة الخاص بنا</h3>
-            <p style="color:var(--text-secondary); margin-bottom:20px; font-size:1.1rem;" class="arabic-text" data-translate="referralDesc">انضم إلى برنامج الإحالة الخاص بنا واكسب مكافآت رائعة!</p>
-            
-            <div style="background:rgba(16, 185, 129, 0.1); padding:20px; border-radius:15px; border:2px solid #10b981; margin-bottom:25px;">
-                <h4 style="color:var(--text-main); margin-bottom:15px;" data-translate="howItWorks">✨ كيف يعمل البرنامج:</h4>
-                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:15px; text-align:center;">
-                    <div style="padding:15px; background:rgba(255,255,255,0.05); border-radius:10px;">
-                        <div style="font-size:1.8rem; color:#10b981; margin-bottom:10px;">1</div>
-                        <h5 style="color:var(--text-main); margin-bottom:8px;" data-translate="step1Title">أحِل صديقاً</h5>
-                        <p style="color:var(--text-secondary); font-size:0.9rem;" data-translate="step1Desc">ادخل رقم صديقك لترسل له عرضاً خاصاً</p>
-                    </div>
-                    <div style="padding:15px; background:rgba(255,255,255,0.05); border-radius:10px;">
-                        <div style="font-size:1.8rem; color:#10b981; margin-bottom:10px;">2</div>
-                        <h5 style="color:var(--text-main); margin-bottom:8px;" data-translate="step2Title">صديقك يطلب</h5>
-                        <p style="color:var(--text-secondary); font-size:0.9rem;" data-translate="step2Desc">عندما يقوم صديقك بالطلب باستخدام رابطك</p>
-                    </div>
-                    <div style="padding:15px; background:rgba(255,255,255,0.05); border-radius:10px;">
-                        <div style="font-size:1.8rem; color:#10b981; margin-bottom:10px;">3</div>
-                        <h5 style="color:var(--text-main); margin-bottom:8px;" data-translate="step3Title">احصل على المكافأة</h5>
-                        <p style="color:var(--text-secondary); font-size:0.9rem;" data-translate="step3Desc">نسبة 15% من قيمة طلب صديقك</p>
-                    </div>
-                </div>
-            </div>
-            
-            <button onclick="startReferralProcess()" style="width:100%; padding:15px; background:linear-gradient(135deg, #10b981, #34d399); color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; font-size:1.1rem; margin-bottom:15px;">
-                <i class="fas fa-user-plus" style="margin-left:10px;"></i>
-                <span data-translate="startReferral">ابدأ الإحالة الآن</span>
-            </button>
-            
-            <div id="referralLinkToast" style="display:none; margin-top:15px; padding:10px; background:#10b981; color:white; border-radius:5px; font-size:0.9rem;">
-                <span data-translate="linkCopied">تم نسخ رابط الإحالة بنجاح! 🎉</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- نموذج إحالة صديق -->
-    <div id="referFriendModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeReferFriendModal()">&times;</span>
-            <h3 style="text-align:center; color:#10b981; margin-bottom:20px;" data-translate="referFriendTitle">🤝 أحِل صديقاً واكسب</h3>
-            
-            <div style="background:rgba(16, 185, 129, 0.1); padding:15px; border-radius:10px; margin-bottom:20px;">
-                <p style="color:var(--text-main); text-align:center; font-size:1rem;" class="arabic-text" data-translate="referFriendDesc">
-                    <i class="fas fa-info-circle" style="color:#10b981; margin-left:5px;"></i>
-                    أدخل معلوماتك ورقم صديقك، وسنرسل له عرضاً خاصاً!
-                </p>
-            </div>
-            
-            <h4 style="color:var(--text-main); margin-bottom:10px;" data-translate="yourInfo">📝 معلوماتك:</h4>
-            <input type="text" id="referrerName" data-translate="namePlaceholder" placeholder="اسمك الكامل">
-            <input type="tel" id="referrerPhone" data-translate="phonePlaceholder" placeholder="رقم واتسابك">
-            
-            <h4 style="color:var(--text-main); margin-bottom:10px;" data-translate="friendPhone">📱 رقم صديقك:</h4>
-            <input type="tel" id="friendPhone" data-translate="friendPhonePlaceholder" placeholder="رقم واتساب صديقك">
-            
-            <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
-                <input type="checkbox" id="agreeTerms" style="width:20px; height:20px;">
-                <label for="agreeTerms" style="color:var(--text-secondary); font-size:0.9rem; cursor:pointer;" data-translate="agreeTerms">
-                    أوافق على شروط برنامج الإحالة وأعطي الإذن بإرسال رسالة لصديقي
-                </label>
-            </div>
-            
-            <button onclick="sendReferralToFriend()" style="width:100%; padding:15px; background:linear-gradient(135deg, #10b981, #34d399); color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer; font-size:1.1rem;">
-                <i class="fab fa-whatsapp" style="margin-left:10px;"></i>
-                <span data-translate="sendOffer">إرسال العرض لصديقي عبر واتساب</span>
-            </button>
-            
-            <p style="color:var(--text-secondary); font-size:0.85rem; text-align:center; margin-top:15px;" class="arabic-text" data-translate="afterSend">
-                بعد الإرسال، ستتلقى كود الإحالة الخاص بك لمتابعة مكافآتك
-            </p>
-        </div>
-    </div>
-
-    <!-- زر الإحالة -->
-    <div class="referral-box" onclick="openReferralModal()" role="button" aria-label="برنامج الإحالة">
-        <div class="referral-icon"><i class="fas fa-user-friends"></i></div>
-        <div class="referral-tag" data-translate="referralTag">أحِل صديقاً</div>
     </div>
 
     <div class="promo-bar" onclick="openForm('عرض الخصم الخاص')">
@@ -1744,16 +1589,6 @@
                 <input type="text" id="clientName" placeholder="الاسم الكامل" data-translate="namePlaceholder">
                 <input type="tel" id="clientPhone" placeholder="رقم الواتساب" data-translate="phonePlaceholder">
                 
-                <div id="referralField" style="display:none; margin-bottom:15px;">
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
-                        <input type="checkbox" id="addReferral" style="width:20px; height:20px;" onchange="toggleReferralField()">
-                        <label for="addReferral" style="color:var(--text-secondary); font-size:0.95rem; cursor:pointer;" data-translate="referralQuestion">
-                            هل لديك صديق مهتم بالخدمة؟ أدخل رقمه لترسل له عرضاً خاصاً
-                        </label>
-                    </div>
-                    <input type="tel" id="friendPhoneOrder" data-translate="friendPhoneOptional" placeholder="رقم واتساب صديقك (اختياري)" style="width:100%; display:none;">
-                </div>
-                
                 <button onclick="submitToWhatsApp()" style="width:100%; padding:12px; background:var(--forge-orange); color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;" data-translate="submitBtn">إرسال الطلب عبر واتساب</button>
             </div>
         </div>
@@ -1793,7 +1628,7 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // بيانات الترجمة الكاملة - كل النصوص مترجمة
+        // بيانات الترجمة المعدلة بدون نظام الإحالة
         const translations = {
             ar: {
                 // الميتادات
@@ -1824,31 +1659,7 @@
                 "contactUs": "اتصل بنا",
                 "contactText": "لأي استفسار حول سياسة الخصوصية: webfooorge@gmail.com",
                 
-                // برنامج الإحالة
-                "referralTitle": "🎁 برنامج الإحالة الخاص بنا",
-                "referralDesc": "انضم إلى برنامج الإحالة الخاص بنا واكسب مكافآت رائعة!",
-                "howItWorks": "✨ كيف يعمل البرنامج:",
-                "step1Title": "أحِل صديقاً",
-                "step1Desc": "ادخل رقم صديقك لترسل له عرضاً خاصاً",
-                "step2Title": "صديقك يطلب",
-                "step2Desc": "عندما يقوم صديقك بالطلب باستخدام رابطك",
-                "step3Title": "احصل على المكافأة",
-                "step3Desc": "نسبة 15% من قيمة طلب صديقك",
-                "startReferral": "ابدأ الإحالة الآن",
-                "linkCopied": "تم نسخ رابط الإحالة بنجاح! 🎉",
-                
-                // نموذج الإحالة
-                "referFriendTitle": "🤝 أحِل صديقاً واكسب",
-                "referFriendDesc": "أدخل معلوماتك ورقم صديقك، وسنرسل له عرضاً خاصاً!",
-                "yourInfo": "📝 معلوماتك:",
-                "friendPhone": "📱 رقم صديقك:",
-                "friendPhonePlaceholder": "رقم واتساب صديقك",
-                "agreeTerms": "أوافق على شروط برنامج الإحالة وأعطي الإذن بإرسال رسالة لصديقي",
-                "sendOffer": "إرسال العرض لصديقي عبر واتساب",
-                "afterSend": "بعد الإرسال، ستتلقى كود الإحالة الخاص بك لمتابعة مكافآتك",
-                
                 // الأزرار والعناصر
-                "referralTag": "أحِل صديقاً",
                 "promoText": "🚀 عرض لفترة محدودة: احصل على خصم 20% عند طلب أول متجر YouCan أو Shopify هذا الأسبوع! — اطلب الآن واستفد من العرض — 🎁 استشارة مجانية عند طلب موقع خاص!",
                 "logoText": "Web Forge",
                 "orderNowBtn": "اطلب خدمتك",
@@ -1951,8 +1762,6 @@
                 // نموذج الطلب
                 "namePlaceholder": "الاسم الكامل",
                 "phonePlaceholder": "رقم الواتساب",
-                "friendPhoneOptional": "رقم واتساب صديقك (اختياري)",
-                "referralQuestion": "هل لديك صديق مهتم بالخدمة؟ أدخل رقمه لترسل له عرضاً خاصاً",
                 "submitBtn": "إرسال الطلب عبر واتساب",
                 
                 // من نحن
@@ -1991,26 +1800,6 @@
                 "dataProtectionText": "We use advanced encryption technologies to protect your data from unauthorized access. We maintain the confidentiality of your information throughout our collaboration.",
                 "contactUs": "Contact Us",
                 "contactText": "For any inquiries about the privacy policy: webfooorge@gmail.com",
-                "referralTitle": "🎁 Our Referral Program",
-                "referralDesc": "Join our referral program and earn amazing rewards!",
-                "howItWorks": "✨ How It Works:",
-                "step1Title": "Refer a Friend",
-                "step1Desc": "Enter your friend's number to send them a special offer",
-                "step2Title": "Friend Orders",
-                "step2Desc": "When your friend orders using your link",
-                "step3Title": "Get Your Reward",
-                "step3Desc": "15% of your friend's order value",
-                "startReferral": "Start Referring Now",
-                "linkCopied": "Referral link copied successfully! 🎉",
-                "referFriendTitle": "🤝 Refer a Friend & Earn",
-                "referFriendDesc": "Enter your information and your friend's number, and we'll send them a special offer!",
-                "yourInfo": "📝 Your Information:",
-                "friendPhone": "📱 Friend's Number:",
-                "friendPhonePlaceholder": "Friend's WhatsApp Number",
-                "agreeTerms": "I agree to the referral program terms and authorize sending a message to my friend",
-                "sendOffer": "Send Offer to My Friend via WhatsApp",
-                "afterSend": "After sending, you'll receive your referral code to track your rewards",
-                "referralTag": "Refer a Friend",
                 "promoText": "🚀 Limited Time Offer: Get 20% discount on your first YouCan or Shopify store this week! — Order now and take advantage of the offer — 🎁 Free consultation when ordering a custom website!",
                 "logoText": "Web Forge",
                 "orderNowBtn": "Order Your Service",
@@ -2093,8 +1882,6 @@
                 "selectPackage": "Select Package",
                 "namePlaceholder": "Full Name",
                 "phonePlaceholder": "WhatsApp Number",
-                "friendPhoneOptional": "Friend's WhatsApp Number (Optional)",
-                "referralQuestion": "Do you have a friend interested in the service? Enter their number to send them a special offer",
                 "submitBtn": "Send Request via WhatsApp",
                 "aboutTitle": "🚀 Web Forge",
                 "aboutDesc": "We turn your ideas into professional digital reality! Specialists in digital identity and website/e-commerce store development.",
@@ -2129,26 +1916,6 @@
                 "dataProtectionText": "Nous utilisons des technologies de chiffrement avancées pour protéger vos données contre tout accès non autorisé. Nous maintenons la confidentialité de vos informations tout au long de notre collaboration.",
                 "contactUs": "Contactez-nous",
                 "contactText": "Pour toute question concernant la politique de confidentialité : webfooorge@gmail.com",
-                "referralTitle": "🎁 Notre Programme de Parrainage",
-                "referralDesc": "Rejoignez notre programme de parrainage et gagnez des récompenses incroyables !",
-                "howItWorks": "✨ Comment ça marche :",
-                "step1Title": "Parrainez un Ami",
-                "step1Desc": "Entrez le numéro de votre ami pour lui envoyer une offre spéciale",
-                "step2Title": "Votre Ami Commande",
-                "step2Desc": "Lorsque votre ami commande en utilisant votre lien",
-                "step3Title": "Recevez Votre Récompense",
-                "step3Desc": "15% de la valeur de la commande de votre ami",
-                "startReferral": "Commencer le Parrainage",
-                "linkCopied": "Lien de parrainage copié avec succès ! 🎉",
-                "referFriendTitle": "🤝 Parrainez un Ami et Gagnez",
-                "referFriendDesc": "Entrez vos informations et le numéro de votre ami, et nous lui enverrons une offre spéciale !",
-                "yourInfo": "📝 Vos Informations :",
-                "friendPhone": "📱 Numéro de Votre Ami :",
-                "friendPhonePlaceholder": "Numéro WhatsApp de votre ami",
-                "agreeTerms": "J'accepte les conditions du programme de parrainage et autorise l'envoi d'un message à mon ami",
-                "sendOffer": "Envoyer l'Offre à Mon Ami via WhatsApp",
-                "afterSend": "Après l'envoi, vous recevrez votre code de parrainage pour suivre vos récompenses",
-                "referralTag": "Parrainez un Ami",
                 "promoText": "🚀 Offre Limitée : Obtenez 20% de réduction sur votre première boutique YouCan ou Shopify cette semaine ! — Commandez maintenant et profitez de l'offre — 🎁 Consultation gratuite lors de la commande d'un site web personnalisé !",
                 "logoText": "Web Forge",
                 "orderNowBtn": "Commander Votre Service",
@@ -2231,8 +1998,6 @@
                 "selectPackage": "Choisir le Forfait",
                 "namePlaceholder": "Nom Complet",
                 "phonePlaceholder": "Numéro WhatsApp",
-                "friendPhoneOptional": "Numéro WhatsApp de votre ami (Optionnel)",
-                "referralQuestion": "Avez-vous un ami intéressé par le service ? Entrez son numéro pour lui envoyer une offre spéciale",
                 "submitBtn": "Envoyer la Demande via WhatsApp",
                 "aboutTitle": "🚀 Web Forge",
                 "aboutDesc": "Nous transformons vos idées en réalité numérique professionnelle ! Spécialistes en identité numérique et développement de sites web/boutiques en ligne.",
@@ -2392,11 +2157,6 @@
             const savedLang = localStorage.getItem('preferredLanguage') || 'ar';
             changeLanguage(savedLang);
             
-            // إظهار حقل الإحالة
-            setTimeout(() => {
-                document.getElementById('referralField').style.display = 'block';
-            }, 2000);
-            
             // تهيئة التأثيرات
             initAnimations();
         });
@@ -2541,27 +2301,6 @@
             hideModal('giftModal');
         }
 
-        function openReferralModal() { 
-            showModal('referralModal'); 
-        }
-        
-        function closeReferralModal() { 
-            hideModal('referralModal'); 
-        }
-        
-        function startReferralProcess() {
-            closeReferralModal();
-            openReferFriendModal();
-        }
-        
-        function openReferFriendModal() {
-            showModal('referFriendModal');
-        }
-        
-        function closeReferFriendModal() {
-            hideModal('referFriendModal');
-        }
-        
         function startConfetti() {
             for(let i=0; i<30; i++) {
                 let conf = document.createElement('div');
@@ -2629,107 +2368,6 @@
             document.getElementById(modalId).style.display = 'none';
             document.body.style.overflow = 'auto';
         }
-        
-        // إرسال رسالة الإحالة
-        function sendReferralToFriend() {
-            const referrerName = document.getElementById('referrerName').value.trim();
-            const referrerPhone = document.getElementById('referrerPhone').value.trim();
-            const friendPhone = document.getElementById('friendPhone').value.trim();
-            const agreeTerms = document.getElementById('agreeTerms').checked;
-            
-            if (!referrerName || referrerName.length < 2) {
-                alert("يرجى إدخال اسمك الكامل");
-                return;
-            }
-            
-            if (!referrerPhone || !/^[\+]?[0-9\s\-\(\)]{8,}$/.test(referrerPhone)) {
-                alert("يرجى إدخال رقم واتسابك صحيح");
-                return;
-            }
-            
-            if (!friendPhone || !/^[\+]?[0-9\s\-\(\)]{8,}$/.test(friendPhone)) {
-                alert("يرجى إدخال رقم واتساب صديقك صحيح");
-                return;
-            }
-            
-            if (!agreeTerms) {
-                alert("يرجى الموافقة على شروط برنامج الإحالة");
-                return;
-            }
-            
-            const referralCode = 'REF' + Math.random().toString(36).substr(2, 8).toUpperCase();
-            localStorage.setItem('userReferralCode', referralCode);
-            
-            const friendMessage = `مرحباً! 👋
-
-صديقك *${referrerName}* يدعوك للاستفادة من عروض Web Forge المميزة! 🚀
-
-✨ *العروض الخاصة:*
-• خصم 15% على أول طلب لك
-• استشارة مجانية لتقييم مشروعك
-• دعم فني لمدة شهر مجاناً
-
-🎁 *الخدمات المتاحة:*
-• تصميم متاجر YouCan و Shopify
-• تطوير مواقع إلكترونية احترافية
-• صناعة الهوية الرقمية
-
-للاستفادة من العرض، تواصل معنا مباشرة:
-📞 https://wa.me/212627713979
-
-أو زر موقعنا:
-🌐 https://webforge-it.com
-
-*كود الإحالة: ${referralCode}*
-(استخدم هذا الكود عند طلبك للحصول على الخصم)
-
-مع تحيات فريق Web Forge 💙`;
-
-            const referrerMessage = `مبروك! 🎉
-
-لقد قمت بإحالة صديقك بنجاح إلى Web Forge!
-
-📋 *تفاصيل إحالتك:*
-• اسمك: ${referrerName}
-• رقم صديقك: ${friendPhone}
-• كود إحالتك: ${referralCode}
-
-💰 *مكافآتك:*
-• 15% من قيمة أي طلب يقوم به صديقك
-• خصم 10% على طلباتك القادمة
-• هدية مجانية بعد 5 إحالات ناجحة
-
-سيتم إعلامك فور قيام صديقك بالطلب. 
-
-شكراً لثقتك بنا! 🤝
-
-فريق Web Forge`;
-
-            const friendWhatsAppUrl = `https://wa.me/${friendPhone.replace(/\D/g, '')}?text=${encodeURIComponent(friendMessage)}`;
-            const referrerWhatsAppUrl = `https://wa.me/${referrerPhone.replace(/\D/g, '')}?text=${encodeURIComponent(referrerMessage)}`;
-            
-            window.open(friendWhatsAppUrl, '_blank');
-            setTimeout(() => {
-                window.open(referrerWhatsAppUrl, '_blank');
-            }, 1000);
-            
-            closeReferFriendModal();
-            alert(`تم إرسال العرض لصديقك بنجاح! ✅\n\nكود إحالتك هو: ${referralCode}\nاحفظ هذا الكود لمتابعة مكافآتك.`);
-        }
-        
-        function toggleReferralField() {
-            const addReferral = document.getElementById('addReferral');
-            const friendPhoneField = document.getElementById('friendPhoneOrder');
-            
-            if (addReferral.checked) {
-                friendPhoneField.style.display = 'block';
-                friendPhoneField.required = true;
-            } else {
-                friendPhoneField.style.display = 'none';
-                friendPhoneField.required = false;
-                friendPhoneField.value = '';
-            }
-        }
 
         let lastSubmissionTime = 0;
         
@@ -2743,8 +2381,6 @@
             const n = document.getElementById('clientName').value.trim();
             const p = document.getElementById('clientPhone').value.trim();
             const s = document.getElementById('serviceName').textContent;
-            const friendPhone = document.getElementById('friendPhoneOrder').value.trim();
-            const addReferral = document.getElementById('addReferral').checked;
             
             if (!n || n.length < 2) {
                 alert("يرجى إدخال اسم صحيح");
@@ -2756,61 +2392,10 @@
                 return;
             }
             
-            if (addReferral && friendPhone) {
-                if (!/^[\+]?[0-9\s\-\(\)]{8,}$/.test(friendPhone)) {
-                    alert("يرجى إدخال رقم صديق صحيح");
-                    return;
-                }
-                
-                const confirmReferral = confirm(`هل تريد إرسال عرض خاص لصديقك على الرقم ${friendPhone}؟\n\nسيحصل صديقك على خصم 15% وستحصل أنت على مكافأة عندما يطلب.`);
-                
-                if (!confirmReferral) {
-                    return;
-                }
-                
-                const referralCode = 'WEB' + Math.random().toString(36).substr(2, 8).toUpperCase();
-                localStorage.setItem('userReferralCode', referralCode);
-                
-                const friendMessage = `مرحباً! 👋
-
-صديقك *${n}* يدعوك للاستفادة من خدمات Web Forge! 🚀
-
-🎁 *عرض خاص لك:*
-• خصم 15% على أول طلب
-• استشارة مجانية
-• دعم فني مميز
-
-🛠️ *خدماتنا:*
-• متاجر YouCan و Shopify
-• مواقع إلكترونية احترافية
-• هوية رقمية متكاملة
-
-للطلب أو الاستفسار:
-📞 https://wa.me/212627713979
-
-أو زر موقعنا:
-🌐 https://webforge-it.com
-
-*كود الخصم: ${referralCode}*
-(استخدمه عند طلبك للحصول على خصم 15%)
-
-مع تحيات فريق Web Forge 💙`;
-                
-                const friendWhatsAppUrl = `https://wa.me/${friendPhone.replace(/\D/g, '')}?text=${encodeURIComponent(friendMessage)}`;
-                window.open(friendWhatsAppUrl, '_blank');
-                
-                const referralText = `%0a%0a🎁 *إحالة صديق:*%0aتم إرسال عرض خاص لصديق على الرقم: ${friendPhone}%0aكود الإحالة: ${referralCode}`;
-                
-                lastSubmissionTime = currentTime;
-                const timestamp = new Date().toLocaleString('ar-MA');
-                
-                window.open(`https://wa.me/212627713979?text=طلب جديد من الموقع:%0aالخدمة: ${encodeURIComponent(s)}%0aالاسم: ${encodeURIComponent(n)}%0aالهاتف: ${encodeURIComponent(p)}${referralText}%0aالتوقيت: ${encodeURIComponent(timestamp)}`, '_blank');
-            } else {
-                lastSubmissionTime = currentTime;
-                const timestamp = new Date().toLocaleString('ar-MA');
-                
-                window.open(`https://wa.me/212627713979?text=طلب جديد من الموقع:%0aالخدمة: ${encodeURIComponent(s)}%0aالاسم: ${encodeURIComponent(n)}%0aالهاتف: ${encodeURIComponent(p)}%0aالتوقيت: ${encodeURIComponent(timestamp)}`, '_blank');
-            }
+            lastSubmissionTime = currentTime;
+            const timestamp = new Date().toLocaleString('ar-MA');
+            
+            window.open(`https://wa.me/212627713979?text=طلب جديد من الموقع:%0aالخدمة: ${encodeURIComponent(s)}%0aالاسم: ${encodeURIComponent(n)}%0aالهاتف: ${encodeURIComponent(p)}%0aالتوقيت: ${encodeURIComponent(timestamp)}`, '_blank');
             
             closeForm();
         }
