@@ -3598,78 +3598,466 @@
         window.translations = translations;
         window.typewriterData = typewriterData;
     </script>
-<!-- ========== نظام ربط لوحة التحكم ========== -->
+
+    <!-- ========== نظام تحديث الموقع الديناميكي ========== -->
 <script>
-// زر الوصول السريع للوحة التحكم
+// ========== نظام WebForge للتحكم الديناميكي ==========
+
+// تهيئة متغيرات النظام
+let siteUpdates = JSON.parse(localStorage.getItem('webforge_updates') || '{}');
+let updateInterval;
+
+// تعريف العناصر القابلة للتحديث في الموقع
+const ELEMENTS_MAP = {
+    // Hero Section
+    'hero-text1': '.hero h1 .hero-line',
+    'hero-text2': '.hero p[data-translate="heroText2"]',
+    
+    // Typewriter Texts
+    'typewriter-texts': 'window.typewriterData.ar',
+    
+    // Why Us Section
+    'why-title': '.why-us h2[data-translate="whyTitle"]',
+    'why-desc': '.why-us p[data-translate="whyDesc"]',
+    'speed-title': '.why-grid .why-card:nth-child(1) h4',
+    'speed-desc': '.why-grid .why-card:nth-child(1) p',
+    'responsive-title': '.why-grid .why-card:nth-child(2) h4',
+    'responsive-desc': '.why-grid .why-card:nth-child(2) p',
+    'support-title': '.why-grid .why-card:nth-child(3) h4',
+    'support-desc': '.why-grid .why-card:nth-child(3) p',
+    'design-title': '.why-grid .why-card:nth-child(4) h4',
+    'design-desc': '.why-grid .why-card:nth-child(4) p',
+    
+    // Services Section
+    'services-title': '.services h2[data-translate="servicesTitle"]',
+    'services-desc': '.services p[data-translate="servicesDesc"]',
+    'youcan-title': '.services-grid .service-card:nth-child(1) h3',
+    'youcan-desc': '.services-grid .service-card:nth-child(1) p',
+    'youcan-btn': '.services-grid .service-card:nth-child(1) .card-btn',
+    'shopify-title': '.services-grid .service-card:nth-child(2) h3',
+    'shopify-desc': '.services-grid .service-card:nth-child(2) p',
+    'shopify-btn': '.services-grid .service-card:nth-child(2) .card-btn',
+    'websites-title': '.services-grid .service-card:nth-child(3) h3',
+    'websites-desc': '.services-grid .service-card:nth-child(3) p',
+    'websites-btn': '.services-grid .service-card:nth-child(3) .card-btn',
+    
+    // Stats Section
+    'stats-projects': '.stats-bar .stat-item:nth-child(1) h2',
+    'stats-satisfaction': '.stats-bar .stat-item:nth-child(2) h2',
+    'stats-support': '.stats-bar .stat-item:nth-child(3) p',
+    
+    // FAQ Section
+    'faq-items': '.faq-container',
+    
+    // Footer
+    'copyright': 'footer p[data-translate="copyright"]'
+};
+
+// ========== نظام تحميل التحديثات ==========
+function loadSiteUpdates() {
+    try {
+        console.log('🔍 جاري تحميل تحديثات الموقع...');
+        
+        // جلب التحديثات من localStorage
+        const updates = JSON.parse(localStorage.getItem('webforge_updates') || '{}');
+        
+        if (!updates || Object.keys(updates).length === 0) {
+            console.log('ℹ️ لا توجد تحديثات جديدة');
+            return;
+        }
+        
+        console.log('📥 التحديثات الموجودة:', updates);
+        
+        // تطبيق التحديثات على العناصر
+        applyUpdatesToSite(updates);
+        
+        // تحديث بيانات Typewriter إذا كانت موجودة
+        if (updates['typewriter-texts'] && window.typewriterData) {
+            window.typewriterData.ar = updates['typewriter-texts'];
+            if (window.typewriter) {
+                window.typewriter.updateLanguage('ar');
+            }
+        }
+        
+        // إشعار المستخدم
+        showUpdateNotification('تم تحميل آخر تحديثات الموقع');
+        
+        // حفظ وقت آخر تحديث
+        localStorage.setItem('last_site_update', new Date().toISOString());
+        
+    } catch (error) {
+        console.error('❌ خطأ في تحميل التحديثات:', error);
+    }
+}
+
+// ========== تطبيق التحديثات على الموقع ==========
+function applyUpdatesToSite(updates) {
+    Object.keys(updates).forEach(key => {
+        try {
+            const selector = ELEMENTS_MAP[key];
+            const value = updates[key];
+            
+            if (!selector || value === undefined) return;
+            
+            console.log(`🔄 تحديث ${key}:`, value);
+            
+            // معالجة خاصة لعناصر معينة
+            switch(key) {
+                case 'typewriter-texts':
+                    // تم معالجته بشكل منفصل
+                    break;
+                    
+                case 'faq-items':
+                    updateFAQItems(value);
+                    break;
+                    
+                case 'stats-projects':
+                case 'stats-satisfaction':
+                    updateStatCounter(key, value);
+                    break;
+                    
+                default:
+                    // تحديث العناصر العادية
+                    if (selector.startsWith('window.')) {
+                        // تحديث متغيرات JavaScript
+                        eval(`${selector} = ${JSON.stringify(value)}`);
+                    } else {
+                        // تحديث عناصر DOM
+                        const elements = document.querySelectorAll(selector);
+                        elements.forEach(element => {
+                            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                                element.value = value;
+                            } else {
+                                element.textContent = value;
+                                element.classList.add('updated-element');
+                            }
+                        });
+                    }
+            }
+            
+        } catch (error) {
+            console.error(`❌ خطأ في تحديث ${key}:`, error);
+        }
+    });
+    
+    // إزالة تأثير التحديث بعد 2 ثانية
+    setTimeout(() => {
+        document.querySelectorAll('.updated-element').forEach(el => {
+            el.classList.remove('updated-element');
+        });
+    }, 2000);
+}
+
+// ========== تحديث الأسئلة الشائعة ==========
+function updateFAQItems(faqData) {
+    try {
+        const container = document.querySelector('.faq-container');
+        if (!container) return;
+        
+        container.innerHTML = '';
+        
+        faqData.forEach((item, index) => {
+            const faqItem = document.createElement('div');
+            faqItem.className = 'faq-item';
+            faqItem.innerHTML = `
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    ${item.q} <i class="fas fa-plus"></i>
+                </div>
+                <div class="faq-answer">${item.a}</div>
+            `;
+            container.appendChild(faqItem);
+        });
+        
+        console.log('✅ تم تحديث الأسئلة الشائعة');
+    } catch (error) {
+        console.error('❌ خطأ في تحديث FAQ:', error);
+    }
+}
+
+// ========== تحديث عداد الإحصائيات ==========
+function updateStatCounter(statKey, newValue) {
+    const elements = {
+        'stats-projects': '.stats-bar .stat-item:nth-child(1) h2',
+        'stats-satisfaction': '.stats-bar .stat-item:nth-child(2) h2'
+    };
+    
+    const element = document.querySelector(elements[statKey]);
+    if (!element) return;
+    
+    const targetValue = parseInt(newValue) || 0;
+    const currentValue = parseInt(element.textContent) || 0;
+    
+    // تأثير عد متحرك
+    animateCounter(element, currentValue, targetValue);
+}
+
+function animateCounter(element, start, end) {
+    const duration = 1000; // 1 ثانية
+    const steps = 60;
+    const increment = (end - start) / steps;
+    let current = start;
+    
+    const timer = setInterval(() => {
+        current += increment;
+        if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+            current = end;
+            clearInterval(timer);
+        }
+        element.textContent = Math.round(current);
+    }, duration / steps);
+}
+
+// ========== إشعار التحديث ==========
+function showUpdateNotification(message) {
+    // إنشاء عنصر الإشعار
+    const notification = document.createElement('div');
+    notification.className = 'site-update-notification';
+    notification.innerHTML = `
+        <div class="notification-content">
+            <i class="fas fa-sync-alt"></i>
+            <span>${message}</span>
+        </div>
+    `;
+    
+    // الأنماط
+    notification.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        z-index: 9999;
+        animation: slideInRight 0.3s ease-out;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    `;
+    
+    // إضافة الأنيميشن
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+        
+        .updated-element {
+            animation: highlightUpdate 1s ease;
+        }
+        
+        @keyframes highlightUpdate {
+            0% { background-color: rgba(56, 189, 248, 0.3); }
+            100% { background-color: transparent; }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    document.body.appendChild(notification);
+    
+    // إزالة الإشعار بعد 3 ثواني
+    setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease-out forwards';
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
+}
+
+// ========== نظام التحديث التلقائي ==========
+function startAutoUpdateChecker() {
+    // التحقق من التحديثات كل 30 ثانية
+    updateInterval = setInterval(() => {
+        checkForUpdates();
+    }, 30000);
+    
+    // التحقق فور تحميل الصفحة
+    setTimeout(checkForUpdates, 1000);
+}
+
+function checkForUpdates() {
+    const lastUpdateTime = localStorage.getItem('last_dashboard_update');
+    const lastLoadTime = localStorage.getItem('last_site_update');
+    
+    if (!lastUpdateTime || !lastLoadTime || 
+        new Date(lastUpdateTime) > new Date(lastLoadTime)) {
+        
+        console.log('🔄 توجد تحديثات جديدة، جاري التحميل...');
+        loadSiteUpdates();
+    }
+}
+
+// ========== نظام الاستماع للتحديثات ==========
+function setupUpdateListener() {
+    // الاستماع لتغييرات localStorage من لوحة التحكم
+    window.addEventListener('storage', function(event) {
+        if (event.key === 'webforge_updates' || event.key === 'last_dashboard_update') {
+            console.log('📢 تم اكتشاف تحديث جديد من لوحة التحكم');
+            loadSiteUpdates();
+        }
+    });
+    
+    // API للتحكم من لوحة التحكم
+    window.WebForgeAPI = {
+        updateSite: function(updates) {
+            localStorage.setItem('webforge_updates', JSON.stringify(updates));
+            localStorage.setItem('last_dashboard_update', new Date().toISOString());
+            loadSiteUpdates();
+            return true;
+        },
+        
+        getCurrentContent: function() {
+            const content = {};
+            Object.keys(ELEMENTS_MAP).forEach(key => {
+                const selector = ELEMENTS_MAP[key];
+                if (selector && !selector.startsWith('window.')) {
+                    const element = document.querySelector(selector);
+                    if (element) {
+                        content[key] = element.textContent || element.value;
+                    }
+                }
+            });
+            return content;
+        },
+        
+        resetUpdates: function() {
+            localStorage.removeItem('webforge_updates');
+            location.reload();
+        }
+    };
+}
+
+// ========== زر الوصول السريع للوحة التحكم ==========
 function addAdminQuickAccess() {
+    // التحقق إذا كان زر التحكم موجوداً بالفعل
+    if (document.getElementById('adminQuickAccess')) return;
+    
     const adminBtn = document.createElement('a');
-    adminBtn.href = 'admin-dashboard.html';
     adminBtn.id = 'adminQuickAccess';
+    adminBtn.href = 'admin-dashboard.html';
+    adminBtn.target = '_blank';
     adminBtn.innerHTML = '<i class="fas fa-cog"></i>';
     adminBtn.title = 'لوحة التحكم';
+    
+    // الأنماط
     adminBtn.style.cssText = `
         position: fixed;
-        bottom: 80px;
+        bottom: 100px;
         left: 20px;
-        width: 50px;
-        height: 50px;
-        background: var(--forge-orange);
+        width: 55px;
+        height: 55px;
+        background: linear-gradient(135deg, var(--forge-orange), #fbbf24);
         color: white;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 1.5rem;
-        z-index: 9999;
-        box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+        z-index: 9998;
+        box-shadow: 0 5px 20px rgba(245, 158, 11, 0.4);
         text-decoration: none;
+        border: 2px solid rgba(255,255,255,0.3);
+        animation: floatAdminBtn 4s ease-in-out infinite;
         transition: all 0.3s ease;
     `;
     
-    // إظهار الزر فقط للمديرين
-    const isAdmin = localStorage.getItem('show_admin_btn') === 'true';
-    if (isAdmin || window.location.search.includes('admin=true')) {
+    // إضافة أنيميشن للزر
+    const adminStyle = document.createElement('style');
+    adminStyle.textContent = `
+        @keyframes floatAdminBtn {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-10px) rotate(10deg); }
+        }
+        
+        #adminQuickAccess:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.6);
+        }
+        
+        .admin-tooltip {
+            position: absolute;
+            right: 60px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        
+        #adminQuickAccess:hover .admin-tooltip {
+            opacity: 1;
+        }
+    `;
+    document.head.appendChild(adminStyle);
+    
+    // إضافة تلميح عند التمرير
+    const tooltip = document.createElement('div');
+    tooltip.className = 'admin-tooltip';
+    tooltip.textContent = 'لوحة التحكم';
+    adminBtn.appendChild(tooltip);
+    
+    // إظهار الزر فقط للمدير
+    const isAdmin = localStorage.getItem('show_admin_btn') === 'true' || 
+                   window.location.search.includes('admin=true') ||
+                   window.location.search.includes('preview=true');
+    
+    if (isAdmin) {
         document.body.appendChild(adminBtn);
     }
-}
-
-// نظام تحميل التحديثات من لوحة التحكم
-function loadDashboardUpdates() {
-    try {
-        const updates = JSON.parse(localStorage.getItem('webforge_updates') || '{}');
-        
-        if (!updates || Object.keys(updates).length === 0) return;
-        
-        // تحديث النصوص
-        Object.keys(updates).forEach(selector => {
-            const element = document.querySelector(selector);
-            if (element && updates[selector]) {
-                element.textContent = updates[selector];
-                element.classList.add('updated-element');
-            }
-        });
-        
-    } catch (error) {
-        console.error('خطأ في تحميل التحديثات:', error);
-    }
-}
-
-// تهيئة النظام عند تحميل الصفحة
-document.addEventListener('DOMContentLoaded', function() {
-    // إضافة زر الوصول السريع
-    addAdminQuickAccess();
     
-    // تحميل التحديثات
-    loadDashboardUpdates();
-    
-    // اختصار لوحة المفاتيح للوحة التحكم (Ctrl+Alt+D)
+    // اختصار لوحة المفاتيح
     document.addEventListener('keydown', function(e) {
         if (e.ctrlKey && e.altKey && e.key === 'd') {
+            e.preventDefault();
             window.open('admin-dashboard.html', '_blank');
         }
     });
-});
-</script>
+}
+
+// ========== تهيئة النظام عند تحميل الصفحة ==========
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 نظام تحديث الموقع يبدأ التهيئة...');
     
+    // إضافة زر الوصول السريع
+    addAdminQuickAccess();
+    
+    // إعداد نظام الاستماع
+    setupUpdateListener();
+    
+    // تحميل التحديثات الحالية
+    loadSiteUpdates();
+    
+    // بدء التحديث التلقائي
+    startAutoUpdateChecker();
+    
+    // التحقق من وضع المعاينة
+    if (window.location.search.includes('preview=true')) {
+        showUpdateNotification('وضع المعاينة نشط - يمكنك رؤية التغييرات');
+    }
+    
+    console.log('✅ نظام تحديث الموقع جاهز!');
+});
+
+// ========== وظائف مساعدة ==========
+function forceReloadUpdates() {
+    localStorage.setItem('last_dashboard_update', new Date().toISOString());
+    loadSiteUpdates();
+}
+
+// جعل الوظائف متاحة عالمياً
+window.forceReloadUpdates = forceReloadUpdates;
+window.loadSiteUpdates = loadSiteUpdates;
+</script>
 </body>
 </html>
