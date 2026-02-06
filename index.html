@@ -3598,5 +3598,255 @@
         window.translations = translations;
         window.typewriterData = typewriterData;
     </script>
+<!-- ========== نظام ربط لوحة التحكم ========== -->
+<script>
+// ========== نظام WebForge للتحكم الديناميكي ==========
+
+// تحديد العناصر القابلة للتعديل في الموقع
+const DYNAMIC_ELEMENTS = {
+    // نصوص رئيسية
+    'hero-text': '.hero p[data-translate="heroText2"]',
+    'promo-text': '.promo-content',
+    'why-text': '.why-us p[data-translate="whyDesc"]',
+    
+    // عناوين الأقسام
+    'why-title': '.why-us h2[data-translate="whyTitle"]',
+    'services-title': '.services h2[data-translate="servicesTitle"]',
+    'services-desc': '.services p[data-translate="servicesDesc"]',
+    'portfolio-title': '.success-stories h2[data-translate="portfolioTitle"]',
+    
+    // الخدمات
+    'youcan-title': '.services-grid .service-card:nth-child(1) h3',
+    'youcan-desc': '.services-grid .service-card:nth-child(1) p',
+    'shopify-title': '.services-grid .service-card:nth-child(2) h3',
+    'shopify-desc': '.services-grid .service-card:nth-child(2) p',
+    'websites-title': '.services-grid .service-card:nth-child(3) h3',
+    'websites-desc': '.services-grid .service-card:nth-child(3) p',
+    
+    // الأسعار (يمكن إظهارها إذا أردت)
+    'stats-projects': '.stats-bar .stat-item:nth-child(1) h2',
+    'stats-satisfaction': '.stats-bar .stat-item:nth-child(2) h2',
+    'stats-support': '.stats-bar .stat-item:nth-child(3) p'
+};
+
+// تحميل التحديثات من لوحة التحكم
+function loadDashboardUpdates() {
+    try {
+        const updates = JSON.parse(localStorage.getItem('webforge_updates') || '{}');
+        const lastUpdate = localStorage.getItem('webforge_last_update');
+        
+        if (!updates || Object.keys(updates).length === 0) {
+            console.log('لا توجد تحديثات من لوحة التحكم');
+            return;
+        }
+        
+        console.log('تحميل التحديثات من لوحة التحكم:', updates);
+        
+        // تطبيق التحديثات على العناصر
+        Object.keys(updates).forEach(elementId => {
+            const selector = DYNAMIC_ELEMENTS[elementId];
+            if (selector && updates[elementId]) {
+                const element = document.querySelector(selector);
+                if (element) {
+                    element.textContent = updates[elementId];
+                }
+            }
+        });
+        
+        // إشعار بوجود تحديثات جديدة
+        if (lastUpdate) {
+            const now = new Date();
+            const updateTime = new Date(lastUpdate);
+            const hoursDiff = Math.abs(now - updateTime) / 36e5;
+            
+            if (hoursDiff < 24) {
+                showUpdateNotification(`تم تحديث الموقع ${formatTimeAgo(updateTime)}`);
+            }
+        }
+        
+    } catch (error) {
+        console.error('خطأ في تحميل التحديثات:', error);
+    }
+}
+
+// تنسيق الوقت المنقضي
+function formatTimeAgo(date) {
+    const now = new Date();
+    const diffMs = now - date;
+    const diffMins = Math.round(diffMs / 60000);
+    const diffHours = Math.round(diffMs / 3600000);
+    const diffDays = Math.round(diffMs / 86400000);
+    
+    if (diffMins < 60) {
+        return `قبل ${diffMins} دقيقة`;
+    } else if (diffHours < 24) {
+        return `قبل ${diffHours} ساعة`;
+    } else {
+        return `قبل ${diffDays} يوم`;
+    }
+}
+
+// إشعار تحديث
+function showUpdateNotification(message) {
+    if (Notification.permission === "granted") {
+        new Notification("🔄 تحديث الموقع", {
+            body: message,
+            icon: "https://i.ibb.co/3qzt7ks/2-2-2026-15329-webforge-it-com.jpg"
+        });
+    }
+}
+
+// ========== نظام التحديث التلقائي ==========
+
+// التحقق من التحديثات كل 30 ثانية
+function startAutoRefresh() {
+    setInterval(() => {
+        loadDashboardUpdates();
+    }, 30000);
+}
+
+// ========== زر الوصول السريع للوحة التحكم ==========
+
+// إضافة زر لوحة التحكم للوصول السريع
+function addAdminQuickAccess() {
+    // زر في الزاوية اليسرى السفلية
+    const adminBtn = document.createElement('a');
+    adminBtn.href = 'dashboard.html';
+    adminBtn.id = 'adminQuickAccess';
+    adminBtn.innerHTML = '<i class="fas fa-cog"></i>';
+    adminBtn.title = 'لوحة التحكم';
+    adminBtn.style.cssText = `
+        position: fixed;
+        bottom: 80px;
+        left: 20px;
+        width: 50px;
+        height: 50px;
+        background: var(--forge-orange);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        z-index: 9999;
+        box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+        text-decoration: none;
+        transition: all 0.3s ease;
+    `;
+    
+    adminBtn.addEventListener('mouseenter', () => {
+        adminBtn.style.transform = 'scale(1.1) rotate(15deg)';
+        adminBtn.style.boxShadow = '0 6px 20px rgba(245, 158, 11, 0.6)';
+    });
+    
+    adminBtn.addEventListener('mouseleave', () => {
+        adminBtn.style.transform = 'scale(1) rotate(0)';
+        adminBtn.style.boxShadow = '0 4px 12px rgba(245, 158, 11, 0.4)';
+    });
+    
+    // إظهار الزر فقط للمدير (يمكن التحكم به من localStorage)
+    if (localStorage.getItem('show_admin_btn') === 'true' || 
+        window.location.search.includes('admin=true')) {
+        document.body.appendChild(adminBtn);
+    }
+}
+
+// ========== تهيئة النظام عند تحميل الصفحة ==========
+document.addEventListener('DOMContentLoaded', function() {
+    // انتظر ثانية لتحميل جميع العناصر
+    setTimeout(() => {
+        // 1. تحميل التحديثات من لوحة التحكم
+        loadDashboardUpdates();
+        
+        // 2. إضافة زر الوصول السريع
+        addAdminQuickAccess();
+        
+        // 3. بدء التحديث التلقائي
+        startAutoRefresh();
+        
+        // 4. إضافة اختصار لوحة المفاتيح للوصول للوحة التحكم (Ctrl+Alt+D)
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.altKey && e.key === 'd') {
+                window.open('dashboard.html', '_blank');
+            }
+        });
+        
+        console.log('✅ نظام ربط لوحة التحكم جاهز!');
+    }, 1000);
+});
+
+// ========== وظائف للاستخدام من لوحة التحكم ==========
+window.WebForge = window.WebForge || {};
+window.WebForge.updateSite = function(updates) {
+    localStorage.setItem('webforge_updates', JSON.stringify(updates));
+    localStorage.setItem('webforge_last_update', new Date().toISOString());
+    loadDashboardUpdates();
+    return true;
+};
+
+window.WebForge.getCurrentContent = function() {
+    const content = {};
+    Object.keys(DYNAMIC_ELEMENTS).forEach(key => {
+        const element = document.querySelector(DYNAMIC_ELEMENTS[key]);
+        if (element) {
+            content[key] = element.textContent;
+        }
+    });
+    return content;
+};
+</script>
+
+<!-- ========== نافذة الإشعارات الصغيرة ========== -->
+<div id="updateToast" style="
+    position: fixed;
+    bottom: 140px;
+    left: 20px;
+    background: var(--success);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    display: none;
+    z-index: 10000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    max-width: 300px;
+">
+    <i class="fas fa-sync-alt"></i>
+    <span id="updateMessage"></span>
+</div>
+
+<style>
+/* تأثيرات للعناصر المحدثة */
+.updated-element {
+    animation: highlightUpdate 2s ease;
+}
+
+@keyframes highlightUpdate {
+    0% { background-color: rgba(56, 189, 248, 0.3); }
+    100% { background-color: transparent; }
+}
+
+/* زر النسخ الاحتياطي للبيانات */
+#backupDataBtn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    display: none;
+    z-index: 9999;
+}
+
+#backupDataBtn.show {
+    display: block;
+}
+</style>
+
+    
 </body>
 </html>
