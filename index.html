@@ -3671,5 +3671,325 @@
         });
     }
 </script>
+    <!-- ========== نظام تحديث الموقع من لوحة التحكم ========== -->
+<script>
+// ========== تحميل البيانات من لوحة التحكم ==========
+function loadAdminData() {
+    try {
+        // محاولة تحميل البيانات من localStorage أولاً
+        const updateData = localStorage.getItem('webforge_live_update');
+        if (updateData) {
+            const parsed = JSON.parse(updateData);
+            applyWebsiteUpdates(parsed.data);
+            localStorage.removeItem('webforge_live_update');
+        }
+        
+        // محاولة تحميل البيانات من ملفات JSON في الجيت هاب
+        loadGitHubData();
+        
+    } catch (error) {
+        console.log('لا توجد تحديثات جديدة من لوحة التحكم');
+    }
+}
+
+// ========== تحميل البيانات من ملفات الجيت هاب ==========
+async function loadGitHubData() {
+    // روابط ملفات البيانات في الجيت هاب (عدلها حسب موقعك)
+    const dataFiles = {
+        hero: 'https://raw.githubusercontent.com/[اسم-المستخدم]/[اسم-المستودع]/main/data/hero.json',
+        services: 'https://raw.githubusercontent.com/[اسم-المستخدم]/[اسم-المستودع]/main/data/services.json',
+        portfolio: 'https://raw.githubusercontent.com/[اسم-المستخدم]/[اسم-المستودع]/main/data/portfolio.json',
+        faq: 'https://raw.githubusercontent.com/[اسم-المستخدم]/[اسم-المستودع]/main/data/faq.json',
+        stats: 'https://raw.githubusercontent.com/[اسم-المستخدم]/[اسم-المستودع]/main/data/stats.json',
+        translations: 'https://raw.githubusercontent.com/[اسم-المستخدم]/[اسم-المستودع]/main/data/translations.json'
+    };
+    
+    try {
+        // تحميل كل ملف
+        for (const [type, url] of Object.entries(dataFiles)) {
+            const response = await fetch(url);
+            if (response.ok) {
+                const data = await response.json();
+                applyDataUpdate(type, data);
+                console.log(`✅ تم تحميل ${type} من الجيت هاب`);
+            }
+        }
+    } catch (error) {
+        console.log('⚠️ استخدام البيانات المحلية (لا اتصال بالجيت هاب)');
+    }
+}
+
+// ========== تطبيق التحديثات على الموقع ==========
+function applyWebsiteUpdates(data) {
+    console.log('🔄 تطبيق تحديثات من لوحة التحكم...');
+    
+    // تحديث قسم Hero
+    if (data.hero) {
+        applyHeroUpdates(data.hero);
+    }
+    
+    // تحديث الخدمات
+    if (data.services) {
+        applyServicesUpdates(data.services);
+    }
+    
+    // تحديث المحفظة
+    if (data.portfolio) {
+        applyPortfolioUpdates(data.portfolio);
+    }
+    
+    // تحديث الأسئلة الشائعة
+    if (data.faq) {
+        applyFaqUpdates(data.faq);
+    }
+    
+    // تحديث الإحصائيات
+    if (data.stats) {
+        applyStatsUpdates(data.stats);
+    }
+    
+    // تحديث الترجمات
+    if (data.translations) {
+        applyTranslationUpdates(data.translations);
+    }
+    
+    showUpdateNotification();
+}
+
+// ========== تطبيق تحديثات محددة ==========
+function applyHeroUpdates(heroData) {
+    // تحديث نص Hero
+    const heroElements = {
+        'heroText1': document.querySelector('[data-translate="heroText1"]'),
+        'heroText2': document.querySelector('[data-translate="heroText2"]'),
+        'primaryBtn': document.querySelector('[data-translate="primaryBtn"]'),
+        'secondaryBtn': document.querySelector('[data-translate="secondaryBtn"]')
+    };
+    
+    if (heroData.ar && heroElements.heroText1) {
+        heroElements.heroText1.textContent = heroData.ar.text1;
+        heroElements.heroText2.textContent = heroData.ar.text2;
+        heroElements.primaryBtn.textContent = heroData.ar.button1;
+        heroElements.secondaryBtn.textContent = heroData.ar.button2;
+    }
+}
+
+function applyServicesUpdates(servicesData) {
+    // تحديث قسم الخدمات
+    const servicesContainer = document.querySelector('.services-grid');
+    if (servicesContainer && servicesData.length > 0) {
+        servicesContainer.innerHTML = '';
+        
+        servicesData.forEach((service, index) => {
+            const serviceCard = `
+                <div class="service-card reveal delay-${index + 1} js-tilt">
+                    <div class="icon-box" style="color: ${getServiceColor(index)};">
+                        <i class="${service.icon}"></i>
+                    </div>
+                    <h3>${service.name.ar}</h3>
+                    <p class="arabic-text">${service.description.ar}</p>
+                    <button onclick="openForm('${service.name.ar}')" class="card-btn">
+                        اطلب الخدمة <i class="fas fa-arrow-left"></i>
+                    </button>
+                </div>
+            `;
+            servicesContainer.innerHTML += serviceCard;
+        });
+    }
+}
+
+function applyPortfolioUpdates(portfolioData) {
+    // تحديث قسم المحفظة
+    const portfolioContainer = document.querySelector('.portfolio-grid');
+    if (portfolioContainer && portfolioData.length > 0) {
+        portfolioContainer.innerHTML = '';
+        
+        portfolioData.forEach((project, index) => {
+            const projectCard = `
+                <div class="work-card reveal delay-${index + 1}">
+                    <div class="browser-header">
+                        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+                    </div>
+                    <div class="screen-box">
+                        <img src="${project.image}" alt="${project.title.ar}">
+                    </div>
+                    <div class="work-label">${project.title.ar}</div>
+                </div>
+            `;
+            portfolioContainer.innerHTML += projectCard;
+        });
+    }
+}
+
+function applyFaqUpdates(faqData) {
+    // تحديث الأسئلة الشائعة
+    const faqContainer = document.querySelector('.faq-container');
+    if (faqContainer && faqData.length > 0) {
+        faqContainer.innerHTML = '';
+        
+        faqData.forEach((faq, index) => {
+            const faqItem = `
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        ${faq.question.ar} <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">${faq.answer.ar}</div>
+                </div>
+            `;
+            faqContainer.innerHTML += faqItem;
+        });
+    }
+}
+
+function applyStatsUpdates(statsData) {
+    // تحديث الإحصائيات
+    const statElements = document.querySelectorAll('.counter');
+    if (statElements.length >= 2 && statsData.stat1 && statsData.stat2) {
+        statElements[0].textContent = statsData.stat1.number;
+        statElements[0].nextElementSibling.textContent = statsData.stat1.label.ar;
+        
+        statElements[1].textContent = statsData.stat2.number;
+        statElements[1].nextElementSibling.textContent = statsData.stat2.label.ar;
+    }
+}
+
+function applyTranslationUpdates(translationsData) {
+    // تحديث الترجمات
+    if (translationsData.ar) {
+        Object.keys(translationsData.ar).forEach(key => {
+            const elements = document.querySelectorAll(`[data-translate="${key}"]`);
+            elements.forEach(el => {
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = translationsData.ar[key];
+                } else {
+                    el.textContent = translationsData.ar[key];
+                }
+            });
+        });
+    }
+}
+
+function applyDataUpdate(type, data) {
+    switch(type) {
+        case 'hero':
+            applyHeroUpdates(data);
+            break;
+        case 'services':
+            applyServicesUpdates(data);
+            break;
+        case 'portfolio':
+            applyPortfolioUpdates(data);
+            break;
+        case 'faq':
+            applyFaqUpdates(data);
+            break;
+        case 'stats':
+            applyStatsUpdates(data);
+            break;
+        case 'translations':
+            applyTranslationUpdates(data);
+            break;
+    }
+}
+
+// ========== وظائف مساعدة ==========
+function getServiceColor(index) {
+    const colors = ['#38bdf8', '#96bf48', '#f59e0b'];
+    return colors[index % colors.length];
+}
+
+function showUpdateNotification() {
+    // إظهار إشعار بالتحديث
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+        padding: 15px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        z-index: 10000;
+        animation: slideIn 0.5s ease;
+    `;
+    
+    notification.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-sync-alt" style="font-size: 18px;"></i>
+            <div>
+                <div style="font-weight: bold;">✅ تم تحديث الموقع</div>
+                <div style="font-size: 12px;">آخر تحديث: ${new Date().toLocaleString('ar-SA')}</div>
+            </div>
+            <button onclick="this.parentElement.parentElement.remove()" 
+                    style="background: none; border: none; color: white; cursor: pointer; margin-right: auto;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.style.animation = 'slideOut 0.5s ease';
+            setTimeout(() => notification.remove(), 500);
+        }
+    }, 5000);
+}
+
+// ========== أنيميشن ==========
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideOut {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100%); opacity: 0; }
+    }
+`;
+document.head.appendChild(style);
+
+// ========== تشغيل النظام عند تحميل الصفحة ==========
+document.addEventListener('DOMContentLoaded', function() {
+    // الانتظار قليلاً ثم تحميل البيانات
+    setTimeout(loadAdminData, 1000);
+    
+    // تحقق من التحديثات كل 30 ثانية
+    setInterval(loadAdminData, 30000);
+});
+
+// ========== إضافة زر يدوي لتحديث الموقع ==========
+function addManualRefreshButton() {
+    const refreshBtn = document.createElement('button');
+    refreshBtn.innerHTML = '🔄 تحديث الموقع';
+    refreshBtn.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: var(--accent);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        border: none;
+        font-size: 12px;
+        cursor: pointer;
+        z-index: 9999;
+        opacity: 0.7;
+        transition: opacity 0.3s;
+    `;
+    
+    refreshBtn.onmouseover = () => refreshBtn.style.opacity = '1';
+    refreshBtn.onmouseout = () => refreshBtn.style.opacity = '0.7';
+    refreshBtn.onclick = loadAdminData;
+    
+    document.body.appendChild(refreshBtn);
+}
+
+// إضافة زر التحديث اليدوي
+setTimeout(addManualRefreshButton, 2000);
+</script>
 </body>
 </html>
