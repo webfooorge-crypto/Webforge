@@ -1,189 +1,1065 @@
-<script>
-// ========== نظام مزامنة البيانات ==========
-
-// تحميل بيانات الموقع من نظام التحكم
-function loadSiteDataFromCMS() {
-    try {
-        // المحتوى الرئيسي
-        const siteData = JSON.parse(localStorage.getItem('webforgeSiteData') || '{}');
-        if (siteData.siteTitle) {
-            document.title = siteData.siteTitle;
-        }
-        if (siteData.siteDescription) {
-            document.querySelector('meta[name="description"]').setAttribute('content', siteData.siteDescription);
-        }
-        if (siteData.heroText) {
-            const heroP = document.querySelector('.hero p');
-            if (heroP) heroP.textContent = siteData.heroText;
-        }
-        if (siteData.promoText) {
-            const promoContent = document.querySelector('.promo-content');
-            if (promoContent) promoContent.textContent = siteData.promoText;
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Web Forge - لوحة التحكم</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #60a5fa;
+            --secondary: #10b981;
+            --secondary-dark: #059669;
+            --danger: #ef4444;
+            --danger-dark: #dc2626;
+            --warning: #f59e0b;
+            --warning-dark: #d97706;
+            --info: #3b82f6;
+            --dark: #0f172a;
+            --dark-card: #1e293b;
+            --dark-light: #334155;
+            --light: #f8fafc;
+            --light-gray: #e2e8f0;
+            --gray: #94a3b8;
+            --border: #475569;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            --gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius: 12px;
+            --transition: all 0.3s ease;
         }
         
-        // الخدمات
-        const servicesData = JSON.parse(localStorage.getItem('webforgeServices') || '{}');
-        if (servicesData.youcanTitle) {
-            const youcanTitle = document.querySelector('[data-translate="youcanTitle"]');
-            if (youcanTitle) youcanTitle.textContent = servicesData.youcanTitle;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
         }
-        if (servicesData.youcanDesc) {
-            const youcanDesc = document.querySelector('[data-translate="youcanDesc"]');
-            if (youcanDesc) youcanDesc.textContent = servicesData.youcanDesc;
-        }
-        // نفس الشيء لباقي الخدمات...
         
-        // مميزاتنا
-        const whyUsData = JSON.parse(localStorage.getItem('webforgeWhyUs') || '{}');
-        if (whyUsData.speedTitle) {
-            const speedTitle = document.querySelector('[data-translate="speedTitle"]');
-            if (speedTitle) speedTitle.textContent = whyUsData.speedTitle;
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: var(--light);
+            direction: rtl;
+            line-height: 1.6;
         }
-        // نفس الشيء لباقي المميزات...
         
-        // معرض الأعمال
-        const portfolioData = JSON.parse(localStorage.getItem('webforgePortfolio') || '{}');
-        if (portfolioData.work1Title) {
-            const work1 = document.querySelector('[data-translate="work1"]');
-            if (work1) work1.textContent = portfolioData.work1Title;
+        .container {
+            display: flex;
+            min-height: 100vh;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
         }
-        if (portfolioData.work1Image) {
-            const work1Img = document.querySelector('.work-card:nth-child(1) img');
-            if (work1Img) work1Img.src = portfolioData.work1Image;
-        }
-        // نفس الشيء لباقي الأعمال...
         
-        // الأسئلة الشائعة
-        const faqData = JSON.parse(localStorage.getItem('webforgeFAQ') || '{}');
-        if (faqData.faq1Q) {
-            const faq1Q = document.querySelector('[data-translate="faq1"]');
-            if (faq1Q) faq1Q.textContent = faqData.faq1Q;
+        /* ========== الشريط الجانبي ========== */
+        .sidebar {
+            width: 280px;
+            background: rgba(30, 41, 59, 0.9);
+            backdrop-filter: blur(10px);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow-lg);
+            z-index: 100;
+            transition: var(--transition);
         }
-        if (faqData.faq1A) {
-            const faq1A = document.querySelector('[data-translate="faq1a"]');
-            if (faq1A) faq1A.textContent = faqData.faq1A;
-        }
-        // نفس الشيء لباقي الأسئلة...
         
-    } catch (error) {
-        console.log('خطأ في تحميل البيانات:', error);
-    }
-}
-
-// تحديث عداد الزيارات
-function updateVisitCounter() {
-    let stats = JSON.parse(localStorage.getItem('webforgeStats') || '{"visits":0,"orders":0,"referrals":0,"gifts":0}');
-    stats.visits = (stats.visits || 0) + 1;
-    
-    // حفظ تاريخ الزيارة
-    const visitsHistory = JSON.parse(localStorage.getItem('visitsHistory') || '[]');
-    visitsHistory.unshift({ date: new Date().toISOString() });
-    if (visitsHistory.length > 100) visitsHistory.pop();
-    
-    localStorage.setItem('webforgeStats', JSON.stringify(stats));
-    localStorage.setItem('visitsHistory', JSON.stringify(visitsHistory));
-}
-
-// تحديث إحصائيات الطلبات
-function updateOrderStats() {
-    let stats = JSON.parse(localStorage.getItem('webforgeStats') || '{"visits":0,"orders":0,"referrals":0,"gifts":0}');
-    stats.orders = (stats.orders || 0) + 1;
-    localStorage.setItem('webforgeStats', JSON.stringify(stats));
-}
-
-// تحديث إحصائيات الإحالات
-function updateReferralStats() {
-    let stats = JSON.parse(localStorage.getItem('webforgeStats') || '{"visits":0,"orders":0,"referrals":0,"gifts":0}');
-    stats.referrals = (stats.referrals || 0) + 1;
-    localStorage.setItem('webforgeStats', JSON.stringify(stats));
-}
-
-// تحديث إحصائيات الهدايا
-function updateGiftStats() {
-    let stats = JSON.parse(localStorage.getItem('webforgeStats') || '{"visits":0,"orders":0,"referrals":0,"gifts":0}');
-    stats.gifts = (stats.gifts || 0) + 1;
-    localStorage.setItem('webforgeStats', JSON.stringify(stats));
-}
-
-// تعديل الدوال الأصلية
-const originalSubmitToWhatsApp = window.submitToWhatsApp;
-window.submitToWhatsApp = function() {
-    updateOrderStats();
-    return originalSubmitToWhatsApp();
-};
-
-const originalSendReferral = window.sendReferral;
-window.sendReferral = function() {
-    updateReferralStats();
-    return originalSendReferral();
-};
-
-const originalOpenGiftModal = window.openGiftModal;
-window.openGiftModal = function() {
-    updateGiftStats();
-    return originalOpenGiftModal();
-};
-
-// زر الدخول السريع لنظام التحكم
-function addAdminQuickAccess() {
-    // طريقة الدخول: أضف ?admin=123456 في نهاية الرابط
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('admin') === '123456') {
-        const adminBtn = document.createElement('a');
-        adminBtn.href = 'admin.html';
-        adminBtn.target = '_blank';
-        adminBtn.style.cssText = `
-            position: fixed;
-            bottom: 180px;
-            left: 30px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        .logo {
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(56, 189, 248, 0.1), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .logo h2 {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo h2 i {
+            color: #38bdf8;
+            margin-left: 10px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .logo p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 18px 25px;
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+            border-right: 4px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            right: -100%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.1), transparent);
+            transition: var(--transition);
+        }
+        
+        .nav-item:hover::before {
+            right: 100%;
+        }
+        
+        .nav-item:hover, .nav-item.active {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border-right-color: #38bdf8;
+        }
+        
+        .nav-item i {
+            width: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        
+        .nav-item span {
+            font-weight: 500;
+            font-size: 1rem;
+        }
+        
+        .logout-btn {
+            position: absolute;
+            bottom: 30px;
+            right: 20px;
+            left: 20px;
+        }
+        
+        /* ========== المحتوى الرئيسي ========== */
+        .content {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+            background: rgba(15, 23, 42, 0.8);
+        }
+        
+        .header {
+            background: var(--dark-card);
+            padding: 25px 30px;
+            border-radius: var(--radius);
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: slideDown 0.5s ease;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .header h1 {
+            color: white;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .header h1 i {
+            color: #38bdf8;
+            background: rgba(56, 189, 248, 0.1);
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4);
-            border: 2px solid rgba(255,255,255,0.3);
-            z-index: 9999;
-            text-decoration: none;
-            animation: pulse 2s infinite;
-        `;
-        adminBtn.innerHTML = '<i class="fas fa-cogs"></i>';
-        adminBtn.title = 'لوحة التحكم';
-        document.body.appendChild(adminBtn);
-        
-        // إظهار تنبيه
-        setTimeout(() => {
-            alert('✅ تم تفعيل دخول لوحة التحكم\n\nاسم المستخدم: admin\nكلمة المرور: webforge2026');
-        }, 1000);
-    }
-}
-
-// التهيئة
-document.addEventListener('DOMContentLoaded', function() {
-    // تحميل بيانات الموقع
-    setTimeout(loadSiteDataFromCMS, 500);
-    
-    // تحديث عداد الزيارات
-    updateVisitCounter();
-    
-    // إضافة زر الدخول السريع
-    addAdminQuickAccess();
-    
-    // اختصار لوحة المفاتيح (Ctrl + Alt + A)
-    document.addEventListener('keydown', function(e) {
-        if (e.ctrlKey && e.altKey && e.key === 'a') {
-            window.open('admin.html', '_blank');
         }
-    });
-});
+        
+        /* ========== الكروت ========== */
+        .card {
+            background: var(--dark-card);
+            padding: 30px;
+            border-radius: var(--radius);
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+        
+        .card h3 {
+            color: white;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(56, 189, 248, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .card h3 i {
+            color: #38bdf8;
+        }
+        
+        /* ========== النماذج ========== */
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--light);
+            font-weight: 500;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .form-group label i {
+            color: #38bdf8;
+            font-size: 0.9rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            transition: var(--transition);
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.1);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .form-control::placeholder {
+            color: var(--gray);
+        }
+        
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+        
+        /* ========== الأزرار ========== */
+        .btn {
+            padding: 16px 32px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: var(--transition);
+        }
+        
+        .btn:hover::before {
+            right: 100%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+        
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+        
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+        
+        .btn-warning:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+        }
+        
+        /* ========== الإحصائيات ========== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(139, 92, 246, 0.1));
+            padding: 25px;
+            border-radius: var(--radius);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #38bdf8, #8b5cf6);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(56, 189, 248, 0.3);
+        }
+        
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        
+        /* ========== التنبيهات ========== */
+        .alert {
+            padding: 20px 25px;
+            border-radius: var(--radius);
+            margin-bottom: 25px;
+            display: none;
+            animation: slideIn 0.3s ease;
+            border: 1px solid;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .alert::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 5px;
+            height: 100%;
+        }
+        
+        .alert-success {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+        
+        .alert-success::before {
+            background: #10b981;
+        }
+        
+        .alert-error {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+        
+        .alert-error::before {
+            background: #ef4444;
+        }
+        
+        /* ========== التبويبات ========== */
+        .tab-content {
+            display: none;
+            animation: fadeInUp 0.5s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* ========== تخصيص الملف ========== */
+        .file-input {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        
+        .file-input input[type="file"] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 0;
+            padding: 0;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            filter: alpha(opacity=0);
+            width: 100%;
+            height: 100%;
+        }
+        
+        .file-label {
+            display: block;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--gray);
+        }
+        
+        .file-label:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #38bdf8;
+            color: white;
+        }
+        
+        .file-label i {
+            margin-left: 8px;
+        }
+        
+        /* ========== تحسينات للجوال ========== */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+            }
+            
+            .logout-btn {
+                position: static;
+                margin: 20px;
+                width: calc(100% - 40px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+                padding: 20px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .card {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* ========== تأثيرات إضافية ========== */
+        .particles {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .glow {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.3), transparent);
+            filter: blur(60px);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .glow:nth-child(1) {
+            top: 20%;
+            right: 10%;
+            animation-delay: 0s;
+        }
+        
+        .glow:nth-child(2) {
+            top: 60%;
+            left: 15%;
+            animation-delay: 2s;
+        }
+        
+        .glow:nth-child(3) {
+            bottom: 20%;
+            right: 20%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.1); }
+        }
+        
+        /* ========== شريط التقدم ========== */
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #38bdf8, #8b5cf6);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- تأثيرات الخلفية -->
+    <div class="particles">
+        <div class="glow"></div>
+        <div class="glow"></div>
+        <div class="glow"></div>
+    </div>
+    
+    <div class="container">
+        <!-- الشريط الجانبي -->
+        <div class="sidebar">
+            <div class="logo">
+                <h2><i class="fas fa-cogs"></i> Web Forge</h2>
+                <p>لوحة التحكم الاحترافية</p>
+            </div>
+            
+            <div class="nav-item active" onclick="switchTab('login')">
+                <i class="fas fa-sign-in-alt"></i>
+                <span>تسجيل الدخول</span>
+            </div>
+            
+            <div class="nav-item" onclick="switchTab('content')">
+                <i class="fas fa-edit"></i>
+                <span>المحتوى</span>
+            </div>
+            
+            <div class="nav-item" onclick="switchTab('stats')">
+                <i class="fas fa-chart-line"></i>
+                <span>الإحصائيات</span>
+            </div>
+            
+            <div class="nav-item" onclick="switchTab('backup')">
+                <i class="fas fa-save"></i>
+                <span>النسخ الاحتياطي</span>
+            </div>
+            
+            <div class="logout-btn">
+                <button class="btn btn-danger" onclick="logout()" style="width: 100%;">
+                    <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+                </button>
+            </div>
+        </div>
+        
+        <!-- المحتوى الرئيسي -->
+        <div class="content">
+            <!-- التنبيهات -->
+            <div id="successAlert" class="alert alert-success"></div>
+            
+            <!-- قسم تسجيل الدخول -->
+            <div id="loginTab" class="tab-content active">
+                <div class="header">
+                    <h1><i class="fas fa-lock"></i> تسجيل دخول المالك</h1>
+                </div>
+                
+                <div class="card" style="max-width: 500px; margin: 50px auto;">
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> اسم المستخدم</label>
+                        <input type="text" id="username" class="form-control" placeholder="أدخل اسم المستخدم" value="admin">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-key"></i> كلمة المرور</label>
+                        <input type="password" id="password" class="form-control" placeholder="أدخل كلمة المرور" value="webforge2026">
+                    </div>
+                    
+                    <div class="progress-bar">
+                        <div class="progress" id="loginProgress" style="width: 0%"></div>
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="login()" style="width: 100%; margin-top: 20px;">
+                        <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+                    </button>
+                </div>
+            </div>
+            
+            <!-- قسم المحتوى -->
+            <div id="contentTab" class="tab-content">
+                <div class="header">
+                    <h1><i class="fas fa-edit"></i> تحرير محتوى الموقع</h1>
+                    <button class="btn btn-success" onclick="saveAll()">
+                        <i class="fas fa-save"></i> حفظ كل التغييرات
+                    </button>
+                </div>
+                
+                <!-- العنوان الرئيسي -->
+                <div class="card">
+                    <h3><i class="fas fa-heading"></i> العنوان الرئيسي</h3>
+                    <div class="form-group">
+                        <input type="text" id="siteTitle" class="form-control" placeholder="عنوان الموقع">
+                    </div>
+                </div>
+                
+                <!-- وصف الموقع -->
+                <div class="card">
+                    <h3><i class="fas fa-align-left"></i> وصف الموقع</h3>
+                    <div class="form-group">
+                        <textarea id="siteDescription" class="form-control" placeholder="وصف الموقع (لتحسين محركات البحث)"></textarea>
+                    </div>
+                </div>
+                
+                <!-- النص الرئيسي -->
+                <div class="card">
+                    <h3><i class="fas fa-paragraph"></i> النص الرئيسي في الصفحة</h3>
+                    <div class="form-group">
+                        <textarea id="heroText" class="form-control" placeholder="النص الذي يظهر تحت العنوان الرئيسي"></textarea>
+                    </div>
+                </div>
+                
+                <!-- شريط العروض -->
+                <div class="card">
+                    <h3><i class="fas fa-bullhorn"></i> شريط العروض المتحرك</h3>
+                    <div class="form-group">
+                        <textarea id="promoText" class="form-control" placeholder="نص شريط العروض (سوف يتحرك تلقائياً)"></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- قسم الإحصائيات -->
+            <div id="statsTab" class="tab-content">
+                <div class="header">
+                    <h1><i class="fas fa-chart-line"></i> إحصائيات الموقع</h1>
+                    <button class="btn btn-primary" onclick="refreshStats()">
+                        <i class="fas fa-sync-alt"></i> تحديث
+                    </button>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalVisits">0</div>
+                        <div class="stat-label">إجمالي الزيارات</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalOrders">0</div>
+                        <div class="stat-label">الطلبات المكتملة</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalReferrals">0</div>
+                        <div class="stat-label">الإحالات الناجحة</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalGifts">0</div>
+                        <div class="stat-label">الهدايا المفتوحة</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- قسم النسخ الاحتياطي -->
+            <div id="backupTab" class="tab-content">
+                <div class="header">
+                    <h1><i class="fas fa-save"></i> النسخ الاحتياطي</h1>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-download"></i> تصدير بيانات الموقع</h3>
+                    <p style="color: var(--gray); margin-bottom: 20px;">
+                        احفظ نسخة احتياطية من جميع محتويات وإعدادات الموقع
+                    </p>
+                    <button class="btn btn-primary" onclick="exportData()">
+                        <i class="fas fa-file-export"></i> تصدير البيانات
+                    </button>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-upload"></i> استيراد بيانات</h3>
+                    <p style="color: var(--gray); margin-bottom: 10px;">
+                        استعد الموقع من نسخة احتياطية سابقة
+                    </p>
+                    <div class="file-input">
+                        <input type="file" id="backupFile" accept=".json">
+                        <label for="backupFile" class="file-label">
+                            <i class="fas fa-cloud-upload-alt"></i> اختر ملف النسخ الاحتياطي
+                        </label>
+                    </div>
+                    <button class="btn btn-primary" onclick="importData()">
+                        <i class="fas fa-file-import"></i> استيراد البيانات
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-// معلومات للمالك
-console.log('🚀 نظام التحكم Web Forge');
-console.log('للوصول: أضف ?admin=123456 إلى رابط الموقع');
-console.log('أو اضغط Ctrl + Alt + A');
-console.log('البيانات محفوظة في localStorage');
-</script>
+    <script>
+        // بيانات المالك الافتراضية
+        const ADMIN = {
+            username: "admin",
+            password: "webforge2026"
+        };
+        
+        let isLoggedIn = false;
+        
+        // التحقق من حالة التسجيل
+        function checkLogin() {
+            const loggedIn = localStorage.getItem('adminLoggedIn');
+            if (loggedIn === 'true') {
+                isLoggedIn = true;
+                showContent();
+            }
+        }
+        
+        // تسجيل الدخول مع تأثير
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const progressBar = document.getElementById('loginProgress');
+            
+            // عرض شريط التقدم
+            progressBar.style.width = '50%';
+            
+            setTimeout(() => {
+                if (username === ADMIN.username && password === ADMIN.password) {
+                    progressBar.style.width = '100%';
+                    
+                    setTimeout(() => {
+                        isLoggedIn = true;
+                        localStorage.setItem('adminLoggedIn', 'true');
+                        showContent();
+                        showAlert('تم تسجيل الدخول بنجاح!', 'success');
+                        progressBar.style.width = '0%';
+                    }, 500);
+                    
+                } else {
+                    progressBar.style.width = '0%';
+                    showAlert('اسم المستخدم أو كلمة المرور غير صحيحة', 'error');
+                }
+            }, 1000);
+        }
+        
+        // تسجيل الخروج
+        function logout() {
+            isLoggedIn = false;
+            localStorage.removeItem('adminLoggedIn');
+            switchTab('login');
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            showAlert('تم تسجيل الخروج بنجاح', 'success');
+        }
+        
+        // تبديل التبويبات
+        function switchTab(tabName) {
+            if (!isLoggedIn && tabName !== 'login') {
+                showAlert('يجب تسجيل الدخول أولاً', 'error');
+                return;
+            }
+            
+            // إخفاء جميع التبويبات
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+                tab.style.display = 'none';
+            });
+            
+            // إزالة النشاط من القائمة
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // إظهار التبويب المطلوب
+            document.getElementById(tabName + 'Tab').classList.add('active');
+            document.getElementById(tabName + 'Tab').style.display = 'block';
+            
+            // تفعيل العنصر في القائمة
+            const tabMap = {
+                'login': 'تسجيل الدخول',
+                'content': 'المحتوى',
+                'stats': 'الإحصائيات',
+                'backup': 'النسخ الاحتياطي'
+            };
+            
+            document.querySelectorAll('.nav-item').forEach(item => {
+                if (item.textContent.includes(tabMap[tabName])) {
+                    item.classList.add('active');
+                }
+            });
+            
+            // تحميل البيانات إذا لزم
+            if (tabName === 'content') {
+                loadSiteData();
+            } else if (tabName === 'stats') {
+                loadStats();
+            }
+        }
+        
+        // إظهار المحتوى بعد التسجيل
+        function showContent() {
+            switchTab('content');
+        }
+        
+        // تحميل بيانات الموقع
+        function loadSiteData() {
+            const siteData = JSON.parse(localStorage.getItem('webforgeSiteData') || '{}');
+            
+            document.getElementById('siteTitle').value = siteData.siteTitle || '';
+            document.getElementById('siteDescription').value = siteData.siteDescription || '';
+            document.getElementById('heroText').value = siteData.heroText || '';
+            document.getElementById('promoText').value = siteData.promoText || '';
+        }
+        
+        // حفظ جميع التغييرات
+        function saveAll() {
+            const siteData = {
+                siteTitle: document.getElementById('siteTitle').value,
+                siteDescription: document.getElementById('siteDescription').value,
+                heroText: document.getElementById('heroText').value,
+                promoText: document.getElementById('promoText').value,
+                lastUpdated: new Date().toISOString()
+            };
+            
+            localStorage.setItem('webforgeSiteData', JSON.stringify(siteData));
+            showAlert('تم حفظ جميع التغييرات بنجاح!', 'success');
+        }
+        
+        // تحميل الإحصائيات
+        function loadStats() {
+            const stats = JSON.parse(localStorage.getItem('webforgeStats') || '{"visits":0,"orders":0,"referrals":0,"gifts":0}');
+            
+            document.getElementById('totalVisits').textContent = stats.visits || 0;
+            document.getElementById('totalOrders').textContent = stats.orders || 0;
+            document.getElementById('totalReferrals').textContent = stats.referrals || 0;
+            document.getElementById('totalGifts').textContent = stats.gifts || 0;
+        }
+        
+        // تحديث الإحصائيات
+        function refreshStats() {
+            loadStats();
+            showAlert('تم تحديث الإحصائيات بنجاح', 'success');
+        }
+        
+        // تصدير البيانات
+        function exportData() {
+            const siteData = JSON.parse(localStorage.getItem('webforgeSiteData') || '{}');
+            const stats = JSON.parse(localStorage.getItem('webforgeStats') || '{}');
+            
+            const exportData = {
+                siteData: siteData,
+                stats: stats,
+                exportedAt: new Date().toISOString()
+            };
+            
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = `webforge-backup-${new Date().toISOString().split('T')[0]}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            document.body.appendChild(linkElement);
+            linkElement.click();
+            document.body.removeChild(linkElement);
+            
+            showAlert('تم تصدير البيانات بنجاح', 'success');
+        }
+        
+        // استيراد البيانات
+        function importData() {
+            const fileInput = document.getElementById('backupFile');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                showAlert('يرجى اختيار ملف النسخ الاحتياطي', 'error');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    
+                    if (data.siteData) {
+                        localStorage.setItem('webforgeSiteData', JSON.stringify(data.siteData));
+                    }
+                    
+                    if (data.stats) {
+                        localStorage.setItem('webforgeStats', JSON.stringify(data.stats));
+                    }
+                    
+                    showAlert('تم استيراد البيانات بنجاح', 'success');
+                    loadSiteData();
+                    loadStats();
+                    
+                } catch (error) {
+                    showAlert('ملف غير صالح', 'error');
+                }
+            };
+            
+            reader.readAsText(file);
+        }
+        
+        // عرض التنبيهات
+        function showAlert(message, type) {
+            const alertDiv = document.getElementById('successAlert');
+            alertDiv.textContent = message;
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                alertDiv.style.display = 'none';
+            }, 3000);
+        }
+        
+        // التهيئة عند تحميل الصفحة
+        window.onload = function() {
+            checkLogin();
+            
+            // إضافة تأثيرات إضافية
+            document.querySelectorAll('.card').forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+        };
+    </script>
+</body>
+</html>
