@@ -2942,5 +2942,229 @@
             });
         }
     </script>
+// ========== وظائف ربط الموقع بلوحة التحكم ==========
+function updateLiveWebsite() {
+    const data = getSiteData();
+    
+    // إنشاء بيانات التحديث
+    const updateData = {
+        action: 'update_website',
+        timestamp: new Date().toISOString(),
+        data: data
+    };
+    
+    // عرض رسالة
+    showAlert('جاري تحديث الموقع...', 'success');
+    
+    // محاكاة تحديث الموقع (يمكن تعديلها لربطها بخادم حقيقي)
+    simulateWebsiteUpdate(updateData);
+}
+
+function simulateWebsiteUpdate(updateData) {
+    showLoading();
+    
+    // محاكاة تأخير الشبكة
+    setTimeout(() => {
+        // حفظ البيانات في localStorage للموقع الرئيسي
+        localStorage.setItem('webforge_live_update', JSON.stringify(updateData));
+        
+        // إنشاء رابط لتحميل البيانات
+        const blob = new Blob([JSON.stringify(updateData, null, 2)], {type: 'application/json'});
+        const url = URL.createObjectURL(blob);
+        
+        // إنشاء رابط تحميل
+        const downloadLink = document.createElement('a');
+        downloadLink.href = url;
+        downloadLink.download = `webforge_update_${Date.now()}.json`;
+        downloadLink.style.display = 'none';
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+        
+        hideLoading();
+        showAlert('✅ تم تحديث الموقع بنجاح!', 'success');
+        
+        // رسالة التعليمات
+        alert('📋 تعليمات التحديث:\n\n1. تم حفظ البيانات في ملف JSON\n2. قم برفع الملف إلى مجلد الموقع\n3. أضف كود التحديث في الموقع الرئيسي');
+    }, 1500);
+}
+
+// ========== وظيفة تنزيل ملف التحديث للجيت هاب ==========
+function generateGitHubFiles() {
+    const data = getSiteData();
+    
+    showLoading();
+    
+    setTimeout(() => {
+        // إنشاء ملفات مختلفة لكل قسم
+        const files = {
+            'data/hero.json': JSON.stringify(data.hero, null, 2),
+            'data/services.json': JSON.stringify(data.services, null, 2),
+            'data/portfolio.json': JSON.stringify(data.portfolio, null, 2),
+            'data/faq.json': JSON.stringify(data.faq, null, 2),
+            'data/stats.json': JSON.stringify(data.stats, null, 2),
+            'data/translations.json': JSON.stringify(data.translations, null, 2),
+            'data/settings.json': JSON.stringify(data.settings, null, 2),
+            'data/full-data.json': JSON.stringify(data, null, 2)
+        };
+        
+        // تنزيل كل الملفات في أرشيف ZIP
+        createZipFile(files, 'webforge_data_' + new Date().toISOString().split('T')[0]);
+        
+        hideLoading();
+        showAlert('📦 تم إنشاء ملفات التحديث للجيت هاب', 'success');
+    }, 1000);
+}
+
+// ========== إنشاء ملف ZIP ==========
+function createZipFile(files, zipName) {
+    // محاكاة إنشاء ZIP (في الواقع الفعلي تحتاج مكتبة مثل JSZip)
+    const zipContent = "=== ملفات تحديث Web Forge ===\n\n";
+    let allFiles = zipContent;
+    
+    for (const [filename, content] of Object.entries(files)) {
+        allFiles += `\n\n=== ${filename} ===\n${content}`;
+    }
+    
+    // تنزيل كملف نصي
+    const blob = new Blob([allFiles], {type: 'text/plain'});
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${zipName}.txt`;
+    link.click();
+    
+    // رسالة التعليمات
+    alert('📁 تعليمات رفع الملفات للجيت هاب:\n\n' +
+          '1. ارفع الملفات في مجلد /data\n' +
+          '2. تأكد من أن الموقع يقرأ البيانات من هذا المجلد\n' +
+          '3. قم بعمل commit و push');
+}
+
+// ========== تحديث جميع وظائف الحفظ ==========
+function updateSaveFunctions() {
+    // نسخ جميع وظائف الحفظ الأصلية
+    const originalSaveService = window.saveService;
+    const originalSavePortfolio = window.savePortfolio;
+    const originalSaveFaq = window.saveFaq;
+    const originalSaveHero = window.saveHero;
+    const originalSaveStats = window.saveStats;
+    const originalSaveTranslations = window.saveTranslations;
+    const originalSaveSettings = window.saveSettings;
+    
+    // تحديث وظائف الحفظ لتشمل تحديث الموقع
+    window.saveService = function() {
+        originalSaveService();
+        updateLiveWebsite();
+    };
+    
+    window.savePortfolio = function() {
+        originalSavePortfolio();
+        updateLiveWebsite();
+    };
+    
+    window.saveFaq = function() {
+        originalSaveFaq();
+        updateLiveWebsite();
+    };
+    
+    window.saveHero = function() {
+        originalSaveHero();
+        updateLiveWebsite();
+    };
+    
+    window.saveStats = function() {
+        originalSaveStats();
+        updateLiveWebsite();
+    };
+    
+    window.saveTranslations = function() {
+        originalSaveTranslations();
+        updateLiveWebsite();
+    };
+    
+    window.saveSettings = function() {
+        originalSaveSettings();
+        updateLiveWebsite();
+    };
+}
+
+// ========== إضافة زر تحديث الموقع ==========
+function addUpdateButton() {
+    // زر في لوحة التحكم
+    const updateBtn = document.createElement('button');
+    updateBtn.id = 'updateWebsiteBtn';
+    updateBtn.innerHTML = '<i class="fas fa-sync-alt"></i> تحديث الموقع المباشر';
+    updateBtn.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        z-index: 10000;
+        transition: all 0.3s;
+    `;
+    
+    updateBtn.onmouseover = function() {
+        this.style.transform = 'translateY(-2px)';
+        this.style.boxShadow = '0 6px 16px rgba(16, 185, 129, 0.6)';
+    };
+    
+    updateBtn.onmouseout = function() {
+        this.style.transform = 'translateY(0)';
+        this.style.boxShadow = '0 4px 12px rgba(16, 185, 129, 0.4)';
+    };
+    
+    updateBtn.onclick = updateLiveWebsite;
+    
+    document.body.appendChild(updateBtn);
+    
+    // زر لإنشاء ملفات الجيت هاب
+    const githubBtn = document.createElement('button');
+    githubBtn.id = 'githubUpdateBtn';
+    githubBtn.innerHTML = '<i class="fab fa-github"></i> إنشاء ملفات للجيت هاب';
+    githubBtn.style.cssText = `
+        position: fixed;
+        bottom: 70px;
+        left: 20px;
+        background: linear-gradient(135deg, #333, #000);
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        z-index: 10000;
+        transition: all 0.3s;
+    `;
+    
+    githubBtn.onmouseover = function() {
+        this.style.transform = 'translateY(-2px)';
+        this.style.boxShadow = '0 6px 16px rgba(0, 0, 0, 0.6)';
+    };
+    
+    githubBtn.onmouseout = function() {
+        this.style.transform = 'translateY(0)';
+        this.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.4)';
+    };
+    
+    githubBtn.onclick = generateGitHubFiles;
+    
+    document.body.appendChild(githubBtn);
+}
+
+// ========== تهيئة النظام ==========
+document.addEventListener('DOMContentLoaded', function() {
+    updateSaveFunctions();
+    addUpdateButton();
+});
+    
 </body>
 </html>
