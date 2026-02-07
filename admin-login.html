@@ -1,0 +1,41 @@
+// admin-config.js
+const AdminConfig = {
+    // بيانات المديرين المسموح لهم بالدخول
+    admins: [
+        {
+            username: "admin",
+            password: "admin123", // سيتم تشفيرها في الإصدار النهائي
+            fullName: "محمد أيت صالح",
+            email: "webfooorge@gmail.com",
+            role: "superadmin",
+            lastLogin: null
+        },
+        {
+            username: "hajar",
+            password: "hajar123",
+            fullName: "هاجر أيت بلعيد",
+            email: "hajar@webforge.com",
+            role: "editor",
+            lastLogin: null
+        }
+    ],
+    
+    // صلاحيات كل دور
+    permissions: {
+        superadmin: ["all"],
+        editor: ["content", "view_orders", "view_stats"],
+        support: ["view_orders", "respond_contacts"]
+    },
+    
+    // إعدادات الأمان
+    security: {
+        maxLoginAttempts: 5,
+        sessionTimeout: 30, // دقائق
+        require2FA: false,
+        backupFrequency: "daily"
+    }
+};
+
+
+
+
