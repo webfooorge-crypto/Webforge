@@ -16,6 +16,13 @@ $config = [
         '../css/style.css',
         // يمكنك إضافة المزيد من الملفات هنا
     ],
+    'allowed_files' => [
+    '../index.html',
+    '../about.html',
+    '../css/style.css',
+    
+    // أضف هنا الملفات التي تريد التعديل عليها
+],
     
     // الصلاحيات
     'max_file_size' => 5 * 1024 * 1024, // 5MB
