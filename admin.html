@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم Web Forge</title>
+    <style>
+        /* كل التصميم في مكان واحد */
+        :root {
+            --primary: #38bdf8; --primary-dark: #0ea5e9;
+            --bg-dark: #0f172a; --bg-card: #1e293b;
+            --bg-sidebar: #1a2332; --text-main: #f8fafc;
+            --text-secondary: #94a3b8; --border-color: rgba(255,255,255,0.1);
+            --success: #10b981; --warning: #f59e0b; --error: #ef4444;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            direction: rtl;
+        }
+        
+        /* شاشة الدخول */
+        .login-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .login-box {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .login-logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .login-logo h1 {
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; color: var(--text-secondary); }
+        .form-group input {
+            width: 100%; padding: 12px 15px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 1rem;
+        }
+        
+        .login-btn {
+            width: 100%; padding: 12px;
+            background: var(--primary); color: #000;
+            border: none; border-radius: 8px;
+            font-size: 1rem; font-weight: bold;
+            cursor: pointer; display: flex;
+            align-items: center; justify-content: center;
+            gap: 8px;
+        }
+        
+        .error-msg {
+            background: rgba(239,68,68,0.1);
+            border: 1px solid var(--error); color: var(--error);
+            padding: 10px; border-radius: 8px;
+            margin-bottom: 1rem; display: none;
+            text-align: center;
+        }
+        
+        /* لوحة التحكم (تظهر بعد الدخول) */
+        .dashboard { display: none; }
+        
+        .admin-nav {
+            position: fixed; top: 0; right: 0; left: 0;
+            height: 60px; background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            display: flex; justify-content: space-between;
+            align-items: center; padding: 0 20px;
+            z-index: 1000;
+        }
+        
+        .nav-brand { display: flex; align-items: center; gap: 10px; }
+        
+        .content-area {
+            margin-top: 60px; padding: 20px;
+            display: grid; gap: 20px;
+        }
+        
+        .section-card {
+            background: var(--bg-card); padding: 20px;
+            border-radius: 10px; border: 1px solid var(--border-color);
+        }
+        
+        .section-card h3 {
+            color: var(--primary); margin-bottom: 15px;
+            padding-bottom: 10px; border-bottom: 1px solid var(--border-color);
+        }
+        
+        .btn {
+            padding: 10px 15px; border-radius: 6px;
+            border: none; cursor: pointer; font-family: inherit;
+            margin: 5px; transition: 0.3s;
+        }
+        
+        .btn-primary { background: var(--primary); color: #000; }
+        .btn-secondary { background: rgba(255,255,255,0.1); color: var(--text-main); }
+        .btn-danger { background: rgba(239,68,68,0.1); color: var(--error); }
+        
+        textarea, input[type="text"] {
+            width: 100%; padding: 10px; margin: 5px 0 15px 0;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 6px; color: var(--text-main);
+        }
+        
+        .notification {
+            position: fixed; top: 70px; right: 20px;
+            padding: 10px 20px; border-radius: 8px;
+            z-index: 2000; animation: slideIn 0.3s;
+        }
+        
+        .notification.success { background: var(--success); color: #000; }
+        .notification.error { background: var(--error); color: #fff; }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- شاشة الدخول -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-box">
+            <div class="login-logo">
+                <h1><i class="fas fa-code"></i> Web Forge Admin</h1>
+                <p style="color: var(--text-secondary); margin-top: 5px;">لوحة التحكم الخاصة بالمالك</p>
+            </div>
+            
+            <div id="errorMsg" class="error-msg"></div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-user"></i> اسم المستخدم</label>
+                <input type="text" id="username" placeholder="أدخل اسم المستخدم">
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-lock"></i> كلمة المرور</label>
+                <input type="password" id="password" placeholder="أدخل كلمة المرور">
+            </div>
+            
+            <button id="loginBtn" class="login-btn">
+                <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+            </button>
+        </div>
+    </div>
+    
+    <!-- لوحة التحكم -->
+    <div id="dashboard" class="dashboard">
+        <nav class="admin-nav">
+            <div class="nav-brand">
+                <i class="fas fa-code"></i>
+                <span>لوحة تحكم المالك</span>
+            </div>
+            <div>
+                <button onclick="window.open('../index.html', '_blank')" class="btn btn-secondary">
+                    <i class="fas fa-external-link-alt"></i> عرض الموقع
+                </button>
+                <button onclick="adminLogout()" class="btn btn-danger">
+                    <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+                </button>
+            </div>
+        </nav>
+        
+        <div class="content-area">
+            <!-- قسم القسم الرئيسي -->
+            <div class="section-card">
+                <h3><i class="fas fa-home"></i> القسم الرئيسي (Hero)</h3>
+                <div class="form-group">
+                    <label>السطر الأول:</label>
+                    <input type="text" id="heroTitle" placeholder="نحول أفكارك إلى">
+                </div>
+                <div class="form-group">
+                    <label>الوصف:</label>
+                    <textarea id="heroDesc" rows="3" placeholder="وصف القسم الرئيسي..."></textarea>
+                </div>
+                <button onclick="saveHero()" class="btn btn-primary">
+                    <i class="fas fa-save"></i> حفظ القسم الرئيسي
+                </button>
+            </div>
+            
+            <!-- قسم الخدمات -->
+            <div class="section-card">
+                <h3><i class="fas fa-concierge-bell"></i> الخدمات</h3>
+                <div id="servicesList">
+                    <!-- سيتم ملؤها بالخدمات -->
+                </div>
+                <button onclick="addService()" class="btn btn-secondary">
+                    <i class="fas fa-plus"></i> إضافة خدمة
+                </button>
+                <button onclick="saveServices()" class="btn btn-primary">
+                    <i class="fas fa-save"></i> حفظ جميع الخدمات
+                </button>
+            </div>
+            
+            <!-- قسم الإحصائيات -->
+            <div class="section-card">
+                <h3><i class="fas fa-chart-line"></i> الإحصائيات</h3>
+                <div class="form-group">
+                    <label>عدد المشاريع:</label>
+                    <input type="number" id="statsProjects" min="0">
+                </div>
+                <div class="form-group">
+                    <label>نسبة الرضا %:</label>
+                    <input type="number" id="statsSatisfaction" min="0" max="100">
+                </div>
+                <button onclick="saveStats()" class="btn btn-primary">
+                    <i class="fas fa-save"></i> حفظ الإحصائيات
+                </button>
+            </div>
+            
+            <!-- قسم الإعدادات -->
+            <div class="section-card">
+                <h3><i class="fas fa-cogs"></i> الإعدادات</h3>
+                <button onclick="changePassword()" class="btn btn-secondary">
+                    <i class="fas fa-key"></i> تغيير كلمة المرور
+                </button>
+                <button onclick="backupData()" class="btn btn-secondary">
+                    <i class="fas fa-download"></i> نسخ احتياطي
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // ========== نظام المصادقة ==========
+        const ADMIN_CREDENTIALS = {
+            username: 'admin',
+            password: 'WebForge2026!' // غيرها بعد الدخول
+        };
+        
+        function checkAuth() {
+            const session = localStorage.getItem('admin_session');
+            if (!session) return false;
+            
+            const data = JSON.parse(session);
+            const now = new Date().getTime();
+            
+            if (now - data.timestamp > 2 * 60 * 60 * 1000) {
+                localStorage.removeItem('admin_session');
+                return false;
+            }
+            
+            return true;
+        }
+        
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.remove(), 3000);
+        }
+        
+        // ========== الدخول ==========
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('errorMsg');
+            
+            if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+                const sessionData = {
+                    loggedIn: true,
+                    timestamp: new Date().getTime(),
+                    username: username
+                };
+                
+                localStorage.setItem('admin_session', JSON.stringify(sessionData));
+                showDashboard();
+            } else {
+                errorDiv.textContent = 'اسم المستخدم أو كلمة المرور غير صحيحة';
+                errorDiv.style.display = 'block';
+            }
+        });
+        
+        // ========== عرض لوحة التحكم ==========
+        function showDashboard() {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+            
+            loadSiteData();
+            setupEventListeners();
+            showNotification('مرحباً بك في لوحة التحكم', 'success');
+        }
+        
+        function adminLogout() {
+            localStorage.removeItem('admin_session');
+            localStorage.removeItem('site_content');
+            location.reload();
+        }
+        
+        // ========== تحميل البيانات ==========
+        function loadSiteData() {
+            const savedData = localStorage.getItem('site_content');
+            const defaultData = {
+                hero: {
+                    title: 'نحول أفكارك إلى',
+                    description: 'مجموعة web forge تقدم لك حلولاً تقنية متكاملة. متخصصون في صناعة الهوية الرقمية، تطوير متاجر YouCan و Shopify، وتصميم المواقع العصرية.'
+                },
+                services: [
+                    { title: 'متاجر YouCan', desc: 'تصميم وتجهيز متاجر YouCan احترافية بالكامل.' },
+                    { title: 'متاجر Shopify', desc: 'تطوير متاجر دروبشيبينغ أو براند خاص عالمي.' },
+                    { title: 'مواقع Web Forge', desc: 'مواقع خاصة: مدونة، طبيب، محامي، Portfolio، كتب.' }
+                ],
+                stats: {
+                    projects: 50,
+                    satisfaction: 100
+                }
+            };
+            
+            const data = savedData ? JSON.parse(savedData) : defaultData;
+            
+            // تحديث النماذج
+            if (data.hero) {
+                document.getElementById('heroTitle').value = data.hero.title || '';
+                document.getElementById('heroDesc').value = data.hero.description || '';
+            }
+            
+            if (data.stats) {
+                document.getElementById('statsProjects').value = data.stats.projects || 0;
+                document.getElementById('statsSatisfaction').value = data.stats.satisfaction || 0;
+            }
+            
+            // تحديث الخدمات
+            updateServicesList(data.services || defaultData.services);
+        }
+        
+        function updateServicesList(services) {
+            const container = document.getElementById('servicesList');
+            container.innerHTML = '';
+            
+            services.forEach((service, index) => {
+                const div = document.createElement('div');
+                div.className = 'service-item';
+                div.style.marginBottom = '15px';
+                div.style.padding = '10px';
+                div.style.background = 'rgba(255,255,255,0.05)';
+                div.style.borderRadius = '6px';
+                div.innerHTML = `
+                    <input type="text" value="${service.title}" 
+                           onchange="updateService(${index}, 'title', this.value)"
+                           style="margin-bottom: 5px;">
+                    <textarea rows="2" 
+                              onchange="updateService(${index}, 'desc', this.value)"
+                              style="width: 100%;">${service.desc}</textarea>
+                    <button onclick="removeService(${index})" class="btn btn-danger btn-small">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                `;
+                container.appendChild(div);
+            });
+        }
+        
+        function updateService(index, field, value) {
+            const savedData = localStorage.getItem('site_content');
+            const data = savedData ? JSON.parse(savedData) : {};
+            
+            if (!data.services) data.services = [];
+            if (!data.services[index]) data.services[index] = {};
+            
+            data.services[index][field] = value;
+            localStorage.setItem('site_content', JSON.stringify(data));
+        }
+        
+        function removeService(index) {
+            const savedData = localStorage.getItem('site_content');
+            const data = savedData ? JSON.parse(savedData) : {};
+            
+            if (data.services && data.services[index]) {
+                data.services.splice(index, 1);
+                localStorage.setItem('site_content', JSON.stringify(data));
+                updateServicesList(data.services);
+                showNotification('تم حذف الخدمة', 'success');
+            }
+        }
+        
+        function addService() {
+            const savedData = localStorage.getItem('site_content');
+            const data = savedData ? JSON.parse(savedData) : {};
+            
+            if (!data.services) data.services = [];
+            data.services.push({ title: 'خدمة جديدة', desc: 'وصف الخدمة...' });
+            
+            localStorage.setItem('site_content', JSON.stringify(data));
+            updateServicesList(data.services);
+            showNotification('تمت إضافة خدمة جديدة', 'success');
+        }
+        
+        // ========== حفظ البيانات ==========
+        function saveHero() {
+            const savedData = localStorage.getItem('site_content');
+            const data = savedData ? JSON.parse(savedData) : {};
+            
+            data.hero = {
+                title: document.getElementById('heroTitle').value,
+                description: document.getElementById('heroDesc').value
+            };
+            
+            localStorage.setItem('site_content', JSON.stringify(data));
+            
+            // تحديث الموقع مباشرة
+            updateLiveSite();
+            
+            showNotification('تم حفظ القسم الرئيسي', 'success');
+        }
+        
+        function saveServices() {
+            // البيانات تحفظ تلقائياً عبر onchange
+            showNotification('تم حفظ جميع الخدمات', 'success');
+        }
+        
+        function saveStats() {
+            const savedData = localStorage.getItem('site_content');
+            const data = savedData ? JSON.parse(savedData) : {};
+            
+            data.stats = {
+                projects: parseInt(document.getElementById('statsProjects').value) || 0,
+                satisfaction: parseInt(document.getElementById('statsSatisfaction').value) || 0
+            };
+            
+            localStorage.setItem('site_content', JSON.stringify(data));
+            
+            // تحديث الموقع مباشرة
+            updateLiveSite();
+            
+            showNotification('تم حفظ الإحصائيات', 'success');
+        }
+        
+        // ========== تحديث الموقع الحي ==========
+        function updateLiveSite() {
+            // إرسال البيانات للصفحة الرئيسية
+            const event = new CustomEvent('siteContentUpdated', {
+                detail: localStorage.getItem('site_content')
+            });
+            window.dispatchEvent(event);
+            
+            // محاولة تحديث الصفحة الرئيسية إذا كانت مفتوحة
+            try {
+                if (window.opener) {
+                    window.opener.postMessage({
+                        type: 'UPDATE_CONTENT',
+                        data: localStorage.getItem('site_content')
+                    }, '*');
+                }
+            } catch (e) {
+                console.log('لا يمكن تحديث النافذة الأصلية');
+            }
+        }
+        
+        // ========== ميزات إضافية ==========
+        function changePassword() {
+            const newPass = prompt('أدخل كلمة المرور الجديدة (8 أحرف على الأقل):');
+            if (newPass && newPass.length >= 8) {
+                ADMIN_CREDENTIALS.password = newPass;
+                showNotification('تم تغيير كلمة المرور', 'success');
+            } else if (newPass) {
+                showNotification('كلمة المرور يجب أن تكون 8 أحرف على الأقل', 'error');
+            }
+        }
+        
+        function backupData() {
+            const data = localStorage.getItem('site_content');
+            const blob = new Blob([data], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `webforge-backup-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showNotification('تم إنشاء نسخة احتياطية', 'success');
+        }
+        
+        // ========== إعدادات أولية ==========
+        function setupEventListeners() {
+            // السماح بالدخول بالزر Enter
+            document.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    if (document.getElementById('loginScreen').style.display !== 'none') {
+                        document.getElementById('loginBtn').click();
+                    }
+                }
+            });
+            
+            // تحديث الموقع كل 30 ثانية
+            setInterval(() => {
+                updateLiveSite();
+            }, 30000);
+        }
+        
+        // ========== بدء التشغيل ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            if (checkAuth()) {
+                showDashboard();
+            }
+            
+            // استقبال تحديثات من الصفحة الرئيسية
+            window.addEventListener('message', function(event) {
+                if (event.data && event.data.type === 'GET_CONTENT') {
+                    updateLiveSite();
+                }
+            });
+        });
+        
+        // جعل الدوال متاحة عالمياً
+        window.adminLogout = adminLogout;
+        window.saveHero = saveHero;
+        window.saveServices = saveServices;
+        window.saveStats = saveStats;
+        window.addService = addService;
+        window.updateService = updateService;
+        window.removeService = removeService;
+        window.changePassword = changePassword;
+        window.backupData = backupData;
+    </script>
+</body>
+</html>
