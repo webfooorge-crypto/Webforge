@@ -3598,5 +3598,44 @@
         window.translations = translations;
         window.typewriterData = typewriterData;
     </script>
+    <!-- سكريبت تحميل المحتوى الديناميكي -->
+<script>
+// تحميل محتوى الموقع من ملف JSON
+fetch('data/site-content.json')
+    .then(response => response.json())
+    .then(data => {
+        const site = data.site;
+        
+        // تحديث المحتوى الديناميكي
+        document.querySelectorAll('[data-content]').forEach(element => {
+            const key = element.getAttribute('data-content');
+            const keys = key.split('.');
+            let value = site;
+            
+            keys.forEach(k => {
+                if (value && value[k] !== undefined) {
+                    value = value[k];
+                } else {
+                    value = null;
+                }
+            });
+            
+            if (value && element.tagName === 'INPUT') {
+                element.value = value;
+            } else if (value) {
+                element.textContent = value;
+            }
+        });
+        
+        // تحديث الروابط الديناميكية
+        document.querySelectorAll('[data-href]').forEach(element => {
+            const key = element.getAttribute('data-href');
+            if (site[key]) {
+                element.href = site[key];
+            }
+        });
+    })
+    .catch(error => console.error('Error loading site content:', error));
+</script>
 </body>
 </html>
