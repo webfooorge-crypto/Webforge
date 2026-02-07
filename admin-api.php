@@ -7,7 +7,7 @@
 // ========== إعدادات النظام ==========
 $config = [
     // كلمة المرور الرئيسية (غيّرها!)
-    'admin_password' => '123456', // password123 (مثال)
+    'admin_password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password123 (مثال)
     
     // ملفات الموقع القابلة للتعديل
     'allowed_files' => [
@@ -16,13 +16,6 @@ $config = [
         '../css/style.css',
         // يمكنك إضافة المزيد من الملفات هنا
     ],
-    'allowed_files' => [
-    '../index.html',
-    '../about.html',
-    '../css/style.css',
-    
-    // أضف هنا الملفات التي تريد التعديل عليها
-],
     
     // الصلاحيات
     'max_file_size' => 5 * 1024 * 1024, // 5MB
