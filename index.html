@@ -3598,5 +3598,78 @@
         window.translations = translations;
         window.typewriterData = typewriterData;
     </script>
+    <!-- ========== رابط الإدارة المخفي ========== -->
+<a href="admin.html" 
+   id="adminLink"
+   style="position: fixed; bottom: 5px; left: 5px; background: rgba(0,0,0,0.05); color: rgba(0,0,0,0.3); padding: 3px 6px; border-radius: 3px; font-size: 9px; text-decoration: none; z-index: 9999; opacity: 0.05; transition: all 0.3s; font-family: Arial; border: 1px solid rgba(0,0,0,0.1);"
+   onmouseover="this.style.opacity='0.8'; this.style.background='rgba(0,0,0,0.2)'; this.style.color='rgba(255,255,255,0.9)';"
+   onmouseout="this.style.opacity='0.05'; this.style.background='rgba(0,0,0,0.05)'; this.style.color='rgba(0,0,0,0.3)';"
+   title="لوحة تحكم الإدارة - Web Forge">
+   🔧 Admin
+</a>
+
+<script>
+    // ========== تأمين الرابط بإظهاره فقط عند الضغط على زر سري ==========
+    let adminKeyPress = [];
+    const adminSecretCode = '3838'; // اضغط 3 ثم 8 ثم 3 ثم 8 لإظهار الرابط
+    
+    document.addEventListener('keydown', function(e) {
+        adminKeyPress.push(e.key);
+        if (adminKeyPress.length > adminSecretCode.length) {
+            adminKeyPress.shift();
+        }
+        
+        if (adminKeyPress.join('') === adminSecretCode) {
+            const adminLink = document.getElementById('adminLink');
+            adminLink.style.opacity = '0.8';
+            adminLink.style.background = 'rgba(37, 99, 235, 0.9)';
+            adminLink.style.color = 'white';
+            adminLink.style.padding = '6px 12px';
+            adminLink.style.fontSize = '11px';
+            
+            // إرجاع الرابط إلى حالته المخفية بعد 10 ثواني
+            setTimeout(() => {
+                adminLink.style.opacity = '0.05';
+                adminLink.style.background = 'rgba(0,0,0,0.05)';
+                adminLink.style.color = 'rgba(0,0,0,0.3)';
+                adminLink.style.padding = '3px 6px';
+                adminLink.style.fontSize = '9px';
+            }, 10000);
+            
+            adminKeyPress = []; // إعادة تعيين
+        }
+    });
+    
+    // ========== إظهار الرابط عند النقر على مكان معين في الموقع ==========
+    document.addEventListener('click', function(e) {
+        // إذا تم النقر ثلاث مرات متتالية على الـ logo
+        if (e.target.closest('.logo') || (e.target.closest('a') && e.target.closest('a').classList.contains('logo'))) {
+            setTimeout(() => {
+                if (window.clickCount === undefined) window.clickCount = 0;
+                window.clickCount++;
+                
+                if (window.clickCount === 3) {
+                    const adminLink = document.getElementById('adminLink');
+                    adminLink.style.opacity = '0.8';
+                    adminLink.style.background = 'rgba(245, 158, 11, 0.9)';
+                    adminLink.style.color = 'white';
+                    alert('🔧 رابط الإدارة ظاهر الآن في الزاوية اليسرى السفلى');
+                    window.clickCount = 0;
+                }
+            }, 300);
+        }
+    });
+    
+    // ========== إظهار رسالة ترحيب في لوحة التحكم ==========
+    if (window.location.pathname.includes('admin.html')) {
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                console.log('%c🔐 لوحة تحكم Web Forge', 'color: #2563eb; font-size: 18px; font-weight: bold;');
+                console.log('%cمرحباً بك في نظام إدارة الموقع', 'color: #10b981; font-size: 14px;');
+                console.log('%c⚠️ هذا النظام مخصص للإدارة فقط', 'color: #f59e0b; font-size: 12px;');
+            }, 1000);
+        });
+    }
+</script>
 </body>
 </html>
