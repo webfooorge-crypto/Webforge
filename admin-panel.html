@@ -1,0 +1,26 @@
+<?php
+header('Content-Type: application/json; charset=utf-8');
+
+$images = [];
+$imageDir = '../images/';
+
+if (file_exists($imageDir) && is_dir($imageDir)) {
+    $files = scandir($imageDir);
+    
+    foreach ($files as $file) {
+        if ($file !== '.' && $file !== '..') {
+            $path = $imageDir . $file;
+            if (is_file($path) && preg_match('/\.(jpg|jpeg|png|gif|webp)$/i', $file)) {
+                $images[] = [
+                    'name' => $file,
+                    'url' => 'images/' . $file,
+                    'size' => filesize($path),
+                    'modified' => date('Y-m-d H:i:s', filemtime($path))
+                ];
+            }
+        }
+    }
+}
+
+echo json_encode($images, JSON_UNESCAPED_UNICODE);
+?>
