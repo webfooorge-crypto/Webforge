@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🚀 Web Forge - لوحة التحكم</title>
+    <title>🚀 Web Forge - لوحة التحكم الكاملة</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #2563eb;
+            --primary: #3b82f6;
             --primary-dark: #1d4ed8;
             --primary-light: #60a5fa;
             --secondary: #10b981;
@@ -17,7 +17,7 @@
             --danger-dark: #dc2626;
             --warning: #f59e0b;
             --warning-dark: #d97706;
-            --info: #3b82f6;
+            --info: #06b6d4;
             --dark: #0f172a;
             --dark-card: #1e293b;
             --dark-light: #334155;
@@ -60,13 +60,30 @@
         
         /* ========== الشريط الجانبي ========== */
         .sidebar {
-            width: 280px;
-            background: rgba(30, 41, 59, 0.9);
+            width: 320px;
+            background: rgba(30, 41, 59, 0.95);
             backdrop-filter: blur(10px);
             border-left: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: var(--shadow-lg);
             z-index: 100;
             transition: var(--transition);
+            overflow-y: auto;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+        }
+        
+        .sidebar::-webkit-scrollbar {
+            width: 5px;
+        }
+        
+        .sidebar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
         }
         
         .logo {
@@ -100,17 +117,10 @@
             margin-bottom: 5px;
             position: relative;
             z-index: 1;
-        }
-        
-        .logo h2 i {
-            color: #38bdf8;
-            margin-left: 10px;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            background: linear-gradient(90deg, #38bdf8, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .logo p {
@@ -120,36 +130,42 @@
             z-index: 1;
         }
         
+        .nav-section {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section-title {
+            color: var(--gray);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 0 25px 10px;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
         .nav-item {
             display: flex;
             align-items: center;
             gap: 15px;
-            padding: 18px 25px;
+            padding: 14px 25px;
             color: var(--gray);
             text-decoration: none;
             transition: var(--transition);
             border-right: 4px solid transparent;
             position: relative;
-            overflow: hidden;
+            cursor: pointer;
         }
         
-        .nav-item::before {
-            content: '';
-            position: absolute;
-            right: -100%;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.1), transparent);
-            transition: var(--transition);
-        }
-        
-        .nav-item:hover::before {
-            right: 100%;
-        }
-        
-        .nav-item:hover, .nav-item.active {
+        .nav-item:hover {
             background: rgba(255, 255, 255, 0.05);
+            color: white;
+            padding-right: 30px;
+        }
+        
+        .nav-item.active {
+            background: rgba(56, 189, 248, 0.1);
             color: white;
             border-right-color: #38bdf8;
         }
@@ -163,13 +179,16 @@
         .nav-item span {
             font-weight: 500;
             font-size: 1rem;
+            flex: 1;
         }
         
-        .logout-btn {
-            position: absolute;
-            bottom: 30px;
-            right: 20px;
-            left: 20px;
+        .badge {
+            background: var(--primary);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-right: auto;
         }
         
         /* ========== المحتوى الرئيسي ========== */
@@ -256,6 +275,12 @@
         }
         
         /* ========== النماذج ========== */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
         .form-group {
             margin-bottom: 25px;
         }
@@ -306,6 +331,13 @@
         }
         
         /* ========== الأزرار ========== */
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
         .btn {
             padding: 16px 32px;
             border: none;
@@ -320,6 +352,7 @@
             gap: 10px;
             position: relative;
             overflow: hidden;
+            min-width: 120px;
         }
         
         .btn::before {
@@ -475,6 +508,16 @@
             background: #ef4444;
         }
         
+        .alert-warning {
+            background: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+        
+        .alert-warning::before {
+            background: #f59e0b;
+        }
+        
         /* ========== التبويبات ========== */
         .tab-content {
             display: none;
@@ -544,12 +587,6 @@
                 height: auto;
                 position: static;
             }
-            
-            .logout-btn {
-                position: static;
-                margin: 20px;
-                width: calc(100% - 40px);
-            }
         }
         
         @media (max-width: 768px) {
@@ -571,6 +608,10 @@
             .card {
                 padding: 20px;
             }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
         }
         
         @media (max-width: 480px) {
@@ -588,50 +629,6 @@
         }
         
         /* ========== تأثيرات إضافية ========== */
-        .particles {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        .glow {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(56, 189, 248, 0.3), transparent);
-            filter: blur(60px);
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        .glow:nth-child(1) {
-            top: 20%;
-            right: 10%;
-            animation-delay: 0s;
-        }
-        
-        .glow:nth-child(2) {
-            top: 60%;
-            left: 15%;
-            animation-delay: 2s;
-        }
-        
-        .glow:nth-child(3) {
-            bottom: 20%;
-            right: 20%;
-            animation-delay: 4s;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-20px) scale(1.1); }
-        }
-        
-        /* ========== شريط التقدم ========== */
         .progress-bar {
             width: 100%;
             height: 6px;
@@ -647,57 +644,214 @@
             border-radius: 3px;
             transition: width 0.3s ease;
         }
+        
+        /* ========== التبديل ========== */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            background-color: #475569;
+            transition: .4s;
+            border-radius: 30px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            right: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: #10b981;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(-30px);
+        }
+        
+        /* ========== الإعدادات ========== */
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .setting-info h4 {
+            color: white;
+            margin-bottom: 5px;
+        }
+        
+        .setting-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* ========== اللغات ========== */
+        .language-selector {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .lang-btn {
+            padding: 10px 20px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .lang-btn.active {
+            border-color: #38bdf8;
+            background: rgba(56, 189, 248, 0.1);
+            color: white;
+        }
+        
+        .lang-btn:hover {
+            border-color: #38bdf8;
+            color: white;
+        }
     </style>
 </head>
 <body>
-    <!-- تأثيرات الخلفية -->
-    <div class="particles">
-        <div class="glow"></div>
-        <div class="glow"></div>
-        <div class="glow"></div>
-    </div>
-    
     <div class="container">
         <!-- الشريط الجانبي -->
         <div class="sidebar">
             <div class="logo">
                 <h2><i class="fas fa-cogs"></i> Web Forge</h2>
-                <p>لوحة التحكم الاحترافية</p>
+                <p>لوحة التحكم المتكاملة</p>
             </div>
             
-            <div class="nav-item active" onclick="switchTab('login')">
-                <i class="fas fa-sign-in-alt"></i>
-                <span>تسجيل الدخول</span>
+            <!-- قسم الإدارة -->
+            <div class="nav-section">
+                <div class="section-title">الإدارة</div>
+                <div class="nav-item active" onclick="switchTab('login')">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>تسجيل الدخول</span>
+                </div>
+                <div class="nav-item" onclick="switchTab('dashboard')">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>لوحة التحكم</span>
+                    <span class="badge">جديد</span>
+                </div>
             </div>
             
-            <div class="nav-item" onclick="switchTab('content')">
-                <i class="fas fa-edit"></i>
-                <span>المحتوى</span>
+            <!-- قسم المحتوى -->
+            <div class="nav-section">
+                <div class="section-title">المحتوى</div>
+                <div class="nav-item" onclick="switchTab('content')">
+                    <i class="fas fa-edit"></i>
+                    <span>المحتوى الرئيسي</span>
+                </div>
+                <div class="nav-item" onclick="switchTab('services')">
+                    <i class="fas fa-laptop-code"></i>
+                    <span>الخدمات</span>
+                </div>
+                <div class="nav-item" onclick="switchTab('features')">
+                    <i class="fas fa-star"></i>
+                    <span>المميزات</span>
+                </div>
+                <div class="nav-item" onclick="switchTab('portfolio')">
+                    <i class="fas fa-briefcase"></i>
+                    <span>معرض الأعمال</span>
+                </div>
+                <div class="nav-item" onclick="switchTab('faq')">
+                    <i class="fas fa-question-circle"></i>
+                    <span>الأسئلة الشائعة</span>
+                </div>
             </div>
             
-            <div class="nav-item" onclick="switchTab('stats')">
-                <i class="fas fa-chart-line"></i>
-                <span>الإحصائيات</span>
+            <!-- قسم الإحصائيات -->
+            <div class="nav-section">
+                <div class="section-title">الإحصائيات</div>
+                <div class="nav-item" onclick="switchTab('stats')">
+                    <i class="fas fa-chart-line"></i>
+                    <span>إحصائيات الموقع</span>
+                </div>
+                <div class="nav-item" onclick="switchTab('analytics')">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>التحليلات</span>
+                </div>
             </div>
             
-            <div class="nav-item" onclick="switchTab('backup')">
-                <i class="fas fa-save"></i>
-                <span>النسخ الاحتياطي</span>
+            <!-- قسم الإعدادات -->
+            <div class="nav-section">
+                <div class="section-title">الإعدادات</div>
+                <div class="nav-item" onclick="switchTab('design')">
+                    <i class="fas fa-palette"></i>
+                    <span>التصميم</span>
+                </div>
+                <div class="nav-item" onclick="switchTab('security')">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>الأمان</span>
+                </div>
+                <div class="nav-item" onclick="switchTab('backup')">
+                    <i class="fas fa-save"></i>
+                    <span>النسخ الاحتياطي</span>
+                </div>
+                <div class="nav-item" onclick="switchTab('system')">
+                    <i class="fas fa-cog"></i>
+                    <span>إعدادات النظام</span>
+                </div>
             </div>
             
-            <div class="logout-btn">
-                <button class="btn btn-danger" onclick="logout()" style="width: 100%;">
-                    <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
-                </button>
+            <!-- خيارات متقدمة -->
+            <div class="nav-section">
+                <div class="section-title">متقدم</div>
+                <div class="nav-item" onclick="switchTab('advanced')">
+                    <i class="fas fa-rocket"></i>
+                    <span>إعدادات متقدمة</span>
+                </div>
+                <div class="nav-item" onclick="switchTab('logs')">
+                    <i class="fas fa-history"></i>
+                    <span>سجلات النظام</span>
+                </div>
             </div>
         </div>
         
         <!-- المحتوى الرئيسي -->
         <div class="content">
             <!-- التنبيهات -->
-            <div id="successAlert" class="alert alert-success"></div>
+            <div id="alertBox" class="alert" style="display: none;"></div>
             
-            <!-- قسم تسجيل الدخول -->
+            <!-- ========== قسم تسجيل الدخول ========== -->
             <div id="loginTab" class="tab-content active">
                 <div class="header">
                     <h1><i class="fas fa-lock"></i> تسجيل دخول المالك</h1>
@@ -724,49 +878,286 @@
                 </div>
             </div>
             
-            <!-- قسم المحتوى -->
-            <div id="contentTab" class="tab-content">
+            <!-- ========== لوحة التحكم ========== -->
+            <div id="dashboardTab" class="tab-content">
                 <div class="header">
-                    <h1><i class="fas fa-edit"></i> تحرير محتوى الموقع</h1>
+                    <h1><i class="fas fa-tachometer-alt"></i> لوحة التحكم الرئيسية</h1>
                     <button class="btn btn-success" onclick="saveAll()">
                         <i class="fas fa-save"></i> حفظ كل التغييرات
                     </button>
                 </div>
                 
-                <!-- العنوان الرئيسي -->
-                <div class="card">
-                    <h3><i class="fas fa-heading"></i> العنوان الرئيسي</h3>
-                    <div class="form-group">
-                        <input type="text" id="siteTitle" class="form-control" placeholder="عنوان الموقع">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="statsVisits">0</div>
+                        <div class="stat-label">إجمالي الزيارات</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-value" id="statsOrders">0</div>
+                        <div class="stat-label">الطلبات المكتملة</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-value" id="statsReferrals">0</div>
+                        <div class="stat-label">الإحالات الناجحة</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-value" id="statsGifts">0</div>
+                        <div class="stat-label">الهدايا المفتوحة</div>
                     </div>
                 </div>
                 
-                <!-- وصف الموقع -->
                 <div class="card">
-                    <h3><i class="fas fa-align-left"></i> وصف الموقع</h3>
+                    <h3><i class="fas fa-bolt"></i> تحديثات سريعة</h3>
                     <div class="form-group">
-                        <textarea id="siteDescription" class="form-control" placeholder="وصف الموقع (لتحسين محركات البحث)"></textarea>
+                        <textarea id="quickUpdate" class="form-control" placeholder="اكتب تحديثاً أو ملاحظة..."></textarea>
                     </div>
+                    <button class="btn btn-primary" onclick="saveUpdate()">
+                        <i class="fas fa-paper-plane"></i> إرسال التحديث
+                    </button>
+                </div>
+            </div>
+            
+            <!-- ========== المحتوى الرئيسي ========== -->
+            <div id="contentTab" class="tab-content">
+                <div class="header">
+                    <h1><i class="fas fa-edit"></i> المحتوى الرئيسي للموقع</h1>
                 </div>
                 
-                <!-- النص الرئيسي -->
-                <div class="card">
-                    <h3><i class="fas fa-paragraph"></i> النص الرئيسي في الصفحة</h3>
-                    <div class="form-group">
-                        <textarea id="heroText" class="form-control" placeholder="النص الذي يظهر تحت العنوان الرئيسي"></textarea>
+                <div class="form-grid">
+                    <div class="card">
+                        <h3><i class="fas fa-heading"></i> العناوين الرئيسية</h3>
+                        <div class="form-group">
+                            <label>عنوان الموقع</label>
+                            <input type="text" id="siteTitle" class="form-control" placeholder="عنوان الموقع">
+                        </div>
+                        <div class="form-group">
+                            <label>وصف الموقع (SEO)</label>
+                            <textarea id="siteDescription" class="form-control" placeholder="وصف الموقع لمحركات البحث"></textarea>
+                        </div>
                     </div>
-                </div>
-                
-                <!-- شريط العروض -->
-                <div class="card">
-                    <h3><i class="fas fa-bullhorn"></i> شريط العروض المتحرك</h3>
-                    <div class="form-group">
-                        <textarea id="promoText" class="form-control" placeholder="نص شريط العروض (سوف يتحرك تلقائياً)"></textarea>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-paragraph"></i> النصوص الرئيسية</h3>
+                        <div class="form-group">
+                            <label>النص الرئيسي في الهيرو</label>
+                            <textarea id="heroText" class="form-control" placeholder="النص الذي يظهر في قسم الهيرو"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>شريط العروض المتحرك</label>
+                            <textarea id="promoText" class="form-control" placeholder="نص شريط العروض المتحرك"></textarea>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <!-- قسم الإحصائيات -->
+            <!-- ========== الخدمات ========== -->
+            <div id="servicesTab" class="tab-content">
+                <div class="header">
+                    <h1><i class="fas fa-laptop-code"></i> إدارة الخدمات</h1>
+                </div>
+                
+                <div class="form-grid">
+                    <div class="card">
+                        <h3><i class="fas fa-store"></i> متاجر YouCan</h3>
+                        <div class="form-group">
+                            <label>عنوان الخدمة</label>
+                            <input type="text" id="youcanTitle" class="form-control" placeholder="عنوان خدمة YouCan">
+                        </div>
+                        <div class="form-group">
+                            <label>وصف الخدمة</label>
+                            <textarea id="youcanDesc" class="form-control" placeholder="وصف خدمة YouCan"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fab fa-shopify"></i> متاجر Shopify</h3>
+                        <div class="form-group">
+                            <label>عنوان الخدمة</label>
+                            <input type="text" id="shopifyTitle" class="form-control" placeholder="عنوان خدمة Shopify">
+                        </div>
+                        <div class="form-group">
+                            <label>وصف الخدمة</label>
+                            <textarea id="shopifyDesc" class="form-control" placeholder="وصف خدمة Shopify"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-code"></i> المواقع الخاصة</h3>
+                        <div class="form-group">
+                            <label>عنوان الخدمة</label>
+                            <input type="text" id="websitesTitle" class="form-control" placeholder="عنوان خدمة المواقع">
+                        </div>
+                        <div class="form-group">
+                            <label>وصف الخدمة</label>
+                            <textarea id="websitesDesc" class="form-control" placeholder="وصف خدمة المواقع"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ========== المميزات ========== -->
+            <div id="featuresTab" class="tab-content">
+                <div class="header">
+                    <h1><i class="fas fa-star"></i> مميزات Web Forge</h1>
+                </div>
+                
+                <div class="form-grid">
+                    <div class="card">
+                        <h3><i class="fas fa-bolt"></i> السرعة الفائقة</h3>
+                        <div class="form-group">
+                            <label>عنوان الميزة</label>
+                            <input type="text" id="speedTitle" class="form-control" placeholder="عنوان ميزة السرعة">
+                        </div>
+                        <div class="form-group">
+                            <label>وصف الميزة</label>
+                            <textarea id="speedDesc" class="form-control" placeholder="وصف ميزة السرعة"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-mobile-alt"></i> التجاوب الكامل</h3>
+                        <div class="form-group">
+                            <label>عنوان الميزة</label>
+                            <input type="text" id="responsiveTitle" class="form-control" placeholder="عنوان ميزة التجاوب">
+                        </div>
+                        <div class="form-group">
+                            <label>وصف الميزة</label>
+                            <textarea id="responsiveDesc" class="form-control" placeholder="وصف ميزة التجاوب"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-headset"></i> الدعم الفني</h3>
+                        <div class="form-group">
+                            <label>عنوان الميزة</label>
+                            <input type="text" id="supportTitle" class="form-control" placeholder="عنوان ميزة الدعم">
+                        </div>
+                        <div class="form-group">
+                            <label>وصف الميزة</label>
+                            <textarea id="supportDesc" class="form-control" placeholder="وصف ميزة الدعم"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-paint-brush"></i> التصميم المخصص</h3>
+                        <div class="form-group">
+                            <label>عنوان الميزة</label>
+                            <input type="text" id="designTitle" class="form-control" placeholder="عنوان ميزة التصميم">
+                        </div>
+                        <div class="form-group">
+                            <label>وصف الميزة</label>
+                            <textarea id="designDesc" class="form-control" placeholder="وصف ميزة التصميم"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ========== معرض الأعمال ========== -->
+            <div id="portfolioTab" class="tab-content">
+                <div class="header">
+                    <h1><i class="fas fa-briefcase"></i> معرض الأعمال</h1>
+                </div>
+                
+                <div class="form-grid">
+                    <div class="card">
+                        <h3><i class="fas fa-briefcase"></i> العمل الأول</h3>
+                        <div class="form-group">
+                            <label>اسم العمل</label>
+                            <input type="text" id="work1Title" class="form-control" placeholder="اسم العمل الأول">
+                        </div>
+                        <div class="form-group">
+                            <label>رابط الصورة</label>
+                            <input type="text" id="work1Image" class="form-control" placeholder="رابط صورة العمل">
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-briefcase"></i> العمل الثاني</h3>
+                        <div class="form-group">
+                            <label>اسم العمل</label>
+                            <input type="text" id="work2Title" class="form-control" placeholder="اسم العمل الثاني">
+                        </div>
+                        <div class="form-group">
+                            <label>رابط الصورة</label>
+                            <input type="text" id="work2Image" class="form-control" placeholder="رابط صورة العمل">
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-briefcase"></i> العمل الثالث</h3>
+                        <div class="form-group">
+                            <label>اسم العمل</label>
+                            <input type="text" id="work3Title" class="form-control" placeholder="اسم العمل الثالث">
+                        </div>
+                        <div class="form-group">
+                            <label>رابط الصورة</label>
+                            <input type="text" id="work3Image" class="form-control" placeholder="رابط صورة العمل">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ========== الأسئلة الشائعة ========== -->
+            <div id="faqTab" class="tab-content">
+                <div class="header">
+                    <h1><i class="fas fa-question-circle"></i> الأسئلة الشائعة</h1>
+                </div>
+                
+                <div class="form-grid">
+                    <div class="card">
+                        <h3><i class="fas fa-question"></i> السؤال الأول</h3>
+                        <div class="form-group">
+                            <label>السؤال</label>
+                            <input type="text" id="faq1Q" class="form-control" placeholder="السؤال الأول">
+                        </div>
+                        <div class="form-group">
+                            <label>الإجابة</label>
+                            <textarea id="faq1A" class="form-control" placeholder="إجابة السؤال الأول"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-question"></i> السؤال الثاني</h3>
+                        <div class="form-group">
+                            <label>السؤال</label>
+                            <input type="text" id="faq2Q" class="form-control" placeholder="السؤال الثاني">
+                        </div>
+                        <div class="form-group">
+                            <label>الإجابة</label>
+                            <textarea id="faq2A" class="form-control" placeholder="إجابة السؤال الثاني"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-question"></i> السؤال الثالث</h3>
+                        <div class="form-group">
+                            <label>السؤال</label>
+                            <input type="text" id="faq3Q" class="form-control" placeholder="السؤال الثالث">
+                        </div>
+                        <div class="form-group">
+                            <label>الإجابة</label>
+                            <textarea id="faq3A" class="form-control" placeholder="إجابة السؤال الثالث"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-question"></i> السؤال الرابع</h3>
+                        <div class="form-group">
+                            <label>السؤال</label>
+                            <input type="text" id="faq4Q" class="form-control" placeholder="السؤال الرابع">
+                        </div>
+                        <div class="form-group">
+                            <label>الإجابة</label>
+                            <textarea id="faq4A" class="form-control" placeholder="إجابة السؤال الرابع"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ========== إحصائيات الموقع ========== -->
             <div id="statsTab" class="tab-content">
                 <div class="header">
                     <h1><i class="fas fa-chart-line"></i> إحصائيات الموقع</h1>
@@ -798,7 +1189,67 @@
                 </div>
             </div>
             
-            <!-- قسم النسخ الاحتياطي -->
+            <!-- ========== التصميم ========== -->
+            <div id="designTab" class="tab-content">
+                <div class="header">
+                    <h1><i class="fas fa-palette"></i> إعدادات التصميم</h1>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-fill-drip"></i> الألوان</h3>
+                    <div class="form-group">
+                        <label>اللون الرئيسي</label>
+                        <input type="color" id="primaryColor" value="#3b82f6" style="width: 100px; height: 50px; border-radius: 8px;">
+                    </div>
+                    <div class="form-group">
+                        <label>اللون الثانوي</label>
+                        <input type="color" id="secondaryColor" value="#10b981" style="width: 100px; height: 50px; border-radius: 8px;">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ========== الأمان ========== -->
+            <div id="securityTab" class="tab-content">
+                <div class="header">
+                    <h1><i class="fas fa-shield-alt"></i> إعدادات الأمان</h1>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-key"></i> تغيير كلمة المرور</h3>
+                    <div class="form-group">
+                        <label>كلمة المرور الحالية</label>
+                        <input type="password" id="currentPassword" class="form-control" placeholder="أدخل كلمة المرور الحالية">
+                    </div>
+                    <div class="form-group">
+                        <label>كلمة المرور الجديدة</label>
+                        <input type="password" id="newPassword" class="form-control" placeholder="أدخل كلمة المرور الجديدة">
+                    </div>
+                    <div class="form-group">
+                        <label>تأكيد كلمة المرور الجديدة</label>
+                        <input type="password" id="confirmPassword" class="form-control" placeholder="أعد إدخال كلمة المرور الجديدة">
+                    </div>
+                    <button class="btn btn-danger" onclick="changePassword()">
+                        <i class="fas fa-key"></i> تغيير كلمة المرور
+                    </button>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-user-lock"></i> جلسات الدخول</h3>
+                    <div class="form-group">
+                        <label>مدة انتهاء الجلسة (دقائق)</label>
+                        <input type="number" id="sessionTimeout" class="form-control" value="30" min="5" max="1440">
+                    </div>
+                    <div class="form-group">
+                        <label>تسجيل الدخول من جهازين</label>
+                        <label class="switch">
+                            <input type="checkbox" id="allowMultiDevice">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ========== النسخ الاحتياطي ========== -->
             <div id="backupTab" class="tab-content">
                 <div class="header">
                     <h1><i class="fas fa-save"></i> النسخ الاحتياطي</h1>
@@ -809,9 +1260,14 @@
                     <p style="color: var(--gray); margin-bottom: 20px;">
                         احفظ نسخة احتياطية من جميع محتويات وإعدادات الموقع
                     </p>
-                    <button class="btn btn-primary" onclick="exportData()">
-                        <i class="fas fa-file-export"></i> تصدير البيانات
-                    </button>
+                    <div class="btn-group">
+                        <button class="btn btn-primary" onclick="exportData()">
+                            <i class="fas fa-file-export"></i> تصدير البيانات
+                        </button>
+                        <button class="btn btn-success" onclick="exportFullBackup()">
+                            <i class="fas fa-database"></i> نسخة كاملة
+                        </button>
+                    </div>
                 </div>
                 
                 <div class="card">
@@ -827,6 +1283,100 @@
                     </div>
                     <button class="btn btn-primary" onclick="importData()">
                         <i class="fas fa-file-import"></i> استيراد البيانات
+                    </button>
+                </div>
+            </div>
+            
+            <!-- ========== إعدادات النظام ========== -->
+            <div id="systemTab" class="tab-content">
+                <div class="header">
+                    <h1><i class="fas fa-cog"></i> إعدادات النظام</h1>
+                </div>
+                
+                <div class="settings-grid">
+                    <div class="card">
+                        <h3><i class="fas fa-globe"></i> اللغة</h3>
+                        <div class="language-selector">
+                            <div class="lang-btn active" onclick="setLanguage('ar')">
+                                <i class="fas fa-language"></i> العربية
+                            </div>
+                            <div class="lang-btn" onclick="setLanguage('en')">
+                                <i class="fas fa-language"></i> English
+                            </div>
+                            <div class="lang-btn" onclick="setLanguage('fr')">
+                                <i class="fas fa-language"></i> Français
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-bell"></i> الإشعارات</h3>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>إشعارات البريد الإلكتروني</h4>
+                                <p>إرسال إشعارات عند استلام طلبات جديدة</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="emailNotifications" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>إشعارات واتساب</h4>
+                                <p>إرسال إشعارات مباشرة إلى واتساب</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="whatsappNotifications" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-tools"></i> المميزات</h3>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>نظام الهدايا</h4>
+                                <p>تفعيل نظام الهدايا والعروض</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="giftSystem" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>نظام الإحالات</h4>
+                                <p>تفعيل نظام دعوة الأصدقاء</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="referralSystem" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ========== الإعدادات المتقدمة ========== -->
+            <div id="advancedTab" class="tab-content">
+                <div class="header">
+                    <h1><i class="fas fa-rocket"></i> الإعدادات المتقدمة</h1>
+                </div>
+                
+                <div class="card">
+                    <h3><i class="fas fa-code"></i> التحكم في الكود</h3>
+                    <div class="form-group">
+                        <label>رأس الصفحة (Header)</label>
+                        <textarea id="headerCode" class="form-control" placeholder="أضف كود HTML/JavaScript لرأس الصفحة"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>تذييل الصفحة (Footer)</label>
+                        <textarea id="footerCode" class="form-control" placeholder="أضف كود HTML/JavaScript لتذييل الصفحة"></textarea>
+                    </div>
+                    <button class="btn btn-warning" onclick="saveCustomCode()">
+                        <i class="fas fa-code"></i> حفظ الكود المخصص
                     </button>
                 </div>
             </div>
@@ -847,7 +1397,7 @@
             const loggedIn = localStorage.getItem('adminLoggedIn');
             if (loggedIn === 'true') {
                 isLoggedIn = true;
-                showContent();
+                showDashboard();
             }
         }
         
@@ -867,9 +1417,10 @@
                     setTimeout(() => {
                         isLoggedIn = true;
                         localStorage.setItem('adminLoggedIn', 'true');
-                        showContent();
+                        showDashboard();
                         showAlert('تم تسجيل الدخول بنجاح!', 'success');
                         progressBar.style.width = '0%';
+                        loadAllData();
                     }, 500);
                     
                 } else {
@@ -912,64 +1463,290 @@
             document.getElementById(tabName + 'Tab').style.display = 'block';
             
             // تفعيل العنصر في القائمة
-            const tabMap = {
-                'login': 'تسجيل الدخول',
-                'content': 'المحتوى',
-                'stats': 'الإحصائيات',
-                'backup': 'النسخ الاحتياطي'
-            };
-            
-            document.querySelectorAll('.nav-item').forEach(item => {
-                if (item.textContent.includes(tabMap[tabName])) {
-                    item.classList.add('active');
-                }
-            });
+            const navItem = document.querySelector(`.nav-item[onclick="switchTab('${tabName}')"]`);
+            if (navItem) {
+                navItem.classList.add('active');
+            }
             
             // تحميل البيانات إذا لزم
-            if (tabName === 'content') {
-                loadSiteData();
+            if (tabName === 'dashboard') {
+                loadDashboardData();
+            } else if (tabName === 'content') {
+                loadContentData();
+            } else if (tabName === 'services') {
+                loadServicesData();
+            } else if (tabName === 'features') {
+                loadFeaturesData();
+            } else if (tabName === 'portfolio') {
+                loadPortfolioData();
+            } else if (tabName === 'faq') {
+                loadFAQData();
             } else if (tabName === 'stats') {
                 loadStats();
+            } else if (tabName === 'security') {
+                loadSecurityData();
+            } else if (tabName === 'system') {
+                loadSystemData();
+            } else if (tabName === 'advanced') {
+                loadAdvancedData();
             }
         }
         
-        // إظهار المحتوى بعد التسجيل
-        function showContent() {
-            switchTab('content');
+        // إظهار لوحة التحكم
+        function showDashboard() {
+            switchTab('dashboard');
         }
         
-        // تحميل بيانات الموقع
-        function loadSiteData() {
-            const siteData = JSON.parse(localStorage.getItem('webforgeSiteData') || '{}');
-            
-            document.getElementById('siteTitle').value = siteData.siteTitle || '';
-            document.getElementById('siteDescription').value = siteData.siteDescription || '';
-            document.getElementById('heroText').value = siteData.heroText || '';
-            document.getElementById('promoText').value = siteData.promoText || '';
+        // تحميل جميع البيانات
+        function loadAllData() {
+            loadDashboardData();
+            loadContentData();
+            loadServicesData();
+            loadFeaturesData();
+            loadPortfolioData();
+            loadFAQData();
+            loadStats();
+            loadSecurityData();
+            loadSystemData();
+            loadAdvancedData();
         }
         
-        // حفظ جميع التغييرات
-        function saveAll() {
-            const siteData = {
-                siteTitle: document.getElementById('siteTitle').value,
-                siteDescription: document.getElementById('siteDescription').value,
-                heroText: document.getElementById('heroText').value,
-                promoText: document.getElementById('promoText').value,
-                lastUpdated: new Date().toISOString()
-            };
-            
-            localStorage.setItem('webforgeSiteData', JSON.stringify(siteData));
-            showAlert('تم حفظ جميع التغييرات بنجاح!', 'success');
+        // ========== دوال تحميل البيانات ==========
+        
+        function loadDashboardData() {
+            const stats = JSON.parse(localStorage.getItem('webforgeStats') || '{"visits":0,"orders":0,"referrals":0,"gifts":0}');
+            document.getElementById('statsVisits').textContent = stats.visits || 0;
+            document.getElementById('statsOrders').textContent = stats.orders || 0;
+            document.getElementById('statsReferrals').textContent = stats.referrals || 0;
+            document.getElementById('statsGifts').textContent = stats.gifts || 0;
         }
         
-        // تحميل الإحصائيات
+        function loadContentData() {
+            const data = JSON.parse(localStorage.getItem('webforgeContent') || '{}');
+            document.getElementById('siteTitle').value = data.siteTitle || '';
+            document.getElementById('siteDescription').value = data.siteDescription || '';
+            document.getElementById('heroText').value = data.heroText || '';
+            document.getElementById('promoText').value = data.promoText || '';
+        }
+        
+        function loadServicesData() {
+            const data = JSON.parse(localStorage.getItem('webforgeServices') || '{}');
+            document.getElementById('youcanTitle').value = data.youcanTitle || '';
+            document.getElementById('youcanDesc').value = data.youcanDesc || '';
+            document.getElementById('shopifyTitle').value = data.shopifyTitle || '';
+            document.getElementById('shopifyDesc').value = data.shopifyDesc || '';
+            document.getElementById('websitesTitle').value = data.websitesTitle || '';
+            document.getElementById('websitesDesc').value = data.websitesDesc || '';
+        }
+        
+        function loadFeaturesData() {
+            const data = JSON.parse(localStorage.getItem('webforgeFeatures') || '{}');
+            document.getElementById('speedTitle').value = data.speedTitle || '';
+            document.getElementById('speedDesc').value = data.speedDesc || '';
+            document.getElementById('responsiveTitle').value = data.responsiveTitle || '';
+            document.getElementById('responsiveDesc').value = data.responsiveDesc || '';
+            document.getElementById('supportTitle').value = data.supportTitle || '';
+            document.getElementById('supportDesc').value = data.supportDesc || '';
+            document.getElementById('designTitle').value = data.designTitle || '';
+            document.getElementById('designDesc').value = data.designDesc || '';
+        }
+        
+        function loadPortfolioData() {
+            const data = JSON.parse(localStorage.getItem('webforgePortfolio') || '{}');
+            document.getElementById('work1Title').value = data.work1Title || '';
+            document.getElementById('work1Image').value = data.work1Image || '';
+            document.getElementById('work2Title').value = data.work2Title || '';
+            document.getElementById('work2Image').value = data.work2Image || '';
+            document.getElementById('work3Title').value = data.work3Title || '';
+            document.getElementById('work3Image').value = data.work3Image || '';
+        }
+        
+        function loadFAQData() {
+            const data = JSON.parse(localStorage.getItem('webforgeFAQ') || '{}');
+            document.getElementById('faq1Q').value = data.faq1Q || '';
+            document.getElementById('faq1A').value = data.faq1A || '';
+            document.getElementById('faq2Q').value = data.faq2Q || '';
+            document.getElementById('faq2A').value = data.faq2A || '';
+            document.getElementById('faq3Q').value = data.faq3Q || '';
+            document.getElementById('faq3A').value = data.faq3A || '';
+            document.getElementById('faq4Q').value = data.faq4Q || '';
+            document.getElementById('faq4A').value = data.faq4A || '';
+        }
+        
         function loadStats() {
             const stats = JSON.parse(localStorage.getItem('webforgeStats') || '{"visits":0,"orders":0,"referrals":0,"gifts":0}');
-            
             document.getElementById('totalVisits').textContent = stats.visits || 0;
             document.getElementById('totalOrders').textContent = stats.orders || 0;
             document.getElementById('totalReferrals').textContent = stats.referrals || 0;
             document.getElementById('totalGifts').textContent = stats.gifts || 0;
+        }
+        
+        function loadSecurityData() {
+            const security = JSON.parse(localStorage.getItem('webforgeSecurity') || '{"sessionTimeout":30,"allowMultiDevice":true}');
+            document.getElementById('sessionTimeout').value = security.sessionTimeout || 30;
+            document.getElementById('allowMultiDevice').checked = security.allowMultiDevice || true;
+        }
+        
+        function loadSystemData() {
+            const system = JSON.parse(localStorage.getItem('webforgeSystem') || '{"emailNotifications":true,"whatsappNotifications":true,"giftSystem":true,"referralSystem":true}');
+            document.getElementById('emailNotifications').checked = system.emailNotifications !== false;
+            document.getElementById('whatsappNotifications').checked = system.whatsappNotifications !== false;
+            document.getElementById('giftSystem').checked = system.giftSystem !== false;
+            document.getElementById('referralSystem').checked = system.referralSystem !== false;
+        }
+        
+        function loadAdvancedData() {
+            const advanced = JSON.parse(localStorage.getItem('webforgeAdvanced') || '{}');
+            document.getElementById('headerCode').value = advanced.headerCode || '';
+            document.getElementById('footerCode').value = advanced.footerCode || '';
+        }
+        
+        // ========== دوال الحفظ ==========
+        
+        // حفظ كل التغييرات
+        function saveAll() {
+            // حفظ المحتوى
+            const contentData = {
+                siteTitle: document.getElementById('siteTitle').value,
+                siteDescription: document.getElementById('siteDescription').value,
+                heroText: document.getElementById('heroText').value,
+                promoText: document.getElementById('promoText').value
+            };
+            localStorage.setItem('webforgeContent', JSON.stringify(contentData));
+            
+            // حفظ الخدمات
+            const servicesData = {
+                youcanTitle: document.getElementById('youcanTitle').value,
+                youcanDesc: document.getElementById('youcanDesc').value,
+                shopifyTitle: document.getElementById('shopifyTitle').value,
+                shopifyDesc: document.getElementById('shopifyDesc').value,
+                websitesTitle: document.getElementById('websitesTitle').value,
+                websitesDesc: document.getElementById('websitesDesc').value
+            };
+            localStorage.setItem('webforgeServices', JSON.stringify(servicesData));
+            
+            // حفظ المميزات
+            const featuresData = {
+                speedTitle: document.getElementById('speedTitle').value,
+                speedDesc: document.getElementById('speedDesc').value,
+                responsiveTitle: document.getElementById('responsiveTitle').value,
+                responsiveDesc: document.getElementById('responsiveDesc').value,
+                supportTitle: document.getElementById('supportTitle').value,
+                supportDesc: document.getElementById('supportDesc').value,
+                designTitle: document.getElementById('designTitle').value,
+                designDesc: document.getElementById('designDesc').value
+            };
+            localStorage.setItem('webforgeFeatures', JSON.stringify(featuresData));
+            
+            // حفظ المعرض
+            const portfolioData = {
+                work1Title: document.getElementById('work1Title').value,
+                work1Image: document.getElementById('work1Image').value,
+                work2Title: document.getElementById('work2Title').value,
+                work2Image: document.getElementById('work2Image').value,
+                work3Title: document.getElementById('work3Title').value,
+                work3Image: document.getElementById('work3Image').value
+            };
+            localStorage.setItem('webforgePortfolio', JSON.stringify(portfolioData));
+            
+            // حفظ الأسئلة
+            const faqData = {
+                faq1Q: document.getElementById('faq1Q').value,
+                faq1A: document.getElementById('faq1A').value,
+                faq2Q: document.getElementById('faq2Q').value,
+                faq2A: document.getElementById('faq2A').value,
+                faq3Q: document.getElementById('faq3Q').value,
+                faq3A: document.getElementById('faq3A').value,
+                faq4Q: document.getElementById('faq4Q').value,
+                faq4A: document.getElementById('faq4A').value
+            };
+            localStorage.setItem('webforgeFAQ', JSON.stringify(faqData));
+            
+            // حفظ إعدادات النظام
+            const systemData = {
+                emailNotifications: document.getElementById('emailNotifications').checked,
+                whatsappNotifications: document.getElementById('whatsappNotifications').checked,
+                giftSystem: document.getElementById('giftSystem').checked,
+                referralSystem: document.getElementById('referralSystem').checked
+            };
+            localStorage.setItem('webforgeSystem', JSON.stringify(systemData));
+            
+            // حفظ إعدادات الأمان
+            const securityData = {
+                sessionTimeout: parseInt(document.getElementById('sessionTimeout').value) || 30,
+                allowMultiDevice: document.getElementById('allowMultiDevice').checked
+            };
+            localStorage.setItem('webforgeSecurity', JSON.stringify(securityData));
+            
+            showAlert('تم حفظ جميع التغييرات بنجاح!', 'success');
+        }
+        
+        // حفظ تحديث سريع
+        function saveUpdate() {
+            const update = document.getElementById('quickUpdate').value;
+            if (update.trim()) {
+                const updates = JSON.parse(localStorage.getItem('siteUpdates') || '[]');
+                updates.unshift({
+                    text: update,
+                    date: new Date().toISOString()
+                });
+                localStorage.setItem('siteUpdates', JSON.stringify(updates));
+                document.getElementById('quickUpdate').value = '';
+                showAlert('تم حفظ التحديث', 'success');
+            }
+        }
+        
+        // تغيير كلمة المرور
+        function changePassword() {
+            const currentPass = document.getElementById('currentPassword').value;
+            const newPass = document.getElementById('newPassword').value;
+            const confirmPass = document.getElementById('confirmPassword').value;
+            
+            if (!currentPass) {
+                showAlert('يرجى إدخال كلمة المرور الحالية', 'error');
+                return;
+            }
+            
+            if (currentPass !== ADMIN.password) {
+                showAlert('كلمة المرور الحالية غير صحيحة', 'error');
+                return;
+            }
+            
+            if (newPass.length < 8) {
+                showAlert('كلمة المرور الجديدة يجب أن تكون 8 أحرف على الأقل', 'error');
+                return;
+            }
+            
+            if (newPass !== confirmPass) {
+                showAlert('كلمتا المرور غير متطابقتين', 'error');
+                return;
+            }
+            
+            // تحديث كلمة المرور
+            ADMIN.password = newPass;
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+            
+            showAlert('تم تغيير كلمة المرور بنجاح', 'success');
+        }
+        
+        // حفظ الكود المخصص
+        function saveCustomCode() {
+            const advancedData = {
+                headerCode: document.getElementById('headerCode').value,
+                footerCode: document.getElementById('footerCode').value
+            };
+            localStorage.setItem('webforgeAdvanced', JSON.stringify(advancedData));
+            showAlert('تم حفظ الكود المخصص بنجاح', 'success');
+        }
+        
+        // تعيين اللغة
+        function setLanguage(lang) {
+            const btns = document.querySelectorAll('.lang-btn');
+            btns.forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.lang-btn').classList.add('active');
+            showAlert(`تم تعيين اللغة ${lang === 'ar' ? 'العربية' : lang === 'en' ? 'الإنجليزية' : 'الفرنسية'}`, 'success');
         }
         
         // تحديث الإحصائيات
@@ -980,16 +1757,20 @@
         
         // تصدير البيانات
         function exportData() {
-            const siteData = JSON.parse(localStorage.getItem('webforgeSiteData') || '{}');
-            const stats = JSON.parse(localStorage.getItem('webforgeStats') || '{}');
-            
-            const exportData = {
-                siteData: siteData,
-                stats: stats,
+            const allData = {
+                content: JSON.parse(localStorage.getItem('webforgeContent') || '{}'),
+                services: JSON.parse(localStorage.getItem('webforgeServices') || '{}'),
+                features: JSON.parse(localStorage.getItem('webforgeFeatures') || '{}'),
+                portfolio: JSON.parse(localStorage.getItem('webforgePortfolio') || '{}'),
+                faq: JSON.parse(localStorage.getItem('webforgeFAQ') || '{}'),
+                stats: JSON.parse(localStorage.getItem('webforgeStats') || '{}'),
+                security: JSON.parse(localStorage.getItem('webforgeSecurity') || '{}'),
+                system: JSON.parse(localStorage.getItem('webforgeSystem') || '{}'),
+                advanced: JSON.parse(localStorage.getItem('webforgeAdvanced') || '{}'),
                 exportedAt: new Date().toISOString()
             };
             
-            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataStr = JSON.stringify(allData, null, 2);
             const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
             
             const exportFileDefaultName = `webforge-backup-${new Date().toISOString().split('T')[0]}.json`;
@@ -1002,6 +1783,35 @@
             document.body.removeChild(linkElement);
             
             showAlert('تم تصدير البيانات بنجاح', 'success');
+        }
+        
+        // تصدير نسخة كاملة
+        function exportFullBackup() {
+            const allData = {};
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                try {
+                    allData[key] = JSON.parse(localStorage.getItem(key));
+                } catch {
+                    allData[key] = localStorage.getItem(key);
+                }
+            }
+            
+            allData.exportedAt = new Date().toISOString();
+            
+            const dataStr = JSON.stringify(allData, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = `webforge-full-backup-${new Date().toISOString().split('T')[0]}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            document.body.appendChild(linkElement);
+            linkElement.click();
+            document.body.removeChild(linkElement);
+            
+            showAlert('تم تصدير النسخة الكاملة بنجاح', 'success');
         }
         
         // استيراد البيانات
@@ -1019,17 +1829,20 @@
                 try {
                     const data = JSON.parse(e.target.result);
                     
-                    if (data.siteData) {
-                        localStorage.setItem('webforgeSiteData', JSON.stringify(data.siteData));
-                    }
+                    // استعادة البيانات
+                    if (data.content) localStorage.setItem('webforgeContent', JSON.stringify(data.content));
+                    if (data.services) localStorage.setItem('webforgeServices', JSON.stringify(data.services));
+                    if (data.features) localStorage.setItem('webforgeFeatures', JSON.stringify(data.features));
+                    if (data.portfolio) localStorage.setItem('webforgePortfolio', JSON.stringify(data.portfolio));
+                    if (data.faq) localStorage.setItem('webforgeFAQ', JSON.stringify(data.faq));
+                    if (data.stats) localStorage.setItem('webforgeStats', JSON.stringify(data.stats));
+                    if (data.security) localStorage.setItem('webforgeSecurity', JSON.stringify(data.security));
+                    if (data.system) localStorage.setItem('webforgeSystem', JSON.stringify(data.system));
+                    if (data.advanced) localStorage.setItem('webforgeAdvanced', JSON.stringify(data.advanced));
                     
-                    if (data.stats) {
-                        localStorage.setItem('webforgeStats', JSON.stringify(data.stats));
-                    }
-                    
+                    // إعادة تحميل البيانات
+                    loadAllData();
                     showAlert('تم استيراد البيانات بنجاح', 'success');
-                    loadSiteData();
-                    loadStats();
                     
                 } catch (error) {
                     showAlert('ملف غير صالح', 'error');
@@ -1041,24 +1854,24 @@
         
         // عرض التنبيهات
         function showAlert(message, type) {
-            const alertDiv = document.getElementById('successAlert');
-            alertDiv.textContent = message;
-            alertDiv.className = `alert alert-${type}`;
-            alertDiv.style.display = 'block';
+            const alertBox = document.getElementById('alertBox');
+            alertBox.textContent = message;
+            alertBox.className = `alert alert-${type}`;
+            alertBox.style.display = 'block';
             
             setTimeout(() => {
-                alertDiv.style.display = 'none';
+                alertBox.style.display = 'none';
             }, 3000);
         }
         
-        // التهيئة عند تحميل الصفحة
+        // التهيئة
         window.onload = function() {
             checkLogin();
             
-            // إضافة تأثيرات إضافية
-            document.querySelectorAll('.card').forEach((card, index) => {
-                card.style.animationDelay = `${index * 0.1}s`;
-            });
+            // تحميل البيانات التلقائية
+            if (isLoggedIn) {
+                loadAllData();
+            }
         };
     </script>
 </body>
