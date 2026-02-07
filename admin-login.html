@@ -1,41 +1,323 @@
-// admin-config.js
-const AdminConfig = {
-    // بيانات المديرين المسموح لهم بالدخول
-    admins: [
-        {
-            username: "admin",
-            password: "admin123", // سيتم تشفيرها في الإصدار النهائي
-            fullName: "محمد أيت صالح",
-            email: "webfooorge@gmail.com",
-            role: "superadmin",
-            lastLogin: null
-        },
-        {
-            username: "hajar",
-            password: "hajar123",
-            fullName: "هاجر أيت بلعيد",
-            email: "hajar@webforge.com",
-            role: "editor",
-            lastLogin: null
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - Web Forge Admin</title>
+    <link rel="stylesheet" href="admin-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .login-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem;
         }
-    ],
+        
+        .login-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        
+        .login-header i {
+            font-size: 3.5rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        
+        .login-header h1 {
+            color: #2d3748;
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .login-header p {
+            color: #718096;
+        }
+        
+        .login-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .login-form .form-control {
+            padding: 1rem 1.25rem;
+            font-size: 1rem;
+        }
+        
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #4a5568;
+        }
+        
+        .forgot-password {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.2);
+        }
+        
+        .login-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+        
+        .login-footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: #718096;
+            font-size: 0.9rem;
+        }
+        
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+        
+        .alert-error {
+            background: #fed7d7;
+            color: #c53030;
+            border: 1px solid #fc8181;
+        }
+        
+        .alert-success {
+            background: #c6f6d5;
+            color: #22543d;
+            border: 1px solid #9ae6b4;
+        }
+        
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 2rem;
+            }
+            
+            .login-header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="login-page">
+    <div class="login-card">
+        <div class="login-header">
+            <i class="fas fa-code"></i>
+            <h1>Web Forge Admin</h1>
+            <p>لوحة التحكم الإدارية</p>
+        </div>
+        
+        <div id="loginAlert" class="alert"></div>
+        
+        <form class="login-form" id="loginForm" onsubmit="return handleLogin(event)">
+            <div class="form-group">
+                <label for="username" class="form-label">اسم المستخدم</label>
+                <input type="text" id="username" class="form-control" placeholder="أدخل اسم المستخدم" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password" class="form-label">كلمة المرور</label>
+                <input type="password" id="password" class="form-control" placeholder="أدخل كلمة المرور" required>
+            </div>
+            
+            <div class="remember-forgot">
+                <label class="remember-me">
+                    <input type="checkbox" id="rememberMe">
+                    تذكرني
+                </label>
+                <a href="#" class="forgot-password">نسيت كلمة المرور؟</a>
+            </div>
+            
+            <button type="submit" class="login-btn" id="loginBtn">
+                <span id="loginText">تسجيل الدخول</span>
+                <span id="loginSpinner" style="display: none;">
+                    <i class="fas fa-spinner fa-spin"></i> جاري التحقق...
+                </span>
+            </button>
+        </form>
+        
+        <div class="login-footer">
+            <p>© 2024 Web Forge. جميع الحقوق محفوظة</p>
+            <p>الإصدار 1.0.0</p>
+        </div>
+    </div>
     
-    // صلاحيات كل دور
-    permissions: {
-        superadmin: ["all"],
-        editor: ["content", "view_orders", "view_stats"],
-        support: ["view_orders", "respond_contacts"]
-    },
-    
-    // إعدادات الأمان
-    security: {
-        maxLoginAttempts: 5,
-        sessionTimeout: 30, // دقائق
-        require2FA: false,
-        backupFrequency: "daily"
-    }
-};
-
-
-
-
+    <script src="admin-config.js"></script>
+    <script>
+        let loginAttempts = 0;
+        const maxAttempts = 5;
+        
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+            
+            // عرض التحميل
+            document.getElementById('loginText').style.display = 'none';
+            document.getElementById('loginSpinner').style.display = 'inline';
+            document.getElementById('loginBtn').disabled = true;
+            
+            // محاكاة تأخير الشبكة
+            setTimeout(() => {
+                const result = authenticateUser(username, password);
+                
+                if (result.success) {
+                    loginSuccess(result.user, rememberMe);
+                } else {
+                    loginFailed(result.message);
+                }
+                
+                // إعادة تعيين الزر
+                document.getElementById('loginText').style.display = 'inline';
+                document.getElementById('loginSpinner').style.display = 'none';
+                document.getElementById('loginBtn').disabled = false;
+            }, 1500);
+            
+            return false;
+        }
+        
+        function authenticateUser(username, password) {
+            const admin = window.AdminConfig.admins.find(
+                admin => admin.username === username && admin.password === password
+            );
+            
+            if (admin) {
+                return {
+                    success: true,
+                    user: {
+                        username: admin.username,
+                        fullName: admin.fullName,
+                        email: admin.email,
+                        role: admin.role,
+                        lastLogin: new Date().toISOString()
+                    }
+                };
+            }
+            
+            loginAttempts++;
+            
+            if (loginAttempts >= maxAttempts) {
+                return {
+                    success: false,
+                    message: 'تم تعطيل الحساب مؤقتًا بسبب محاولات تسجيل دخول فاشلة متعددة'
+                };
+            }
+            
+            return {
+                success: false,
+                message: `اسم المستخدم أو كلمة المرور غير صحيحة. المحاولات المتبقية: ${maxAttempts - loginAttempts}`
+            };
+        }
+        
+        function loginSuccess(user, rememberMe) {
+            // حفظ بيانات الجلسة
+            const token = btoa(JSON.stringify({
+                user: user.username,
+                timestamp: Date.now(),
+                expires: Date.now() + (7 * 24 * 60 * 60 * 1000) // أسبوع
+            }));
+            
+            localStorage.setItem('admin_token', token);
+            localStorage.setItem('admin_user', JSON.stringify(user));
+            
+            if (rememberMe) {
+                localStorage.setItem('remember_me', 'true');
+            }
+            
+            showAlert('تم تسجيل الدخول بنجاح! جاري التوجيه...', 'success');
+            
+            // توجيه إلى لوحة التحكم بعد تأخير بسيط
+            setTimeout(() => {
+                window.location.href = 'admin-dashboard.html';
+            }, 1500);
+        }
+        
+        function loginFailed(message) {
+            showAlert(message, 'error');
+            
+            // اهتزاز النموذج في حالة الفشل
+            document.getElementById('loginForm').style.animation = 'shake 0.5s';
+            setTimeout(() => {
+                document.getElementById('loginForm').style.animation = '';
+            }, 500);
+        }
+        
+        function showAlert(message, type) {
+            const alert = document.getElementById('loginAlert');
+            alert.textContent = message;
+            alert.className = `alert alert-${type}`;
+            alert.style.display = 'block';
+            
+            // إخفاء التنبيه بعد 5 ثواني
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 5000);
+        }
+        
+        // التحقق من التذكر
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('remember_me') === 'true') {
+                const savedUser = localStorage.getItem('admin_user');
+                if (savedUser) {
+                    try {
+                        const user = JSON.parse(savedUser);
+                        document.getElementById('username').value = user.username;
+                        document.getElementById('rememberMe').checked = true;
+                    } catch (e) {
+                        console.error('Error loading saved user:', e);
+                    }
+                }
+            }
+            
+            // إضافة تأثيرات الاهتزاز
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                    20%, 40%, 60%, 80% { transform: translateX(5px); }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>
