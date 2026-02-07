@@ -3598,55 +3598,46 @@
         window.translations = translations;
         window.typewriterData = typewriterData;
     </script>
-    <!-- نظام إدارة المحتوى البسيط -->
-<script src="admin-content.js"></script>
+    <!-- نظام تحديث المحتوى من واجهة الإدارة -->
+<script src="site-updater.js"></script>
+
+<!-- رابط سريع للمالك -->
 <script>
-// إذا أردت اختصار أكثر، ضع هذا الكود مباشرة قبل </body>
-(function(){
-    // تحميل البيانات
-    const content = localStorage.getItem('webforge_admin_content');
-    if(content){
-        const data = JSON.parse(content);
-        
-        // تحديث بسيط للعناصر الرئيسية
-        if(data.hero){
-            // العنوان
-            const title = document.querySelector('[data-translate="heroText1"]');
-            if(title) title.textContent = data.hero.title;
-            
-            // الوصف
-            const desc = document.querySelector('[data-translate="heroText2"]');
-            if(desc) desc.textContent = data.hero.description;
-        }
-        
-        // تحديث الإحصائيات
-        if(data.stats){
-            const counters = document.querySelectorAll('.counter[data-target]');
-            counters.forEach(counter => {
-                if(counter.textContent.includes('مشروع')){
-                    counter.setAttribute('data-target', data.stats.projects || 50);
-                }
-            });
-        }
-    }
+if(window.location.hash === '#owner'){
+    // إضافة زر لوحة التحكم
+    const adminBtn = document.createElement('a');
+    adminBtn.href = 'admin.html';
+    adminBtn.target = '_blank';
+    adminBtn.innerHTML = '👑 لوحة التحكم';
+    adminBtn.style.cssText = `
+        position:fixed; bottom:20px; left:20px;
+        background:linear-gradient(90deg, #f59e0b, #d97706);
+        color:#000; padding:12px 25px;
+        border-radius:10px; text-decoration:none;
+        font-weight:bold; z-index:10000;
+        box-shadow:0 6px 20px rgba(245,158,11,0.4);
+        font-family:'Tajawal', sans-serif;
+        display:flex; align-items:center; gap:10px;
+    `;
+    document.body.appendChild(adminBtn);
     
-    // رابط سريع للمالك
-    if(window.location.hash === '#owner'){
-        const link = document.createElement('a');
-        link.href = 'admin.html';
-        link.target = '_blank';
-        link.style.cssText = `
-            position:fixed; bottom:20px; left:20px;
-            background:#f59e0b; color:#000; padding:10px 20px;
-            border-radius:8px; text-decoration:none; font-weight:bold;
-            z-index:10000; box-shadow:0 4px 12px rgba(245,158,11,0.4);
-        `;
-        link.innerHTML = '👑 لوحة التحكم';
-        document.body.appendChild(link);
-    }
-})();
+    // إضافة زر التحديث
+    const refreshBtn = document.createElement('button');
+    refreshBtn.innerHTML = '🔄 تحديث';
+    refreshBtn.onclick = function() {
+        if(window.refreshAdminContent) window.refreshAdminContent();
+    };
+    refreshBtn.style.cssText = `
+        position:fixed; bottom:70px; left:20px;
+        background:#38bdf8; color:#000;
+        border:none; padding:10px 20px;
+        border-radius:10px; font-weight:bold;
+        cursor:pointer; z-index:10000;
+        box-shadow:0 4px 15px rgba(56,189,248,0.3);
+        font-family:'Tajawal', sans-serif;
+    `;
+    document.body.appendChild(refreshBtn);
+}
 </script>
-   <script src="admin-content.js"></script>
-<!-- أو الكود المختصر أعلاه --> 
 </body>
 </html>
