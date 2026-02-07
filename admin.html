@@ -1,6 +1,171 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    <script>
+// ========== مزامنة البيانات مع الموقع الأساسي ==========
+
+// ربط لوحة التحكم بالموقع الأساسي
+async function syncWithMainSite(data) {
+    try {
+        // حفظ في localStorage (لموقع التحكم)
+        localStorage.setItem('webforgeData', JSON.stringify(data));
+        
+        // محاولة تحديث الموقع الأساسي
+        await updateMainSite(data);
+        
+        return true;
+    } catch (error) {
+        console.error('خطأ في المزامنة:', error);
+        return false;
+    }
+}
+
+// تحديث الموقع الأساسي
+async function updateMainSite(data) {
+    // طريقة 1: استخدام localStorage المشترك
+    // نستخدم sessionStorage كجسر بين الصفحات
+    sessionStorage.setItem('webforgeUpdates', JSON.stringify({
+        data: data,
+        timestamp: Date.now(),
+        action: 'update'
+    }));
+    
+    // طريقة 2: إعلام الموقع الأساسي
+    try {
+        // فتح نافذة/تبويب الموقع الأساسي إذا كان مفتوحاً
+        const mainSiteWindows = window.open('', '_blank');
+        if (mainSiteWindows && !mainSiteWindows.closed) {
+            mainSiteWindows.postMessage({
+                type: 'WEBFORGE_UPDATE',
+                data: data,
+                timestamp: Date.now()
+            }, '*');
+        }
+        
+        // طريقة 3: حفظ في localStorage مع علامة محددة
+        localStorage.setItem('webforge_sync_trigger', Date.now().toString());
+        localStorage.setItem('webforge_latest_data', JSON.stringify(data));
+        
+        return true;
+    } catch (error) {
+        console.log('الموقع الأساسي غير مفتوح، سيتم التحديث عند زيارته');
+        return true;
+    }
+}
+
+// حفظ المحتوى مع المزامنة
+async function saveContent() {
+    const contentData = {
+        // المحتوى الرئيسي
+        siteTitle: document.getElementById('siteTitle')?.value || '',
+        siteDescription: document.getElementById('siteDescription')?.value || '',
+        heroText: document.getElementById('heroText')?.value || '',
+        promoText: document.getElementById('promoText')?.value || '',
+        
+        // الخدمات
+        youcanTitle: document.getElementById('youcanTitle')?.value || '',
+        youcanDesc: document.getElementById('youcanDesc')?.value || '',
+        shopifyTitle: document.getElementById('shopifyTitle')?.value || '',
+        shopifyDesc: document.getElementById('shopifyDesc')?.value || '',
+        websitesTitle: document.getElementById('websitesTitle')?.value || '',
+        websitesDesc: document.getElementById('websitesDesc')?.value || '',
+        
+        // المميزات
+        speedTitle: document.getElementById('speedTitle')?.value || '',
+        speedDesc: document.getElementById('speedDesc')?.value || '',
+        responsiveTitle: document.getElementById('responsiveTitle')?.value || '',
+        responsiveDesc: document.getElementById('responsiveDesc')?.value || '',
+        supportTitle: document.getElementById('supportTitle')?.value || '',
+        supportDesc: document.getElementById('supportDesc')?.value || '',
+        designTitle: document.getElementById('designTitle')?.value || '',
+        designDesc: document.getElementById('designDesc')?.value || '',
+        
+        // المعرض
+        work1Title: document.getElementById('work1Title')?.value || '',
+        work1Image: document.getElementById('work1Image')?.value || '',
+        work2Title: document.getElementById('work2Title')?.value || '',
+        work2Image: document.getElementById('work2Image')?.value || '',
+        work3Title: document.getElementById('work3Title')?.value || '',
+        work3Image: document.getElementById('work3Image')?.value || '',
+        
+        // الأسئلة الشائعة
+        faq1Q: document.getElementById('faq1Q')?.value || '',
+        faq1A: document.getElementById('faq1A')?.value || '',
+        faq2Q: document.getElementById('faq2Q')?.value || '',
+        faq2A: document.getElementById('faq2A')?.value || '',
+        faq3Q: document.getElementById('faq3Q')?.value || '',
+        faq3A: document.getElementById('faq3A')?.value || '',
+        faq4Q: document.getElementById('faq4Q')?.value || '',
+        faq4A: document.getElementById('faq4A')?.value || '',
+        
+        // الإعدادات
+        primaryColor: document.getElementById('primaryColor')?.value || '#3b82f6',
+        secondaryColor: document.getElementById('secondaryColor')?.value || '#10b981',
+        lastUpdated: new Date().toISOString(),
+        version: '2.0'
+    };
+    
+    // حفظ محلياً
+    localStorage.setItem('webforgeContent', JSON.stringify(contentData));
+    
+    // مزامنة مع الموقع الأساسي
+    const success = await syncWithMainSite(contentData);
+    
+    if (success) {
+        showAlert('✅ تم حفظ التغييرات وتطبيقها على الموقع', 'success');
+    } else {
+        showAlert('⚠️ تم الحفظ محلياً فقط، تأكد من فتح الموقع الأساسي', 'warning');
+    }
+}
+
+// دالة الحفظ الرئيسية المعدلة
+async function saveAll() {
+    showAlert('🔄 جاري حفظ التغييرات...', 'warning');
+    await saveContent();
+}
+
+// إضافة استماع للرسائل من الموقع الأساسي
+window.addEventListener('message', function(event) {
+    if (event.data && event.data.type === 'WEBFORGE_REQUEST_DATA') {
+        // إرسال البيانات عند الطلب
+        const content = JSON.parse(localStorage.getItem('webforgeContent') || '{}');
+        event.source.postMessage({
+            type: 'WEBFORGE_DATA',
+            data: content,
+            timestamp: Date.now()
+        }, '*');
+    }
+});
+
+// تحميل البيانات المحفوظة
+function loadSavedData() {
+    const saved = JSON.parse(localStorage.getItem('webforgeContent') || '{}');
+    
+    // تعبئة الحقول
+    Object.keys(saved).forEach(key => {
+        const element = document.getElementById(key);
+        if (element && saved[key]) {
+            element.value = saved[key];
+        }
+    });
+}
+
+// عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', function() {
+    loadSavedData();
+    
+    // فحص إذا كان الموقع الأساسي مفتوحاً
+    setInterval(async () => {
+        const lastTrigger = localStorage.getItem('webforge_sync_trigger');
+        if (lastTrigger && Date.now() - parseInt(lastTrigger) < 5000) {
+            // إعادة مزامنة البيانات
+            const content = JSON.parse(localStorage.getItem('webforgeContent') || '{}');
+            await updateMainSite(content);
+            localStorage.removeItem('webforge_sync_trigger');
+        }
+    }, 1000);
+});
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🚀 Web Forge - لوحة التحكم الكاملة</title>
