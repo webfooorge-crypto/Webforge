@@ -3598,48 +3598,5 @@
         window.translations = translations;
         window.typewriterData = typewriterData;
     </script>
-    <!-- نظام تحديث المحتوى من واجهة الإدارة -->
-<script src="site-updater.js"></script>
-
-<!-- رابط سريع للمالك -->
-<script>
-if(window.location.hash === '#owner'){
-    // إضافة زر لوحة التحكم
-    const adminBtn = document.createElement('a');
-    adminBtn.href = 'admin.html';
-    adminBtn.target = '_blank';
-    adminBtn.innerHTML = '👑 لوحة التحكم';
-    adminBtn.style.cssText = `
-        position:fixed; bottom:20px; left:20px;
-        background:linear-gradient(90deg, #f59e0b, #d97706);
-        color:#000; padding:12px 25px;
-        border-radius:10px; text-decoration:none;
-        font-weight:bold; z-index:10000;
-        box-shadow:0 6px 20px rgba(245,158,11,0.4);
-        font-family:'Tajawal', sans-serif;
-        display:flex; align-items:center; gap:10px;
-    `;
-    document.body.appendChild(adminBtn);
-    
-    // إضافة زر التحديث
-    const refreshBtn = document.createElement('button');
-    refreshBtn.innerHTML = '🔄 تحديث';
-    refreshBtn.onclick = function() {
-        if(window.refreshAdminContent) window.refreshAdminContent();
-    };
-    refreshBtn.style.cssText = `
-        position:fixed; bottom:70px; left:20px;
-        background:#38bdf8; color:#000;
-        border:none; padding:10px 20px;
-        border-radius:10px; font-weight:bold;
-        cursor:pointer; z-index:10000;
-        box-shadow:0 4px 15px rgba(56,189,248,0.3);
-        font-family:'Tajawal', sans-serif;
-    `;
-    document.body.appendChild(refreshBtn);
-}
-</script>
-    <!-- نظام تحديث المحتوى من واجهة الإدارة -->
-<script src="update-site.js"></script>
 </body>
 </html>
