@@ -2,309 +2,80 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل دخول الأدمن - Web Forge</title>
+    <title>تسجيل دخول الأدمن</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Tajawal', sans-serif;
-        }
-        
         body {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: #f8fafc;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .login-container {
-            background: rgba(30, 41, 59, 0.9);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2.5rem;
-            width: 100%;
-            max-width: 400px;
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 0.5s ease-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .logo {
+            background: #0f172a;
+            color: white;
+            font-family: 'Tajawal', sans-serif;
             text-align: center;
-            margin-bottom: 2rem;
+            padding-top: 100px;
         }
-        
-        .logo h1 {
-            font-size: 2.2rem;
-            background: linear-gradient(90deg, #38bdf8, #f59e0b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
-        }
-        
-        .logo p {
-            color: #94a3b8;
-            font-size: 0.9rem;
-        }
-        
-        .input-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #cbd5e1;
-            font-weight: 500;
-        }
-        
-        .input-group input {
-            width: 100%;
-            padding: 12px 15px;
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid #475569;
+        .login-box {
+            background: #1e293b;
+            width: 350px;
+            margin: 0 auto;
+            padding: 30px;
             border-radius: 10px;
-            color: #f8fafc;
-            font-size: 1rem;
-            transition: all 0.3s;
+            border: 1px solid #38bdf8;
         }
-        
-        .input-group input:focus {
-            outline: none;
-            border-color: #38bdf8;
-            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
-        }
-        
-        .login-btn {
+        input {
             width: 100%;
-            padding: 14px;
-            background: linear-gradient(90deg, #38bdf8, #0ea5e9);
-            color: #000;
-            border: none;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(56, 189, 248, 0.4);
-        }
-        
-        .login-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-        
-        .error-message {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid #f87171;
-            color: #fca5a5;
             padding: 12px;
-            border-radius: 8px;
-            margin-top: 1rem;
-            text-align: center;
+            margin: 10px 0;
+            background: #334155;
+            border: 1px solid #475569;
+            color: white;
+            border-radius: 5px;
+        }
+        button {
+            background: #38bdf8;
+            color: black;
+            padding: 12px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
             display: none;
         }
-        
-        .security-note {
-            margin-top: 1.5rem;
-            padding: 10px;
-            background: rgba(245, 158, 11, 0.1);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-            border-radius: 8px;
-            text-align: center;
-            font-size: 0.85rem;
-            color: #fbbf24;
-        }
-        
-        .password-hint {
-            text-align: center;
-            margin-top: 1rem;
-            font-size: 0.8rem;
-            color: #64748b;
-        }
-        
-        @media (max-width: 480px) {
-            .login-container {
-                padding: 1.5rem;
-            }
-            
-            .logo h1 {
-                font-size: 1.8rem;
-            }
-        }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="login-container">
-        <div class="logo">
-            <h1><i class="fas fa-code"></i> Web Forge</h1>
-            <p>لوحة تحكم الأدمن</p>
-        </div>
-        
-        <form id="loginForm">
-            <div class="input-group">
-                <label for="adminPassword"><i class="fas fa-lock"></i> كلمة المرور الرئيسية</label>
-                <input 
-                    type="password" 
-                    id="adminPassword" 
-                    placeholder="أدخل كلمة المرور الخاصة بالإدارة"
-                    autocomplete="current-password"
-                    required
-                >
-            </div>
-            
-            <button type="submit" class="login-btn" id="loginButton">
-                <span>دخول إلى لوحة التحكم</span>
-                <i class="fas fa-sign-in-alt"></i>
-            </button>
-        </form>
-        
-        <div class="error-message" id="errorMessage">
-            كلمة المرور غير صحيحة. حاول مرة أخرى.
-        </div>
-        
-        <div class="security-note">
-            <i class="fas fa-shield-alt"></i>
-            هذا القسم محمي بكلمة مرور قوية ومشفرة
-        </div>
-        
-        <div class="password-hint">
-            للوصول إلى لوحة التحكم، أدخل كلمة المرور المحددة في ملف admin-api.php
-        </div>
+    <div class="login-box">
+        <h2>🔐 تسجيل دخول الأدمن</h2>
+        <input type="password" id="password" placeholder="كلمة المرور">
+        <button onclick="login()">دخول</button>
+        <div class="error" id="error">كلمة مرور خاطئة</div>
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
+        function login() {
+            let pass = document.getElementById('password').value;
+            let error = document.getElementById('error');
             
-            const password = document.getElementById('adminPassword').value;
-            const loginBtn = document.getElementById('loginButton');
-            const errorMsg = document.getElementById('errorMessage');
+            error.style.display = 'none';
             
-            // إظهار حالة التحميل
-            loginBtn.disabled = true;
-            loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التحقق...';
-            errorMsg.style.display = 'none';
-            
-            try {
-                // إرسال طلب التحقق إلى PHP
-                const response = await fetch('admin-api.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: 'action=login&password=' + encodeURIComponent(password)
-                });
-                
-                const result = await response.text();
-                
-                if (result === 'success') {
-                    // نجاح الدخول
-                    loginBtn.innerHTML = '<i class="fas fa-check"></i> تم الدخول بنجاح!';
-                    loginBtn.style.background = 'linear-gradient(90deg, #10b981, #059669)';
-                    
-                    // إضافة تأثير النجاح
-                    document.querySelector('.login-container').style.boxShadow = '0 0 30px rgba(16, 185, 129, 0.5)';
-                    
-                    // التوجيه بعد ثانيتين
-                    setTimeout(() => {
-                        window.location.href = 'admin-panel.html';
-                    }, 1500);
-                    
-                    // حفظ حالة الدخول
-                    localStorage.setItem('admin_authenticated', 'true');
-                    localStorage.setItem('login_timestamp', Date.now());
-                    
-                } else {
-                    // فشل الدخول
-                    errorMsg.textContent = result || 'كلمة المرور غير صحيحة';
-                    errorMsg.style.display = 'block';
-                    
-                    // تأثير الخطأ
-                    document.getElementById('adminPassword').style.borderColor = '#ef4444';
-                    document.getElementById('adminPassword').style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.2)';
-                    
-                    // إعادة تعيين الزر
-                    loginBtn.disabled = false;
-                    loginBtn.innerHTML = '<span>دخول إلى لوحة التحكم</span><i class="fas fa-sign-in-alt"></i>';
-                    
-                    // اهتزاز الحقل
-                    document.getElementById('adminPassword').animate([
-                        { transform: 'translateX(0)' },
-                        { transform: 'translateX(-10px)' },
-                        { transform: 'translateX(10px)' },
-                        { transform: 'translateX(0)' }
-                    ], {
-                        duration: 500,
-                        iterations: 1
-                    });
-                }
-                
-            } catch (error) {
-                console.error('Login error:', error);
-                errorMsg.textContent = 'حدث خطأ في الاتصال بالخادم';
-                errorMsg.style.display = 'block';
-                loginBtn.disabled = false;
-                loginBtn.innerHTML = '<span>دخول إلى لوحة التحكم</span><i class="fas fa-sign-in-alt"></i>';
-            }
-        });
-        
-        // تأثيرات بصرية عند التركيز
-        document.getElementById('adminPassword').addEventListener('focus', function() {
-            this.style.transform = 'translateY(-2px)';
-        });
-        
-        document.getElementById('adminPassword').addEventListener('blur', function() {
-            this.style.transform = 'translateY(0)';
-        });
-        
-        // السماح بالدخول بالزر Enter
-        document.getElementById('adminPassword').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                document.getElementById('loginForm').dispatchEvent(new Event('submit'));
-            }
-        });
-        
-        // تحذير إذا كان المستخدم يحاول الوصول مباشرة
-        window.addEventListener('load', function() {
-            const isAuthenticated = localStorage.getItem('admin_authenticated');
-            const loginTime = localStorage.getItem('login_timestamp');
-            
-            if (isAuthenticated === 'true' && loginTime) {
-                const timeDiff = Date.now() - parseInt(loginTime);
-                const hoursDiff = timeDiff / (1000 * 60 * 60);
-                
-                // إذا مرت أكثر من 12 ساعة، إعادة المصادقة
-                if (hoursDiff > 12) {
-                    localStorage.removeItem('admin_authenticated');
-                    localStorage.removeItem('login_timestamp');
-                } else {
-                    // توجيه مباشر إذا كان مسجلاً دخول
+            fetch('admin-api.php', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'action=login&password=' + encodeURIComponent(pass)
+            })
+            .then(r => r.text())
+            .then(result => {
+                if(result === 'success') {
+                    localStorage.setItem('admin_login', 'true');
                     window.location.href = 'admin-panel.html';
+                } else {
+                    error.style.display = 'block';
                 }
-            }
-        });
+            });
+        }
     </script>
 </body>
 </html>
