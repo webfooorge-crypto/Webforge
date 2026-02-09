@@ -2246,6 +2246,13 @@
                     <p data-translate="websitesDesc" class="arabic-text">مواقع خاصة: مدونة، طبيب، محامي، Portfolio، كتب.</p>
                     <button onclick="openTypeSelection()" class="card-btn" data-translate="websitesBtn">اطلب الخدمة <i class="fas fa-arrow-left"></i></button>
                 </div>
+                <!-- ========== خدمة الدورات التكوينية الجديدة ========== -->
+                <div class="service-card reveal delay-4 js-tilt">
+                    <div class="icon-box" style="color: #10b981;"><i class="fas fa-graduation-cap"></i></div>
+                    <h3 data-translate="coursesTitle">الدورات التكوينية</h3>
+                    <p data-translate="coursesDesc" class="arabic-text">دورات احترافية في التسويق بالعمولة، العمل على AliExpress، والبرمجة.</p>
+                    <button onclick="openCoursesSelection()" class="card-btn" data-translate="coursesBtn">اطلب الخدمة <i class="fas fa-arrow-left"></i></button>
+                </div>
             </div>
         </section>
 
@@ -2300,6 +2307,37 @@
         </section>
 
         <!-- ========== المودالات الأخرى ========== -->
+        <!-- مودال الدورات التكوينية -->
+        <div id="coursesModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeCoursesModal()">&times;</span>
+                <h3 style="text-align:center; color:var(--accent)" data-translate="coursesModalTitle">اختر الدورة التكوينية</h3>
+                <p style="text-align:center; color:var(--text-secondary); margin-bottom:20px;" data-translate="coursesModalDesc">اختر الدورة التي تناسب اهتماماتك واحصل على تكوين احترافي</p>
+                <div class="types-grid">
+                    <button class="type-btn" onclick="selectCourse('دورة التسويق بالعمولة')">
+                        <i class="fas fa-bullhorn" style="color:#f59e0b;"></i>
+                        <span data-translate="courseAffiliate">التسويق بالعمولة</span>
+                        <small data-translate="courseAffiliateDesc">تعلم كيفية الربح من التسويق بالعمولة</small>
+                    </button>
+                    <button class="type-btn" onclick="selectCourse('دورة العمل على موقع علي اكسبريس')">
+                        <i class="fas fa-shopping-cart" style="color:#10b981;"></i>
+                        <span data-translate="courseAliExpress">العمل على AliExpress</span>
+                        <small data-translate="courseAliExpressDesc">احترف التجارة الإلكترونية عبر AliExpress</small>
+                    </button>
+                    <button class="type-btn" onclick="selectCourse('دورة البرمجة للمبتدئين')">
+                        <i class="fas fa-code" style="color:#38bdf8;"></i>
+                        <span data-translate="courseProgramming">البرمجة للمبتدئين</span>
+                        <small data-translate="courseProgrammingDesc">ابدأ رحلة البرمجة من الصفر</small>
+                    </button>
+                    <button class="type-btn" onclick="selectCourse('باقة الدورات الشاملة')">
+                        <i class="fas fa-crown" style="color:#ffd700;"></i>
+                        <span data-translate="courseBundle">الباقة الشاملة</span>
+                        <small data-translate="courseBundleDesc">جميع الدورات معاً بخصم خاص</small>
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <!-- Gift Modal -->
         <div id="giftModal" class="modal">
             <div class="modal-content" style="text-align:center; overflow:hidden;">
@@ -2415,7 +2453,6 @@
                         <span style="background:rgba(245,158,11,0.1); color:var(--forge-orange); padding:5px 12px; border-radius:20px; font-size:0.85rem;">Hajar Ait Belaid</span>
                         <span style="background:rgba(245,158,11,0.1); color:var(--forge-orange); padding:5px 12px; border-radius:20px; font-size:0.85rem;">Aissa Ed-dahil</span>
                         <span style="background:rgba(245,158,11,0.1); color:var(--forge-orange); padding:5px 12px; border-radius:20px; font-size:0.85rem;">Hasani Omaima</span>
-                        <span style="background:rgba(245,158,11,0.1); color:var(--forge-orange); padding:5px 12px; border-radius:20px; font-size:0.85rem;"> Hamid bouchouafa</span>
                     </div>
                 </div>
             </div>
@@ -3043,6 +3080,8 @@
         window.closeAboutModal = () => hideModal('aboutModal');
         window.openTypeSelection = () => showModal('typeModal');
         window.closeTypeSelection = () => hideModal('typeModal');
+        window.openCoursesSelection = () => showModal('coursesModal');
+        window.closeCoursesModal = () => hideModal('coursesModal');
         window.openForm = (service) => {
             document.getElementById('serviceName').textContent = service;
             showModal('orderModal');
@@ -3054,6 +3093,10 @@
             document.getElementById('pkgTitle').textContent = 
                 document.querySelector('[data-translate="packageTitle"]').textContent + " " + type;
             showModal('packageModal');
+        };
+        window.selectCourse = (course) => {
+            hideModal('coursesModal');
+            openForm(course);
         };
         window.openFormWithPackage = (pkg) => {
             hideModal('packageModal');
@@ -3222,6 +3265,19 @@
                 "websitesTitle": "مواقع Web Forge",
                 "websitesDesc": "مواقع خاصة: مدونة، طبيب، محامي، Portfolio، كتب.",
                 "websitesBtn": "اطلب الخدمة",
+                "coursesTitle": "الدورات التكوينية",
+                "coursesDesc": "دورات احترافية في التسويق بالعمولة، العمل على AliExpress، والبرمجة.",
+                "coursesBtn": "اطلب الخدمة",
+                "coursesModalTitle": "اختر الدورة التكوينية",
+                "coursesModalDesc": "اختر الدورة التي تناسب اهتماماتك واحصل على تكوين احترافي",
+                "courseAffiliate": "التسويق بالعمولة",
+                "courseAffiliateDesc": "تعلم كيفية الربح من التسويق بالعمولة",
+                "courseAliExpress": "العمل على AliExpress",
+                "courseAliExpressDesc": "احترف التجارة الإلكترونية عبر AliExpress",
+                "courseProgramming": "البرمجة للمبتدئين",
+                "courseProgrammingDesc": "ابدأ رحلة البرمجة من الصفر",
+                "courseBundle": "الباقة الشاملة",
+                "courseBundleDesc": "جميع الدورات معاً بخصم خاص",
                 "portfolioTitle": "🏆 قصص النجاح بالصور",
                 "work1": "نموذج موقع محامي",
                 "work2": "نموذج موقع بائع ساعات",
@@ -3367,6 +3423,19 @@
                 "websitesTitle": "Web Forge Websites",
                 "websitesDesc": "Private websites: Blog, Doctor, Lawyer, Portfolio, Books.",
                 "websitesBtn": "Order Service",
+                "coursesTitle": "Training Courses",
+                "coursesDesc": "Professional courses in affiliate marketing, AliExpress business, and programming.",
+                "coursesBtn": "Order Service",
+                "coursesModalTitle": "Choose Training Course",
+                "coursesModalDesc": "Choose the course that matches your interests and get professional training",
+                "courseAffiliate": "Affiliate Marketing",
+                "courseAffiliateDesc": "Learn how to earn from affiliate marketing",
+                "courseAliExpress": "Working on AliExpress",
+                "courseAliExpressDesc": "Master e-commerce through AliExpress",
+                "courseProgramming": "Programming for Beginners",
+                "courseProgrammingDesc": "Start your programming journey from scratch",
+                "courseBundle": "Complete Package",
+                "courseBundleDesc": "All courses together with special discount",
                 "portfolioTitle": "🏆 Success Stories in Pictures",
                 "work1": "Lawyer Website Template",
                 "work2": "Watch Seller Website Template",
@@ -3512,6 +3581,19 @@
                 "websitesTitle": "Sites Web Forge",
                 "websitesDesc": "Sites privés: Blog, Médecin, Avocat, Portfolio, Livres.",
                 "websitesBtn": "Commander le Service",
+                "coursesTitle": "Formations Professionnelles",
+                "coursesDesc": "Formations professionnelles en marketing d'affiliation, business AliExpress, et programmation.",
+                "coursesBtn": "Commander le Service",
+                "coursesModalTitle": "Choisir la Formation",
+                "coursesModalDesc": "Choisissez la formation qui correspond à vos intérêts et obtenez une formation professionnelle",
+                "courseAffiliate": "Marketing d'Affiliation",
+                "courseAffiliateDesc": "Apprenez à gagner de l'argent avec le marketing d'affiliation",
+                "courseAliExpress": "Travailler sur AliExpress",
+                "courseAliExpressDesc": "Maîtrisez le e-commerce via AliExpress",
+                "courseProgramming": "Programmation pour Débutants",
+                "courseProgrammingDesc": "Commencez votre parcours de programmation dès le début",
+                "courseBundle": "Pack Complet",
+                "courseBundleDesc": "Toutes les formations ensemble avec réduction spéciale",
                 "portfolioTitle": "🏆 Histoires de Succès en Images",
                 "work1": "Modèle de Site d'Avocat",
                 "work2": "Modèle de Site de Vendeur de Montres",
