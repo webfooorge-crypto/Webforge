@@ -5,28 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title data-translate="siteTitle">Web Forge | مجموعة محمد أيت صالح</title>
     
-    <!-- ========== PWA Manifest ========== -->
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#0f172a">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="https://i.ibb.co/3qzt7ks/2-2-2026-15329-webforge-it-com.jpg">
-    
     <!-- ========== تحسينات الأداء ========== -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://i.ibb.co">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700;900&display=swap">
-    <link rel="preload" as="script" href="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js">
     
     <!-- ========== تحسينات SEO ========== -->
     <meta name="description" data-translate="metaDescription">
     <meta name="keywords" data-translate="metaKeywords">
     <meta name="author" content="Web Forge Team">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://webforge-it.com/">
     
     <!-- Open Graph Tags -->
     <meta property="og:title" data-translate="ogTitle">
@@ -83,19 +73,6 @@
             "@id": "https://webforge-it.com/#organization"
           },
           "description": "متخصصون في صناعة الهوية الرقمية، تطوير متاجر YouCan و Shopify، وتصميم المواقع العصرية"
-        },
-        {
-          "@type": "Service",
-          "name": "تصميم متاجر YouCan",
-          "serviceType": "تصميم مواقع إلكترونية",
-          "provider": {
-            "@type": "Organization",
-            "name": "Web Forge"
-          },
-          "areaServed": {
-            "@type": "Country",
-            "name": "المغرب"
-          }
         }
       ]
     }
@@ -130,7 +107,6 @@
             --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
             --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
             --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
-            --parallax-speed: 0.5;
         }
         [data-theme="light"] {
             --bg-dark: #f8fafc; 
@@ -141,27 +117,6 @@
             --text-main: #0f172a; 
             --text-secondary: #475569; 
             --header-bg: rgba(248, 250, 252, 0.95);
-        }
-
-        /* ========== تحسينات تباين عالي ========== */
-        @media (prefers-contrast: high) {
-            :root {
-                --text-main: #000000;
-                --text-secondary: #333333;
-                --accent: #0056b3;
-                --bg-dark: #ffffff;
-                --bg-card: #f0f0f0;
-            }
-            
-            .service-card,
-            .why-card,
-            .work-card {
-                border: 2px solid var(--text-main);
-            }
-            
-            button, .btn {
-                border: 2px solid currentColor;
-            }
         }
 
         /* ========== الأساسيات مع التحسينات ========== */
@@ -186,7 +141,6 @@
             text-align: right;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            transition: background-color 0.3s, color 0.3s;
         }
 
         @media (max-width: 768px) {
@@ -194,23 +148,6 @@
                 font-size: 14px;
                 line-height: 1.6;
             }
-        }
-
-        /* تحسينات للشاشات التي تعمل باللمس */
-        @media (hover: none) and (pointer: coarse) {
-            button, .btn {
-                min-height: 44px;
-                min-width: 44px;
-            }
-            
-            input, select, textarea {
-                font-size: 16px; /* منع التكبير في iOS */
-            }
-        }
-
-        .touch-active {
-            transform: scale(0.95);
-            transition: transform 0.2s;
         }
 
         .arabic-numbers {
@@ -289,8 +226,6 @@
             cursor: pointer;
             border: none;
             transition: all var(--transition-base);
-            min-height: 44px;
-            min-width: 44px;
         }
 
         .btn-primary {
@@ -349,36 +284,11 @@
             -ms-hyphens: auto;
         }
 
-        /* تحسينات للحركة المخففة */
         @media (prefers-reduced-motion: reduce) {
             * {
                 animation-duration: 0.01ms !important;
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-            
-            .reveal,
-            .service-card,
-            .why-card,
-            .work-card {
-                transition: none !important;
-            }
-            
-            .tech-track,
-            .promo-content,
-            .cursor {
-                animation: none !important;
-            }
-            
-            .promo-content {
-                white-space: normal;
-            }
-            
-            .referral-float,
-            .consult-float,
-            .mystery-box {
-                animation: none !important;
             }
         }
 
@@ -407,18 +317,10 @@
         }
 
         img {
+            alt: attr(alt);
+            loading: lazy;
             max-width: 100%;
             height: auto;
-            object-fit: cover;
-        }
-
-        .lazy {
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .lazy.loaded {
-            opacity: 1;
         }
 
         body { 
@@ -728,7 +630,6 @@
             font-size: 0.9rem;
             transition: all var(--transition-fast);
             min-width: 120px;
-            min-height: 44px;
         }
         
         @media (max-width: 768px) {
@@ -736,7 +637,6 @@
                 min-width: 100px;
                 padding: 6px 10px;
                 font-size: 0.8rem;
-                min-height: 40px;
             }
         }
         
@@ -775,7 +675,6 @@
             gap: 10px;
             transition: all var(--transition-fast);
             font-size: 0.9rem;
-            min-height: 44px;
         }
         
         .language-dropdown-item:hover {
@@ -792,8 +691,8 @@
             background: var(--bg-card); 
             border: 1px solid var(--accent); 
             color: var(--accent); 
-            width: 44px; 
-            height: 44px; 
+            width: 40px; 
+            height: 40px; 
             border-radius: 50%; 
             cursor: pointer; 
             display: flex; 
@@ -805,8 +704,8 @@
         
         @media (max-width: 768px) {
             .theme-btn {
-                width: 40px;
-                height: 40px;
+                width: 35px;
+                height: 35px;
                 font-size: 1rem;
             }
         }
@@ -823,18 +722,16 @@
             font-size: 0.9rem; 
             white-space: nowrap;
             transition: all var(--transition-fast);
-            min-height: 44px;
         }
         
         @media (max-width: 768px) {
             .order-now-btn {
                 padding: 6px 12px;
                 font-size: 0.8rem;
-                min-height: 40px;
             }
         }
 
-        /* ========== Hero Section مع Parallax ========== */
+        /* ========== Hero Section ========== */
         .hero { 
             min-height: 95vh; 
             display: flex; 
@@ -846,7 +743,6 @@
             overflow: hidden; 
             background: #0f172a; 
             margin-top: 0; 
-            will-change: transform;
         }
         
         @media (max-width: 768px) {
@@ -876,7 +772,6 @@
             position: relative; 
             animation: zoomInFade 1.2s ease-out; 
             width: 100%;
-            transform: translateZ(0);
         }
         
         @media (max-width: 768px) {
@@ -1419,7 +1314,6 @@
             transform: translateZ(20px); 
             text-align: right;
             transition: all var(--transition-fast);
-            min-height: 44px;
         }
         
         .card-btn:hover {
@@ -1545,7 +1439,6 @@
             cursor: pointer; 
             font-weight: bold; 
             font-size: 1.1rem; 
-            min-height: 44px;
         }
         
         @media (max-width: 768px) {
@@ -1637,8 +1530,6 @@
             font-size: 1.5rem; 
             cursor: pointer; 
             z-index: 1;
-            min-width: 44px;
-            min-height: 44px;
         }
         
         .types-grid { 
@@ -1668,7 +1559,6 @@
             text-align: center; 
             font-size: 1rem; 
             transition: all var(--transition-fast);
-            min-height: 44px;
         }
         
         .type-btn:hover { 
@@ -1735,14 +1625,13 @@
             background: var(--accent); 
             color: #000; 
             border: none; 
-            padding: 12px; 
+            padding: 8px; 
             width: 100%; 
             border-radius: 5px; 
             font-weight: bold; 
             transform: translateZ(15px); 
             cursor: pointer; 
             transition: all var(--transition-fast);
-            min-height: 44px;
         }
         
         .pkg-btn:hover {
@@ -1796,8 +1685,6 @@
             color: var(--text-secondary); 
             text-decoration: none; 
             transition: all var(--transition-fast);
-            min-height: 44px;
-            min-width: 44px;
         }
         
         .social-btn:hover { 
@@ -1830,8 +1717,6 @@
             z-index: 1000; 
             border: none; 
             font-size: 1.3rem; 
-            min-height: 55px;
-            min-width: 55px;
         }
         
         @media (max-width: 768px) {
@@ -1918,154 +1803,6 @@
             50% { transform: rotate(8deg); } 
         }
 
-        /* ========== Dashboard Styles ========== */
-        .dashboard {
-            background: var(--bg-card);
-            border-radius: 15px;
-            overflow: hidden;
-            margin: 2rem auto;
-            max-width: 1200px;
-        }
-        
-        .dashboard-menu {
-            background: rgba(0,0,0,0.1);
-            padding: 1rem;
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            border-bottom: 1px solid rgba(128,128,128,0.1);
-        }
-        
-        .dashboard-menu a {
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            color: var(--text-secondary);
-            transition: all 0.3s;
-            min-height: 44px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .dashboard-menu a.active {
-            background: var(--accent);
-            color: #000;
-            font-weight: bold;
-        }
-        
-        .dashboard-content {
-            padding: 2rem;
-        }
-        
-        .project-status {
-            background: rgba(56, 189, 248, 0.1);
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-        }
-        
-        .progress-bar {
-            background: rgba(0,0,0,0.1);
-            height: 10px;
-            border-radius: 5px;
-            overflow: hidden;
-            margin: 1rem 0;
-        }
-        
-        .progress {
-            height: 100%;
-            background: var(--accent);
-            border-radius: 5px;
-            transition: width 1s ease;
-        }
-        
-        /* ========== Live Preview Styles ========== */
-        .preview-controls {
-            background: var(--bg-card);
-            padding: 1rem;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        
-        .theme-preview {
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto;
-            border: 2px solid var(--accent);
-            border-radius: 10px;
-            overflow: hidden;
-            background: var(--bg-dark);
-        }
-        
-        /* ========== Booking System Styles ========== */
-        .calendar {
-            background: var(--bg-card);
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin: 2rem auto;
-            max-width: 800px;
-        }
-        
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 5px;
-        }
-        
-        .calendar-day {
-            aspect-ratio: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s;
-            min-height: 44px;
-        }
-        
-        .calendar-day:hover {
-            background: var(--accent);
-            color: #000;
-        }
-        
-        .calendar-day.selected {
-            background: var(--forge-orange);
-            color: #000;
-            font-weight: bold;
-        }
-        
-        /* ========== Confetti Effect ========== */
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: var(--accent);
-            border-radius: 50%;
-            animation: fall 2s linear forwards;
-            z-index: 10000;
-        }
-        
-        @keyframes fall {
-            0% {
-                transform: translateY(-20px) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
         /* ========== تحسينات خاصة للجوال ========== */
         @media (max-width: 480px) {
             .hero h1 {
@@ -2101,16 +1838,6 @@
             .consult-float {
                 bottom: 155px;
             }
-            
-            .dashboard-menu {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-            
-            .dashboard-menu a {
-                width: 100%;
-                justify-content: center;
-            }
         }
 
         /* ========== تحسين تجربة اللمس ========== */
@@ -2119,10 +1846,6 @@
             -webkit-user-select: none;
             user-select: none;
             touch-action: manipulation;
-        }
-
-        button:active, .btn-primary:active, .btn-secondary:active {
-            transform: scale(0.95);
         }
 
         /* ========== تحسين التمرير السلس على الجوال ========== */
@@ -2142,6 +1865,47 @@
             .consult-float:hover,
             .mystery-box:hover {
                 transform: none;
+            }
+        }
+
+        /* ========== High Contrast Support ========== */
+        @media (prefers-contrast: high) {
+            :root {
+                --text-main: #000000;
+                --text-secondary: #333333;
+                --accent: #0056b3;
+            }
+            
+            .service-card,
+            .why-card,
+            .work-card {
+                border: 2px solid var(--text-main);
+            }
+        }
+
+        /* ========== Reduced Motion ========== */
+        @media (prefers-reduced-motion: reduce) {
+            .reveal,
+            .service-card,
+            .why-card,
+            .work-card {
+                transition: none;
+            }
+            
+            .tech-track,
+            .promo-content,
+            .cursor {
+                animation: none;
+            }
+            
+            .promo-content {
+                white-space: normal;
+            }
+            
+            .referral-float,
+            .consult-float,
+            .mystery-box {
+                animation: none;
             }
         }
     </style>
@@ -2352,7 +2116,7 @@
 
     <main role="main">
         <!-- ========== Hero Section ========== -->
-        <section class="hero" id="heroSection">
+        <section class="hero">
             <div id="particles-js"></div>
             <div class="hero-glass">
                 <h1>
@@ -2500,32 +2264,17 @@
             <div class="portfolio-grid">
                 <div class="work-card reveal delay-1">
                     <div class="browser-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-                    <div class="screen-box">
-                        <picture>
-                            <source srcset="https://i.ibb.co/W4BhL518/IMG-20260128-WA0010.webp" type="image/webp">
-                            <img src="https://i.ibb.co/W4BhL518/IMG-20260128-WA0010.jpg" alt="موقع محامي - تصميم احترافي" loading="lazy" class="lazy">
-                        </picture>
-                    </div>
+                    <div class="screen-box"><img src="https://i.ibb.co/W4BhL518/IMG-20260128-WA0010.jpg" alt="موقع محامي - تصميم احترافي"></div>
                     <div class="work-label" data-translate="work1">نموذج موقع محامي</div>
                 </div>
                 <div class="work-card reveal delay-2">
                     <div class="browser-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-                    <div class="screen-box">
-                        <picture>
-                            <source srcset="https://i.ibb.co/0pTkqypt/IMG-20260128-WA0011.webp" type="image/webp">
-                            <img src="https://i.ibb.co/0pTkqypt/IMG-20260128-WA0011.jpg" alt="موقع بائع ساعات - متجر إلكتروني" loading="lazy" class="lazy">
-                        </picture>
-                    </div>
+                    <div class="screen-box"><img src="https://i.ibb.co/0pTkqypt/IMG-20260128-WA0011.jpg" alt="موقع بائع ساعات - متجر إلكتروني"></div>
                     <div class="work-label" data-translate="work2">نموذج موقع بائع ساعات</div>
                 </div>
                 <div class="work-card reveal delay-3">
                     <div class="browser-header"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-                    <div class="screen-box">
-                        <picture>
-                            <source srcset="https://i.ibb.co/mVNQDLLX/IMG-20260128-WA0012.webp" type="image/webp">
-                            <img src="https://i.ibb.co/mVNQDLLX/IMG-20260128-WA0012.jpg" alt="موقع ملابس - تصميم عصري" loading="lazy" class="lazy">
-                        </picture>
-                    </div>
+                    <div class="screen-box"><img src="https://i.ibb.co/mVNQDLLX/IMG-20260128-WA0012.jpg" alt="موقع ملابس - تصميم عصري"></div>
                     <div class="work-label" data-translate="work3">نموذج موقع بيع ملابس</div>
                 </div>
             </div>
@@ -2708,118 +2457,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- ========== Dashboard (عميل جديد) ========== -->
-        <div id="clientDashboard" class="dashboard no-print" style="display: none;">
-            <div class="dashboard-menu">
-                <a href="#projects" class="active" onclick="showDashboardTab('projects')" data-translate="dashboardProjects">مشاريعي</a>
-                <a href="#messages" onclick="showDashboardTab('messages')" data-translate="dashboardMessages">الرسائل</a>
-                <a href="#files" onclick="showDashboardTab('files')" data-translate="dashboardFiles">الملفات</a>
-                <a href="#billing" onclick="showDashboardTab('billing')" data-translate="dashboardBilling">الفواتير</a>
-            </div>
-            
-            <div class="dashboard-content">
-                <div id="projectsTab">
-                    <div class="project-status">
-                        <h4 data-translate="projectStatus">حالة المشروع الحالي</h4>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 60%"></div>
-                        </div>
-                        <p data-translate="projectProgress">مشروعك جاهز بنسبة 60%</p>
-                    </div>
-                    
-                    <div class="project-timeline">
-                        <h4 data-translate="projectTimeline">الجدول الزمني</h4>
-                        <!-- سيتم ملء هذا القسم بالبيانات -->
-                    </div>
-                </div>
-                
-                <div id="messagesTab" style="display: none;">
-                    <div class="messages-container">
-                        <h4 data-translate="messagesTitle">الرسائل</h4>
-                        <!-- سيتم ملء هذا القسم بالرسائل -->
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ========== حاسبة التكلفة ========== -->
-        <div id="priceCalculator" class="modal">
-            <div class="modal-content">
-                <span class="close-btn" onclick="closePriceCalculator()">&times;</span>
-                <h3 style="text-align:center; color:var(--accent); margin-bottom:20px;" data-translate="calculatorTitle">حاسبة التكلفة</h3>
-                
-                <div class="calculator-form">
-                    <select id="serviceType" onchange="calculatePrice()">
-                        <option value="" data-translate="selectService">اختر الخدمة</option>
-                        <option value="youcan" data-translate="youcanTitle">متجر YouCan</option>
-                        <option value="shopify" data-translate="shopifyTitle">متجر Shopify</option>
-                        <option value="website" data-translate="websitesTitle">موقع خاص</option>
-                    </select>
-                    
-                    <div class="features-list">
-                        <label>
-                            <input type="checkbox" value="seo" onchange="calculatePrice()" data-translate="featureSEO"> تهيئة SEO
-                        </label>
-                        <label>
-                            <input type="checkbox" value="domain" onchange="calculatePrice()" data-translate="featureDomain"> دومين لمدة سنة
-                        </label>
-                        <label>
-                            <input type="checkbox" value="hosting" onchange="calculatePrice()" data-translate="featureHosting"> استضافة سنة
-                        </label>
-                        <label>
-                            <input type="checkbox" value="support" onchange="calculatePrice()" data-translate="featureSupport"> دعم فني 3 شهور
-                        </label>
-                    </div>
-                    
-                    <div id="priceResult" style="margin: 20px 0; text-align: center; font-size: 1.5rem; color: var(--forge-orange); font-weight: bold;">
-                        0 درهم
-                    </div>
-                    
-                    <button onclick="openForm('طلب من الحاسبة')" style="width:100%; padding:12px; background:var(--accent); color:#000; border:none; border-radius:8px; font-weight:bold; cursor:pointer;" data-translate="calculatorBtn">
-                        اطلب الآن
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- ========== Live Preview Modal ========== -->
-        <div id="livePreviewModal" class="modal">
-            <div class="modal-content" style="max-width: 800px;">
-                <span class="close-btn" onclick="closeLivePreview()">&times;</span>
-                <h3 style="text-align:center; color:var(--accent); margin-bottom:20px;" data-translate="previewTitle">معاينة حية للمتجر</h3>
-                
-                <div class="preview-controls">
-                    <button onclick="changePreviewTheme('light')" class="btn-secondary" data-translate="previewLight">فاتح</button>
-                    <button onclick="changePreviewTheme('dark')" class="btn-secondary" data-translate="previewDark">غامق</button>
-                    <button onclick="changePreviewTheme('modern')" class="btn-secondary" data-translate="previewModern">حديث</button>
-                    <button onclick="changePreviewTheme('classic')" class="btn-secondary" data-translate="previewClassic">كلاسيكي</button>
-                </div>
-                
-                <div class="theme-preview" id="storePreview">
-                    <!-- ستتم إضافة المحتوى ديناميكياً -->
-                </div>
-            </div>
-        </div>
-
-        <!-- ========== Booking Calendar Modal ========== -->
-        <div id="bookingModal" class="modal">
-            <div class="modal-content" style="max-width: 600px;">
-                <span class="close-btn" onclick="closeBookingModal()">&times;</span>
-                <h3 style="text-align:center; color:var(--accent); margin-bottom:20px;" data-translate="bookingTitle">حجز استشارة</h3>
-                
-                <div class="calendar" id="bookingCalendar">
-                    <!-- سيتم ملء التقويم ديناميكياً -->
-                </div>
-                
-                <div id="timeSlots" style="display: none; margin-top: 20px;">
-                    <h4 data-translate="selectTime">اختر الوقت المناسب</h4>
-                    <div class="time-grid">
-                        <!-- سيتم ملء الأوقات ديناميكياً -->
-                    </div>
-                </div>
-            </div>
-        </div>
     </main>
 
     <!-- ========== Footer ========== -->
@@ -2830,7 +2467,6 @@
             <a href="#services" class="footer-link" data-translate="servicesBtn">الخدمات</a>
             <button onclick="openPolicyModal()" class="footer-link" data-translate="privacyBtn">سياسة الخصوصية</button>
             <a href="mailto:webfooorge@gmail.com" class="footer-link" data-translate="contactLink">اتصل بنا</a>
-            <button onclick="openPriceCalculator()" class="footer-link" data-translate="calculatorLink">حاسبة التكلفة</button>
         </div>
         <p data-translate="copyright">جميع الحقوق محفوظة &copy; 2026 Web Forge</p>
         <div class="social-links">
@@ -2842,7 +2478,7 @@
     <!-- ========== JavaScript Libraries ========== -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
 
-    <!-- ========== JavaScript مع جميع التحسينات ========== -->
+    <!-- ========== JavaScript مع جميع التحسينات والميزات الأصلية ========== -->
     <script>
         // ========== Configuration ==========
         const CONFIG = {
@@ -2862,14 +2498,6 @@
             cooldown: {
                 formSubmission: 30000,
                 notification: 5000
-            },
-            parallax: {
-                speed: 0.5
-            },
-            prices: {
-                youcan: { base: 1500, seo: 500, domain: 200, hosting: 300, support: 400 },
-                shopify: { base: 2000, seo: 500, domain: 200, hosting: 400, support: 500 },
-                website: { base: 1000, seo: 400, domain: 200, hosting: 200, support: 300 }
             }
         };
 
@@ -2884,28 +2512,8 @@
                 charIndex: 0,
                 isDeleting: false,
                 timeout: null
-            },
-            dashboard: {
-                currentTab: 'projects'
-            },
-            booking: {
-                selectedDate: null,
-                selectedTime: null
             }
         };
-
-        // ========== Service Worker Registration ==========
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
-                    .then(registration => {
-                        console.log('ServiceWorker registration successful:', registration);
-                    })
-                    .catch(error => {
-                        console.log('ServiceWorker registration failed:', error);
-                    });
-            });
-        }
 
         // ========== Notification System ==========
         class NotificationSystem {
@@ -3001,328 +2609,6 @@
             updateLanguage(lang) {
                 this.textArray = window.typewriterData[lang];
                 this.start();
-            }
-        }
-
-        // ========== Price Calculator ==========
-        class PriceCalculator {
-            static calculate() {
-                const serviceType = document.getElementById('serviceType').value;
-                if (!serviceType) return 0;
-                
-                const basePrice = CONFIG.prices[serviceType].base;
-                let total = basePrice;
-                
-                // حساب الإضافات
-                const features = {
-                    seo: document.querySelector('input[value="seo"]').checked,
-                    domain: document.querySelector('input[value="domain"]').checked,
-                    hosting: document.querySelector('input[value="hosting"]').checked,
-                    support: document.querySelector('input[value="support"]').checked
-                };
-                
-                Object.entries(features).forEach(([feature, isSelected]) => {
-                    if (isSelected) {
-                        total += CONFIG.prices[serviceType][feature];
-                    }
-                });
-                
-                return total;
-            }
-            
-            static updateDisplay() {
-                const price = this.calculate();
-                const priceElement = document.getElementById('priceResult');
-                if (priceElement) {
-                    priceElement.textContent = `${price} درهم`;
-                }
-            }
-        }
-
-        // ========== Booking System ==========
-        class BookingSystem {
-            constructor() {
-                this.availableSlots = this.generateSlots();
-            }
-            
-            generateSlots() {
-                const slots = [];
-                const startHour = 9;
-                const endHour = 17;
-                
-                for (let i = 0; i < 7; i++) {
-                    const date = new Date();
-                    date.setDate(date.getDate() + i);
-                    
-                    const daySlots = [];
-                    for (let hour = startHour; hour < endHour; hour++) {
-                        if (hour !== 12) { // استراحة الظهر
-                            daySlots.push({
-                                date: date.toISOString().split('T')[0],
-                                time: `${hour}:00`,
-                                available: Math.random() > 0.3 // 70% متاحة
-                            });
-                        }
-                    }
-                    
-                    slots.push({
-                        date: date.toISOString().split('T')[0],
-                        day: date.getDate(),
-                        month: date.getMonth(),
-                        year: date.getFullYear(),
-                        slots: daySlots
-                    });
-                }
-                
-                return slots;
-            }
-            
-            renderCalendar() {
-                const calendar = document.getElementById('bookingCalendar');
-                if (!calendar) return;
-                
-                const today = new Date();
-                const monthNames = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 
-                                  'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
-                
-                let html = `
-                    <div class="calendar-header">
-                        <button onclick="bookingSystem.prevMonth()">&lt;</button>
-                        <h4>${monthNames[today.getMonth()]} ${today.getFullYear()}</h4>
-                        <button onclick="bookingSystem.nextMonth()">&gt;</button>
-                    </div>
-                    <div class="calendar-grid">
-                `;
-                
-                // أيام الأسبوع
-                const days = ['أحد', 'اثنين', 'ثلاثاء', 'أربعاء', 'خميس', 'جمعة', 'سبت'];
-                days.forEach(day => {
-                    html += `<div class="calendar-day" style="font-weight:bold;">${day}</div>`;
-                });
-                
-                // الأيام
-                for (let i = 1; i <= 31; i++) {
-                    const hasSlots = this.availableSlots.some(slot => {
-                        const slotDate = new Date(slot.date);
-                        return slotDate.getDate() === i;
-                    });
-                    
-                    const isToday = i === today.getDate();
-                    const className = `calendar-day ${hasSlots ? 'available' : ''} ${isToday ? 'today' : ''}`;
-                    
-                    html += `<div class="${className}" onclick="bookingSystem.selectDate(${i})">${i}</div>`;
-                }
-                
-                html += `</div>`;
-                calendar.innerHTML = html;
-            }
-            
-            selectDate(day) {
-                AppState.booking.selectedDate = day;
-                this.showTimeSlots(day);
-            }
-            
-            showTimeSlots(day) {
-                const slotsContainer = document.getElementById('timeSlots');
-                const timeGrid = slotsContainer.querySelector('.time-grid');
-                
-                const daySlots = this.availableSlots.find(slot => {
-                    const slotDate = new Date(slot.date);
-                    return slotDate.getDate() === day;
-                });
-                
-                if (!daySlots) return;
-                
-                let html = '';
-                daySlots.slots.forEach(slot => {
-                    html += `
-                        <button class="time-slot ${slot.available ? 'available' : 'unavailable'}" 
-                                onclick="bookingSystem.selectTime('${slot.time}')" 
-                                ${!slot.available ? 'disabled' : ''}>
-                            ${slot.time}
-                        </button>
-                    `;
-                });
-                
-                timeGrid.innerHTML = html;
-                slotsContainer.style.display = 'block';
-            }
-            
-            selectTime(time) {
-                AppState.booking.selectedTime = time;
-                this.confirmBooking();
-            }
-            
-            confirmBooking() {
-                const date = new Date();
-                date.setDate(AppState.booking.selectedDate);
-                
-                const message = `📅 *حجز استشارة مع Web Forge*
-
-📅 *التاريخ:* ${date.toLocaleDateString('ar-MA')}
-⏰ *الوقت:* ${AppState.booking.selectedTime}
-
-👤 *معلومات الحجز:*
-الاسم: _______
-الهاتف: _______
-البريد الإلكتروني: _______
-
-🔔 *ملاحظة:* هذا الحجز مؤكد عند استلام تأكيد من فريقنا خلال 24 ساعة.
-
-🚀 *Web Forge - صناعة النجاح الرقمي*`;
-
-                const whatsappUrl = `https://wa.me/212627713979?text=${encodeURIComponent(message)}`;
-                window.open(whatsappUrl, '_blank');
-                
-                NotificationSystem.show('تم فتح واتساب لتأكيد الحجز', 'success');
-                closeBookingModal();
-            }
-        }
-
-        // ========== Live Preview System ==========
-        class LivePreview {
-            constructor() {
-                this.themes = ['light', 'dark', 'modern', 'classic'];
-                this.currentTheme = 'light';
-            }
-            
-            render() {
-                const preview = document.getElementById('storePreview');
-                if (!preview) return;
-                
-                preview.innerHTML = `
-                    <div class="preview-header" style="background: var(--accent); padding: 15px; text-align: center; color: white;">
-                        <h4 style="margin: 0;">متجر Web Forge</h4>
-                    </div>
-                    <div class="preview-content" style="padding: 20px;">
-                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px;">
-                            ${[1, 2, 3].map(i => `
-                                <div class="preview-product" style="border: 1px solid #ddd; border-radius: 8px; padding: 10px; text-align: center;">
-                                    <div style="height: 100px; background: #eee; border-radius: 5px; margin-bottom: 10px;"></div>
-                                    <p style="margin: 5px 0;">منتج ${i}</p>
-                                    <p style="color: var(--forge-orange); font-weight: bold;">${i * 100} درهم</p>
-                                </div>
-                            `).join('')}
-                        </div>
-                        <div style="text-align: center;">
-                            <button style="background: var(--accent); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-                                ابدأ التسوق
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }
-            
-            changeTheme(theme) {
-                this.currentTheme = theme;
-                const preview = document.getElementById('storePreview');
-                
-                const themeStyles = {
-                    light: { bg: '#ffffff', text: '#000000', accent: '#38bdf8' },
-                    dark: { bg: '#1e293b', text: '#f8fafc', accent: '#38bdf8' },
-                    modern: { bg: '#f8fafc', text: '#0f172a', accent: '#f59e0b' },
-                    classic: { bg: '#fef3c7', text: '#78350f', accent: '#d97706' }
-                };
-                
-                const style = themeStyles[theme];
-                preview.style.backgroundColor = style.bg;
-                preview.style.color = style.text;
-                preview.querySelector('.preview-header').style.background = style.accent;
-            }
-        }
-
-        // ========== Parallax System ==========
-        class ParallaxSystem {
-            constructor() {
-                this.hero = document.getElementById('heroSection');
-                this.init();
-            }
-            
-            init() {
-                if (!this.hero) return;
-                
-                window.addEventListener('scroll', () => {
-                    if (window.innerWidth > 768) { // فقط على الشاشات الكبيرة
-                        const scrolled = window.pageYOffset;
-                        const speed = CONFIG.parallax.speed;
-                        this.hero.style.transform = `translateY(${scrolled * speed}px)`;
-                    }
-                });
-            }
-        }
-
-        // ========== Image Lazy Loading ==========
-        class LazyLoader {
-            constructor() {
-                this.images = document.querySelectorAll('img.lazy');
-                this.observer = null;
-                this.init();
-            }
-            
-            init() {
-                if ('IntersectionObserver' in window) {
-                    this.observer = new IntersectionObserver((entries) => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                const img = entry.target;
-                                img.src = img.dataset.src;
-                                img.classList.add('loaded');
-                                this.observer.unobserve(img);
-                            }
-                        });
-                    });
-                    
-                    this.images.forEach(img => {
-                        this.observer.observe(img);
-                    });
-                } else {
-                    // Fallback للمتصفحات القديمة
-                    this.images.forEach(img => {
-                        img.src = img.dataset.src;
-                        img.classList.add('loaded');
-                    });
-                }
-            }
-        }
-
-        // ========== Dashboard System ==========
-        class DashboardSystem {
-            constructor() {
-                this.init();
-            }
-            
-            init() {
-                // إظهار لوحة التحكم للعملاء المسجلين
-                const clientToken = localStorage.getItem('clientToken');
-                if (clientToken) {
-                    this.showDashboard();
-                }
-            }
-            
-            showDashboard() {
-                const dashboard = document.getElementById('clientDashboard');
-                if (dashboard) {
-                    dashboard.style.display = 'block';
-                }
-            }
-            
-            showTab(tabId) {
-                // إخفاء كل الألسنة
-                document.querySelectorAll('[id$="Tab"]').forEach(tab => {
-                    tab.style.display = 'none';
-                });
-                
-                // إظهار اللسان المطلوب
-                const tab = document.getElementById(`${tabId}Tab`);
-                if (tab) {
-                    tab.style.display = 'block';
-                }
-                
-                // تحديث القائمة النشطة
-                document.querySelectorAll('.dashboard-menu a').forEach(link => {
-                    link.classList.remove('active');
-                });
-                event.target.classList.add('active');
             }
         }
 
@@ -3599,11 +2885,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             // Initialize components
             window.typewriter = new Typewriter();
-            window.bookingSystem = new BookingSystem();
-            window.livePreview = new LivePreview();
-            window.parallaxSystem = new ParallaxSystem();
-            window.lazyLoader = new LazyLoader();
-            window.dashboardSystem = new DashboardSystem();
             
             // Load saved preferences
             const savedLang = localStorage.getItem('preferredLanguage') || 'ar';
@@ -3657,21 +2938,6 @@
             
             // Add event listeners
             setupEventListeners();
-            
-            // Render initial components
-            bookingSystem.renderCalendar();
-            livePreview.render();
-            
-            // Initialize price calculator
-            document.getElementById('serviceType')?.addEventListener('change', () => {
-                PriceCalculator.updateDisplay();
-            });
-            
-            document.querySelectorAll('.features-list input').forEach(input => {
-                input.addEventListener('change', () => {
-                    PriceCalculator.updateDisplay();
-                });
-            });
         });
 
         // ========== Event Listeners ==========
@@ -3714,10 +2980,10 @@
             if ('ontouchstart' in window) {
                 document.querySelectorAll('button, .btn').forEach(btn => {
                     btn.addEventListener('touchstart', () => {
-                        btn.classList.add('touch-active');
+                        btn.style.opacity = '0.8';
                     });
                     btn.addEventListener('touchend', () => {
-                        btn.classList.remove('touch-active');
+                        btn.style.opacity = '1';
                     });
                 });
             }
@@ -3795,7 +3061,7 @@
             }
         }
 
-        // ========== Global Functions ==========
+        // ========== Global Functions (نفس الدوال الأصلية) ==========
         window.openConsultModal = () => showModal('consultModal');
         window.closeConsultModal = () => hideModal('consultModal');
         window.openReferralModal = () => showModal('referralModal');
@@ -3842,24 +3108,6 @@
         window.submitToWhatsApp = submitToWhatsApp;
         window.sendReferral = sendReferral;
         window.copyLink = copyLink;
-        
-        // New functions
-        window.openPriceCalculator = () => showModal('priceCalculator');
-        window.closePriceCalculator = () => hideModal('priceCalculator');
-        window.calculatePrice = () => PriceCalculator.updateDisplay();
-        
-        window.openLivePreview = () => {
-            showModal('livePreviewModal');
-            livePreview.render();
-        };
-        window.closeLivePreview = () => hideModal('livePreviewModal');
-        window.changePreviewTheme = (theme) => livePreview.changeTheme(theme);
-        
-        window.openBookingModal = () => showModal('bookingModal');
-        window.closeBookingModal = () => hideModal('bookingModal');
-        
-        window.showDashboardTab = (tabId) => dashboardSystem.showTab(tabId);
-        
         window.openFreeConsult = () => {
             const message = `مرحباً، أريد استشارة مجانية حول: 
 
@@ -3888,7 +3136,6 @@
             NotificationSystem.show('تم فتح واتساب للاستشارة المجانية', 'success');
             hideModal('consultModal');
         };
-        
         window.openPaidConsult = () => {
             const message = `🔔 *طلب استشارة مدفوعة - 200 درهم*
 
@@ -3931,7 +3178,7 @@
             setTimeout(() => h.classList.remove('active'), 6500);
         });
 
-        // ========== البيانات الأساسية ==========
+        // ========== البيانات الأساسية (نفس البيانات الأصلية) ==========
         const translations = {
             ar: {
                 "siteTitle": "Web Forge | مجموعة محمد أيت صالح",
@@ -3983,6 +3230,8 @@
                 "featurePaid3": "اختيار عبر المكالمة/اللقاء في أكادير",
                 "featurePaid4": "تقرير مفصل بعد الجلسة",
                 "paidConsultBtn": "حجز استشارة مدفوعة",
+                "consultSuccess": "✅ تم إرسال طلب الاستشارة بنجاح! سيتواصل معك فريقنا خلال 24 ساعة.",
+                "consultPaidSuccess": "✅ تم إرسال طلب الاستشارة المدفوعة بنجاح! سيتواصل معك فريقنا خلال ساعتين لتحديد موعد الجلسة.",
                 "promoText": "🚀 عرض لفترة محدودة: احصل على خصم 20% عند طلب أول متجر YouCan أو Shopify هذا الأسبوع! — اطلب الآن واستفد من العرض — 🎁 استشارة مجانية عند طلب موقع خاص!",
                 "logoText": "Web Forge",
                 "orderNowBtn": "اطلب خدمتك",
@@ -4087,29 +3336,6 @@
                 "servicesBtn": "الخدمات",
                 "privacyBtn": "سياسة الخصوصية",
                 "contactLink": "اتصل بنا",
-                "calculatorLink": "حاسبة التكلفة",
-                "calculatorTitle": "حاسبة التكلفة",
-                "selectService": "اختر الخدمة",
-                "featureSEO": "تهيئة SEO",
-                "featureDomain": "دومين لمدة سنة",
-                "featureHosting": "استضافة سنة",
-                "featureSupport": "دعم فني 3 شهور",
-                "calculatorBtn": "اطلب الآن",
-                "previewTitle": "معاينة حية للمتجر",
-                "previewLight": "فاتح",
-                "previewDark": "غامق",
-                "previewModern": "حديث",
-                "previewClassic": "كلاسيكي",
-                "bookingTitle": "حجز استشارة",
-                "selectTime": "اختر الوقت المناسب",
-                "dashboardProjects": "مشاريعي",
-                "dashboardMessages": "الرسائل",
-                "dashboardFiles": "الملفات",
-                "dashboardBilling": "الفواتير",
-                "projectStatus": "حالة المشروع الحالي",
-                "projectProgress": "مشروعك جاهز بنسبة 60%",
-                "projectTimeline": "الجدول الزمني",
-                "messagesTitle": "الرسائل",
                 "copyright": "جميع الحقوق محفوظة &copy; 2026 Web Forge"
             },
             en: {
@@ -4162,6 +3388,8 @@
                 "featurePaid3": "Choice via call/meeting in Agadir",
                 "featurePaid4": "Detailed report after the session",
                 "paidConsultBtn": "Book Paid Consultation",
+                "consultSuccess": "✅ Consultation request sent successfully! Our team will contact you within 24 hours.",
+                "consultPaidSuccess": "✅ Paid consultation request sent successfully! Our team will contact you within 2 hours to schedule the session.",
                 "promoText": "🚀 Limited Time Offer: Get 20% discount on your first YouCan or Shopify store this week! — Order now and take advantage of the offer — 🎁 Free consultation when ordering a custom website!",
                 "logoText": "Web Forge",
                 "orderNowBtn": "Order Your Service",
@@ -4266,29 +3494,6 @@
                 "servicesBtn": "Services",
                 "privacyBtn": "Privacy Policy",
                 "contactLink": "Contact Us",
-                "calculatorLink": "Price Calculator",
-                "calculatorTitle": "Price Calculator",
-                "selectService": "Select Service",
-                "featureSEO": "SEO Optimization",
-                "featureDomain": "Domain for 1 year",
-                "featureHosting": "Hosting for 1 year",
-                "featureSupport": "Technical support 3 months",
-                "calculatorBtn": "Order Now",
-                "previewTitle": "Live Store Preview",
-                "previewLight": "Light",
-                "previewDark": "Dark",
-                "previewModern": "Modern",
-                "previewClassic": "Classic",
-                "bookingTitle": "Book Consultation",
-                "selectTime": "Select Suitable Time",
-                "dashboardProjects": "My Projects",
-                "dashboardMessages": "Messages",
-                "dashboardFiles": "Files",
-                "dashboardBilling": "Billing",
-                "projectStatus": "Current Project Status",
-                "projectProgress": "Your project is 60% complete",
-                "projectTimeline": "Timeline",
-                "messagesTitle": "Messages",
                 "copyright": "All rights reserved &copy; 2026 Web Forge"
             },
             fr: {
@@ -4341,6 +3546,8 @@
                 "featurePaid3": "Choix via appel/rencontre à Agadir",
                 "featurePaid4": "Rapport détaillé après la session",
                 "paidConsultBtn": "Réserver une Consultation Payante",
+                "consultSuccess": "✅ Demande de consultation envoyée avec succès! Notre équipe vous contactera dans les 24 heures.",
+                "consultPaidSuccess": "✅ Demande de consultation payante envoyée avec succès! Notre équipe vous contactera dans les 2 heures pour planifier la session.",
                 "promoText": "🚀 Offre Limitée : Obtenez 20% de réduction sur votre première boutique YouCan ou Shopify cette semaine ! — Commandez maintenant et profitez de l'offre — 🎁 Consultation gratuite lors de la commande d'un site web personnalisé !",
                 "logoText": "Web Forge",
                 "orderNowBtn": "Commander Votre Service",
@@ -4397,7 +3604,7 @@
                 "faq1a": "La durée varie selon le type de forfait, mais prend généralement de 3 à 7 jours ouvrables pour les sites et boutiques réguliers.",
                 "faq2": "Le domaine est-il gratuit?",
                 "faq2a": "Dans certains forfaits professionnels, nous offrons un nom de domaine gratuit pour la première année. Contactez-nous pour plus de détails.",
-                "faq3": "Y a-t-il un support technique après la livraison?",
+                "faq3": "Y a-t-il un support technique بعد la livraison?",
                 "faq3a": "Oui, nous fournissons un support technique complet pour garantir le fonctionnement efficace de votre site et résoudre tout problème technique que vous rencontrez.",
                 "faq4": "Quelles méthodes de paiement sont disponibles?",
                 "faq4a": "Nous acceptons les virements bancaires et de nombreux moyens de paiement locaux et internationaux pour faciliter la tâche à nos clients.",
@@ -4445,29 +3652,6 @@
                 "servicesBtn": "Services",
                 "privacyBtn": "Politique de Confidentialité",
                 "contactLink": "Contactez-Nous",
-                "calculatorLink": "Calculateur de Prix",
-                "calculatorTitle": "Calculateur de Prix",
-                "selectService": "Sélectionnez le Service",
-                "featureSEO": "Optimisation SEO",
-                "featureDomain": "Domaine pour 1 an",
-                "featureHosting": "Hébergement pour 1 an",
-                "featureSupport": "Support technique 3 mois",
-                "calculatorBtn": "Commander Maintenant",
-                "previewTitle": "Aperçu en Direct de la Boutique",
-                "previewLight": "Clair",
-                "previewDark": "Sombre",
-                "previewModern": "Moderne",
-                "previewClassic": "Classique",
-                "bookingTitle": "Réservation de Consultation",
-                "selectTime": "Sélectionnez l'Heure Appropriée",
-                "dashboardProjects": "Mes Projets",
-                "dashboardMessages": "Messages",
-                "dashboardFiles": "Fichiers",
-                "dashboardBilling": "Facturation",
-                "projectStatus": "Statut du Projet Actuel",
-                "projectProgress": "Votre projet est terminé à 60%",
-                "projectTimeline": "Calendrier",
-                "messagesTitle": "Messages",
                 "copyright": "Tous droits réservés &copy; 2026 Web Forge"
             }
         };
@@ -4496,20 +3680,6 @@
         // ========== تعيين البيانات كمتغيرات عامة ==========
         window.translations = translations;
         window.typewriterData = typewriterData;
-    </script>
-
-    <!-- ========== Service Worker ========== -->
-    <script>
-        // Service Worker Registration
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js')
-                .then(registration => {
-                    console.log('Service Worker registered:', registration);
-                })
-                .catch(error => {
-                    console.log('Service Worker registration failed:', error);
-                });
-        }
     </script>
 </body>
 </html>
