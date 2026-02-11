@@ -268,6 +268,31 @@
             }
         }
 
+        .how-it-works-sm {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--accent), var(--forge-orange));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            margin-top: 12px;
+        }
+
+        .how-it-works-sm i {
+            animation: rotate-cog 3s linear infinite;
+        }
+
+        .how-it-works-sm:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+        }
+
         /* ========== Process Steps ========== */
         .process-steps {
             display: grid;
@@ -1314,7 +1339,7 @@
             padding: 2.5rem;
             border-radius: 24px;
             width: 90%;
-            max-width: 600px;
+            max-width: 500px;
             position: relative;
             border: 2px solid var(--accent);
             max-height: 90vh;
@@ -1343,6 +1368,79 @@
             color: var(--error);
         }
 
+        /* ========== Referral Modal - بسيط جداً ========== */
+        .referral-input {
+            width: 100%;
+            padding: 14px 16px;
+            margin-bottom: 15px;
+            background: rgba(128,128,128,0.1);
+            border: 1px solid rgba(128,128,128,0.2);
+            border-radius: 30px;
+            color: var(--text-main);
+            font-size: 1rem;
+        }
+
+        .referral-input:focus {
+            outline: none;
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+        }
+
+        .referral-btn {
+            width: 100%;
+            padding: 14px;
+            background: #10b981;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .referral-btn:hover {
+            background: #059669;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        /* ========== Consultation Modal - بسيط جداً ========== */
+        .consult-btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .consult-btn.free {
+            background: var(--accent);
+            color: #000;
+        }
+
+        .consult-btn.paid {
+            background: var(--forge-orange);
+            color: #000;
+        }
+
+        .consult-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
         /* ========== Order Modal ========== */
         .order-method-selection {
             display: flex;
@@ -1354,19 +1452,18 @@
 
         .order-method-card {
             flex: 1;
-            min-width: 180px;
+            min-width: 140px;
             background: var(--bg-card);
-            border: 2px solid transparent;
+            border: 1px solid rgba(128,128,128,0.2);
             border-radius: 16px;
             padding: 20px;
             text-align: center;
             cursor: pointer;
             transition: all var(--transition-base);
-            border: 1px solid rgba(128,128,128,0.2);
         }
 
         .order-method-card.active {
-            border-color: var(--forge-orange);
+            border: 2px solid var(--forge-orange);
             background: rgba(245, 158, 11, 0.1);
         }
 
@@ -1475,6 +1572,14 @@
             font-size: 1.5rem;
         }
 
+        .admin-close {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
         .admin-stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -1506,6 +1611,23 @@
             font-size: 1.5rem;
             font-weight: bold;
             color: var(--forge-orange);
+        }
+
+        .admin-filter-btn {
+            padding: 8px 18px;
+            border-radius: 30px;
+            border: 1px solid var(--accent);
+            background: transparent;
+            color: var(--text-main);
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all var(--transition-fast);
+        }
+
+        .admin-filter-btn.active,
+        .admin-filter-btn:hover {
+            background: var(--accent);
+            color: #000;
         }
 
         .orders-list {
@@ -1766,7 +1888,7 @@
 
         /* ========== Responsive Touch Optimizations ========== */
         @media (max-width: 768px) {
-            button, .btn-primary, .btn-secondary, .card-btn, .type-btn, .pkg-btn, .order-now-btn, .theme-btn, .footer-link {
+            button, .btn-primary, .btn-secondary, .card-btn, .type-btn, .pkg-btn, .order-now-btn, .theme-btn, .footer-link, .referral-btn, .consult-btn {
                 min-height: 44px;
             }
             
@@ -1843,15 +1965,15 @@
     <!-- ========== Admin Login ========== -->
     <div id="adminLogin" class="admin-login" style="display:none;">
         <div class="login-box">
-            <h3>
+            <h3 style="display:flex; align-items:center; gap:10px; justify-content:center; margin-bottom:30px;">
                 <i class="fas fa-lock"></i>
                 <span data-translate="adminLogin">دخول لوحة التحكم</span>
             </h3>
-            <input type="password" id="adminPassword" placeholder="كلمة المرور" data-translate="adminPasswordPlaceholder">
+            <input type="password" id="adminPassword" placeholder="كلمة المرور" data-translate="adminPasswordPlaceholder" style="width:100%; padding:14px; margin-bottom:20px; background:rgba(128,128,128,0.1); border:1px solid rgba(128,128,128,0.2); border-radius:30px; color:var(--text-main);">
             <button onclick="adminLogin()" style="width:100%; padding:14px; background:var(--accent); color:#000; border:none; border-radius:30px; font-weight:bold; cursor:pointer;">
                 <span data-translate="adminLoginBtn">تسجيل الدخول</span>
             </button>
-            <div id="loginError" class="login-error" data-translate="adminLoginError">كلمة المرور غير صحيحة</div>
+            <div id="loginError" class="login-error" data-translate="adminLoginError" style="color:var(--error); margin-top:15px; text-align:center; display:none;">كلمة المرور غير صحيحة</div>
         </div>
     </div>
 
@@ -1862,7 +1984,7 @@
                 <i class="fas fa-tachometer-alt"></i>
                 <span data-translate="adminDashboard">لوحة التحكم</span>
             </h2>
-            <button class="admin-close" onclick="closeAdminPanel()" style="background:none; border:none; color:var(--text-secondary); font-size:2rem; cursor:pointer;">&times;</button>
+            <button class="admin-close" onclick="closeAdminPanel()">&times;</button>
         </div>
 
         <!-- Statistics -->
@@ -1927,46 +2049,49 @@
         <div class="modal-content">
             <span class="close-btn" onclick="closePolicyModal()">&times;</span>
             <h3 style="text-align:center; color:var(--accent); margin-bottom:20px;" data-translate="privacyTitle">سياسة الخصوصية</h3>
-            <div style="max-height:400px; overflow-y:auto; text-align:right; line-height:1.7; padding:0 5px;">
-                <h4 data-translate="privacyIntro">مقدمة</h4>
+            <div style="text-align:right; line-height:1.7;">
                 <p data-translate="privacyIntroText">نحن في Web Forge نحترم خصوصيتك ونلتزم بحماية بياناتك الشخصية.</p>
-                <h4 data-translate="dataCollection">البيانات التي نجمعها</h4>
-                <ul style="padding-right: 25px;">
-                    <li data-translate="data1">الاسم الكامل</li>
-                    <li data-translate="data2">رقم الهاتف</li>
-                    <li data-translate="data3">تفاصيل المشروع</li>
-                </ul>
-                <h4 data-translate="dataUsage">كيف نستخدم بياناتك</h4>
-                <p data-translate="dataUsageText">نستخدم بياناتك فقط لتقديم الخدمات المطلوبة.</p>
             </div>
         </div>
     </div>
 
-    <!-- ========== Referral Modal ========== -->
+    <!-- ========== Referral Modal - بسيط جداً ========== -->
     <div id="referralModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeReferralModal()">&times;</span>
-            <h3 style="text-align:center; color:#10b981; margin-bottom:20px;" data-translate="referralTitle">🎁 دعوة صديق للحصول على مكافأة</h3>
-            <div style="margin-bottom:15px;" data-translate="referralNote">ادعُ صديقك واحصل على خصم إضافي 5%!</div>
-            <input type="text" id="referrerName" placeholder="اسمك" data-translate="referrerNamePlaceholder" value="محمد" style="margin-bottom:10px;">
-            <input type="tel" id="friendPhone" placeholder="رقم صديقك (واتساب)" data-translate="friendPhonePlaceholder">
-            <button onclick="sendReferral()" style="width:100%; padding:14px; background:#10b981; color:white; border:none; border-radius:30px; font-weight:bold; margin-top:15px; cursor:pointer;" data-translate="sendReferralBtn">أرسل الدعوة الآن</button>
+            <h3 style="text-align:center; color:#10b981; margin-bottom:25px;">
+                <i class="fas fa-gift" style="margin-left:10px;"></i>
+                <span data-translate="referralTitle">دعوة صديق</span>
+            </h3>
+            
+            <input type="text" id="referrerName" class="referral-input" placeholder="اسمك" data-translate="referrerNamePlaceholder" value="محمد">
+            <input type="tel" id="friendPhone" class="referral-input" placeholder="رقم صديقك (واتساب)" data-translate="friendPhonePlaceholder">
+            
+            <button onclick="sendReferral()" class="referral-btn">
+                <i class="fab fa-whatsapp"></i>
+                <span data-translate="sendReferralBtn">أرسل الدعوة</span>
+            </button>
         </div>
     </div>
 
-    <!-- ========== Consultation Modal ========== -->
+    <!-- ========== Consultation Modal - بسيط جداً ========== -->
     <div id="consultModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeConsultModal()">&times;</span>
-            <h3 style="text-align:center; color:var(--accent); margin-bottom:20px;" data-translate="consultTitle">💼 استشارة Web Forge</h3>
-            <div style="display:flex; flex-direction:column; gap:15px;">
-                <button onclick="openFreeConsult()" style="padding:16px; background:var(--accent); color:#000; border:none; border-radius:16px; font-weight:bold; cursor:pointer;">
-                    <i class="fab fa-whatsapp"></i> <span data-translate="freeConsultBtn">استشارة مجانية</span>
-                </button>
-                <button onclick="openPaidConsult()" style="padding:16px; background:var(--forge-orange); color:#000; border:none; border-radius:16px; font-weight:bold; cursor:pointer;">
-                    <i class="fas fa-video"></i> <span data-translate="paidConsultBtn">استشارة مدفوعة - 500 درهم</span>
-                </button>
-            </div>
+            <h3 style="text-align:center; color:var(--accent); margin-bottom:25px;">
+                <i class="fas fa-headset" style="margin-left:10px;"></i>
+                <span data-translate="consultTitle">استشارة Web Forge</span>
+            </h3>
+            
+            <button onclick="openFreeConsult()" class="consult-btn free">
+                <i class="fab fa-whatsapp"></i>
+                <span data-translate="freeConsultBtn">استشارة مجانية</span>
+            </button>
+            
+            <button onclick="openPaidConsult()" class="consult-btn paid">
+                <i class="fas fa-video"></i>
+                <span data-translate="paidConsultBtn">استشارة مدفوعة - 500 درهم</span>
+            </button>
         </div>
     </div>
 
@@ -2035,7 +2160,6 @@
                 <div class="tech-item"><i class="fab fa-google"></i> SEO</div>
                 <div class="tech-item"><i class="fab fa-html5"></i> HTML5</div>
                 <div class="tech-item"><i class="fab fa-js"></i> JavaScript</div>
-                <!-- Duplicate for seamless loop -->
                 <div class="tech-item"><i class="fab fa-shopify"></i> Shopify</div>
                 <div class="tech-item"><i class="fas fa-shopping-bag"></i> YouCan</div>
             </div>
@@ -2108,7 +2232,7 @@
                 <h2 data-translate="servicesTitle" class="arabic-heading">💼 خدماتنا</h2>
             </div>
             <div class="services-grid">
-                <!-- YouCan Store - No How It Works button -->
+                <!-- YouCan Store - بدون زر كيف نعمل -->
                 <div class="service-card reveal delay-1">
                     <div class="icon-box"><i class="fas fa-store"></i></div>
                     <h3 data-translate="youcanTitle">متاجر YouCan</h3>
@@ -2118,7 +2242,7 @@
                     </button>
                 </div>
                 
-                <!-- Shopify Store - No How It Works button -->
+                <!-- Shopify Store - بدون زر كيف نعمل -->
                 <div class="service-card reveal delay-2">
                     <div class="icon-box" style="color: #96bf48;"><i class="fab fa-shopify"></i></div>
                     <h3 data-translate="shopifyTitle">متاجر Shopify</h3>
@@ -2128,7 +2252,7 @@
                     </button>
                 </div>
                 
-                <!-- Custom Websites - With How It Works button -->
+                <!-- Custom Websites - مع زر كيف نعمل -->
                 <div class="service-card reveal delay-3">
                     <div class="icon-box" style="color: var(--forge-orange);"><i class="fas fa-laptop-code"></i></div>
                     <h3 data-translate="websitesTitle">مواقع Web Forge</h3>
@@ -2136,12 +2260,12 @@
                     <button onclick="openTypeSelection()" class="card-btn">
                         <span data-translate="websitesBtn">اطلب الخدمة</span> <i class="fas fa-arrow-left"></i>
                     </button>
-                    <button onclick="openProcessModal()" class="how-it-works-sm" style="margin-top:12px; padding:8px 16px; background:linear-gradient(135deg, var(--accent), var(--forge-orange)); color:white; border:none; border-radius:30px; font-size:0.9rem; cursor:pointer; display:inline-flex; align-items:center; gap:8px;">
+                    <button onclick="openProcessModal()" class="how-it-works-sm">
                         <i class="fas fa-cog"></i> <span data-translate="processBtn">كيف نعمل؟</span>
                     </button>
                 </div>
                 
-                <!-- Training Courses - How It Works button removed -->
+                <!-- Training Courses - بدون زر كيف نعمل -->
                 <div class="service-card reveal delay-4">
                     <div class="icon-box" style="color: #10b981;"><i class="fas fa-graduation-cap"></i></div>
                     <h3 data-translate="coursesTitle">الدورات التكوينية</h3>
@@ -2149,7 +2273,6 @@
                     <button onclick="openCoursesSelection()" class="card-btn">
                         <span data-translate="coursesBtn">اطلب الخدمة</span> <i class="fas fa-arrow-left"></i>
                     </button>
-                    <!-- How It Works button removed from courses -->
                 </div>
             </div>
         </section>
@@ -2203,8 +2326,8 @@
         <div id="coursesModal" class="modal">
             <div class="modal-content">
                 <span class="close-btn" onclick="closeCoursesModal()">&times;</span>
-                <h3 style="text-align:center; color:var(--accent);" data-translate="coursesModalTitle">اختر الدورة</h3>
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-top:20px;">
+                <h3 style="text-align:center; color:var(--accent); margin-bottom:25px;" data-translate="coursesModalTitle">اختر الدورة</h3>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
                     <button class="type-btn" onclick="selectCourse('دورة التسويق بالعمولة')">
                         <i class="fas fa-bullhorn"></i> <span data-translate="courseAffiliate">التسويق بالعمولة</span>
                     </button>
@@ -2225,12 +2348,12 @@
         <div id="giftModal" class="modal">
             <div class="modal-content" style="text-align:center;">
                 <span class="close-btn" onclick="closeGiftModal()">&times;</span>
-                <div style="font-size: 3rem;">🎉</div>
-                <h3 style="color:var(--forge-orange);" data-translate="giftTitle">مبروك! هديتك</h3>
-                <p data-translate="giftDesc">كود خصم حصري لمدة 15 دقيقة!</p>
+                <div style="font-size: 3rem; margin-bottom:10px;">🎉</div>
+                <h3 style="color:var(--forge-orange); margin-bottom:15px;" data-translate="giftTitle">مبروك! هديتك</h3>
+                <p data-translate="giftDesc" style="margin-bottom:20px;">كود خصم حصري لمدة 15 دقيقة!</p>
                 <div style="background:var(--bg-dark); padding:15px; border:2px dashed var(--accent); margin:15px 0; font-size:1.8rem; font-weight:bold; border-radius:12px;">FORGE2026</div>
-                <p data-translate="giftTimer">ينتهي خلال: <span id="countdown" style="color:red;">15:00</span></p>
-                <button onclick="openForm('طلب باستخدام كود FORGE2026')" style="margin-top:15px; background:var(--accent); color:#000; padding:14px; border:none; border-radius:30px; font-weight:bold; width:100%; cursor:pointer;" data-translate="giftBtn">استخدم الكود الآن</button>
+                <p style="color:var(--text-secondary); margin-bottom:20px;" data-translate="giftTimer">ينتهي خلال: <span id="countdown" style="color:var(--error); font-weight:bold;">15:00</span></p>
+                <button onclick="openForm('طلب باستخدام كود FORGE2026')" style="width:100%; padding:16px; background:var(--accent); color:#000; border:none; border-radius:30px; font-weight:bold; cursor:pointer;" data-translate="giftBtn">استخدم الكود الآن</button>
             </div>
         </div>
 
@@ -2272,13 +2395,14 @@
         <div id="typeModal" class="modal">
             <div class="modal-content">
                 <span class="close-btn" onclick="closeTypeSelection()">&times;</span>
-                <h3 style="text-align:center; color:var(--accent);" data-translate="typeTitle">اختر نوع الموقع</h3>
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-top:20px;">
+                <h3 style="text-align:center; color:var(--accent); margin-bottom:25px;" data-translate="typeTitle">اختر نوع الموقع</h3>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
                     <button class="type-btn" onclick="selectType('مدونة')"><i class="fas fa-pen-nib"></i> <span data-translate="typeBlog">مدونة</span></button>
                     <button class="type-btn" onclick="selectType('طبيب')"><i class="fas fa-user-md"></i> <span data-translate="typeDoctor">طبيب</span></button>
                     <button class="type-btn" onclick="selectType('محامي')"><i class="fas fa-gavel"></i> <span data-translate="typeLawyer">محامي</span></button>
                     <button class="type-btn" onclick="selectType('تجاري')"><i class="fas fa-briefcase"></i> <span data-translate="typeBusiness">تجاري</span></button>
                     <button class="type-btn" onclick="selectType('Portfolio')"><i class="fas fa-user-tie"></i> <span data-translate="typePortfolio">Portfolio</span></button>
+                    <button class="type-btn" onclick="selectType('إخباري')"><i class="fas fa-newspaper"></i> <span data-translate="typeNews">إخباري</span></button>
                 </div>
             </div>
         </div>
@@ -2287,27 +2411,27 @@
         <div id="packageModal" class="modal">
             <div class="modal-content">
                 <span class="close-btn" onclick="document.getElementById('packageModal').style.display='none'">&times;</span>
-                <h3 id="pkgTitle" style="text-align:center; color:var(--forge-orange); margin-bottom:20px;" data-translate="packageTitle">اختر الباقة</h3>
+                <h3 id="pkgTitle" style="text-align:center; color:var(--forge-orange); margin-bottom:25px;" data-translate="packageTitle">اختر الباقة</h3>
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
-                    <div class="pkg-card" onclick="openFormWithPackage('باقة الانطلاق')" style="padding:20px; border:1px solid rgba(128,128,128,0.2); border-radius:16px; text-align:center; cursor:pointer;">
-                        <div class="pkg-name" style="font-size:1.3rem; color:var(--accent); margin-bottom:15px;">🚀 <span data-translate="packageBasic">باقة الانطلاق</span></div>
+                    <div class="pkg-card" onclick="openFormWithPackage('باقة الانطلاق')" style="padding:20px; border:1px solid rgba(128,128,128,0.2); border-radius:16px; text-align:center; cursor:pointer; transition:all 0.3s ease;">
+                        <div style="font-size:1.3rem; color:var(--accent); margin-bottom:15px;">🚀 <span data-translate="packageBasic">باقة الانطلاق</span></div>
                         <ul style="list-style:none; padding:0; text-align:right; margin-bottom:20px;">
                             <li style="margin-bottom:8px;">✓ تصميم عصري</li>
                             <li style="margin-bottom:8px;">✓ متجاوب مع الجوال</li>
                             <li style="margin-bottom:8px;">✓ لوحة تحكم سهلة</li>
                             <li>✓ دعم فني أسبوع</li>
                         </ul>
-                        <button class="pkg-btn" style="background:var(--accent); color:#000; border:none; padding:10px; width:100%; border-radius:30px; font-weight:bold; cursor:pointer;" data-translate="selectPackage">اختيار الباقة</button>
+                        <button style="width:100%; padding:12px; background:var(--accent); color:#000; border:none; border-radius:30px; font-weight:bold; cursor:pointer;" data-translate="selectPackage">اختيار الباقة</button>
                     </div>
-                    <div class="pkg-card" onclick="openFormWithPackage('باقة الاحتراف')" style="padding:20px; border:2px solid var(--forge-orange); border-radius:16px; text-align:center; cursor:pointer;">
-                        <div class="pkg-name" style="font-size:1.3rem; color:var(--forge-orange); margin-bottom:15px;">💎 <span data-translate="packagePro">باقة الاحتراف</span></div>
+                    <div class="pkg-card" onclick="openFormWithPackage('باقة الاحتراف')" style="padding:20px; border:2px solid var(--forge-orange); border-radius:16px; text-align:center; cursor:pointer; transition:all 0.3s ease;">
+                        <div style="font-size:1.3rem; color:var(--forge-orange); margin-bottom:15px;">💎 <span data-translate="packagePro">باقة الاحتراف</span></div>
                         <ul style="list-style:none; padding:0; text-align:right; margin-bottom:20px;">
                             <li style="margin-bottom:8px;">✓ كل مميزات الانطلاق</li>
                             <li style="margin-bottom:8px;">✓ تهيئة لمحركات البحث</li>
                             <li style="margin-bottom:8px;">✓ ربط دومين احترافي</li>
                             <li>✓ دعم فني شهر</li>
                         </ul>
-                        <button class="pkg-btn" style="background:var(--forge-orange); color:#000; border:none; padding:10px; width:100%; border-radius:30px; font-weight:bold; cursor:pointer;" data-translate="selectPackage">اختيار الباقة</button>
+                        <button style="width:100%; padding:12px; background:var(--forge-orange); color:#000; border:none; border-radius:30px; font-weight:bold; cursor:pointer;" data-translate="selectPackage">اختيار الباقة</button>
                     </div>
                 </div>
             </div>
@@ -2317,10 +2441,10 @@
         <div id="orderModal" class="modal">
             <div class="modal-content">
                 <span class="close-btn" onclick="closeForm()">&times;</span>
-                <h3 id="serviceName" style="text-align:center; color:var(--forge-orange); margin-bottom:20px;"></h3>
+                <h3 id="serviceName" style="text-align:center; color:var(--forge-orange); margin-bottom:25px;"></h3>
                 
                 <!-- Order Method Selection -->
-                <div style="margin-bottom: 20px;">
+                <div style="margin-bottom: 25px;">
                     <div style="text-align:center; margin-bottom:15px; color:var(--text-secondary);" data-translate="chooseMethod">اختر طريقة الطلب:</div>
                     <div style="display:flex; gap:15px; flex-wrap:wrap; justify-content:center;">
                         <div id="methodWhatsApp" class="order-method-card whatsapp" onclick="selectOrderMethod('whatsapp')" style="flex:1; min-width:140px; padding:15px; border:1px solid rgba(128,128,128,0.2); border-radius:12px; text-align:center; cursor:pointer;">
@@ -2331,23 +2455,23 @@
                         <div id="methodWebsite" class="order-method-card website active" onclick="selectOrderMethod('website')" style="flex:1; min-width:140px; padding:15px; border:2px solid var(--forge-orange); border-radius:12px; text-align:center; cursor:pointer; background:rgba(245,158,11,0.05);">
                             <i class="fas fa-database" style="font-size:2rem; color:var(--accent);"></i>
                             <h4 style="margin:8px 0 4px;" data-translate="methodWebsite">عبر الموقع</h4>
-                            <p style="font-size:0.8rem; color:var(--text-secondary);" data-translate="methodWebsiteDesc">حفظ في قاعدة البيانات</p>
+                            <p style="font-size:0.8rem; color:var(--text-secondary);" data-translate="methodWebsiteDesc">حفظ آمن</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Client Information -->
-                <input type="text" id="clientName" placeholder="الاسم الكامل" data-translate="namePlaceholder">
-                <input type="tel" id="clientPhone" placeholder="رقم الواتساب" data-translate="phonePlaceholder">
+                <input type="text" id="clientName" class="referral-input" placeholder="الاسم الكامل" data-translate="namePlaceholder">
+                <input type="tel" id="clientPhone" class="referral-input" placeholder="رقم الواتساب" data-translate="phonePlaceholder">
                 
                 <!-- Dynamic Note -->
-                <div id="methodNote" class="form-note website" style="margin-top:15px; padding:15px; border-radius:12px; background:rgba(56,189,248,0.1); border-right:4px solid var(--accent); display:flex; align-items:center; gap:12px;">
+                <div id="methodNote" class="form-note website" style="margin-top:15px;">
                     <i class="fas fa-database"></i>
-                    <span data-translate="websiteMethodNote">سيتم حفظ طلبك في قاعدة البيانات وسيتواصل معك فريقنا خلال 24 ساعة</span>
+                    <span data-translate="websiteMethodNote">سيتم حفظ طلبك وسيتواصل معك فريقنا خلال 24 ساعة</span>
                 </div>
 
                 <!-- Submit Button -->
-                <button id="submitOrderBtn" onclick="processOrder()" class="submit-btn website" style="margin-top:20px; width:100%; padding:16px; background:var(--accent); color:#000; border:none; border-radius:30px; font-weight:bold; display:flex; align-items:center; justify-content:center; gap:12px; cursor:pointer;">
+                <button id="submitOrderBtn" onclick="processOrder()" class="submit-btn website" style="margin-top:20px;">
                     <i class="fas fa-check-circle"></i>
                     <span data-translate="submitWebsiteBtn">إرسال الطلب وحفظه</span>
                 </button>
@@ -2358,11 +2482,11 @@
         <div id="aboutModal" class="modal">
             <div class="modal-content">
                 <span class="close-btn" onclick="closeAboutModal()">&times;</span>
-                <h3 style="color: var(--accent); text-align:center;" data-translate="aboutTitle">🚀 Web Forge</h3>
-                <div style="text-align:center; margin-top:20px;">
-                    <p data-translate="aboutDesc">نحول أفكارك إلى واقع رقمي احترافي!</p>
-                    <p style="margin-top:15px; font-weight:bold;" data-translate="teamTitle">👥 فريق العمل:</p>
-                    <div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:15px;">
+                <h3 style="color: var(--accent); text-align:center; margin-bottom:20px;" data-translate="aboutTitle">🚀 Web Forge</h3>
+                <div style="text-align:center;">
+                    <p data-translate="aboutDesc" style="margin-bottom:20px;">نحول أفكارك إلى واقع رقمي احترافي!</p>
+                    <p style="font-weight:bold; margin-bottom:15px;" data-translate="teamTitle">👥 فريق العمل:</p>
+                    <div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center;">
                         <span style="background:rgba(245,158,11,0.1); color:var(--forge-orange); padding:8px 16px; border-radius:30px;">Mohammed Ait Saleh</span>
                         <span style="background:rgba(245,158,11,0.1); color:var(--forge-orange); padding:8px 16px; border-radius:30px;">Hajar Ait Belaid</span>
                         <span style="background:rgba(245,158,11,0.1); color:var(--forge-orange); padding:8px 16px; border-radius:30px;">Aissa Ed-dahil</span>
@@ -2434,7 +2558,6 @@
 
             save() {
                 localStorage.setItem('webforge_orders', JSON.stringify(this.orders));
-                // تحديث فوري للوحة التحكم إذا كانت مفتوحة
                 if (AppState.isAdminLoggedIn) {
                     this.updateAdminUI();
                 }
@@ -2460,8 +2583,7 @@
                 this.orders.unshift(newOrder);
                 this.save();
                 
-                // ✅ إشعار فوري مع رقم الطلب
-                NotificationSystem.show(`📦 طلب جديد! رقم المتابعة: ${orderId}`, 'success');
+                NotificationSystem.show(`📦 طلب جديد! رقم: ${orderId}`, 'success');
                 
                 return newOrder;
             },
@@ -2471,7 +2593,7 @@
                 if (order) {
                     order.status = status;
                     this.save();
-                    NotificationSystem.show(`تم تحديث حالة الطلب ${orderId}`, 'info');
+                    NotificationSystem.show(`تم تحديث الطلب ${orderId}`, 'info');
                 }
             },
 
@@ -2529,7 +2651,7 @@
             }
         }
 
-        // ========== Typewriter System ==========
+        // ========== Typewriter ==========
         class Typewriter {
             constructor() {
                 this.textArray = ['متاجر إلكترونية رائعة', 'هوية رقمية مميزة', 'مواقع احترافية', 'دعم فني متواصل'];
@@ -2594,37 +2716,37 @@
         function selectOrderMethod(method) {
             AppState.selectedOrderMethod = method;
             
-            const whatsappCard = document.getElementById('methodWhatsApp');
-            const websiteCard = document.getElementById('methodWebsite');
-            const methodNote = document.getElementById('methodNote');
-            const submitBtn = document.getElementById('submitOrderBtn');
+            const whatsapp = document.getElementById('methodWhatsApp');
+            const website = document.getElementById('methodWebsite');
+            const note = document.getElementById('methodNote');
+            const btn = document.getElementById('submitOrderBtn');
             
             if (method === 'whatsapp') {
-                whatsappCard.style.border = '2px solid var(--whatsapp)';
-                whatsappCard.style.background = 'rgba(37,211,102,0.05)';
-                websiteCard.style.border = '1px solid rgba(128,128,128,0.2)';
-                websiteCard.style.background = 'var(--bg-card)';
+                whatsapp.style.border = '2px solid var(--whatsapp)';
+                whatsapp.style.background = 'rgba(37,211,102,0.05)';
+                website.style.border = '1px solid rgba(128,128,128,0.2)';
+                website.style.background = 'var(--bg-card)';
                 
-                methodNote.className = 'form-note whatsapp';
-                methodNote.innerHTML = '<i class="fab fa-whatsapp"></i> <span data-translate="whatsappMethodNote">سيتم توجيهك إلى واتساب لإرسال الطلب مباشرة</span>';
+                note.className = 'form-note whatsapp';
+                note.innerHTML = '<i class="fab fa-whatsapp"></i> <span data-translate="whatsappMethodNote">سيتم توجيهك إلى واتساب</span>';
                 
-                submitBtn.className = 'submit-btn whatsapp';
-                submitBtn.innerHTML = '<i class="fab fa-whatsapp"></i> <span data-translate="submitWhatsAppBtn">إرسال الطلب عبر واتساب</span>';
-                submitBtn.style.background = 'var(--whatsapp)';
-                submitBtn.style.color = 'white';
+                btn.className = 'submit-btn whatsapp';
+                btn.innerHTML = '<i class="fab fa-whatsapp"></i> <span data-translate="submitWhatsAppBtn">إرسال عبر واتساب</span>';
+                btn.style.background = 'var(--whatsapp)';
+                btn.style.color = 'white';
             } else {
-                whatsappCard.style.border = '1px solid rgba(128,128,128,0.2)';
-                whatsappCard.style.background = 'var(--bg-card)';
-                websiteCard.style.border = '2px solid var(--forge-orange)';
-                websiteCard.style.background = 'rgba(245,158,11,0.05)';
+                whatsapp.style.border = '1px solid rgba(128,128,128,0.2)';
+                whatsapp.style.background = 'var(--bg-card)';
+                website.style.border = '2px solid var(--forge-orange)';
+                website.style.background = 'rgba(245,158,11,0.05)';
                 
-                methodNote.className = 'form-note website';
-                methodNote.innerHTML = '<i class="fas fa-database"></i> <span data-translate="websiteMethodNote">سيتم حفظ طلبك في قاعدة البيانات وسيتواصل معك فريقنا خلال 24 ساعة</span>';
+                note.className = 'form-note website';
+                note.innerHTML = '<i class="fas fa-database"></i> <span data-translate="websiteMethodNote">سيتم حفظ طلبك في قاعدة البيانات</span>';
                 
-                submitBtn.className = 'submit-btn website';
-                submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> <span data-translate="submitWebsiteBtn">إرسال الطلب وحفظه</span>';
-                submitBtn.style.background = 'var(--accent)';
-                submitBtn.style.color = '#000';
+                btn.className = 'submit-btn website';
+                btn.innerHTML = '<i class="fas fa-check-circle"></i> <span data-translate="submitWebsiteBtn">إرسال الطلب وحفظه</span>';
+                btn.style.background = 'var(--accent)';
+                btn.style.color = '#000';
             }
         }
 
@@ -2633,7 +2755,7 @@
             try {
                 const currentTime = Date.now();
                 if (currentTime - AppState.lastSubmissionTime < CONFIG.cooldown.formSubmission) {
-                    NotificationSystem.show('يرجى الانتظار 30 ثانية قبل إرسال طلب جديد', 'warning');
+                    NotificationSystem.show('يرجى الانتظار 30 ثانية', 'warning');
                     return;
                 }
                 
@@ -2655,10 +2777,10 @@
                 
                 AppState.lastSubmissionTime = currentTime;
                 
-                const submitBtn = document.getElementById('submitOrderBtn');
-                const originalHTML = submitBtn.innerHTML;
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+                const btn = document.getElementById('submitOrderBtn');
+                const originalHTML = btn.innerHTML;
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
                 
                 if (AppState.selectedOrderMethod === 'whatsapp') {
                     submitWhatsAppOrder(name, phone, service);
@@ -2667,17 +2789,16 @@
                 }
                 
                 setTimeout(() => {
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = originalHTML;
+                    btn.disabled = false;
+                    btn.innerHTML = originalHTML;
                 }, 2000);
                 
             } catch (error) {
                 console.error('Order error:', error);
-                NotificationSystem.show('حدث خطأ أثناء معالجة الطلب', 'error');
+                NotificationSystem.show('حدث خطأ', 'error');
             }
         }
 
-        // ========== Submit Website Order ==========
         function submitWebsiteOrder(name, phone, service) {
             const newOrder = OrdersDB.add({
                 service: service,
@@ -2689,27 +2810,18 @@
             });
             
             closeForm();
+            NotificationSystem.show(`✅ تم حفظ طلبك! رقم: ${newOrder.id}`, 'success');
             
-            // ✅ رسالة تأكيد واضحة مع رقم الطلب
-            NotificationSystem.show(`✅ تم حفظ طلبك بنجاح! رقم المتابعة: ${newOrder.id}`, 'success');
-            
-            // تفريغ الحقول
             document.getElementById('clientName').value = '';
             document.getElementById('clientPhone').value = '';
             
-            // تحديث لوحة التحكم فوراً
-            if (AppState.isAdminLoggedIn) {
-                OrdersDB.updateAdminUI();
-            }
+            if (AppState.isAdminLoggedIn) OrdersDB.updateAdminUI();
         }
 
-        // ========== Submit WhatsApp Order ==========
         function submitWhatsAppOrder(name, phone, service) {
-            const timestamp = new Date().toLocaleString('ar-MA');
-            const message = `📋 *طلب جديد - Web Forge*\\n\\n🛠️ *الخدمة:* ${service}\\n👤 *الاسم:* ${name}\\n📞 *الهاتف:* ${phone}\\n⏰ *التوقيت:* ${timestamp}\\n\\nفريق Web Forge سيتواصل معك قريباً ⚡`;
-            
-            const whatsappUrl = `https://wa.me/212627713979?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
+            const message = `📋 *طلب جديد* - Web Forge\n\nالخدمة: ${service}\nالاسم: ${name}\nالهاتف: ${phone}`;
+            const url = `https://wa.me/212627713979?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
             
             const newOrder = OrdersDB.add({
                 service: service,
@@ -2721,22 +2833,19 @@
             });
             
             closeForm();
-            
-            NotificationSystem.show(`✅ تم توجيهك إلى واتساب! رقم المتابعة: ${newOrder.id}`, 'success');
+            NotificationSystem.show(`✅ تم الإرسال! رقم: ${newOrder.id}`, 'success');
             
             document.getElementById('clientName').value = '';
             document.getElementById('clientPhone').value = '';
             
-            if (AppState.isAdminLoggedIn) {
-                OrdersDB.updateAdminUI();
-            }
+            if (AppState.isAdminLoggedIn) OrdersDB.updateAdminUI();
         }
 
         // ========== Admin System ==========
         function showAdminLogin() {
             document.getElementById('adminLogin').style.display = 'flex';
             document.getElementById('adminPassword').value = '';
-            document.getElementById('loginError').classList.remove('active');
+            document.getElementById('loginError').style.display = 'none';
         }
 
         function adminLogin() {
@@ -2745,9 +2854,9 @@
                 AppState.isAdminLoggedIn = true;
                 document.getElementById('adminLogin').style.display = 'none';
                 openAdminPanel();
-                NotificationSystem.show('مرحباً بك في لوحة التحكم', 'success');
+                NotificationSystem.show('مرحباً بك', 'success');
             } else {
-                document.getElementById('loginError').classList.add('active');
+                document.getElementById('loginError').style.display = 'block';
             }
         }
 
@@ -2759,11 +2868,6 @@
             updateAdminStats();
             renderOrdersList();
             document.getElementById('adminPanel').classList.add('active');
-            
-            const stats = OrdersDB.getStats();
-            if (stats.new > 0) {
-                NotificationSystem.show(`📊 لديك ${stats.new} طلب/طلبات جديدة`, 'info');
-            }
         }
 
         function closeAdminPanel() {
@@ -2795,38 +2899,38 @@
         }
 
         function renderOrdersList() {
-            const ordersList = document.getElementById('ordersList');
-            const filteredOrders = OrdersDB.filterByStatus(AppState.currentOrderFilter);
+            const list = document.getElementById('ordersList');
+            const filtered = OrdersDB.filterByStatus(AppState.currentOrderFilter);
             
-            if (filteredOrders.length === 0) {
-                ordersList.innerHTML = '<div style="text-align:center; padding:40px; color:var(--text-secondary);"><i class="fas fa-inbox" style="font-size:3rem; margin-bottom:15px;"></i><p data-translate="noOrders">لا توجد طلبات</p></div>';
+            if (filtered.length === 0) {
+                list.innerHTML = '<div style="text-align:center; padding:40px; color:var(--text-secondary);"><i class="fas fa-inbox" style="font-size:3rem; margin-bottom:15px;"></i><p>لا توجد طلبات</p></div>';
                 return;
             }
             
             let html = '';
-            filteredOrders.slice(0, 20).forEach(order => {
+            filtered.slice(0, 20).forEach(order => {
                 const date = new Date(order.date);
                 const now = new Date();
-                const diffMins = Math.floor((now - date) / 60000);
-                const timeAgo = diffMins < 60 ? `منذ ${diffMins} دقيقة` : `منذ ${Math.floor(diffMins/60)} ساعة`;
+                const diff = Math.floor((now - date) / 60000);
+                const timeAgo = diff < 60 ? `منذ ${diff} دقيقة` : `منذ ${Math.floor(diff/60)} ساعة`;
                 
                 html += `
                     <div class="order-item status-${order.status}">
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                        <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
                             <span class="order-id">${order.id}</span>
                             <span class="order-status status-${order.status}">${getStatusText(order.status)}</span>
                         </div>
                         <div class="order-service">${order.service}</div>
-                        <div style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:12px; color:var(--text-secondary); font-size:0.9rem;">
+                        <div style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:12px; color:var(--text-secondary);">
                             <span><i class="fas fa-user"></i> ${order.clientName}</span>
                             <span><i class="fas fa-phone"></i> ${order.clientPhone}</span>
                             ${order.package ? `<span><i class="fas fa-box"></i> ${order.package}</span>` : ''}
                         </div>
                         <div style="display:flex; gap:8px; flex-wrap:wrap;">
-                            <button onclick="window.open('https://wa.me/${order.clientPhone.replace(/\D/g, '')}?text=${encodeURIComponent('مرحباً ' + order.clientName + '، بخصوص طلبك: ' + order.service)}', '_blank')" style="padding:6px 14px; background:var(--whatsapp); color:white; border:none; border-radius:30px; font-size:0.8rem; cursor:pointer;"><i class="fab fa-whatsapp"></i> واتساب</button>
-                            ${order.status === 'new' ? `<button onclick="updateOrderStatus('${order.id}', 'processing')" style="padding:6px 14px; background:var(--order-status-processing); color:#000; border:none; border-radius:30px; font-size:0.8rem; cursor:pointer;"><i class="fas fa-cog"></i> بدء</button>` : ''}
-                            ${order.status !== 'completed' ? `<button onclick="updateOrderStatus('${order.id}', 'completed')" style="padding:6px 14px; background:var(--success); color:white; border:none; border-radius:30px; font-size:0.8rem; cursor:pointer;"><i class="fas fa-check"></i> إتمام</button>` : ''}
-                            <button onclick="deleteOrder('${order.id}')" style="padding:6px 14px; background:var(--error); color:white; border:none; border-radius:30px; font-size:0.8rem; cursor:pointer;"><i class="fas fa-trash"></i> حذف</button>
+                            <button onclick="window.open('https://wa.me/${order.clientPhone.replace(/\D/g, '')}?text=${encodeURIComponent('مرحباً ' + order.clientName)}', '_blank')" style="padding:6px 14px; background:var(--whatsapp); color:white; border:none; border-radius:30px; cursor:pointer;"><i class="fab fa-whatsapp"></i> واتساب</button>
+                            ${order.status === 'new' ? `<button onclick="updateOrderStatus('${order.id}', 'processing')" style="padding:6px 14px; background:var(--order-status-processing); color:#000; border:none; border-radius:30px; cursor:pointer;"><i class="fas fa-cog"></i> بدء</button>` : ''}
+                            ${order.status !== 'completed' ? `<button onclick="updateOrderStatus('${order.id}', 'completed')" style="padding:6px 14px; background:var(--success); color:white; border:none; border-radius:30px; cursor:pointer;"><i class="fas fa-check"></i> إتمام</button>` : ''}
+                            <button onclick="deleteOrder('${order.id}')" style="padding:6px 14px; background:var(--error); color:white; border:none; border-radius:30px; cursor:pointer;"><i class="fas fa-trash"></i> حذف</button>
                         </div>
                         <div style="margin-top:12px; font-size:0.75rem; color:var(--text-secondary);">
                             <i class="fas fa-clock"></i> ${timeAgo}
@@ -2835,7 +2939,7 @@
                 `;
             });
             
-            ordersList.innerHTML = html;
+            list.innerHTML = html;
         }
 
         function getStatusText(status) {
@@ -2843,19 +2947,19 @@
             return map[status] || status;
         }
 
-        function updateOrderStatus(orderId, status) {
-            OrdersDB.updateStatus(orderId, status);
+        function updateOrderStatus(id, status) {
+            OrdersDB.updateStatus(id, status);
             renderOrdersList();
         }
 
-        function deleteOrder(orderId) {
-            if (confirm('هل أنت متأكد من حذف هذا الطلب؟')) {
-                OrdersDB.deleteOrder(orderId);
+        function deleteOrder(id) {
+            if (confirm('تأكيد الحذف؟')) {
+                OrdersDB.deleteOrder(id);
                 renderOrdersList();
             }
         }
 
-        // ========== Language System ==========
+        // ========== Language ==========
         function changeLanguage(lang) {
             AppState.currentLang = lang;
             document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
@@ -2868,21 +2972,20 @@
             document.getElementById('currentLanguageName').textContent = name;
             
             localStorage.setItem('preferredLanguage', lang);
-            NotificationSystem.show('تم تغيير اللغة بنجاح', 'success');
         }
 
         // ========== Modal System ==========
-        function showModal(modalId) {
+        function showModal(id) {
             if (AppState.currentModal) hideModal(AppState.currentModal);
-            const modal = document.getElementById(modalId);
+            const modal = document.getElementById(id);
             if (!modal) return;
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
-            AppState.currentModal = modalId;
+            AppState.currentModal = id;
         }
         
-        function hideModal(modalId) {
-            const modal = document.getElementById(modalId);
+        function hideModal(id) {
+            const modal = document.getElementById(id);
             if (modal) modal.style.display = 'none';
             document.body.style.overflow = 'auto';
             AppState.currentModal = null;
@@ -2902,33 +3005,34 @@
                     el.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
                 } else {
                     clearInterval(interval);
-                    el.textContent = 'انتهى!';
+                    el.textContent = 'انتهى';
                 }
             }, 1000);
         }
 
-        // ========== Referral System ==========
+        // ========== Referral ==========
         function sendReferral() {
-            const friendPhone = document.getElementById('friendPhone')?.value.trim();
-            const phoneError = FormValidator.validatePhone(friendPhone);
-            if (phoneError) {
-                NotificationSystem.show(phoneError, 'error');
+            const phone = document.getElementById('friendPhone')?.value.trim();
+            const error = FormValidator.validatePhone(phone);
+            if (error) {
+                NotificationSystem.show(error, 'error');
                 return;
             }
             
-            const message = `مرحباً! صديقك يدعوك للاستفادة من عروض Web Forge 🚀 خصم 15% على أول طلب!`;
-            const whatsappUrl = `https://wa.me/${friendPhone.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
+            const name = document.getElementById('referrerName')?.value.trim() || 'محمد';
+            const msg = `مرحباً! ${name} يدعوك للاستفادة من خصم 15% في Web Forge 🚀`;
+            const url = `https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
             
-            NotificationSystem.show('تم إرسال الدعوة بنجاح!', 'success');
+            NotificationSystem.show('تم إرسال الدعوة', 'success');
             hideModal('referralModal');
         }
 
         // ========== Copy Link ==========
         function copyLink() {
             navigator.clipboard.writeText(window.location.href)
-                .then(() => NotificationSystem.show('تم نسخ رابط الموقع! 📋', 'success'))
-                .catch(() => NotificationSystem.show('فشل نسخ الرابط', 'error'));
+                .then(() => NotificationSystem.show('تم نسخ الرابط 📋', 'success'))
+                .catch(() => NotificationSystem.show('فشل النسخ', 'error'));
         }
 
         // ========== Theme Toggle ==========
@@ -2947,7 +3051,7 @@
             }
         }
 
-        // ========== Animation System ==========
+        // ========== Animations ==========
         function initAnimations() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -2960,18 +3064,17 @@
             
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
             
-            // Counter animation
             const counterObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const counter = entry.target;
                         const target = +counter.getAttribute('data-target');
                         let current = 0;
-                        const increment = target / 50;
+                        const inc = target / 50;
                         
                         const update = () => {
                             if (current < target) {
-                                current = Math.min(current + increment, target);
+                                current = Math.min(current + inc, target);
                                 counter.textContent = Math.floor(current);
                                 setTimeout(update, 30);
                             } else {
@@ -2989,7 +3092,6 @@
 
         // ========== Event Listeners ==========
         function setupEventListeners() {
-            // Language dropdown
             document.getElementById('headerLanguageBtn').addEventListener('click', function(e) {
                 e.stopPropagation();
                 document.getElementById('languageDropdown').classList.toggle('active');
@@ -3073,7 +3175,7 @@
         
         window.openPaidConsult = () => {
             window.open('https://wa.me/212627713979?text=' + encodeURIComponent('مرحباً، أريد حجز استشارة مدفوعة - 500 درهم'), '_blank');
-            NotificationSystem.show('تم إرسال طلب الاستشارة المدفوعة', 'success');
+            NotificationSystem.show('تم إرسال طلب الاستشارة', 'success');
             hideModal('consultModal');
         };
         
@@ -3134,16 +3236,10 @@
         style.textContent = `
             .admin-login { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); z-index: 3000; justify-content: center; align-items: center; }
             .login-box { background: var(--bg-card); padding: 40px; border-radius: 24px; width: 90%; max-width: 400px; border: 2px solid var(--accent); }
-            .login-error { color: var(--error); font-size: 0.85rem; margin-top: 15px; text-align: center; display: none; }
-            .login-error.active { display: block; }
-            .admin-filter-btn { padding: 8px 18px; border-radius: 30px; border: 1px solid var(--accent); background: transparent; color: var(--text-main); cursor: pointer; font-size: 0.85rem; }
-            .admin-filter-btn.active { background: var(--accent); color: #000; }
-            .pkg-card { transition: all 0.3s ease; }
+            @keyframes slideOutLeft { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(-100%); } }
             .pkg-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
             .type-btn { background: rgba(128,128,128,0.05); border: 1px solid var(--accent); color: var(--text-main); padding: 15px; border-radius: 12px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: all 0.3s ease; }
             .type-btn:hover { background: var(--accent); color: #000; transform: translateY(-3px); }
-            .how-it-works-sm:hover { transform: translateX(-5px); box-shadow: 0 4px 12px rgba(245,158,11,0.4); }
-            @keyframes slideOutLeft { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(-100%); } }
         `;
         document.head.appendChild(style);
     </script>
