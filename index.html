@@ -161,6 +161,7 @@
             -moz-osx-font-smoothing: grayscale;
             padding-top: 100px;
             -webkit-overflow-scrolling: touch;
+            position: relative;
         }
 
         @media (max-width: 768px) {
@@ -168,6 +169,207 @@
                 font-size: 14px;
                 line-height: 1.6;
                 padding-top: 80px;
+            }
+        }
+
+        /* ========== Hidden Admin Button (مخفي في الأسفل) ========== */
+        .hidden-admin-btn {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            width: 32px;
+            height: 32px;
+            background: rgba(56, 189, 248, 0.08);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(148, 163, 184, 0.2);
+            font-size: 0.9rem;
+            cursor: pointer;
+            z-index: 9999;
+            border: 1px solid rgba(56, 189, 248, 0.1);
+            transition: all 0.3s ease;
+            opacity: 0.2;
+            backdrop-filter: blur(2px);
+        }
+
+        .hidden-admin-btn:hover {
+            opacity: 0.8;
+            background: rgba(56, 189, 248, 0.2);
+            color: var(--accent);
+            border-color: var(--accent);
+            transform: scale(1.1);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        @media (max-width: 768px) {
+            .hidden-admin-btn {
+                bottom: 12px;
+                right: 12px;
+                width: 28px;
+                height: 28px;
+                font-size: 0.8rem;
+                opacity: 0.15;
+            }
+        }
+
+        /* ========== How It Works Button ========== */
+        .how-it-works-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--accent), var(--forge-orange));
+            color: white;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .how-it-works-btn i {
+            font-size: 1.2rem;
+            animation: rotate-cog 3s linear infinite;
+        }
+
+        .how-it-works-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.5);
+        }
+
+        .how-it-works-btn:hover i {
+            animation: rotate-cog 1s linear infinite;
+        }
+
+        @keyframes rotate-cog {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .how-it-works-sm {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--accent), var(--forge-orange));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            margin-top: 15px;
+            width: fit-content;
+        }
+
+        .how-it-works-sm i {
+            animation: rotate-cog 3s linear infinite;
+        }
+
+        .how-it-works-sm:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .how-it-works-btn {
+                padding: 12px 24px;
+                font-size: 1rem;
+                margin: 5px;
+            }
+            
+            .how-it-works-sm {
+                padding: 6px 16px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* ========== Process Steps Enhanced ========== */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .step-card {
+            background: var(--bg-card);
+            padding: 25px 20px;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            border: 1px solid rgba(128,128,128,0.1);
+            transition: all var(--transition-base);
+            transform-style: preserve-3d;
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--accent);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .step-number {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--accent), var(--forge-orange));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin: 0 auto 15px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 4px 10px rgba(56, 189, 248, 0.3);
+        }
+
+        .step-card h4 {
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .step-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .process-steps {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .step-card {
+                padding: 20px;
+                display: flex;
+                align-items: center;
+                text-align: right;
+                gap: 15px;
+            }
+            
+            .step-number {
+                margin: 0;
+                min-width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+            
+            .step-card h4 {
+                margin-bottom: 5px;
             }
         }
 
@@ -310,111 +512,6 @@
                 animation-duration: 0.01ms !important;
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
-            }
-        }
-
-        .high-contrast {
-            filter: contrast(1.5);
-        }
-
-        .large-text {
-            font-size: 1.2em;
-        }
-
-        @media print {
-            .no-print {
-                display: none !important;
-            }
-            body {
-                color: #000;
-                background: #fff;
-            }
-            a {
-                color: #000;
-                text-decoration: underline;
-            }
-        }
-
-        /* ========== Images ========== */
-        img {
-            alt: attr(alt);
-            loading: lazy;
-            max-width: 100%;
-            height: auto;
-        }
-
-        /* ========== Notification System ========== */
-        #notificationContainer {
-            position: fixed;
-            top: 100px;
-            right: 30px;
-            z-index: 2001;
-        }
-
-        .notification {
-            position: relative;
-            background: var(--bg-card);
-            border-right: 4px solid var(--accent);
-            border-radius: 8px;
-            padding: 1rem 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            box-shadow: var(--shadow-lg);
-            margin-bottom: 10px;
-            max-width: 350px;
-            animation: slideInRight 0.3s ease-out;
-        }
-
-        .notification.success {
-            border-right-color: var(--success);
-        }
-
-        .notification.error {
-            border-right-color: var(--error);
-        }
-
-        .notification.warning {
-            border-right-color: var(--warning);
-        }
-
-        .notification.info {
-            border-right-color: var(--accent);
-        }
-
-        .notification-close {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            cursor: pointer;
-            font-size: 1.2rem;
-            margin-right: auto;
-            padding: 0 0.5rem;
-        }
-
-        .notification-close:hover {
-            color: var(--text-main);
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(100%);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideOutRight {
-            from {
-                opacity: 1;
-                transform: translateX(0);
-            }
-            to {
-                opacity: 0;
-                transform: translateX(100%);
             }
         }
 
@@ -860,11 +957,10 @@
                 gap: 10px;
             }
             .hero-btns .btn-primary,
-            .hero-btns .btn-secondary {
+            .hero-btns .btn-secondary,
+            .hero-btns .how-it-works-btn {
                 padding: 10px 20px;
                 font-size: 1rem;
-                width: 100%;
-                max-width: 250px;
             }
         }
 
@@ -2112,41 +2208,45 @@
             display: block;
         }
 
-        /* ========== Hidden Admin Button (أسفل الموقع) ========== */
+        /* ========== Hidden Admin Button (مخفي في الأسفل) ========== */
         .hidden-admin-btn {
             position: fixed;
-            bottom: 20px;
-            right: 50%;
-            transform: translateX(50%);
-            width: 40px;
-            height: 40px;
-            background: rgba(128, 128, 128, 0.1);
+            bottom: 15px;
+            right: 15px;
+            width: 32px;
+            height: 32px;
+            background: rgba(56, 189, 248, 0.08);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-secondary);
-            font-size: 1rem;
+            color: rgba(148, 163, 184, 0.2);
+            font-size: 0.9rem;
             cursor: pointer;
-            z-index: 999;
-            border: 1px solid rgba(128,128,128,0.2);
-            transition: all var(--transition-fast);
-            opacity: 0.3;
+            z-index: 9999;
+            border: 1px solid rgba(56, 189, 248, 0.1);
+            transition: all 0.3s ease;
+            opacity: 0.2;
+            backdrop-filter: blur(2px);
         }
 
         .hidden-admin-btn:hover {
             opacity: 0.8;
-            background: var(--accent);
-            color: #000;
-            transform: translateX(50%) scale(1.1);
+            background: rgba(56, 189, 248, 0.2);
+            color: var(--accent);
+            border-color: var(--accent);
+            transform: scale(1.1);
+            box-shadow: 0 0 10px var(--accent-glow);
         }
 
         @media (max-width: 768px) {
             .hidden-admin-btn {
-                width: 35px;
-                height: 35px;
-                font-size: 0.9rem;
-                bottom: 15px;
+                bottom: 12px;
+                right: 12px;
+                width: 28px;
+                height: 28px;
+                font-size: 0.8rem;
+                opacity: 0.15;
             }
         }
 
@@ -2303,7 +2403,7 @@
         }
 
         /* ========== Touch Optimizations ========== */
-        button, .btn-primary, .btn-secondary, .type-btn, .pkg-btn, .social-btn, .theme-btn, .order-now-btn, .hidden-admin-btn {
+        button, .btn-primary, .btn-secondary, .type-btn, .pkg-btn, .social-btn, .theme-btn, .order-now-btn, .hidden-admin-btn, .how-it-works-btn, .how-it-works-sm {
             -webkit-touch-callout: none;
             -webkit-user-select: none;
             user-select: none;
@@ -2318,13 +2418,15 @@
         @media (hover: none) and (pointer: coarse) {
             .service-card:hover,
             .why-card:hover,
-            .work-card:hover {
+            .work-card:hover,
+            .step-card:hover {
                 transform: none;
             }
             
             .referral-float:hover,
             .consult-float:hover,
-            .mystery-box:hover {
+            .mystery-box:hover,
+            .hidden-admin-btn:hover {
                 transform: none;
             }
         }
@@ -2339,7 +2441,8 @@
             
             .service-card,
             .why-card,
-            .work-card {
+            .work-card,
+            .step-card {
                 border: 2px solid var(--text-main);
             }
         }
@@ -2349,13 +2452,17 @@
             .reveal,
             .service-card,
             .why-card,
-            .work-card {
+            .work-card,
+            .step-card,
+            .hidden-admin-btn,
+            .how-it-works-btn {
                 transition: none;
             }
             
             .tech-track,
             .promo-content,
-            .cursor {
+            .cursor,
+            .how-it-works-btn i {
                 animation: none;
             }
             
@@ -2437,7 +2544,7 @@
         <div id="ordersList" class="orders-list"></div>
     </div>
 
-    <!-- ========== Hidden Admin Button (في أسفل الموقع) ========== -->
+    <!-- ========== زر لوحة التحكم المخفي في الأسفل ========== -->
     <div class="hidden-admin-btn" onclick="showAdminLogin()" aria-label="لوحة التحكم المخفية" title="لوحة التحكم">
         <i class="fas fa-cog"></i>
     </div>
@@ -2653,6 +2760,11 @@
                 <div class="hero-btns">
                     <a href="#services" class="btn-primary" data-translate="primaryBtn">استعرض خدماتنا</a>
                     <a href="mailto:webfooorge@gmail.com?subject=استفسار عن خدمات Web Forge" class="btn-secondary" data-translate="secondaryBtn">تواصل مباشرة</a>
+                    <!-- ========== زر كيف نعمل داخل المحتوى (موجود فقط هنا) ========== -->
+                    <button onclick="openProcessModal()" class="how-it-works-btn">
+                        <i class="fas fa-cog"></i>
+                        <span data-translate="processBtn">كيف نعمل؟</span>
+                    </button>
                 </div>
             </div>
         </section>
@@ -2732,7 +2844,7 @@
                 <div class="why-card reveal delay-3 js-tilt">
                     <i class="fas fa-headset"></i>
                     <h4 data-translate="supportTitle">دعم فني</h4>
-                    <p data-translate="supportDesc" class="arabic-text">فريقنا معك دائماً لضمان استقرار موقعك 24/5.</p>
+                    <p data-translate="supportDesc" class="arabic-text">فريقنا معك دائماً لضمان استقرار موقعك 24/7.</p>
                 </div>
                 <div class="why-card reveal delay-4 js-tilt">
                     <i class="fas fa-paint-brush"></i>
@@ -2754,24 +2866,36 @@
                     <h3 data-translate="youcanTitle">متاجر YouCan</h3>
                     <p data-translate="youcanDesc" class="arabic-text">تصميم وتجهيز متاجر YouCan احترافية بالكامل.</p>
                     <button onclick="openForm('متجر YouCan')" class="card-btn" data-translate="youcanBtn">اطلب الخدمة <i class="fas fa-arrow-left"></i></button>
+                    <!-- تم إزالة زر كيف نعمل من هنا -->
                 </div>
                 <div class="service-card reveal delay-2 js-tilt">
                     <div class="icon-box" style="color: #96bf48;"><i class="fab fa-shopify"></i></div>
                     <h3 data-translate="shopifyTitle">متاجر Shopify</h3>
                     <p data-translate="shopifyDesc" class="arabic-text">تطوير متاجر دروبشيبينغ أو براند خاص عالمي.</p>
                     <button onclick="openForm('متجر Shopify')" class="card-btn" data-translate="shopifyBtn">اطلب الخدمة <i class="fas fa-arrow-left"></i></button>
+                    <!-- تم إزالة زر كيف نعمل من هنا -->
                 </div>
                 <div class="service-card reveal delay-3 js-tilt">
                     <div class="icon-box" style="color: var(--forge-orange);"><i class="fas fa-laptop-code"></i></div>
                     <h3 data-translate="websitesTitle">مواقع Web Forge</h3>
                     <p data-translate="websitesDesc" class="arabic-text">مواقع خاصة: مدونة، طبيب، محامي، Portfolio، كتب.</p>
                     <button onclick="openTypeSelection()" class="card-btn" data-translate="websitesBtn">اطلب الخدمة <i class="fas fa-arrow-left"></i></button>
+                    <!-- ========== زر كيف نعمل موجود هنا فقط في مواقع الويب ========== -->
+                    <button onclick="openProcessModal()" class="how-it-works-sm">
+                        <i class="fas fa-cog"></i>
+                        <span data-translate="processBtn">كيف نعمل؟</span>
+                    </button>
                 </div>
                 <div class="service-card reveal delay-4 js-tilt">
                     <div class="icon-box" style="color: #10b981;"><i class="fas fa-graduation-cap"></i></div>
                     <h3 data-translate="coursesTitle">الدورات التكوينية</h3>
                     <p data-translate="coursesDesc" class="arabic-text">دورات احترافية في التسويق بالعمولة، العمل على AliExpress، والبرمجة.</p>
                     <button onclick="openCoursesSelection()" class="card-btn" data-translate="coursesBtn">اطلب الخدمة <i class="fas fa-arrow-left"></i></button>
+                    <!-- ========== زر كيف نعمل موجود هنا في الدورات ========== -->
+                    <button onclick="openProcessModal()" class="how-it-works-sm">
+                        <i class="fas fa-cog"></i>
+                        <span data-translate="processBtn">كيف نعمل؟</span>
+                    </button>
                 </div>
             </div>
         </section>
@@ -2870,12 +2994,13 @@
             </div>
         </div>
 
-        <!-- ========== Process Modal ========== -->
+        <!-- ========== Process Modal (مطور) ========== -->
         <div id="processModal" class="modal">
             <div class="modal-content" style="max-width: 900px;">
                 <span class="close-btn" onclick="closeProcessModal()">&times;</span>
-                <h3 style="text-align:center; color:var(--accent); margin-bottom: 20px;" data-translate="processTitle">⚙️ كيف نعمل؟</h3>
-                <p style="text-align:center; margin-bottom: 20px; color:var(--text-secondary);" data-translate="processDesc">رحلة نجاح مشروعك في 4 خطوات بسيطة</p>
+                <h3 style="text-align:center; color:var(--accent); margin-bottom: 10px;" data-translate="processTitle">⚙️ كيف نعمل؟</h3>
+                <p style="text-align:center; margin-bottom: 30px; color:var(--text-secondary); font-size: 1.1rem;" data-translate="processDesc">رحلة نجاح مشروعك في 4 خطوات بسيطة</p>
+                
                 <div class="process-steps">
                     <div class="step-card">
                         <div class="step-number">1</div>
@@ -2897,6 +3022,12 @@
                         <h4 data-translate="step4">الإطلاق والدعم</h4>
                         <p data-translate="step4Desc">ننشر موقعك للعالم ونقدم لك الدعم الفني اللازم.</p>
                     </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button onclick="closeProcessModal()" style="background: var(--forge-orange); color: white; border: none; padding: 12px 30px; border-radius: 30px; font-weight: bold; cursor: pointer;">
+                        <i class="fas fa-check"></i> فهمت، شكراً!
+                    </button>
                 </div>
             </div>
         </div>
