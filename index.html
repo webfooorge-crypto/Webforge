@@ -1184,70 +1184,273 @@
             font-size: 1rem;
         }
 
-        /* ========== FAQ Section ========== */
+        /* ========== FAQ Section - محسن بشكل كبير ========== */
         .faq-section {
             padding: 5rem 5%;
             background: var(--bg-dark);
+            position: relative;
         }
 
         @media (max-width: 768px) {
             .faq-section { padding: 3.5rem 5%; }
         }
 
+        .faq-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+
+        .faq-section .arabic-heading {
+            margin-bottom: 3rem;
+        }
+
         .faq-container {
-            max-width: 850px;
-            margin: 2rem auto 0;
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
 
         .faq-item {
             background: var(--bg-card);
             border: 1px solid rgba(128,128,128,0.1);
-            border-radius: 16px;
-            margin-bottom: 1rem;
+            border-radius: 20px;
             overflow: hidden;
+            transition: all var(--transition-base);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .faq-item:hover {
+            border-color: var(--accent);
+            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.15);
+        }
+
+        .faq-item.active {
+            border-color: var(--forge-orange);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.2);
         }
 
         .faq-question {
-            padding: 20px 25px;
+            padding: 22px 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
+            background: rgba(56, 189, 248, 0.02);
+            transition: background var(--transition-fast);
+        }
+
+        .faq-question:hover {
+            background: rgba(56, 189, 248, 0.05);
         }
 
         @media (max-width: 768px) {
             .faq-question {
-                padding: 16px 20px;
+                padding: 18px 20px;
                 font-size: 1rem;
             }
         }
 
-        .faq-question i {
-            transition: 0.3s;
+        .faq-question-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+
+        .faq-question-content i {
             color: var(--accent);
+            font-size: 1.3rem;
+            width: 28px;
+            text-align: center;
+        }
+
+        .faq-item.active .faq-question-content i {
+            color: var(--forge-orange);
+        }
+
+        .faq-question-text {
+            flex: 1;
+        }
+
+        .faq-toggle-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(56, 189, 248, 0.1);
+            border-radius: 50%;
+            transition: all var(--transition-base);
+            color: var(--accent);
+        }
+
+        .faq-item.active .faq-toggle-icon {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--forge-orange);
+            transform: rotate(180deg);
         }
 
         .faq-answer {
             max-height: 0;
             overflow: hidden;
-            transition: 0.4s ease;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 0 25px;
             color: var(--text-secondary);
-            line-height: 1.7;
+            line-height: 1.8;
             border-top: 1px solid transparent;
+            background: rgba(0, 0, 0, 0.1);
         }
 
         .faq-item.active .faq-answer {
-            max-height: 200px;
-            padding: 20px 25px;
+            max-height: 300px;
+            padding: 22px 25px;
             border-color: rgba(128,128,128,0.1);
         }
 
-        .faq-item.active .faq-question i {
-            transform: rotate(135deg);
+        .faq-answer-content {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .faq-answer-icon {
+            background: rgba(56, 189, 248, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .faq-item.active .faq-answer-icon {
+            background: rgba(245, 158, 11, 0.1);
             color: var(--forge-orange);
+        }
+
+        .faq-answer-text {
+            flex: 1;
+        }
+
+        .faq-answer-text p {
+            margin-bottom: 10px;
+        }
+
+        .faq-answer-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-highlight {
+            color: var(--forge-orange);
+            font-weight: 700;
+        }
+
+        .faq-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: #000;
+            font-size: 0.7rem;
+            padding: 3px 10px;
+            border-radius: 30px;
+            margin-right: 10px;
+            font-weight: 600;
+            vertical-align: middle;
+        }
+
+        .faq-badge.popular {
+            background: var(--forge-orange);
+        }
+
+        .faq-badge.new {
+            background: var(--success);
+        }
+
+        .faq-category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .faq-category-tab {
+            padding: 10px 25px;
+            background: var(--bg-card);
+            border: 1px solid rgba(128,128,128,0.2);
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all var(--transition-fast);
+            color: var(--text-secondary);
+        }
+
+        .faq-category-tab:hover,
+        .faq-category-tab.active {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .faq-category-tab i {
+            margin-left: 8px;
+        }
+
+        .faq-more-link {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .faq-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            padding: 14px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            text-decoration: none;
+        }
+
+        .faq-more-btn:hover {
+            background: var(--accent);
+            color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .faq-answer-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .faq-answer-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+            
+            .faq-category-tab {
+                padding: 8px 18px;
+                font-size: 0.9rem;
+            }
         }
 
         /* ========== Modal System ========== */
@@ -2169,24 +2372,260 @@
             </div>
         </section>
 
-        <!-- ========== FAQ Section ========== -->
+        <!-- ========== FAQ Section - محسن بشكل كبير ========== -->
         <section class="faq-section">
             <div style="text-align:center;">
-                <h2 data-translate="faqTitle" class="arabic-heading">🤔 أسئلة شائعة</h2>
+                <h2 data-translate="faqTitle" class="arabic-heading">🤔 الأسئلة الشائعة</h2>
             </div>
+            
+            <!-- تصنيفات الأسئلة -->
+            <div class="faq-category-tabs">
+                <span class="faq-category-tab active" onclick="filterFAQ('all', this)"><i class="fas fa-globe"></i> الكل</span>
+                <span class="faq-category-tab" onclick="filterFAQ('general', this)"><i class="fas fa-question-circle"></i> عام</span>
+                <span class="faq-category-tab" onclick="filterFAQ('services', this)"><i class="fas fa-cogs"></i> الخدمات</span>
+                <span class="faq-category-tab" onclick="filterFAQ('payment', this)"><i class="fas fa-credit-card"></i> الدفع</span>
+                <span class="faq-category-tab" onclick="filterFAQ('support', this)"><i class="fas fa-headset"></i> الدعم</span>
+            </div>
+            
             <div class="faq-container">
-                <div class="faq-item" onclick="toggleFaq(this)">
-                    <div class="faq-question">كم تستغرق مدة التجهيز؟ <i class="fas fa-plus"></i></div>
-                    <div class="faq-answer" data-translate="faq1a">من 3 إلى 7 أيام عمل حسب الباقة.</div>
+                <!-- السؤال 1 - عام -->
+                <div class="faq-item" data-category="general" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <div class="faq-question-content">
+                            <i class="fas fa-clock"></i>
+                            <span class="faq-question-text">كم تستغرق مدة تصميم وتجهيز الموقع؟ <span class="faq-badge popular">الأكثر شيوعاً</span></span>
+                        </div>
+                        <div class="faq-toggle-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <div class="faq-answer-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="faq-answer-text">
+                                <p>مدة التصميم والتجهيز تختلف حسب نوع المشروع:</p>
+                                <ul style="padding-right: 25px; margin-top: 10px;">
+                                    <li><span class="faq-highlight">🚀 موقع بسيط (مدونة، شخصي):</span> من 3 إلى 5 أيام عمل</li>
+                                    <li><span class="faq-highlight">🛒 متجر إلكتروني (YouCan/Shopify):</span> من 5 إلى 10 أيام عمل</li>
+                                    <li><span class="faq-highlight">💼 موقع شركة متكامل:</span> من 7 إلى 14 يوم عمل</li>
+                                </ul>
+                                <p style="margin-top: 10px;">نحرص على التسليم في الوقت المتفق عليه مع إمكانية التعديلات خلال فترة التطوير.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="faq-item" onclick="toggleFaq(this)">
-                    <div class="faq-question">هل النطاق مجاني؟ <i class="fas fa-plus"></i></div>
-                    <div class="faq-answer" data-translate="faq2a">نعم، في الباقات الاحترافية.</div>
+                
+                <!-- السؤال 2 - عام -->
+                <div class="faq-item" data-category="general" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <div class="faq-question-content">
+                            <i class="fas fa-dollar-sign"></i>
+                            <span class="faq-question-text">كم تبلغ تكلفة تصميم موقع أو متجر إلكتروني؟</span>
+                        </div>
+                        <div class="faq-toggle-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <div class="faq-answer-icon">
+                                <i class="fas fa-coins"></i>
+                            </div>
+                            <div class="faq-answer-text">
+                                <p>التكلفة تعتمد على احتياجاتك والميزات المطلوبة:</p>
+                                <ul style="padding-right: 25px; margin-top: 10px;">
+                                    <li><span class="faq-highlight">📄 موقع بسيط:</span> ابتداءً من 2000 درهم</li>
+                                    <li><span class="faq-highlight">🛍️ متجر YouCan أساسي:</span> ابتداءً من 3500 درهم</li>
+                                    <li><span class="faq-highlight">🏪 متجر Shopify احترافي:</span> ابتداءً من 5000 درهم</li>
+                                    <li><span class="faq-highlight">💎 موقع متكامل مع مميزات خاصة:</span> حسب الاتفاق</li>
+                                </ul>
+                                <p style="margin-top: 10px;">نقدم عروضاً مرنة وتقسيط مريح. تواصل معنا للحصول على عرض دقيق حسب مشروعك.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="faq-item" onclick="toggleFaq(this)">
-                    <div class="faq-question">هل يوجد دعم فني؟ <i class="fas fa-plus"></i></div>
-                    <div class="faq-answer" data-translate="faq3a">نعم، دعم فني شامل بعد التسليم.</div>
+                
+                <!-- السؤال 3 - خدمات -->
+                <div class="faq-item" data-category="services" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <div class="faq-question-content">
+                            <i class="fas fa-code"></i>
+                            <span class="faq-question-text">ما الفرق بين متجر YouCan ومتجر Shopify؟</span>
+                        </div>
+                        <div class="faq-toggle-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <div class="faq-answer-icon">
+                                <i class="fas fa-store"></i>
+                            </div>
+                            <div class="faq-answer-text">
+                                <p><span class="faq-highlight">✨ متجر YouCan:</span> منصة مغربية 100%، تدعم الدفع المحلي (CMI، Payzone)، مناسبة للمتاجر المحلية، تكلفة أقل، دعم فني بالعربية.</p>
+                                <p style="margin-top: 10px;"><span class="faq-highlight">🌍 متجر Shopify:</span> منصة عالمية، إضافات أكثر، قوالب احترافية، مناسب للدروبشيبينغ والتوسع الدولي، تكامل مع بوابات دفع عالمية.</p>
+                                <p style="margin-top: 10px;">نحن نساعدك في اختيار الأنسب بناءً على جمهورك المستهدف وميزانيتك.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                
+                <!-- السؤال 4 - خدمات -->
+                <div class="faq-item" data-category="services" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <div class="faq-question-content">
+                            <i class="fas fa-search"></i>
+                            <span class="faq-question-text">هل تقومون بتحسين الموقع لمحركات البحث (SEO)؟</span>
+                        </div>
+                        <div class="faq-toggle-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <div class="faq-answer-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="faq-answer-text">
+                                <p>نعم، بالتأكيد! جميع مواقعنا ومتاجرنا يتم بناؤها بأساسيات SEO:</p>
+                                <ul style="padding-right: 25px; margin-top: 10px;">
+                                    <li>✅ هيكلة عناوين صديقة لمحركات البحث</li>
+                                    <li>✅ تحسين سرعة التحميل</li>
+                                    <li>✅ تهيئة العلامات الوصفية (Meta tags)</li>
+                                    <li>✅ توافق مع معايير جوجل</li>
+                                </ul>
+                                <p style="margin-top: 10px;">في الباقات الاحترافية نقدم <span class="faq-highlight">حزمة SEO متكاملة</span> تشمل تحسين المحتوى وبناء الروابط.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- السؤال 5 - الدفع -->
+                <div class="faq-item" data-category="payment" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <div class="faq-question-content">
+                            <i class="fas fa-credit-card"></i>
+                            <span class="faq-question-text">ما هي طرق الدفع المتاحة؟</span>
+                        </div>
+                        <div class="faq-toggle-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <div class="faq-answer-icon">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <div class="faq-answer-text">
+                                <p>نوفر عدة طرق دفع مرنة:</p>
+                                <ul style="padding-right: 25px; margin-top: 10px;">
+                                    <li>💳 <span class="faq-highlight">تحويل بنكي:</span> إلى حساباتنا في البنوك المغربية</li>
+                                    <li>📱 <span class="faq-highlight">خدمات الدفع الإلكتروني:</span> CMI، Paypal (للعملاء خارج المغرب)</li>
+                                    <li>💵 <span class="faq-highlight">نقداً:</span> في مدينة أكادير</li>
+                                    <li>🔄 <span class="faq-highlight">نظام التقسيط:</span> 50% عند الاتفاق، 50% عند التسليم النهائي</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- السؤال 6 - الدعم -->
+                <div class="faq-item" data-category="support" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <div class="faq-question-content">
+                            <i class="fas fa-headset"></i>
+                            <span class="faq-question-text">هل تقدمون دعماً فنياً بعد التسليم؟</span>
+                        </div>
+                        <div class="faq-toggle-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <div class="faq-answer-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="faq-answer-text">
+                                <p>نعم، نوفر دعماً فنياً حسب الباقة المختارة:</p>
+                                <ul style="padding-right: 25px; margin-top: 10px;">
+                                    <li>🔰 <span class="faq-highlight">الباقة الأساسية:</span> أسبوع دعم مجاني لحل المشاكل التقنية</li>
+                                    <li>💎 <span class="faq-highlight">الباقة الاحترافية:</span> شهر كامل دعم فني شامل + تحديثات</li>
+                                    <li>👑 <span class="faq-highlight">عقود دعم سنوية:</span> بأسعار خاصة للشركات</li>
+                                </ul>
+                                <p style="margin-top: 10px;">الدوم يشمل: تصحيح الأخطاء، تحديث المحتوى، استشارات سريعة عبر الواتساب.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- السؤال 7 - خدمات -->
+                <div class="faq-item" data-category="services" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <div class="faq-question-content">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span class="faq-question-text">هل المواقع التي تصممونها متجاوبة مع الجوال؟</span>
+                        </div>
+                        <div class="faq-toggle-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <div class="faq-answer-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div class="faq-answer-text">
+                                <p><span class="faq-highlight">بالتأكيد 100%!</span> جميع مواقعنا ومتاجرنا مصممة لتكون:</p>
+                                <ul style="padding-right: 25px; margin-top: 10px;">
+                                    <li>📱 متوافقة تماماً مع جميع أحجام الشاشات (جوال، تابلت، كمبيوتر)</li>
+                                    <li>⚡ سريعة التحميل على شبكات الجوال</li>
+                                    <li>👆 سهلة التصفح باللمس</li>
+                                </ul>
+                                <p style="margin-top: 10px;">نختبر المواقع على أكثر من 20 جهاز مختلف لضمان تجربة مستخدم مثالية.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- السؤال 8 - عام -->
+                <div class="faq-item" data-category="general" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <div class="faq-question-content">
+                            <i class="fas fa-globe"></i>
+                            <span class="faq-question-text">هل النطاق والاستضافة يشملان السعر؟</span>
+                        </div>
+                        <div class="faq-toggle-icon">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <div class="faq-answer-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="faq-answer-text">
+                                <p>يختلف حسب الباقة:</p>
+                                <ul style="padding-right: 25px; margin-top: 10px;">
+                                    <li>🎁 <span class="faq-highlight">الباقة الأساسية:</span> السعر يشمل التصميم فقط (النطاق والاستضافة على العميل)</li>
+                                    <li>💫 <span class="faq-highlight">الباقة الاحترافية:</span> نقدم لك سنة أولى مجانية للنطاق .com أو .ma</li>
+                                    <li>🚀 <span class="faq-highlight">الباقة الشاملة:</span> نضمن استضافة سريعة وآمنة مع دعم فني للاستضافة</li>
+                                </ul>
+                                <p style="margin-top: 10px;">نرشدك لاختيار أفضل شركات الاستضافة المناسبة لمشروعك.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- رابط للمزيد من الأسئلة -->
+            <div class="faq-more-link">
+                <button onclick="openConsultModal()" class="faq-more-btn">
+                    <i class="fas fa-question-circle"></i>
+                    <span data-translate="faqMore">لم تجد سؤالك؟ تواصل معنا</span>
+                    <i class="fas fa-arrow-left"></i>
+                </button>
             </div>
         </section>
 
@@ -2629,10 +3068,11 @@
                     work1: 'موقع محامي',
                     work2: 'متجر ساعات',
                     work3: 'متجر ملابس',
-                    faqTitle: '🤔 أسئلة شائعة',
+                    faqTitle: '🤔 الأسئلة الشائعة',
                     faq1a: 'من 3 إلى 7 أيام عمل حسب الباقة.',
                     faq2a: 'نعم، في الباقات الاحترافية.',
                     faq3a: 'نعم، دعم فني شامل بعد التسليم.',
+                    faqMore: 'لم تجد سؤالك؟ تواصل معنا',
                     consultTag: 'استشارة',
                     referralTag: '+5%',
                     giftTag: 'هدية',
@@ -2705,6 +3145,7 @@
                     faq1a: '3-7 working days.',
                     faq2a: 'Yes, in pro packages.',
                     faq3a: 'Yes, full support.',
+                    faqMore: 'Didn\'t find your question? Contact us',
                     consultTag: 'Consult',
                     referralTag: '+5%',
                     giftTag: 'Gift',
@@ -2777,6 +3218,7 @@
                     faq1a: '3-7 jours ouvrables.',
                     faq2a: 'Oui, forfaits pro.',
                     faq3a: 'Oui, support complet.',
+                    faqMore: 'Vous n\'avez pas trouvé votre question? Contactez-nous',
                     consultTag: 'Conseil',
                     referralTag: '+5%',
                     giftTag: 'Cadeau',
@@ -2904,7 +3346,7 @@
         }
         
         function openPaidConsult() {
-            const message = `مرحباً، أريد حجز استشارة مدفوعة (500 درهم)\n\n📋 تفاصيل الطلب:\n- المبلغ: 500 درهم\n- المدة: 60 دقيقة\n- الطريقة: مكالمة فيديو\n\nأرجو تحديد موعد مناسب. شكراً!`;
+            const message = `مرحباً، أريد حجز استشارة مدفوعة (500 درهم)\n\n📋 تفاصيل الطلب:\n- المبلغ: 500 درهم\n- المدة: 120 دقيقة\n- الطريقة: مكالمة فيديو\n\nأرجو تحديد موعد مناسب. شكراً!`;
             window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
             NotificationSystem.show('تم إرسال طلب الاستشارة المدفوعة', 'success');
             closeConsultModal();
@@ -3005,6 +3447,29 @@
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         }
 
+        // ========== FAQ Functions ==========
+        function toggleFaq(item) {
+            item.classList.toggle('active');
+        }
+        
+        function filterFAQ(category, element) {
+            // تحديث التبويب النشط
+            document.querySelectorAll('.faq-category-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            element.classList.add('active');
+            
+            // تصفية الأسئلة
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
         // ========== Event Listeners ==========
         function setupEventListeners() {
             document.getElementById('headerLanguageBtn').addEventListener('click', function(e) {
@@ -3048,7 +3513,8 @@
         window.closeOrderModal = closeOrderModal;
         window.openOrderModalWithPackage = openOrderModalWithPackage;
         window.selectType = selectType;
-        window.toggleFaq = (item) => item.classList.toggle('active');
+        window.toggleFaq = toggleFaq;
+        window.filterFAQ = filterFAQ;
         window.toggleTheme = toggleTheme;
         window.changeLanguage = changeLanguage;
         window.submitWhatsAppOrder = submitWhatsAppOrder;
