@@ -17,6 +17,9 @@
     <meta name="keywords" content="تصميم مواقع, متاجر إلكترونية, YouCan, Shopify, تطوير ويب, هوية رقمية, المغرب, أكادير">
     <meta name="author" content="Web Forge Team">
     <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="geo.region" content="MA">
+    <meta name="geo.placename" content="Agadir">
     
     <!-- Open Graph Tags -->
     <meta property="og:title" content="Web Forge | مجموعة محمد أيت صالح">
@@ -35,6 +38,11 @@
     <meta name="twitter:description" content="متخصصون في صناعة الهوية الرقمية، تطوير متاجر YouCan و Shopify">
     <meta name="twitter:image" content="https://i.ibb.co/3qzt7ks/2-2-2026-15329-webforge-it-com.jpg">
     <meta name="twitter:creator" content="@web_forge4">
+    
+    <!-- أمان إضافي -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
@@ -92,11 +100,13 @@
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
 
     <style>
-        /* ========== CSS Variables ========== */
+        /* ========== CSS Variables محسنة ========== */
         :root {
             --bg-dark: #0f172a;
             --bg-card: #1e293b;
+            --bg-card-hover: #2d3748;
             --accent: #38bdf8;
+            --accent-soft: rgba(56, 189, 248, 0.15);
             --accent-glow: rgba(56, 189, 248, 0.3);
             --forge-orange: #f59e0b;
             --text-main: #f8fafc;
@@ -109,6 +119,8 @@
             --error: #ef4444;
             --warning: #f59e0b;
             --whatsapp: #25D366;
+            --border-color: rgba(148, 163, 184, 0.1);
+            --shadow-color: rgba(0, 0, 0, 0.5);
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
@@ -119,12 +131,22 @@
         [data-theme="light"] {
             --bg-dark: #f8fafc;
             --bg-card: #ffffff;
+            --bg-card-hover: #f1f5f9;
             --accent: #0284c7;
+            --accent-soft: rgba(2, 132, 199, 0.1);
             --accent-glow: rgba(2, 132, 199, 0.1);
             --forge-orange: #d97706;
             --text-main: #0f172a;
             --text-secondary: #475569;
             --header-bg: rgba(255, 255, 255, 0.98);
+            --border-color: rgba(0, 0, 0, 0.1);
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.6);
         }
 
         /* ========== Reset & Base ========== */
@@ -153,6 +175,7 @@
             padding-top: 90px;
             -webkit-overflow-scrolling: touch;
             position: relative;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         @media (max-width: 768px) {
@@ -170,6 +193,22 @@
             }
         }
 
+        /* ========== شريط التمرير المخصص للوضع المظلم ========== */
+        [data-theme="dark"] ::-webkit-scrollbar {
+            width: 12px;
+            background: #0f172a;
+        }
+
+        [data-theme="dark"] ::-webkit-scrollbar-thumb {
+            background: #2d3748;
+            border-radius: 6px;
+            border: 2px solid #0f172a;
+        }
+
+        [data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
         /* ========== Process Steps ========== */
         .process-steps {
             display: grid;
@@ -183,7 +222,7 @@
             padding: 25px 20px;
             border-radius: 16px;
             text-align: center;
-            border: 1px solid rgba(128,128,128,0.1);
+            border: 1px solid var(--border-color);
             transition: all var(--transition-base);
         }
 
@@ -191,6 +230,15 @@
             transform: translateY(-8px);
             border-color: var(--accent);
             box-shadow: var(--shadow-lg);
+        }
+
+        [data-theme="dark"] .step-card {
+            background: var(--bg-card);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        [data-theme="dark"] .step-card:hover {
+            background: var(--bg-card-hover);
         }
 
         .step-number {
@@ -208,16 +256,29 @@
             box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
         }
 
+        [data-theme="dark"] .step-number {
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
+        }
+
         .step-card h4 {
             color: var(--accent);
             margin-bottom: 10px;
             font-size: 1.2rem;
         }
 
+        [data-theme="dark"] .step-card h4 {
+            color: var(--accent);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
         .step-card p {
             color: var(--text-secondary);
             font-size: 0.95rem;
             line-height: 1.6;
+        }
+
+        [data-theme="dark"] .step-card p {
+            color: #e2e8f0;
         }
 
         @media (max-width: 768px) {
@@ -251,13 +312,18 @@
             }
         }
 
-        /* ========== Typography ========== */
+        /* ========== Typography محسن للوضع المظلم ========== */
         .arabic-heading {
             font-weight: 700;
             font-size: clamp(1.8rem, 4vw, 2.5rem);
             margin-bottom: 1.5rem;
             position: relative;
             text-align: center;
+        }
+
+        [data-theme="dark"] .arabic-heading {
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
         .arabic-heading::after {
@@ -272,10 +338,28 @@
             border-radius: 2px;
         }
 
+        [data-theme="dark"] .arabic-heading::after {
+            box-shadow: 0 0 10px var(--accent);
+        }
+
         .arabic-text {
             line-height: 1.8;
             margin-bottom: 1.5rem;
             text-align: justify;
+        }
+
+        [data-theme="dark"] p,
+        [data-theme="dark"] li,
+        [data-theme="dark"] .text-secondary {
+            color: #e2e8f0;
+        }
+
+        [data-theme="dark"] h1,
+        [data-theme="dark"] h2,
+        [data-theme="dark"] h3,
+        [data-theme="dark"] h4 {
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
         /* ========== Preloader ========== */
@@ -294,6 +378,10 @@
             transition: opacity 0.5s ease, visibility 0.5s ease;
         }
 
+        [data-theme="dark"] #preloader {
+            background: #0f172a;
+        }
+
         .loader-logo {
             font-size: 4rem;
             color: var(--accent);
@@ -307,6 +395,10 @@
             background: rgba(255,255,255,0.1);
             border-radius: 4px;
             overflow: hidden;
+        }
+
+        [data-theme="dark"] .loader-bar {
+            background: rgba(255,255,255,0.1);
         }
 
         .loader-progress {
@@ -352,6 +444,10 @@
             min-width: 280px;
             height: 1.2em;
             text-align: center;
+        }
+
+        [data-theme="dark"] .typewriter-text {
+            text-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
         }
 
         .cursor {
@@ -420,7 +516,7 @@
             }
         }
 
-        /* ========== Header ========== */
+        /* ========== Header محسن ========== */
         header {
             background-color: var(--header-bg);
             padding: 0.8rem 5%;
@@ -431,8 +527,13 @@
             top: 38px;
             width: 100%;
             z-index: 1000;
-            border-bottom: 1px solid rgba(128,128,128,0.1);
+            border-bottom: 1px solid var(--border-color);
             backdrop-filter: blur(12px);
+        }
+
+        [data-theme="dark"] header {
+            background: rgba(15, 23, 42, 0.98);
+            border-bottom-color: rgba(56, 189, 248, 0.2);
         }
 
         @media (max-width: 768px) {
@@ -455,6 +556,10 @@
             -webkit-text-fill-color: transparent;
             animation: forge-shine 4s linear infinite;
             text-decoration: none;
+        }
+
+        [data-theme="dark"] .logo {
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
         }
 
         @media (max-width: 768px) {
@@ -487,7 +592,7 @@
             }
         }
 
-        /* ========== Language Selector ========== */
+        /* ========== Language Selector محسن ========== */
         .language-container {
             position: relative;
         }
@@ -506,6 +611,17 @@
             font-size: 0.95rem;
             transition: all var(--transition-fast);
             min-width: 115px;
+        }
+
+        [data-theme="dark"] .language-btn {
+            background: var(--bg-card);
+            border-color: var(--accent);
+            color: var(--text-main);
+        }
+
+        [data-theme="dark"] .language-btn:hover {
+            background: var(--accent);
+            color: #000;
         }
 
         @media (max-width: 768px) {
@@ -535,6 +651,12 @@
             border: 1px solid var(--accent);
             display: none;
             z-index: 1001;
+        }
+
+        [data-theme="dark"] .language-dropdown {
+            background: #1e293b;
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
         }
 
         .language-dropdown.active {
@@ -572,6 +694,12 @@
             transition: all var(--transition-fast);
         }
 
+        [data-theme="dark"] .theme-btn {
+            background: var(--bg-card);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
         @media (max-width: 768px) {
             .theme-btn {
                 width: 38px;
@@ -594,6 +722,10 @@
             transition: all var(--transition-fast);
         }
 
+        [data-theme="dark"] .order-now-btn {
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
         @media (max-width: 768px) {
             .order-now-btn {
                 padding: 6px 16px;
@@ -601,7 +733,7 @@
             }
         }
 
-        /* ========== Hero Section ========== */
+        /* ========== Hero Section محسن ========== */
         .hero {
             min-height: 90vh;
             display: flex;
@@ -642,6 +774,11 @@
             width: 100%;
         }
 
+        [data-theme="dark"] .hero-glass {
+            background: rgba(15, 23, 42, 0.8);
+            border-color: rgba(56, 189, 248, 0.2);
+        }
+
         @media (max-width: 768px) {
             .hero-glass {
                 padding: 2rem 1.2rem;
@@ -661,6 +798,11 @@
             justify-content: center;
         }
 
+        [data-theme="dark"] .hero h1 {
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 1.8rem;
@@ -674,6 +816,10 @@
             margin-bottom: 2rem;
             line-height: 1.8;
             padding: 0 10px;
+        }
+
+        [data-theme="dark"] .hero p {
+            color: #e2e8f0;
         }
 
         .hero-btns {
@@ -717,6 +863,12 @@
             color: #000;
         }
 
+        [data-theme="dark"] .btn-primary {
+            background: var(--accent);
+            color: #000;
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+        }
+
         .btn-primary:hover {
             transform: translateY(-3px);
             box-shadow: var(--shadow-lg);
@@ -726,6 +878,16 @@
             border: 2px solid var(--accent);
             color: var(--accent);
             background: transparent;
+        }
+
+        [data-theme="dark"] .btn-secondary {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        [data-theme="dark"] .btn-secondary:hover {
+            background: var(--accent);
+            color: #000;
         }
 
         .btn-secondary:hover {
@@ -750,6 +912,10 @@
             text-decoration: none;
         }
 
+        [data-theme="dark"] .how-it-works-btn {
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+        }
+
         .how-it-works-btn i {
             font-size: 1.2rem;
             animation: rotate-cog 4s linear infinite;
@@ -769,13 +935,18 @@
             to { transform: rotate(360deg); }
         }
 
-        /* ========== Tech Strip ========== */
+        /* ========== Tech Strip محسن ========== */
         .tech-strip {
             background: var(--bg-card);
             padding: 18px 0;
-            border-top: 1px solid rgba(128,128,128,0.1);
-            border-bottom: 1px solid rgba(128,128,128,0.1);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
             overflow: hidden;
+        }
+
+        [data-theme="dark"] .tech-strip {
+            background: #1a2639;
+            border-color: rgba(56, 189, 248, 0.2);
         }
 
         .tech-track {
@@ -803,6 +974,11 @@
             white-space: nowrap;
         }
 
+        [data-theme="dark"] .tech-item {
+            color: #e2e8f0;
+            opacity: 0.9;
+        }
+
         @media (max-width: 768px) {
             .tech-item {
                 font-size: 1.1rem;
@@ -814,7 +990,7 @@
             100% { transform: translateX(50%); }
         }
 
-        /* ========== Floating Buttons ========== */
+        /* ========== Floating Buttons محسنة ========== */
         .consult-float, .referral-float, .mystery-box, .share-float {
             position: fixed;
             z-index: 1000;
@@ -855,6 +1031,12 @@
             font-size: 1.3rem;
         }
 
+        [data-theme="dark"] .share-float {
+            background: linear-gradient(135deg, var(--accent), #2563eb);
+            color: white;
+            box-shadow: 0 5px 20px rgba(56, 189, 248, 0.4);
+        }
+
         @media (max-width: 768px) {
             .consult-float { bottom: 160px; left: 15px; }
             .referral-float { bottom: 95px; left: 15px; }
@@ -872,6 +1054,13 @@
             font-size: 1.5rem;
             color: white;
             border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        [data-theme="dark"] .consult-icon,
+        [data-theme="dark"] .referral-icon,
+        [data-theme="dark"] .box-icon {
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
         .consult-icon { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
@@ -904,6 +1093,12 @@
         .referral-tag { background: #10b981; color: #000; }
         .box-tag { background: var(--accent); color: #000; }
 
+        [data-theme="dark"] .box-tag {
+            background: var(--accent);
+            color: #000;
+            box-shadow: 0 2px 8px rgba(56, 189, 248, 0.3);
+        }
+
         @keyframes floatBounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
@@ -920,7 +1115,7 @@
             80% { transform: rotate(-5deg); }
         }
 
-        /* ========== Stats Bar ========== */
+        /* ========== Stats Bar محسنة ========== */
         .stats-bar {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -928,6 +1123,12 @@
             padding: 4rem 5%;
             background: var(--bg-card);
             text-align: center;
+        }
+
+        [data-theme="dark"] .stats-bar {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
         }
 
         @media (max-width: 768px) {
@@ -944,11 +1145,16 @@
             margin-bottom: 0.5rem;
         }
 
+        [data-theme="dark"] .stat-item h2 {
+            color: var(--accent);
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+
         @media (max-width: 768px) {
             .stat-item h2 { font-size: 2.2rem; }
         }
 
-        /* ========== Why Us Section ========== */
+        /* ========== Why Us Section محسن ========== */
         .why-us {
             padding: 5rem 5%;
             background: var(--bg-dark);
@@ -977,8 +1183,19 @@
             padding: 2rem;
             background: var(--bg-card);
             border-radius: 20px;
-            border: 1px solid rgba(128,128,128,0.1);
+            border: 1px solid var(--border-color);
             transition: all var(--transition-base);
+        }
+
+        [data-theme="dark"] .why-card {
+            background: var(--bg-card);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        [data-theme="dark"] .why-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent);
+            box-shadow: 0 12px 30px rgba(56, 189, 248, 0.2);
         }
 
         .why-card:hover {
@@ -993,7 +1210,11 @@
             margin-bottom: 1.2rem;
         }
 
-        /* ========== Services Section ========== */
+        [data-theme="dark"] .why-card i {
+            filter: drop-shadow(0 4px 8px rgba(245, 158, 11, 0.3));
+        }
+
+        /* ========== Services Section محسن ========== */
         .services {
             padding: 5rem 5%;
             scroll-margin-top: 100px;
@@ -1023,10 +1244,21 @@
             background-color: var(--bg-card);
             padding: 2rem;
             border-radius: 20px;
-            border: 1px solid rgba(128,128,128,0.1);
+            border: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
             transition: all var(--transition-base);
+        }
+
+        [data-theme="dark"] .service-card {
+            background: var(--bg-card);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        [data-theme="dark"] .service-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent);
+            box-shadow: 0 12px 30px rgba(56, 189, 248, 0.2);
         }
 
         .service-card:hover {
@@ -1048,10 +1280,18 @@
             margin-bottom: 1.5rem;
         }
 
+        [data-theme="dark"] .icon-box {
+            filter: drop-shadow(0 4px 8px rgba(56, 189, 248, 0.3));
+        }
+
         .service-card h3 {
             font-size: 1.3rem;
             margin-bottom: 0.8rem;
             color: var(--text-main);
+        }
+
+        [data-theme="dark"] .service-card h3 {
+            color: #ffffff;
         }
 
         .service-card p {
@@ -1059,6 +1299,10 @@
             margin-bottom: 1.2rem;
             line-height: 1.7;
             font-size: 0.95rem;
+        }
+
+        [data-theme="dark"] .service-card p {
+            color: #e2e8f0;
         }
 
         .card-btn {
@@ -1075,6 +1319,11 @@
             gap: 8px;
             transition: all var(--transition-fast);
             padding: 8px 0;
+        }
+
+        [data-theme="dark"] .card-btn:hover {
+            color: var(--forge-orange);
+            text-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
         }
 
         .card-btn:hover {
@@ -1097,15 +1346,23 @@
             transition: all var(--transition-fast);
         }
 
+        [data-theme="dark"] .how-it-works-sm {
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+
         .how-it-works-sm:hover {
             transform: translateX(-5px);
             box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
         }
 
-        /* ========== Success Stories ========== */
+        /* ========== Success Stories محسن ========== */
         .success-stories {
             padding: 5rem 5%;
             background: rgba(0,0,0,0.1);
+        }
+
+        [data-theme="dark"] .success-stories {
+            background: rgba(0,0,0,0.2);
         }
 
         @media (max-width: 768px) {
@@ -1130,8 +1387,19 @@
             background: var(--bg-card);
             border-radius: 16px;
             overflow: hidden;
-            border: 1px solid rgba(128,128,128,0.1);
+            border: 1px solid var(--border-color);
             transition: all var(--transition-base);
+        }
+
+        [data-theme="dark"] .work-card {
+            background: var(--bg-card);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        [data-theme="dark"] .work-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent);
+            box-shadow: 0 12px 30px rgba(56, 189, 248, 0.2);
         }
 
         .work-card:hover {
@@ -1145,6 +1413,10 @@
             padding: 12px;
             display: flex;
             gap: 8px;
+        }
+
+        [data-theme="dark"] .browser-header {
+            background: #1a2639;
         }
 
         .dot {
@@ -1172,6 +1444,11 @@
             height: 100%;
         }
 
+        [data-theme="dark"] .screen-box img {
+            filter: brightness(0.9) contrast(1.1);
+            transition: filter 0.3s ease, transform 8s ease-in-out;
+        }
+
         .work-card:hover img {
             object-position: bottom;
         }
@@ -1180,11 +1457,15 @@
             padding: 16px;
             text-align: center;
             font-weight: 700;
-            border-top: 1px solid rgba(128,128,128,0.1);
+            border-top: 1px solid var(--border-color);
             font-size: 1rem;
         }
 
-        /* ========== FAQ Section - محسن بشكل كبير ========== */
+        [data-theme="dark"] .work-label {
+            color: #ffffff;
+        }
+
+        /* ========== FAQ Section - محسن بشكل كبير للوضع المظلم ========== */
         .faq-section {
             padding: 5rem 5%;
             background: var(--bg-dark);
@@ -1219,11 +1500,23 @@
 
         .faq-item {
             background: var(--bg-card);
-            border: 1px solid rgba(128,128,128,0.1);
+            border: 1px solid var(--border-color);
             border-radius: 20px;
             overflow: hidden;
             transition: all var(--transition-base);
             box-shadow: var(--shadow-sm);
+        }
+
+        [data-theme="dark"] .faq-item {
+            background: #1e293b;
+            border-color: rgba(56, 189, 248, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        [data-theme="dark"] .faq-item.active {
+            background: #2d3748;
+            border-color: var(--forge-orange);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.2);
         }
 
         .faq-item:hover {
@@ -1250,6 +1543,10 @@
 
         .faq-question:hover {
             background: rgba(56, 189, 248, 0.05);
+        }
+
+        [data-theme="dark"] .faq-question {
+            color: #ffffff;
         }
 
         @media (max-width: 768px) {
@@ -1313,7 +1610,7 @@
         .faq-item.active .faq-answer {
             max-height: 300px;
             padding: 22px 25px;
-            border-color: rgba(128,128,128,0.1);
+            border-color: var(--border-color);
         }
 
         .faq-answer-content {
@@ -1344,6 +1641,10 @@
             flex: 1;
         }
 
+        [data-theme="dark"] .faq-answer-text {
+            color: #e2e8f0;
+        }
+
         .faq-answer-text p {
             margin-bottom: 10px;
         }
@@ -1367,6 +1668,12 @@
             margin-right: 10px;
             font-weight: 600;
             vertical-align: middle;
+        }
+
+        [data-theme="dark"] .faq-badge {
+            background: var(--accent);
+            color: #000;
+            box-shadow: 0 2px 8px rgba(56, 189, 248, 0.3);
         }
 
         .faq-badge.popular {
@@ -1394,6 +1701,12 @@
             font-weight: 600;
             transition: all var(--transition-fast);
             color: var(--text-secondary);
+        }
+
+        [data-theme="dark"] .faq-category-tab {
+            background: #1e293b;
+            border-color: rgba(56, 189, 248, 0.2);
+            color: #e2e8f0;
         }
 
         .faq-category-tab:hover,
@@ -1428,6 +1741,16 @@
             text-decoration: none;
         }
 
+        [data-theme="dark"] .faq-more-btn {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        [data-theme="dark"] .faq-more-btn:hover {
+            background: var(--accent);
+            color: #000;
+        }
+
         .faq-more-btn:hover {
             background: var(--accent);
             color: #000;
@@ -1453,7 +1776,379 @@
             }
         }
 
-        /* ========== Modal System ========== */
+        /* ========== المدونة التقنية (Blog Section) ========== */
+        .blog-section {
+            padding: 5rem 5%;
+            background: var(--bg-dark);
+            position: relative;
+        }
+
+        [data-theme="dark"] .blog-section {
+            background: var(--bg-dark);
+        }
+
+        .blog-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-top: -1rem;
+            margin-bottom: 3rem;
+        }
+
+        [data-theme="dark"] .blog-subtitle {
+            color: #e2e8f0;
+        }
+
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* المقال المميز */
+        .blog-card.featured {
+            display: grid;
+            grid-template-columns: 1.2fr 1.8fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            background: var(--bg-card);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.4s ease;
+        }
+
+        [data-theme="dark"] .blog-card.featured {
+            background: var(--bg-card);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .blog-card.featured:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 30px rgba(56, 189, 248, 0.15);
+        }
+
+        [data-theme="dark"] .blog-card.featured:hover {
+            background: var(--bg-card-hover);
+            box-shadow: 0 15px 30px rgba(56, 189, 248, 0.2);
+        }
+
+        .blog-card.featured .blog-image {
+            height: 100%;
+            min-height: 300px;
+        }
+
+        .blog-card.featured .blog-content {
+            padding: 2rem;
+        }
+
+        /* شبكة المقالات */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 1024px) {
+            .blog-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .blog-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        [data-theme="dark"] .blog-card {
+            background: var(--bg-card);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 15px 30px rgba(56, 189, 248, 0.1);
+        }
+
+        [data-theme="dark"] .blog-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent);
+            box-shadow: 0 12px 30px rgba(56, 189, 248, 0.2);
+        }
+
+        .blog-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        [data-theme="dark"] .blog-image img {
+            filter: brightness(0.9) contrast(1.1);
+        }
+
+        .blog-card:hover .blog-image img {
+            transform: scale(1.1);
+        }
+
+        .blog-category {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: #000;
+            padding: 6px 15px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            z-index: 2;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        [data-theme="dark"] .blog-category {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        [data-theme="dark"] .blog-meta {
+            color: #e2e8f0;
+        }
+
+        .blog-meta i {
+            margin-left: 5px;
+            color: var(--accent);
+        }
+
+        .blog-title {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            color: var(--text-main);
+            line-height: 1.5;
+        }
+
+        [data-theme="dark"] .blog-title {
+            color: #ffffff;
+        }
+
+        .blog-card.featured .blog-title {
+            font-size: 1.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .blog-card.featured .blog-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        .blog-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+
+        [data-theme="dark"] .blog-excerpt {
+            color: #e2e8f0;
+        }
+
+        .blog-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .blog-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .blog-author img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        [data-theme="dark"] .blog-author img {
+            border: 2px solid var(--accent);
+        }
+
+        .blog-author span {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        [data-theme="dark"] .blog-author span {
+            color: #ffffff;
+        }
+
+        .blog-read-more {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .blog-read-more:hover {
+            background: rgba(56, 189, 248, 0.1);
+            transform: translateX(-5px);
+        }
+
+        [data-theme="dark"] .blog-read-more:hover {
+            background: rgba(56, 189, 248, 0.2);
+            color: var(--forge-orange);
+        }
+
+        .blog-view-all {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .blog-view-all-btn {
+            background: linear-gradient(135deg, var(--accent), var(--forge-orange));
+            color: white;
+            border: none;
+            padding: 16px 45px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(245, 158, 11, 0.2);
+        }
+
+        [data-theme="dark"] .blog-view-all-btn {
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4);
+        }
+
+        .blog-view-all-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(245, 158, 11, 0.3);
+        }
+
+        /* ========== Blog Modal ========== */
+        .blog-modal-content {
+            max-width: 800px !important;
+        }
+
+        .blog-full-post {
+            line-height: 1.8;
+        }
+
+        .blog-full-post h1 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .blog-full-post h2 {
+            color: var(--forge-orange);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.5rem;
+        }
+
+        .blog-full-post img {
+            width: 100%;
+            border-radius: 16px;
+            margin: 1.5rem 0;
+        }
+
+        [data-theme="dark"] .blog-full-post img {
+            filter: brightness(0.9) contrast(1.1);
+        }
+
+        .blog-full-post ul, .blog-full-post ol {
+            padding-right: 2rem;
+            margin: 1rem 0;
+        }
+
+        .blog-full-post li {
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-post-meta {
+            display: flex;
+            gap: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        [data-theme="dark"] .blog-post-meta {
+            color: #e2e8f0;
+        }
+
+        .blog-cta {
+            background: linear-gradient(135deg, var(--accent-soft), rgba(245, 158, 11, 0.1));
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        [data-theme="dark"] .blog-cta {
+            background: rgba(56, 189, 248, 0.1);
+        }
+
+        .blog-cta h3 {
+            color: var(--forge-orange);
+            margin-bottom: 1rem;
+        }
+
+        /* ========== Modal System محسن ========== */
         .modal {
             display: none;
             position: fixed;
@@ -1483,6 +2178,12 @@
             margin: auto;
         }
 
+        [data-theme="dark"] .modal-content {
+            background: #1e293b;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+        }
+
         @media (max-width: 768px) {
             .modal-content {
                 padding: 1.8rem;
@@ -1500,11 +2201,15 @@
             transition: color var(--transition-fast);
         }
 
+        [data-theme="dark"] .close-btn {
+            color: #e2e8f0;
+        }
+
         .close-btn:hover {
             color: var(--error);
         }
 
-        /* ========== Order Modal (WhatsApp Only) ========== */
+        /* ========== Order Modal (WhatsApp Only) محسن ========== */
         .order-whatsapp-card {
             background: rgba(37, 211, 102, 0.1);
             border: 2px solid var(--whatsapp);
@@ -1512,6 +2217,10 @@
             padding: 30px 20px;
             text-align: center;
             margin-bottom: 25px;
+        }
+
+        [data-theme="dark"] .order-whatsapp-card {
+            background: rgba(37, 211, 102, 0.15);
         }
 
         .order-whatsapp-icon {
@@ -1533,6 +2242,10 @@
             font-size: 1rem;
         }
 
+        [data-theme="dark"] .order-whatsapp-desc {
+            color: #e2e8f0;
+        }
+
         .whatsapp-input {
             width: 100%;
             padding: 16px;
@@ -1545,10 +2258,20 @@
             transition: all var(--transition-fast);
         }
 
+        [data-theme="dark"] .whatsapp-input {
+            background: #0f172a;
+            border-color: rgba(37, 211, 102, 0.3);
+            color: #ffffff;
+        }
+
         .whatsapp-input:focus {
             outline: none;
             border-color: var(--whatsapp);
             box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.2);
+        }
+
+        [data-theme="dark"] .whatsapp-input:focus {
+            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.3);
         }
 
         .whatsapp-submit-btn {
@@ -1569,6 +2292,10 @@
             margin-top: 10px;
         }
 
+        [data-theme="dark"] .whatsapp-submit-btn {
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+
         .whatsapp-submit-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
@@ -1587,7 +2314,12 @@
             color: var(--text-secondary);
         }
 
-        /* ========== Type Buttons ========== */
+        [data-theme="dark"] .order-note {
+            background: rgba(56, 189, 248, 0.15);
+            color: #e2e8f0;
+        }
+
+        /* ========== Type Buttons محسنة ========== */
         .type-btn {
             background: rgba(128,128,128,0.05);
             border: 1px solid var(--accent);
@@ -1603,6 +2335,12 @@
             font-size: 1rem;
         }
 
+        [data-theme="dark"] .type-btn {
+            background: rgba(56, 189, 248, 0.05);
+            border-color: var(--accent);
+            color: #ffffff;
+        }
+
         .type-btn:hover {
             background: var(--accent);
             color: #000;
@@ -1613,7 +2351,7 @@
             font-size: 1.5rem;
         }
 
-        /* ========== Package Card ========== */
+        /* ========== Package Card محسنة ========== */
         .pkg-card {
             padding: 20px;
             border: 1px solid rgba(128,128,128,0.2);
@@ -1626,6 +2364,11 @@
             height: 100%;
         }
 
+        [data-theme="dark"] .pkg-card {
+            background: rgba(56, 189, 248, 0.05);
+            border-color: rgba(56, 189, 248, 0.2);
+        }
+
         .pkg-card:hover {
             border-color: var(--forge-orange);
             background: rgba(245, 158, 11, 0.05);
@@ -1633,10 +2376,19 @@
             box-shadow: var(--shadow-lg);
         }
 
+        [data-theme="dark"] .pkg-card:hover {
+            background: rgba(245, 158, 11, 0.15);
+            border-color: var(--forge-orange);
+        }
+
         .pkg-name {
             font-size: 1.3rem;
             font-weight: bold;
             margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        [data-theme="dark"] .pkg-name {
             color: var(--accent);
         }
 
@@ -1650,6 +2402,10 @@
             text-align: right;
             margin-bottom: 20px;
             flex-grow: 1;
+        }
+
+        [data-theme="dark"] .pkg-features li {
+            color: #e2e8f0;
         }
 
         .pkg-features li {
@@ -1675,12 +2431,18 @@
             transition: all var(--transition-fast);
         }
 
+        [data-theme="dark"] .pkg-btn {
+            background: var(--accent);
+            color: #000;
+            box-shadow: 0 2px 8px rgba(56, 189, 248, 0.3);
+        }
+
         .pkg-btn:hover {
             background: var(--forge-orange);
             transform: scale(1.05);
         }
 
-        /* ========== Gift Modal ========== */
+        /* ========== Gift Modal محسنة ========== */
         .gift-code {
             background: var(--bg-dark);
             padding: 15px;
@@ -1693,6 +2455,13 @@
             color: var(--accent);
         }
 
+        [data-theme="dark"] .gift-code {
+            background: #0f172a;
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+        }
+
         .countdown {
             font-size: 1.5rem;
             font-weight: bold;
@@ -1700,7 +2469,7 @@
             text-align: center;
         }
 
-        /* ========== Notification ========== */
+        /* ========== Notification System محسن ========== */
         #notificationContainer {
             position: fixed;
             top: 100px;
@@ -1723,6 +2492,24 @@
             box-shadow: var(--shadow-lg);
             animation: slideInLeft 0.3s ease-out;
             color: var(--text-main);
+        }
+
+        [data-theme="dark"] .notification {
+            background: #1e293b;
+            border-right-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        [data-theme="dark"] .notification.success {
+            border-right-color: var(--success);
+        }
+
+        [data-theme="dark"] .notification.error {
+            border-right-color: var(--error);
+        }
+
+        [data-theme="dark"] .notification.warning {
+            border-right-color: var(--warning);
         }
 
         .notification.success { border-right-color: var(--success); }
@@ -1748,12 +2535,17 @@
             }
         }
 
-        /* ========== Footer ========== */
+        /* ========== Footer محسن ========== */
         footer {
             background-color: var(--bg-card);
             padding: 3.5rem 5% 4rem;
             text-align: center;
-            border-top: 1px solid rgba(128,128,128,0.1);
+            border-top: 1px solid var(--border-color);
+        }
+
+        [data-theme="dark"] footer {
+            background-color: var(--bg-card);
+            border-top-color: rgba(56, 189, 248, 0.2);
         }
 
         @media (max-width: 768px) {
@@ -1791,6 +2583,10 @@
             font-weight: 500;
         }
 
+        [data-theme="dark"] .footer-link {
+            color: #e2e8f0;
+        }
+
         .footer-link::after {
             content: '';
             position: absolute;
@@ -1800,6 +2596,11 @@
             height: 2px;
             background: var(--accent);
             transition: width 0.3s ease;
+        }
+
+        [data-theme="dark"] .footer-link::after {
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent);
         }
 
         .footer-link:hover::after {
@@ -1827,10 +2628,20 @@
             font-size: 1.2rem;
         }
 
+        [data-theme="dark"] .social-btn {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+        }
+
         .social-btn:hover {
             background: var(--accent);
             color: #fff;
             transform: translateY(-5px);
+        }
+
+        [data-theme="dark"] .social-btn:hover {
+            background: var(--accent);
+            color: #000;
         }
 
         @media (max-width: 768px) {
@@ -1928,6 +2739,23 @@
                 height: 3px;
                 bottom: -10px;
             }
+
+            .blog-card.featured {
+                grid-template-columns: 1fr;
+            }
+            
+            .blog-card.featured .blog-image {
+                min-height: 250px;
+            }
+            
+            .blog-meta {
+                gap: 10px;
+            }
+            
+            .blog-subtitle {
+                font-size: 1rem;
+                padding: 0 15px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1950,6 +2778,21 @@
             
             .stat-item h2 {
                 font-size: 2rem;
+            }
+
+            .blog-card.featured .blog-content {
+                padding: 1.5rem;
+            }
+            
+            .blog-footer {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .blog-view-all-btn {
+                padding: 14px 30px;
+                font-size: 1rem;
             }
         }
 
@@ -2011,7 +2854,7 @@
         </div>
     </div>
 
-    <!-- ========== Referral Modal - مقالة كاملة عن الإحالة ========== -->
+    <!-- ========== Referral Modal ========== -->
     <div id="referralModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeReferralModal()">&times;</span>
@@ -2089,7 +2932,7 @@
         </div>
     </div>
 
-    <!-- ========== Consultation Modal - مقالة كاملة عن الاستشارة ========== -->
+    <!-- ========== Consultation Modal ========== -->
     <div id="consultModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeConsultModal()">&times;</span>
@@ -2372,7 +3215,7 @@
             </div>
         </section>
 
-        <!-- ========== FAQ Section - محسن بشكل كبير ========== -->
+        <!-- ========== FAQ Section ========== -->
         <section class="faq-section">
             <div style="text-align:center;">
                 <h2 data-translate="faqTitle" class="arabic-heading">🤔 الأسئلة الشائعة</h2>
@@ -2446,8 +3289,6 @@
                         </div>
                     </div>
                 </div>
-                
-            
                 
                 <!-- السؤال 4 - خدمات -->
                 <div class="faq-item" data-category="services" onclick="toggleFaq(this)">
@@ -2606,7 +3447,135 @@
             </div>
         </section>
 
-        <!-- ========== Process Modal - مقالة كاملة عن كيفية العمل ========== -->
+        <!-- ========== المدونة التقنية (Blog Section) ========== -->
+        <section class="blog-section">
+            <div style="text-align:center;" class="reveal">
+                <h2 data-translate="blogTitle" class="arabic-heading">📝 مدونة Web Forge التقنية</h2>
+                <p class="blog-subtitle" data-translate="blogSubtitle">أحدث المقالات والنصائح في عالم التكنولوجيا والتجارة الإلكترونية</p>
+            </div>
+            
+            <div class="blog-container">
+                <!-- المقال 1 - مميز -->
+                <article class="blog-card featured reveal delay-1">
+                    <div class="blog-image">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500" alt="التجارة الإلكترونية" loading="lazy">
+                        <span class="blog-category">📊 تجارة إلكترونية</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> 13 فبراير 2026</span>
+                            <span><i class="fas fa-eye"></i> 2.5k قراءة</span>
+                            <span><i class="fas fa-clock"></i> 5 دقائق</span>
+                        </div>
+                        <h3 class="blog-title">دليل المبتدئين لإنشاء أول متجر إلكتروني ناجح في 2026</h3>
+                        <p class="blog-excerpt">تعرف على الخطوات الأساسية لإنشاء متجرك الإلكتروني الأول، من الفكرة إلى الإطلاق، مع نصائح الخبراء لضمان النجاح...</p>
+                        <div class="blog-footer">
+                            <div class="blog-author">
+                                <img src="https://i.ibb.co/3qzt7ks/2-2-2026-15329-webforge-it-com.jpg" alt="محمد أيت صالح">
+                                <span>محمد أيت صالح</span>
+                            </div>
+                            <button onclick="openBlogPost(1)" class="blog-read-more">
+                                <span>اقرأ المزيد</span>
+                                <i class="fas fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- باقي المقالات في grid -->
+                <div class="blog-grid">
+                    <!-- المقال 2 -->
+                    <article class="blog-card reveal delay-2">
+                        <div class="blog-image">
+                            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=500" alt="SEO">
+                            <span class="blog-category">🔍 تحسين محركات البحث</span>
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span><i class="fas fa-calendar"></i> 10 فبراير</span>
+                            </div>
+                            <h4 class="blog-title">10 استراتيجيات SEO فعالة لمتجرك الإلكتروني</h4>
+                            <p class="blog-excerpt">كيف تتصدر نتائج البحث وتجذب زبائن أكثر لمتجرك...</p>
+                            <button onclick="openBlogPost(2)" class="blog-read-more">اقرأ المزيد <i class="fas fa-arrow-left"></i></button>
+                        </div>
+                    </article>
+
+                    <!-- المقال 3 -->
+                    <article class="blog-card reveal delay-3">
+                        <div class="blog-image">
+                            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500" alt="YouCan">
+                            <span class="blog-category">🛒 YouCan</span>
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span><i class="fas fa-calendar"></i> 8 فبراير</span>
+                            </div>
+                            <h4 class="blog-title">مقارنة شاملة: YouCan vs Shopify للمتاجر العربية</h4>
+                            <p class="blog-excerpt">أيهما أفضل لمشروعك؟ تحليل مفصل للمميزات والعيوب...</p>
+                            <button onclick="openBlogPost(3)" class="blog-read-more">اقرأ المزيد <i class="fas fa-arrow-left"></i></button>
+                        </div>
+                    </article>
+
+                    <!-- المقال 4 -->
+                    <article class="blog-card reveal delay-1">
+                        <div class="blog-image">
+                            <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=500" alt="Dropshipping">
+                            <span class="blog-category">📦 دروبشيبينغ</span>
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span><i class="fas fa-calendar"></i> 5 فبراير</span>
+                            </div>
+                            <h4 class="blog-title">الدليل الكامل لبدء الدروبشيبينغ في المغرب</h4>
+                            <p class="blog-excerpt">أفضل الموردين، منصات موثوقة، ونصائح لتجنب الاحتيال...</p>
+                            <button onclick="openBlogPost(4)" class="blog-read-more">اقرأ المزيد <i class="fas fa-arrow-left"></i></button>
+                        </div>
+                    </article>
+
+                    <!-- المقال 5 -->
+                    <article class="blog-card reveal delay-2">
+                        <div class="blog-image">
+                            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=500" alt="Web Design">
+                            <span class="blog-category">🎨 تصميم مواقع</span>
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span><i class="fas fa-calendar"></i> 2 فبراير</span>
+                            </div>
+                            <h4 class="blog-title">أحدث اتجاهات تصميم المواقع في 2026</h4>
+                            <p class="blog-excerpt">تعرف على أحدث الصيحات في عالم التصميم وتجربة المستخدم...</p>
+                            <button onclick="openBlogPost(5)" class="blog-read-more">اقرأ المزيد <i class="fas fa-arrow-left"></i></button>
+                        </div>
+                    </article>
+
+                    <!-- المقال 6 -->
+                    <article class="blog-card reveal delay-3">
+                        <div class="blog-image">
+                            <img src="https://images.unsplash.com/photo-1556740714-a8395b3bf30f?w=500" alt="Marketing">
+                            <span class="blog-category">📈 تسويق</span>
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span><i class="fas fa-calendar"></i> 30 يناير</span>
+                            </div>
+                            <h4 class="blog-title">5 طرق مجانية لتسويق متجرك الإلكتروني</h4>
+                            <p class="blog-excerpt">استراتيجيات فعالة بدون ميزانية لجذب الزبائن...</p>
+                            <button onclick="openBlogPost(6)" class="blog-read-more">اقرأ المزيد <i class="fas fa-arrow-left"></i></button>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- زر عرض جميع المقالات -->
+                <div class="blog-view-all">
+                    <button onclick="openBlogArchive()" class="blog-view-all-btn">
+                        <span>📚 عرض جميع المقالات</span>
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== Process Modal ========== -->
         <div id="processModal" class="modal">
             <div class="modal-content" style="max-width: 1000px;">
                 <span class="close-btn" onclick="closeProcessModal()">&times;</span>
@@ -2794,6 +3763,16 @@
                         <span style="background:rgba(245,158,11,0.1); color:var(--forge-orange); padding:8px 16px; border-radius:30px;">Hasani Omaima</span>
                         <span style="background:rgba(245,158,11,0.1); color:var(--forge-orange); padding:8px 16px; border-radius:30px;">Hamid bouchouafa</span>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== Blog Modal ========== -->
+        <div id="blogModal" class="modal">
+            <div class="modal-content blog-modal-content">
+                <span class="close-btn" onclick="closeBlogModal()">&times;</span>
+                <div id="blogPostContent" class="blog-post-content">
+                    <!-- المحتوى سيتم تحميله ديناميكياً -->
                 </div>
             </div>
         </div>
@@ -3046,10 +4025,9 @@
                     work2: 'متجر ساعات',
                     work3: 'متجر ملابس',
                     faqTitle: '🤔 الأسئلة الشائعة',
-                    faq1a: 'من 3 إلى 7 أيام عمل حسب الباقة.',
-                    faq2a: 'نعم، في الباقات الاحترافية.',
-                    faq3a: 'نعم، دعم فني شامل بعد التسليم.',
                     faqMore: 'لم تجد سؤالك؟ تواصل معنا',
+                    blogTitle: '📝 مدونة Web Forge التقنية',
+                    blogSubtitle: 'أحدث المقالات والنصائح في عالم التكنولوجيا والتجارة الإلكترونية',
                     consultTag: 'استشارة',
                     referralTag: '+5%',
                     giftTag: 'هدية',
@@ -3119,10 +4097,9 @@
                     work2: 'Watch Store',
                     work3: 'Clothing Store',
                     faqTitle: '🤔 FAQ',
-                    faq1a: '3-7 working days.',
-                    faq2a: 'Yes, in pro packages.',
-                    faq3a: 'Yes, full support.',
                     faqMore: 'Didn\'t find your question? Contact us',
+                    blogTitle: '📝 Web Forge Tech Blog',
+                    blogSubtitle: 'Latest articles and tips in tech and e-commerce',
                     consultTag: 'Consult',
                     referralTag: '+5%',
                     giftTag: 'Gift',
@@ -3192,10 +4169,9 @@
                     work2: 'Boutique Montres',
                     work3: 'Boutique Vêtements',
                     faqTitle: '🤔 FAQ',
-                    faq1a: '3-7 jours ouvrables.',
-                    faq2a: 'Oui, forfaits pro.',
-                    faq3a: 'Oui, support complet.',
                     faqMore: 'Vous n\'avez pas trouvé votre question? Contactez-nous',
+                    blogTitle: '📝 Blog Technique Web Forge',
+                    blogSubtitle: 'Derniers articles et conseils en technologie et e-commerce',
                     consultTag: 'Conseil',
                     referralTag: '+5%',
                     giftTag: 'Cadeau',
@@ -3255,21 +4231,103 @@
             localStorage.setItem('preferredLanguage', lang);
         }
 
-        // ========== Theme Toggle ==========
+        // ========== Theme Toggle محسن ==========
         function toggleTheme() {
             const body = document.body;
             const icon = document.getElementById('themeIcon');
+            
+            // تأثير انتقالي
+            body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
             
             if (body.hasAttribute('data-theme')) {
                 body.removeAttribute('data-theme');
                 icon.className = 'fas fa-moon';
                 localStorage.setItem('theme', 'dark');
+                
+                // تغيير لون شريط العنوان في المتصفح
+                const metaTheme = document.querySelector('meta[name="theme-color"]');
+                if (metaTheme) metaTheme.setAttribute('content', '#0f172a');
             } else {
                 body.setAttribute('data-theme', 'light');
                 icon.className = 'fas fa-sun';
                 localStorage.setItem('theme', 'light');
+                
+                // تغيير لون شريط العنوان
+                const metaTheme = document.querySelector('meta[name="theme-color"]');
+                if (metaTheme) metaTheme.setAttribute('content', '#f8fafc');
+            }
+            
+            // تحسين الصور في الوضع المظلم
+            enhanceImagesForDarkMode();
+            
+            // إزالة الانتقال بعد فترة
+            setTimeout(() => {
+                body.style.transition = '';
+            }, 300);
+        }
+
+        // تحسين الصور في الوضع المظلم
+        function enhanceImagesForDarkMode() {
+            if (document.body.hasAttribute('data-theme')) {
+                document.querySelectorAll('.blog-image img, .screen-box img, .blog-full-post img').forEach(img => {
+                    img.style.filter = 'brightness(0.9) contrast(1.1)';
+                    img.style.transition = 'filter 0.3s ease';
+                });
+            } else {
+                document.querySelectorAll('.blog-image img, .screen-box img, .blog-full-post img').forEach(img => {
+                    img.style.filter = 'none';
+                });
             }
         }
+
+        // اكتشاف تفضيلات النظام للوضع المظلم
+        function detectSystemTheme() {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const savedTheme = localStorage.getItem('theme');
+            
+            if (!savedTheme) {
+                if (prefersDark) {
+                    document.body.setAttribute('data-theme', 'dark');
+                    document.getElementById('themeIcon').className = 'fas fa-moon';
+                    const metaTheme = document.querySelector('meta[name="theme-color"]');
+                    if (metaTheme) metaTheme.setAttribute('content', '#0f172a');
+                } else {
+                    document.body.removeAttribute('data-theme');
+                    document.getElementById('themeIcon').className = 'fas fa-sun';
+                    const metaTheme = document.querySelector('meta[name="theme-color"]');
+                    if (metaTheme) metaTheme.setAttribute('content', '#f8fafc');
+                }
+            }
+        }
+
+        // مراقبة تغيير تفضيلات النظام
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.body.setAttribute('data-theme', 'dark');
+                    document.getElementById('themeIcon').className = 'fas fa-moon';
+                    const metaTheme = document.querySelector('meta[name="theme-color"]');
+                    if (metaTheme) metaTheme.setAttribute('content', '#0f172a');
+                } else {
+                    document.body.removeAttribute('data-theme');
+                    document.getElementById('themeIcon').className = 'fas fa-sun';
+                    const metaTheme = document.querySelector('meta[name="theme-color"]');
+                    if (metaTheme) metaTheme.setAttribute('content', '#f8fafc');
+                }
+                enhanceImagesForDarkMode();
+            }
+        });
+
+        // مراقبة تغيير الوضع
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName === 'data-theme') {
+                    enhanceImagesForDarkMode();
+                }
+            });
+        });
+
+        observer.observe(document.body, { attributes: true });
 
         // ========== Gift System ==========
         let countdownInterval;
@@ -3380,6 +4438,267 @@
             hideModal('typeModal');
             document.getElementById('pkgTitle').innerHTML = `اختر الباقة - ${type}`;
             showModal('packageModal');
+        }
+
+        // ========== Blog System ==========
+        const blogPosts = {
+            1: {
+                title: 'دليل المبتدئين لإنشاء أول متجر إلكتروني ناجح في 2026',
+                content: `
+                    <h1>🚀 دليل المبتدئين لإنشاء أول متجر إلكتروني ناجح في 2026</h1>
+                    <div class="blog-post-meta">
+                        <span>📅 13 فبراير 2026</span>
+                        <span>👤 محمد أيت صالح</span>
+                        <span>⏱️ 5 دقائق قراءة</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800" alt="متجر إلكتروني">
+                    
+                    <h2>المقدمة</h2>
+                    <p>في عصر الرقمنة، أصبح إنشاء متجر إلكتروني ليس رفاهية بل ضرورة لأي مشروع تجاري. في هذا الدليل الشامل، سنأخذك خطوة بخطوة لإنشاء أول متجر إلكتروني ناجح.</p>
+                    
+                    <h2>1. اختيار المنتج المناسب</h2>
+                    <p>أول خطوة وأهمها هي اختيار المنتج الذي ستبيعه. اسأل نفسك:</p>
+                    <ul>
+                        <li>هل هناك طلب على هذا المنتج؟</li>
+                        <li>من هم منافسوك؟</li>
+                        <li>ما هي هامش الربح؟</li>
+                    </ul>
+                    
+                    <h2>2. اختيار المنصة المناسبة</h2>
+                    <p>في Web Forge، نوصي بـ:</p>
+                    <ul>
+                        <li><strong>YouCan:</strong> للمتاجر العربية والمبتدئين</li>
+                        <li><strong>Shopify:</strong> للتوسع العالمي والدروبشيبينغ</li>
+                    </ul>
+                    
+                    <h2>3. تصميم المتجر</h2>
+                    <p>تصميم متجرك يعكس هوية علامتك التجارية. نصائحنا:</p>
+                    <ul>
+                        <li>اجعل التصميم بسيطاً وسهل التصفح</li>
+                        <li>استخدم ألوان متناسقة</li>
+                        <li>تأكد من تجاوب الموقع مع الجوال</li>
+                    </ul>
+                    
+                    <h2>4. إضافة المنتجات</h2>
+                    <p>عند إضافة منتجاتك، اهتم بـ:</p>
+                    <ul>
+                        <li>صور عالية الجودة من زوايا متعددة</li>
+                        <li>وصف دقيق وجذاب</li>
+                        <li>أسعار واضحة</li>
+                    </ul>
+                    
+                    <h2>5. إعدادات الدفع والشحن</h2>
+                    <p>في المغرب، ننصح بـ:</p>
+                    <ul>
+                        <li>CMI للدفع الإلكتروني</li>
+                        <li>Amana Cash عند الاستلام</li>
+                        <li>شركات الشحن: Amana, Chronopost, Aramex</li>
+                    </ul>
+                    
+                    <div class="blog-cta">
+                        <h3>📢 تحتاج مساعدة في إنشاء متجرك؟</h3>
+                        <button onclick="openOrderModal('طلب استشارة متجر إلكتروني')" class="btn-primary">
+                            تواصل معنا الآن
+                        </button>
+                    </div>
+                `
+            },
+            2: {
+                title: '10 استراتيجيات SEO فعالة لمتجرك الإلكتروني',
+                content: `
+                    <h1>🔍 10 استراتيجيات SEO فعالة لمتجرك الإلكتروني</h1>
+                    <div class="blog-post-meta">
+                        <span>📅 10 فبراير 2026</span>
+                        <span>👤 هاجر أيت بلاّ</span>
+                        <span>⏱️ 4 دقائق قراءة</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800" alt="SEO">
+                    
+                    <h2>مقدمة</h2>
+                    <p>تحسين محركات البحث (SEO) هو المفتاح لجذب زوار عضويين لمتجرك دون دفع إعلانات. إليك 10 استراتيجيات فعالة:</p>
+                    
+                    <h2>1. البحث عن الكلمات المفتاحية</h2>
+                    <p>استخدم أدوات مثل Google Keyword Planner للعثور على كلمات يبحث عنها جمهورك.</p>
+                    
+                    <h2>2. تحسين العناوين والوصف</h2>
+                    <p>تأكد أن كل صفحة لها عنوان ووصف فريد يحتوي على الكلمات المفتاحية.</p>
+                    
+                    <h2>3. سرعة الموقع</h2>
+                    <p>جوجل يعطي أولوية للمواقع السريعة. استخدم أدوات مثل Google PageSpeed Insights.</p>
+                    
+                    <div class="blog-cta">
+                        <h3>🚀 حقق أفضل أداء لمتجرك!</h3>
+                        <button onclick="openOrderModal('طلب خدمة تحسين SEO')" class="btn-primary">
+                            اطلب خدمة SEO الآن
+                        </button>
+                    </div>
+                `
+            },
+            3: {
+                title: 'مقارنة شاملة: YouCan vs Shopify للمتاجر العربية',
+                content: `
+                    <h1>🛒 مقارنة شاملة: YouCan vs Shopify للمتاجر العربية</h1>
+                    <div class="blog-post-meta">
+                        <span>📅 8 فبراير 2026</span>
+                        <span>👤 عيسى الداهيل</span>
+                        <span>⏱️ 6 دقائق قراءة</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800" alt="YouCan vs Shopify">
+                    
+                    <h2>المقدمة</h2>
+                    <p>إذا كنت تفكر في إنشاء متجر إلكتروني في العالم العربي، فأكبر منصتين هما YouCan و Shopify. أيهما تختار؟</p>
+                    
+                    <h2>YouCan: المميزات</h2>
+                    <ul>
+                        <li>✔️ منصة عربية 100%</li>
+                        <li>✔️ دعم اللغة العربية والدرهم المغربي</li>
+                        <li>✔️ أسعار مناسبة للمبتدئين</li>
+                        <li>✔️ دعم فني بالعربية</li>
+                    </ul>
+                    
+                    <h2>Shopify: المميزات</h2>
+                    <ul>
+                        <li>✔️ منصة عالمية بتقنيات متطورة</li>
+                        <li>✔️ آلاف التطبيقات والإضافات</li>
+                        <li>✔️ مثالي للدروبشيبينغ</li>
+                        <li>✔️ قابلية توسع غير محدودة</li>
+                    </ul>
+                    
+                    <h2>الخلاصة</h2>
+                    <p>إذا كنت تستهدف السوق المغربي والعربي فقط، ابدأ مع YouCan. إذا كنت تخطط للتوسع عالمياً، اختر Shopify.</p>
+                    
+                    <div class="blog-cta">
+                        <h3>🤔 محتار؟ خذ استشارة مجانية!</h3>
+                        <button onclick="openFreeConsult()" class="btn-primary">
+                            احصل على استشارة
+                        </button>
+                    </div>
+                `
+            },
+            4: {
+                title: 'الدليل الكامل لبدء الدروبشيبينغ في المغرب',
+                content: `
+                    <h1>📦 الدليل الكامل لبدء الدروبشيبينغ في المغرب</h1>
+                    <div class="blog-post-meta">
+                        <span>📅 5 فبراير 2026</span>
+                        <span>👤 حسن أوميمة</span>
+                        <span>⏱️ 7 دقائق قراءة</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=800" alt="Dropshipping">
+                    
+                    <h2>ما هو الدروبشيبينغ؟</h2>
+                    <p>نموذج تجاري تبيع منتجات بدون تخزينها. المورد يشحنها مباشرة للزبون.</p>
+                    
+                    <h2>أفضل منصات الدروبشيبينغ</h2>
+                    <ul>
+                        <li>AliExpress - الأكثر شهرة</li>
+                        <li>Spocket - منتجات من أوروبا والولايات المتحدة</li>
+                        <li>CJ Dropshipping - شحن أسرع</li>
+                    </ul>
+                    
+                    <h2>نصائح للنجاح في المغرب</h2>
+                    <ul>
+                        <li>اختر منتجات خفيفة الوزن لتقليل تكاليف الشحن</li>
+                        <li>تعاون مع شركات شحن محلية موثوقة</li>
+                        <li>قدم طرق دفع متنوعة (CMI، Cash Plus، الدفع عند الاستلام)</li>
+                    </ul>
+                    
+                    <div class="blog-cta">
+                        <h3>🚀 ابدأ مشروعك اليوم!</h3>
+                        <button onclick="openOrderModal('طلب دورة الدروبشيبينغ')" class="btn-primary">
+                            سجل في الدورة التدريبية
+                        </button>
+                    </div>
+                `
+            },
+            5: {
+                title: 'أحدث اتجاهات تصميم المواقع في 2026',
+                content: `
+                    <h1>🎨 أحدث اتجاهات تصميم المواقع في 2026</h1>
+                    <div class="blog-post-meta">
+                        <span>📅 2 فبراير 2026</span>
+                        <span>👤 حميد بوشوافة</span>
+                        <span>⏱️ 5 دقائق قراءة</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800" alt="Web Design">
+                    
+                    <h2>1. الوضع المظلم (Dark Mode)</h2>
+                    <p>أصبح أساسياً لتجربة مستخدم مريحة وتوفير طاقة البطارية.</p>
+                    
+                    <h2>2. التصميم ثلاثي الأبعاد</h2>
+                    <p>استخدام عناصر 3D خفيفة يضيف عمقاً وتفاعلاً.</p>
+                    
+                    <h2>3. الخطوط العربية الإبداعية</h2>
+                    <p>تصاميم خطوط عربية مبتكرة تبرز الهوية.</p>
+                    
+                    <h2>4. التمرير السردي (Scrollytelling)</h2>
+                    <p>سرد القصص عبر التمرير يجذب الزوار.</p>
+                    
+                    <div class="blog-cta">
+                        <h3>💡 نريد موقعاً بتصميم عصري!</h3>
+                        <button onclick="openOrderModal('طلب تصميم موقع')" class="btn-primary">
+                            اطلب تصميم موقعك
+                        </button>
+                    </div>
+                `
+            },
+            6: {
+                title: '5 طرق مجانية لتسويق متجرك الإلكتروني',
+                content: `
+                    <h1>📈 5 طرق مجانية لتسويق متجرك الإلكتروني</h1>
+                    <div class="blog-post-meta">
+                        <span>📅 30 يناير 2026</span>
+                        <span>👤 محمد أيت صالح</span>
+                        <span>⏱️ 4 دقائق قراءة</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1556740714-a8395b3bf30f?w=800" alt="Marketing">
+                    
+                    <h2>1. تحسين محركات البحث (SEO)</h2>
+                    <p>اجلب زواراً بدون دفع إعلانات عبر تحسين موقعك لمحركات البحث.</p>
+                    
+                    <h2>2. وسائل التواصل الاجتماعي</h2>
+                    <p>أنشئ محتوى قيماً على إنستغرام، تيك توك، وفيسبوك.</p>
+                    
+                    <h2>3. التسويق بالمحتوى</h2>
+                    <p>اكتب مقالات و أنشئ فيديوهات تعليمية تهم جمهورك.</p>
+                    
+                    <h2>4. البريد الإلكتروني</h2>
+                    <p>اجمع عناوين البريد وأرسل عروضاً حصرية.</p>
+                    
+                    <h2>5. الشراكات والتعاون</h2>
+                    <p>تعاون مع مؤثرين أو متاجر مكملة لمتجرك.</p>
+                    
+                    <div class="blog-cta">
+                        <h3>🚀 جهز متجرك للتسويق!</h3>
+                        <button onclick="openOrderModal('طلب استشارة تسويق')" class="btn-primary">
+                            تواصل مع خبير تسويق
+                        </button>
+                    </div>
+                `
+            }
+        };
+
+        function openBlogPost(postId) {
+            const post = blogPosts[postId];
+            if (!post) return;
+            
+            const modalContent = document.getElementById('blogPostContent');
+            modalContent.innerHTML = `
+                <article class="blog-full-post">
+                    ${post.content}
+                </article>
+            `;
+            
+            showModal('blogModal');
+        }
+
+        function openBlogArchive() {
+            window.open('https://webforge-it.com/blog', '_blank');
+            NotificationSystem.show('جاري فتح أرشيف المدونة', 'info');
+        }
+
+        function closeBlogModal() {
+            hideModal('blogModal');
         }
 
         // ========== Counter Animation ==========
@@ -3499,6 +4818,9 @@
         window.copyLink = copyLink;
         window.openFreeConsult = openFreeConsult;
         window.openPaidConsult = openPaidConsult;
+        window.openBlogPost = openBlogPost;
+        window.openBlogArchive = openBlogArchive;
+        window.closeBlogModal = closeBlogModal;
 
         // ========== Initialize ==========
         document.addEventListener('DOMContentLoaded', () => {
@@ -3507,11 +4829,7 @@
             const savedLang = localStorage.getItem('preferredLanguage') || 'ar';
             changeLanguage(savedLang);
             
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'light') {
-                document.body.setAttribute('data-theme', 'light');
-                document.getElementById('themeIcon').className = 'fas fa-sun';
-            }
+            detectSystemTheme();
             
             initReveal();
             initCounters();
@@ -3536,6 +4854,7 @@
             }
             
             setupEventListeners();
+            enhanceImagesForDarkMode();
         });
 
         window.addEventListener('load', () => {
