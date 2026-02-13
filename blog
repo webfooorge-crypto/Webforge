@@ -1,1 +1,138 @@
 
+<!-- ========== المدونة التقنية (Blog Section) ========== -->
+<section class="blog-section">
+    <div style="text-align:center;" class="reveal">
+        <h2 data-translate="blogTitle" class="arabic-heading">📝 مدونة Web Forge التقنية</h2>
+        <p class="blog-subtitle" data-translate="blogSubtitle">أحدث المقالات والنصائح في عالم التكنولوجيا والتجارة الإلكترونية</p>
+    </div>
+    
+    <div class="blog-container">
+        <!-- المقال 1 - مميز -->
+        <article class="blog-card featured reveal delay-1">
+            <div class="blog-image">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500" alt="التجارة الإلكترونية" loading="lazy">
+                <span class="blog-category">📊 تجارة إلكترونية</span>
+            </div>
+            <div class="blog-content">
+                <div class="blog-meta">
+                    <span><i class="fas fa-calendar"></i> 13 فبراير 2026</span>
+                    <span><i class="fas fa-eye"></i> 2.5k قراءة</span>
+                    <span><i class="fas fa-clock"></i> 5 دقائق</span>
+                </div>
+                <h3 class="blog-title">دليل المبتدئين لإنشاء أول متجر إلكتروني ناجح في 2026</h3>
+                <p class="blog-excerpt">تعرف على الخطوات الأساسية لإنشاء متجرك الإلكتروني الأول، من الفكرة إلى الإطلاق، مع نصائح الخبراء لضمان النجاح...</p>
+                <div class="blog-footer">
+                    <div class="blog-author">
+                        <img src="https://i.ibb.co/3qzt7ks/2-2-2026-15329-webforge-it-com.jpg" alt="محمد أيت صالح">
+                        <span>محمد أيت صالح</span>
+                    </div>
+                    <button onclick="openBlogPost(1)" class="blog-read-more">
+                        <span>اقرأ المزيد</span>
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                </div>
+            </div>
+        </article>
+
+        <!-- باقي المقالات في grid -->
+        <div class="blog-grid">
+            <!-- المقال 2 -->
+            <article class="blog-card reveal delay-2">
+                <div class="blog-image">
+                    <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=500" alt="SEO">
+                    <span class="blog-category">🔍 تحسين محركات البحث</span>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span><i class="fas fa-calendar"></i> 10 فبراير</span>
+                    </div>
+                    <h4 class="blog-title">10 استراتيجيات SEO فعالة لمتجرك الإلكتروني</h4>
+                    <p class="blog-excerpt">كيف تتصدر نتائج البحث وتجذب زبائن أكثر لمتجرك...</p>
+                    <button onclick="openBlogPost(2)" class="blog-read-more">اقرأ المزيد <i class="fas fa-arrow-left"></i></button>
+                </div>
+            </article>
+
+            <!-- المقال 3 -->
+            <article class="blog-card reveal delay-3">
+                <div class="blog-image">
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500" alt="YouCan">
+                    <span class="blog-category">🛒 YouCan</span>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span><i class="fas fa-calendar"></i> 8 فبراير</span>
+                    </div>
+                    <h4 class="blog-title">مقارنة شاملة: YouCan vs Shopify للمتاجر العربية</h4>
+                    <p class="blog-excerpt">أيهما أفضل لمشروعك؟ تحليل مفصل للمميزات والعيوب...</p>
+                    <button onclick="openBlogPost(3)" class="blog-read-more">اقرأ المزيد <i class="fas fa-arrow-left"></i></button>
+                </div>
+            </article>
+
+            <!-- المقال 4 -->
+            <article class="blog-card reveal delay-1">
+                <div class="blog-image">
+                    <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=500" alt="Dropshipping">
+                    <span class="blog-category">📦 دروبشيبينغ</span>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span><i class="fas fa-calendar"></i> 5 فبراير</span>
+                    </div>
+                    <h4 class="blog-title">الدليل الكامل لبدء الدروبشيبينغ في المغرب</h4>
+                    <p class="blog-excerpt">أفضل الموردين، منصات موثوقة، ونصائح لتجنب الاحتيال...</p>
+                    <button onclick="openBlogPost(4)" class="blog-read-more">اقرأ المزيد <i class="fas fa-arrow-left"></i></button>
+                </div>
+            </article>
+
+            <!-- المقال 5 -->
+            <article class="blog-card reveal delay-2">
+                <div class="blog-image">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=500" alt="Web Design">
+                    <span class="blog-category">🎨 تصميم مواقع</span>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span><i class="fas fa-calendar"></i> 2 فبراير</span>
+                    </div>
+                    <h4 class="blog-title">أحدث اتجاهات تصميم المواقع في 2026</h4>
+                    <p class="blog-excerpt">تعرف على أحدث الصيحات في عالم التصميم وتجربة المستخدم...</p>
+                    <button onclick="openBlogPost(5)" class="blog-read-more">اقرأ المزيد <i class="fas fa-arrow-left"></i></button>
+                </div>
+            </article>
+
+            <!-- المقال 6 -->
+            <article class="blog-card reveal delay-3">
+                <div class="blog-image">
+                    <img src="https://images.unsplash.com/photo-1556740714-a8395b3bf30f?w=500" alt="Marketing">
+                    <span class="blog-category">📈 تسويق</span>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span><i class="fas fa-calendar"></i> 30 يناير</span>
+                    </div>
+                    <h4 class="blog-title">5 طرق مجانية لتسويق متجرك الإلكتروني</h4>
+                    <p class="blog-excerpt">استراتيجيات فعالة بدون ميزانية لجذب الزبائن...</p>
+                    <button onclick="openBlogPost(6)" class="blog-read-more">اقرأ المزيد <i class="fas fa-arrow-left"></i></button>
+                </div>
+            </article>
+        </div>
+
+        <!-- زر عرض جميع المقالات -->
+        <div class="blog-view-all">
+            <button onclick="openBlogArchive()" class="blog-view-all-btn">
+                <span>📚 عرض جميع المقالات</span>
+                <i class="fas fa-arrow-left"></i>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- ========== Blog Modal ========== -->
+<div id="blogModal" class="modal">
+    <div class="modal-content blog-modal-content">
+        <span class="close-btn" onclick="closeBlogModal()">&times;</span>
+        <div id="blogPostContent" class="blog-post-content">
+            <!-- المحتوى سيتم تحميله ديناميكياً -->
+        </div>
+    </div>
+</div>
