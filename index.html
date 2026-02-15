@@ -2000,6 +2000,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            cursor: pointer;
         }
 
         .blog-author img {
@@ -2007,10 +2008,17 @@
             height: 35px;
             border-radius: 50%;
             object-fit: cover;
+            border: 2px solid var(--accent);
+            transition: all 0.3s ease;
         }
 
         [data-theme="dark"] .blog-author img {
             border: 2px solid var(--accent);
+        }
+
+        .blog-author:hover img {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px var(--accent);
         }
 
         .blog-author span {
@@ -2813,6 +2821,171 @@
                 transform: translateX(0);
             }
         }
+
+        /* ========== فريق العمل - تحسينات ========== */
+        .team-member-name {
+            background: rgba(245,158,11,0.1);
+            color: var(--forge-orange);
+            padding: 8px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-weight: 500;
+            border: 1px solid transparent;
+            display: inline-block;
+        }
+
+        .team-member-name:hover {
+            background: var(--forge-orange);
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);
+            border-color: var(--forge-orange);
+        }
+
+        [data-theme="dark"] .team-member-name:hover {
+            background: var(--forge-orange);
+            color: #000;
+            box-shadow: 0 5px 20px rgba(245, 158, 11, 0.5);
+        }
+
+        /* ========== Member Modal ========== */
+        .member-modal-content {
+            max-width: 800px !important;
+        }
+
+        .member-header {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .member-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--accent);
+            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.3);
+        }
+
+        [data-theme="dark"] .member-avatar {
+            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.5);
+        }
+
+        .member-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .member-title h2 {
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+
+        .member-title p {
+            color: var(--forge-orange);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .member-skills {
+            margin: 30px 0;
+        }
+
+        .member-skills h3 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .skill-item {
+            background: rgba(56, 189, 248, 0.1);
+            padding: 12px 20px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            background: var(--accent);
+            color: #000;
+            transform: translateX(-5px);
+        }
+
+        .skill-item i {
+            color: var(--forge-orange);
+            font-size: 1.2rem;
+        }
+
+        .member-bio {
+            line-height: 1.8;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 16px;
+        }
+
+        [data-theme="dark"] .member-bio {
+            background: rgba(0,0,0,0.2);
+        }
+
+        .member-contact {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .member-contact-btn {
+            background: linear-gradient(135deg, var(--accent), var(--forge-orange));
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .member-contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .member-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .member-avatar {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -3014,6 +3187,50 @@
         </div>
     </div>
 
+    <!-- ========== Member Modal - محمد أيت صالح ========== -->
+    <div id="memberMohammedModal" class="modal">
+        <div class="modal-content member-modal-content">
+            <span class="close-btn" onclick="closeMemberModal()">&times;</span>
+            
+            <div class="member-header">
+                <div class="member-avatar">
+                    <img src="https://i.ibb.co/3qzt7ks/2-2-2026-15329-webforge-it-com.jpg" alt="محمد أيت صالح">
+                </div>
+                <div class="member-title">
+                    <h2>محمد أيت صالح</h2>
+                    <p>المؤسس والمطور الرئيسي | Web Forge</p>
+                </div>
+            </div>
+            
+            <div class="member-bio">
+                <p>محمد أيت صالح، مطور ويب متكامل (Full-Stack Developer) ومؤسس مجموعة Web Forge. بخبرة تمتد لأكثر من 5 سنوات في مجال تطوير الويب والتجارة الإلكترونية، قاد محمد العديد من المشاريع الناجحة التي ساعدت الشركات والأفراد على تأسيس حضورهم الرقمي بقوة.</p>
+                <p style="margin-top: 15px;">يتميز محمد بمهارات تقنية واسعة تشمل تطوير المتاجر الإلكترونية على منصتي Shopify و YouCan، بالإضافة إلى تصميم وتطوير المواقع الخاصة (HTML/CSS/JavaScript) وتطبيقات الويب المتقدمة باستخدام أحدث التقنيات.</p>
+                <p style="margin-top: 15px;">إلى جانب البرمجة، يهتم محمد بمشاركة خبراته من خلال الدورات التدريبية والمحتوى التقني الذي يقدمه عبر قنوات التواصل الاجتماعي، بهدف تمكين الجيل القادم من المطورين ورواد الأعمال الرقمية في المغرب والوطن العربي.</p>
+            </div>
+            
+            <div class="member-skills">
+                <h3><i class="fas fa-code"></i> المهارات التقنية</h3>
+                <div class="skills-grid">
+                    <div class="skill-item"><i class="fab fa-html5"></i> HTML5/CSS3</div>
+                    <div class="skill-item"><i class="fab fa-js"></i> JavaScript/ES6+</div>
+                    <div class="skill-item"><i class="fab fa-react"></i> React.js</div>
+                    <div class="skill-item"><i class="fab fa-node-js"></i> Node.js</div>
+                    <div class="skill-item"><i class="fas fa-database"></i> MySQL/MongoDB</div>
+                    <div class="skill-item"><i class="fas fa-chart-line"></i> SEO Optimization</div>
+                </div>
+            </div>
+            
+            <div class="member-contact">
+                <button onclick="openWhatsAppChat('212627713979', 'مرحباً محمد، أود التواصل معك بخصوص مشروع')" class="member-contact-btn">
+                    <i class="fab fa-whatsapp"></i> تواصل مع محمد
+                </button>
+                <button onclick="window.open('mailto:mohammed@webforge-it.com')" class="member-contact-btn" style="background: linear-gradient(135deg, var(--forge-orange), var(--accent));">
+                    <i class="fas fa-envelope"></i> راسلني
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- ========== Promo Bar ========== -->
     <div class="promo-bar" onclick="openOrderModal('عرض الخصم الخاص')">
         <div class="promo-content" data-translate="promoText">
@@ -3070,7 +3287,7 @@
             </div>
         </section>
 
-        <!-- ========== Tech Strip ========== -->
+        !-- ========== Tech Strip ========== -->
         <div class="tech-strip">
             <div class="tech-track">
                 <div class="tech-item"><i class="fab fa-shopify"></i> Shopify</div>
@@ -3463,14 +3680,14 @@
                     </div>
                     <div class="blog-content">
                         <div class="blog-meta">
-                            <span><i class="fas fa-calendar"></i> 13 فبراير 2026</span>
+                            <span><i class="fas fa-calendar"></i>  يناير 2026</span>
                             <span><i class="fas fa-eye"></i> 2.5k قراءة</span>
-                            <span><i class="fas fa-clock"></i> 5 دقائق</span>
+                            <span><i class="fas fa-clock"></i> شهرين </span>
                         </div>
                         <h3 class="blog-title">دليل المبتدئين لإنشاء أول متجر إلكتروني ناجح في 2026</h3>
                         <p class="blog-excerpt">تعرف على الخطوات الأساسية لإنشاء متجرك الإلكتروني الأول، من الفكرة إلى الإطلاق، مع نصائح الخبراء لضمان النجاح...</p>
                         <div class="blog-footer">
-                            <div class="blog-author">
+                            <div class="blog-author" onclick="openMemberModal('mohammed')">
                                 <img src="https://i.ibb.co/3qzt7ks/2-2-2026-15329-webforge-it-com.jpg" alt="محمد أيت صالح">
                                 <span>محمد أيت صالح</span>
                             </div>
@@ -3496,25 +3713,17 @@
                             </div>
                             <h4 class="blog-title">10 استراتيجيات SEO فعالة لمتجرك الإلكتروني</h4>
                             <p class="blog-excerpt">كيف تتصدر نتائج البحث وتجذب زبائن أكثر لمتجرك...</p>
-                            <button onclick="openBlogPost(2)" class="blog-read-more">اقرأ المزيد <i class="fas fa-arrow-left"></i></button>
+                            <div class="blog-footer">
+                                <div class="blog-author" onclick="openMemberModal('mohammed')">
+                                    <img src="https://i.ibb.co/3qzt7ks/2-2-2026-15329-webforge-it-com.jpg" alt="محمد ايت صالح">
+                                    <span>محمد ايت صالح </span>>
+                                </div>
+                                <button onclick="openBlogPost(2)" class="blog-read-more">اقرأ المزيد <i class="fas fa-arrow-left"></i></button>
+                            </div>
                         </div>
                     </article>
 
-                    <!-- المقال 3 -->
-                    <article class="blog-card reveal delay-3">
-                        <div class="blog-image">
-                            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500" alt="YouCan">
-                            <span class="blog-category">🛒 YouCan</span>
-                        </div>
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <span><i class="fas fa-calendar"></i> 8 فبراير</span>
-                            </div>
-                            <h4 class="blog-title">مقارنة شاملة: YouCan vs Shopify للمتاجر العربية</h4>
-                            <p class="blog-excerpt">أيهما أفضل لمشروعك؟ تحليل مفصل للمميزات والعيوب...</p>
-                            <button onclick="openBlogPost(3)" class="blog-read-more">اقرأ المزيد <i class="fas fa-arrow-left"></i></button>
-                        </div>
-                    </article>
+                
 
                     <!-- المقال 4 -->
                     <article class="blog-card reveal delay-1">
@@ -3528,7 +3737,13 @@
                             </div>
                             <h4 class="blog-title">الدليل الكامل لبدء الدروبشيبينغ في المغرب</h4>
                             <p class="blog-excerpt">أفضل الموردين، منصات موثوقة، ونصائح لتجنب الاحتيال...</p>
-                            <button onclick="openBlogPost(4)" class="blog-read-more">اقرأ المزيد <i class="fas fa-arrow-left"></i></button>
+                            <div class="blog-footer">
+                                <div class="blog-author" onclick="openMemberModal('mohammed')">
+                                    <img src="https://i.ibb.co/3qzt7ks/2-2-2026-15329-webforge-it-com.jpg" alt="محمد ايت صالح ">
+                                    <span>محمد ايت صالح </span>
+                                </div>
+                                <button onclick="openBlogPost(4)" class="blog-read-more">اقرأ المزيد <i class="fas fa-arrow-left"></i></button>
+                            </div>
                         </div>
                     </article>
 
@@ -3544,7 +3759,13 @@
                             </div>
                             <h4 class="blog-title">أحدث اتجاهات تصميم المواقع في 2026</h4>
                             <p class="blog-excerpt">تعرف على أحدث الصيحات في عالم التصميم وتجربة المستخدم...</p>
-                            <button onclick="openBlogPost(5)" class="blog-read-more">اقرأ المزيد <i class="fas fa-arrow-left"></i></button>
+                            <div class="blog-footer">
+                                <div class="blog-author" onclick="openMemberModal('mohammed')">
+                                    <img src="https://i.ibb.co/3qzt7ks/2-2-2026-15329-webforge-it-com.jpg" alt="محمد ايت صالح">
+                                    <span>محمد ايت صالح </span>
+                                </div>
+                                <button onclick="openBlogPost(5)" class="blog-read-more">اقرأ المزيد <i class="fas fa-arrow-left"></i></button>
+                            </div>
                         </div>
                     </article>
 
@@ -3560,7 +3781,13 @@
                             </div>
                             <h4 class="blog-title">5 طرق مجانية لتسويق متجرك الإلكتروني</h4>
                             <p class="blog-excerpt">استراتيجيات فعالة بدون ميزانية لجذب الزبائن...</p>
-                            <button onclick="openBlogPost(6)" class="blog-read-more">اقرأ المزيد <i class="fas fa-arrow-left"></i></button>
+                            <div class="blog-footer">
+                                <div class="blog-author" onclick="openMemberModal('mohammed')">
+                                    <img src="https://i.ibb.co/3qzt7ks/2-2-2026-15329-webforge-it-com.jpg" alt="محمد أيت صالح">
+                                    <span>محمد أيت صالح</span>
+                                </div>
+                                <button onclick="openBlogPost(6)" class="blog-read-more">اقرأ المزيد <i class="fas fa-arrow-left"></i></button>
+                            </div>
                         </div>
                     </article>
                 </div>
@@ -3757,11 +3984,10 @@
                     <p data-translate="aboutDesc">نحول أفكارك إلى واقع رقمي احترافي!</p>
                     <p style="margin-top:15px; font-weight:bold;" data-translate="teamTitle">👥 فريق العمل:</p>
                     <div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:15px;">
-                        <span style="background:rgba(245,158,11,0.1); color:var(--forge-orange); padding:8px 16px; border-radius:30px;">Mohammed Ait Saleh</span>
-                        <span style="background:rgba(245,158,11,0.1); color:var(--forge-orange); padding:8px 16px; border-radius:30px;">Hajar Ait Belaid</span>
-                        <span style="background:rgba(245,158,11,0.1); color:var(--forge-orange); padding:8px 16px; border-radius:30px;">Aissa Ed-dahil</span>
-                        <span style="background:rgba(245,158,11,0.1); color:var(--forge-orange); padding:8px 16px; border-radius:30px;">Hasani Omaima</span>
-                        <span style="background:rgba(245,158,11,0.1); color:var(--forge-orange); padding:8px 16px; border-radius:30px;">Hamid bouchouafa</span>
+                        <span onclick="openMemberModal('mohammed')" class="team-member-name">Mohammed Ait Saleh</span>
+                        <span onclick="openMemberModal('aissa')" class="team-member-name">Aissa Ed-dahil</span>
+                        <span onclick="openMemberModal('omaima')" class="team-member-name">Hasani Omaima</span>
+                        <span onclick="openMemberModal('hamid')" class="team-member-name">Hamid bouchouafa</span>
                     </div>
                 </div>
             </div>
@@ -4440,6 +4666,22 @@
             showModal('packageModal');
         }
 
+        // ========== Member Modal Functions ==========
+        function openMemberModal(memberId) {
+            if (memberId === 'mohammed') {
+                showModal('memberMohammedModal');
+            }
+            // يمكن إضافة أعضاء آخرين لاحقاً
+        }
+
+        function closeMemberModal() {
+            hideModal('memberMohammedModal');
+        }
+
+        function openWhatsAppChat(number, message) {
+            window.open(`https://wa.me/${number}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
         // ========== Blog System ==========
         const blogPosts = {
             1: {
@@ -4821,6 +5063,9 @@
         window.openBlogPost = openBlogPost;
         window.openBlogArchive = openBlogArchive;
         window.closeBlogModal = closeBlogModal;
+        window.openMemberModal = openMemberModal;
+        window.closeMemberModal = closeMemberModal;
+        window.openWhatsAppChat = openWhatsAppChat;
 
         // ========== Initialize ==========
         document.addEventListener('DOMContentLoaded', () => {
