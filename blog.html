@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>مدونة Web Forge التقنية - مقالات وشروحات في التجارة الإلكترونية والبرمجة</title>
+    <title>مدونة محمد أيت صالح - Web Forge | دروس وشروحات في البرمجة والتجارة الإلكترونية</title>
     
     <!-- ========== تحسينات SEO ========== -->
-    <meta name="description" content="مدونة Web Forge التقنية: أحدث المقالات والدروس في عالم التجارة الإلكترونية، تصميم المواقع، تحسين محركات البحث (SEO)، والدروبشيبينغ. نشارك خبراتنا لمساعدتك في بناء مشروعك الرقمي.">
-    <meta name="keywords" content="مدونة تقنية, مقالات برمجة, دروس Shopify, دروس YouCan, تسويق إلكتروني, SEO, دروبشيبينغ, المغرب">
-    <meta name="author" content="Web Forge Team">
+    <meta name="description" content="مدونة محمد أيت صالح، مؤسس Web Forge. مقالات حصرية في تطوير الويب، البرمجة، التجارة الإلكترونية، تحسين محركات البحث، والدروبشيبينغ. خبرة +5 سنوات في المجال.">
+    <meta name="keywords" content="محمد أيت صالح, Web Forge, مدونة برمجة, تطوير مواقع, Shopify, SEO, دروبشيبينغ, تسويق إلكتروني, المغرب, أكادير">
+    <meta name="author" content="محمد أيت صالح">
     <meta name="robots" content="index, follow">
     
     <!-- Open Graph Tags -->
-    <meta property="og:title" content="مدونة Web Forge التقنية">
-    <meta property="og:description" content="أحدث المقالات والدروس في عالم التكنولوجيا والتجارة الإلكترونية">
-    <meta property="og:image" content="https://i.ibb.co/3qzt7ks/2-2-2026-15329-webforge-it-com.jpg">
+    <meta property="og:title" content="مدونة محمد أيت صالح - Web Forge">
+    <meta property="og:description" content="أحدث المقالات والدروس في عالم التكنولوجيا والتجارة الإلكترونية من المؤسس محمد أيت صالح">
+    <meta property="og:image" content="https://i.ibb.co/4wwG4HN0/1445-10-11-23-06-46-ae7d0b7b.jpg">
     <meta property="og:url" content="https://webforge-it.com/blog">
     <meta property="og:type" content="website">
     
@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* ========== نفس متغيرات الصفحة الرئيسية مع بعض الإضافات ========== */
+        /* ========== متغيرات الألوان ========== */
         :root {
             --bg-dark: #0f172a;
             --bg-card: #1e293b;
@@ -96,6 +96,11 @@
             gap: 10px;
         }
         
+        .logo i {
+            color: var(--forge-orange);
+            -webkit-text-fill-color: initial;
+        }
+        
         .header-actions {
             display: flex;
             align-items: center;
@@ -115,6 +120,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-size: 1.2rem;
+            text-decoration: none;
         }
         
         .home-btn:hover, .theme-btn:hover {
@@ -123,25 +129,81 @@
             transform: translateY(-2px);
         }
         
-        /* ========== Hero Section ========== */
+        /* ========== Hero Section مع صورة محمد ========== */
         .blog-hero {
             background: linear-gradient(135deg, var(--bg-card), var(--bg-dark));
             padding: 3rem 5%;
             text-align: center;
             border-bottom: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
         }
         
-        .blog-hero h1 {
-            font-size: clamp(2rem, 5vw, 3rem);
+        .author-profile {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .author-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--accent);
+            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.3);
+        }
+        
+        .author-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 20%;
+        }
+        
+        .author-info h1 {
+            font-size: clamp(2rem, 4vw, 2.5rem);
             color: var(--accent);
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
         
-        .blog-hero p {
-            color: var(--text-secondary);
+        .author-info .title {
+            color: var(--forge-orange);
             font-size: 1.2rem;
-            max-width: 700px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .author-info .bio {
+            color: var(--text-secondary);
+            max-width: 600px;
             margin: 0 auto;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat .number {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--forge-orange);
+        }
+        
+        .stat .label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
         }
         
         /* ========== Search Bar ========== */
@@ -726,6 +788,69 @@
             margin-top: 2rem;
         }
         
+        .blog-cta .btn-primary {
+            background: var(--accent);
+            color: #000;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .blog-cta .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
+        }
+        
+        /* ========== Empty State ========== */
+        .no-results {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+            grid-column: 1 / -1;
+        }
+        
+        .no-results i {
+            font-size: 4rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        
+        .no-results p {
+            font-size: 1.2rem;
+        }
+        
+        .reset-btn {
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: var(--accent);
+            border: none;
+            border-radius: 30px;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        /* ========== Loading Spinner ========== */
+        .spinner {
+            text-align: center;
+            padding: 3rem;
+            grid-column: 1 / -1;
+        }
+        
+        .spinner i {
+            font-size: 3rem;
+            color: var(--accent);
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
         /* ========== Responsive ========== */
         @media (max-width: 1024px) {
             .blog-grid {
@@ -736,6 +861,23 @@
         @media (max-width: 768px) {
             body {
                 padding-top: 70px;
+            }
+            
+            .author-profile {
+                gap: 20px;
+            }
+            
+            .author-img {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .hero-stats {
+                gap: 20px;
+            }
+            
+            .stat .number {
+                font-size: 1.5rem;
             }
             
             .featured-card {
@@ -774,10 +916,6 @@
                 padding: 10px 18px;
                 font-size: 0.9rem;
             }
-            
-            .pagination {
-                flex-wrap: wrap;
-            }
         }
         
         @media (max-width: 480px) {
@@ -795,42 +933,6 @@
                 font-size: 1rem;
             }
         }
-        
-        /* ========== Empty State ========== */
-        .no-results {
-            text-align: center;
-            padding: 4rem 2rem;
-            color: var(--text-secondary);
-            grid-column: 1 / -1;
-        }
-        
-        .no-results i {
-            font-size: 4rem;
-            color: var(--accent);
-            margin-bottom: 1rem;
-        }
-        
-        .no-results p {
-            font-size: 1.2rem;
-        }
-        
-        /* ========== Loading Spinner ========== */
-        .spinner {
-            text-align: center;
-            padding: 3rem;
-            grid-column: 1 / -1;
-        }
-        
-        .spinner i {
-            font-size: 3rem;
-            color: var(--accent);
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
     </style>
 </head>
 <body>
@@ -844,15 +946,38 @@
     </header>
 
     <main>
-        <!-- ========== Hero Section ========== -->
+        <!-- ========== Hero Section مع صورة محمد ========== -->
         <section class="blog-hero">
-            <h1>📝 مدونة Web Forge التقنية</h1>
-            <p>نشارك معك أحدث المقالات والدروس في عالم التكنولوجيا، التجارة الإلكترونية، البرمجة، والتسويق الرقمي</p>
+            <div class="author-profile">
+                <div class="author-img">
+                    <img src="https://i.ibb.co/4wwG4HN0/1445-10-11-23-06-46-ae7d0b7b.jpg" alt="محمد أيت صالح">
+                </div>
+                <div class="author-info">
+                    <h1>📝 مدونة محمد أيت صالح</h1>
+                    <div class="title">مؤسس Web Forge | مطور ويب متكامل | خبير في التجارة الإلكترونية</div>
+                    <p class="bio">بخبرة تمتد لأكثر من 5 سنوات في تطوير الويب والتجارة الإلكترونية، أشارك معك خلاصة تجاربي ونصائحي العملية لمساعدتك في بناء مشروعك الرقمي بنجاح.</p>
+                </div>
+            </div>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="number">+50</div>
+                    <div class="label">مشروع منجز</div>
+                </div>
+                <div class="stat">
+                    <div class="number">+5</div>
+                    <div class="label">سنوات خبرة</div>
+                </div>
+                <div class="stat">
+                    <div class="number">+30</div>
+                    <div class="label">مقالة تقنية</div>
+                </div>
+            </div>
             
             <!-- Search Bar -->
             <div class="search-container">
                 <i class="fas fa-search search-icon"></i>
-                <input type="text" class="search-input" id="searchInput" placeholder="ابحث عن مقال... (مثال: Shopify, SEO, دروبشيبينغ)" onkeyup="searchPosts()">
+                <input type="text" class="search-input" id="searchInput" placeholder="ابحث عن مقال... (مثال: Shopify, SEO, برمجة)" onkeyup="searchPosts()">
             </div>
         </section>
 
@@ -860,6 +985,9 @@
         <div class="category-filters">
             <button class="category-btn active" onclick="filterCategory('all', this)">
                 <i class="fas fa-globe"></i> الكل
+            </button>
+            <button class="category-btn" onclick="filterCategory('webdev', this)">
+                <i class="fas fa-code"></i> تطوير الويب
             </button>
             <button class="category-btn" onclick="filterCategory('ecommerce', this)">
                 <i class="fas fa-store"></i> تجارة إلكترونية
@@ -870,14 +998,11 @@
             <button class="category-btn" onclick="filterCategory('dropshipping', this)">
                 <i class="fas fa-box-open"></i> دروبشيبينغ
             </button>
-            <button class="category-btn" onclick="filterCategory('webdesign', this)">
-                <i class="fas fa-paint-brush"></i> تصميم مواقع
-            </button>
             <button class="category-btn" onclick="filterCategory('marketing', this)">
-                <i class="fas fa-bullhorn"></i> تسويق
+                <i class="fas fa-bullhorn"></i> تسويق رقمي
             </button>
-            <button class="category-btn" onclick="filterCategory('comparison', this)">
-                <i class="fas fa-balance-scale"></i> مقارنات
+            <button class="category-btn" onclick="filterCategory('freelancing', this)">
+                <i class="fas fa-laptop"></i> العمل الحر
             </button>
         </div>
 
@@ -909,7 +1034,7 @@
         <!-- ========== Newsletter ========== -->
         <section class="newsletter">
             <h3>📧 اشترك في النشرة البريدية</h3>
-            <p>احصل على أحدث المقالات والدروس مباشرة في بريدك الإلكتروني. لا تقلق، نحن لا نرسل بريداً عشوائياً أبداً!</p>
+            <p>احصل على أحدث المقالات والدروس من محمد أيت صالح مباشرة في بريدك الإلكتروني. مرة واحدة في الأسبوع، لا بريد مزعج!</p>
             <div class="newsletter-form">
                 <input type="email" class="newsletter-input" id="newsletterEmail" placeholder="بريدك الإلكتروني">
                 <button class="newsletter-btn" onclick="subscribeNewsletter()">
@@ -924,11 +1049,11 @@
         <div class="footer-links">
             <a href="index.html">الرئيسية</a>
             <a href="index.html#services">الخدمات</a>
-            <a href="index.html#aboutModal" onclick="openAboutModal()">من نحن</a>
+            <a href="index.html#aboutModal">من نحن</a>
             <a href="index.html#policyModal">الخصوصية</a>
             <a href="mailto:webfooorge@gmail.com">اتصل بنا</a>
         </div>
-        <p>جميع الحقوق محفوظة © 2026 Web Forge</p>
+        <p>جميع الحقوق محفوظة © 2026 Web Forge | بإدارة محمد أيت صالح</p>
         <div class="social-links">
             <a href="https://www.instagram.com/web_forge4" target="_blank" class="social-btn"><i class="fab fa-instagram"></i></a>
             <a href="https://www.tiktok.com/@webfoorge" target="_blank" class="social-btn"><i class="fab fa-tiktok"></i></a>
@@ -952,216 +1077,320 @@
             postsPerPage: 6
         };
 
-        // ========== Blog Posts Data ==========
+        // ========== Blog Posts Data - جميعها من كتابة محمد أيت صالح ==========
         const blogPosts = [
             {
                 id: 1,
-                title: 'دليل المبتدئين لإنشاء أول متجر إلكتروني ناجح في 2026',
-                excerpt: 'تعرف على الخطوات الأساسية لإنشاء متجرك الإلكتروني الأول، من الفكرة إلى الإطلاق، مع نصائح الخبراء لضمان النجاح...',
-                category: 'ecommerce',
-                categoryName: 'تجارة إلكترونية',
-                categoryIcon: 'fa-store',
-                image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500',
+                title: 'دليلك الشامل لتعلم البرمجة من الصفر حتى الاحتراف في 2026',
+                excerpt: 'خطة دراسية متكاملة لتعلم البرمجة للمبتدئين. من أين تبدأ؟ أي لغة تختار؟ وكيف تبني مشاريع عملية تزيد فرصك في سوق العمل؟',
+                category: 'webdev',
+                categoryName: 'تطوير الويب',
+                categoryIcon: 'fa-code',
+                image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=500',
                 author: 'محمد أيت صالح',
                 authorAvatar: 'https://i.ibb.co/4wwG4HN0/1445-10-11-23-06-46-ae7d0b7b.jpg',
-                date: '13 فبراير 2026',
-                views: '2.5k',
+                date: '15 فبراير 2026',
+                views: '3.2k',
                 featured: true,
                 content: `
-                    <h1>🚀 دليل المبتدئين لإنشاء أول متجر إلكتروني ناجح في 2026</h1>
+                    <h1>💻 دليلك الشامل لتعلم البرمجة من الصفر حتى الاحتراف في 2026</h1>
                     <div class="blog-post-meta">
-                        <span><i class="fas fa-calendar"></i> 13 فبراير 2026</span>
+                        <span><i class="fas fa-calendar"></i> 15 فبراير 2026</span>
                         <span><i class="fas fa-user"></i> محمد أيت صالح</span>
-                        <span><i class="fas fa-clock"></i> 5 دقائق قراءة</span>
+                        <span><i class="fas fa-clock"></i> 8 دقائق قراءة</span>
                     </div>
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800" alt="متجر إلكتروني">
+                    <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800" alt="تعلم البرمجة">
                     
                     <h2>المقدمة</h2>
-                    <p>في عصر الرقمنة، أصبح إنشاء متجر إلكتروني ليس رفاهية بل ضرورة لأي مشروع تجاري. في هذا الدليل الشامل، سنأخذك خطوة بخطوة لإنشاء أول متجر إلكتروني ناجح.</p>
+                    <p>البرمجة هي لغة العصر، وأصبحت مهارة أساسية لأي شخص يريد بناء مستقبل رقمي. في هذا الدليل الشامل، سأشارك معك تجربتي في تعلم البرمجة، والخطوات التي اتبعتها حتى أصبحت مطوراً محترفاً.</p>
                     
-                    <h2>1. اختيار المنتج المناسب</h2>
-                    <p>أول خطوة وأهمها هي اختيار المنتج الذي ستبيعه. اسأل نفسك:</p>
+                    <h2>1. لماذا تتعلم البرمجة؟</h2>
+                    <p>قبل أن تبدأ، حدد هدفك: هل تريد العمل لدى شركة؟ أم تريد العمل الحر (Freelancing)؟ أم تبني مشروعك الخاص؟ كل هدف له مسار مختلف.</p>
+                    
+                    <h2>2. اختر المجال المناسب</h2>
                     <ul>
-                        <li>هل هناك طلب على هذا المنتج؟</li>
-                        <li>من هم منافسوك؟</li>
-                        <li>ما هي هامش الربح؟</li>
+                        <li><strong>تطوير الويب (Web Development):</strong> الأكثر طلباً وسهولة للمبتدئين. ينقسم إلى Front-end, Back-end, Full-stack.</li>
+                        <li><strong>تطوير تطبيقات الجوال (Mobile Apps):</strong> Android (Kotlin/Java) أو iOS (Swift) أو Cross-platform (Flutter, React Native).</li>
+                        <li><strong>علوم البيانات والذكاء الاصطناعي:</strong> مجال متقدم يتطلب رياضيات قوية.</li>
                     </ul>
                     
-                    <h2>2. اختيار المنصة المناسبة</h2>
-                    <p>في Web Forge، نوصي بـ:</p>
+                    <h2>3. خريطة الطريق لتطوير الويب</h2>
+                    <h3>المرحلة الأولى: الأساسيات (3-4 أشهر)</h3>
                     <ul>
-                        <li><strong>YouCan:</strong> للمتاجر العربية والمبتدئين</li>
-                        <li><strong>Shopify:</strong> للتوسع العالمي والدروبشيبينغ</li>
+                        <li>HTML5: هيكلة المواقع</li>
+                        <li>CSS3: التصميم والتنسيق (Flexbox, Grid, Responsive Design)</li>
+                        <li>JavaScript: أساسيات البرمجة (Variables, Functions, DOM Manipulation)</li>
                     </ul>
                     
-                    <h2>3. تصميم المتجر</h2>
-                    <p>تصميم متجرك يعكس هوية علامتك التجارية. نصائحنا:</p>
+                    <h3>المرحلة الثانية: التعمق (4-6 أشهر)</h3>
                     <ul>
-                        <li>اجعل التصميم بسيطاً وسهل التصفح</li>
-                        <li>استخدم ألوان متناسقة</li>
-                        <li>تأكد من تجاوب الموقع مع الجوال</li>
+                        <li>إطار عمل للواجهات: React.js أو Vue.js</li>
+                        <li>أساسيات Back-end: Node.js + Express.js أو PHP</li>
+                        <li>قواعد البيانات: MySQL (SQL) و MongoDB (NoSQL)</li>
                     </ul>
                     
-                    <h2>4. إضافة المنتجات</h2>
-                    <p>عند إضافة منتجاتك، اهتم بـ:</p>
+                    <h3>المرحلة الثالثة: المشاريع والتخصص (مستمر)</h3>
                     <ul>
-                        <li>صور عالية الجودة من زوايا متعددة</li>
-                        <li>وصف دقيق وجذاب</li>
-                        <li>أسعار واضحة</li>
+                        <li>ابنِ مشاريع حقيقية: متجر إلكتروني، منصة تدوين، لوحة تحكم</li>
+                        <li>تعلم Git/GitHub لإدارة الأكواد</li>
+                        <li>تعلم أساسيات DevOps: Deployment, Hosting, Domains</li>
                     </ul>
                     
-                    <h2>5. إعدادات الدفع والشحن</h2>
-                    <p>في المغرب، ننصح بـ:</p>
+                    <h2>4. أفضل المصادر للتعلم (مجانية ومدفوعة)</h2>
                     <ul>
-                        <li>CMI للدفع الإلكتروني</li>
-                        <li>Amana Cash عند الاستلام</li>
-                        <li>شركات الشحن: Amana, Chronopost, Aramex</li>
+                        <li><strong>منصات عربية:</strong> دروب, إدراك, يوداسيتي</li>
+                        <li><strong>منصات أجنبية:</strong> freeCodeCamp, The Odin Project, Udemy, Coursera</li>
+                        <li><strong>قنوات يوتيوب:</strong> Elzero Web School, Abdelrahman Gamal, Osama Elzero</li>
+                    </ul>
+                    
+                    <h2>5. نصائح من تجربتي الشخصية</h2>
+                    <ul>
+                        <li>لا تتسرع، تعلم الأساسيات جيداً قبل الانتقال لأي شيء آخر</li>
+                        <li>طبق كل ما تتعلمه فوراً بمشاريع صغيرة</li>
+                        <li>انضم لمجتمعات المبرمجين على Discord, Telegram, Facebook</li>
+                        <li>تعلم اللغة الإنجليزية فهي مفتاحك للمصادر الأجنبية</li>
+                        <li>الاستمرارية أهم من السرعة. خصص وقتاً يومياً للتعلم ولو ساعة واحدة</li>
                     </ul>
                     
                     <div class="blog-cta">
-                        <h3>📢 تحتاج مساعدة في إنشاء متجرك؟</h3>
-                        <button onclick="window.parent.openOrderModal ? window.parent.openOrderModal('طلب استشارة متجر إلكتروني') : window.open('index.html#services', '_blank')" class="btn-primary" style="background: var(--accent); color: #000; border: none; padding: 12px 30px; border-radius: 50px; font-weight: bold; cursor: pointer;">
-                            تواصل معنا الآن
+                        <h3>🚀 تريد مساعدة في رحلتك التعليمية؟</h3>
+                        <button onclick="window.parent.openConsultModal ? window.parent.openConsultModal() : window.open('index.html#consultModal', '_blank')" class="btn-primary">
+                            احصل على استشارة مجانية
                         </button>
                     </div>
                 `
             },
             {
                 id: 2,
-                title: '10 استراتيجيات SEO فعالة لمتجرك الإلكتروني',
-                excerpt: 'كيف تتصدر نتائج البحث وتجذب زبائن أكثر لمتجرك بدون دفع إعلانات. استراتيجيات مجربة وعملية...',
-                category: 'seo',
-                categoryName: 'تحسين محركات البحث',
-                categoryIcon: 'fa-chart-line',
-                image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=500',
-                author: 'هاجر أيت بلاّ',
+                title: '10 أخطاء شائعة يقع فيها أصحاب المتاجر الإلكترونية الجدد',
+                excerpt: 'من خلال خبرتي في تصميم وتطوير المتاجر الإلكترونية، جمعت لك أكثر 10 أخطاء تتسبب في فشل المتاجر الجديدة وكيف تتجنبها.',
+                category: 'ecommerce',
+                categoryName: 'تجارة إلكترونية',
+                categoryIcon: 'fa-store',
+                image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500',
+                author: 'محمد أيت صالح',
                 authorAvatar: 'https://i.ibb.co/4wwG4HN0/1445-10-11-23-06-46-ae7d0b7b.jpg',
-                date: '10 فبراير 2026',
-                views: '1.8k',
+                date: '12 فبراير 2026',
+                views: '2.8k',
                 featured: false,
                 content: `
-                    <h1>🔍 10 استراتيجيات SEO فعالة لمتجرك الإلكتروني</h1>
+                    <h1>🛒 10 أخطاء شائعة يقع فيها أصحاب المتاجر الإلكترونية الجدد</h1>
                     <div class="blog-post-meta">
-                        <span><i class="fas fa-calendar"></i> 10 فبراير 2026</span>
-                        <span><i class="fas fa-user"></i> هاجر أيت بلاّ</span>
-                        <span><i class="fas fa-clock"></i> 4 دقائق قراءة</span>
+                        <span><i class="fas fa-calendar"></i> 12 فبراير 2026</span>
+                        <span><i class="fas fa-user"></i> محمد أيت صالح</span>
+                        <span><i class="fas fa-clock"></i> 6 دقائق قراءة</span>
                     </div>
-                    <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800" alt="SEO">
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800" alt="متجر إلكتروني">
                     
-                    <h2>مقدمة</h2>
-                    <p>تحسين محركات البحث (SEO) هو المفتاح لجذب زوار عضويين لمتجرك دون دفع إعلانات. إليك 10 استراتيجيات فعالة:</p>
+                    <h2>المقدمة</h2>
+                    <p>بعد تصميم وتطوير أكثر من 50 متجراً إلكترونياً، لاحظت أن معظم الأخطاء التي تؤدي إلى فشل المتاجر الجديدة متشابهة. في هذا المقال، سأشارك معك هذه الأخطاء وكيف تتجنبها.</p>
                     
-                    <h2>1. البحث عن الكلمات المفتاحية</h2>
-                    <p>استخدم أدوات مثل Google Keyword Planner للعثور على كلمات يبحث عنها جمهورك.</p>
+                    <h2>الخطأ 1: إطلاق المتجر بدون خطة تسويقية</h2>
+                    <p>كثير من التجار يظنون أن مجرد إنشاء المتجر سيجلب الزبائن. الحقيقة أنك تحتاج لخطة تسويقية قبل الإطلاق بفترة.</p>
                     
-                    <h2>2. تحسين العناوين والوصف</h2>
-                    <p>تأكد أن كل صفحة لها عنوان ووصف فريد يحتوي على الكلمات المفتاحية.</p>
+                    <h2>الخطأ 2: إهمال تحسين محركات البحث (SEO)</h2>
+                    <p>إذا لم يكن متجرك مهيأ لمحركات البحث، فأنت تترك آلاف الزبائن المحتملين لمنافسيك. اهتم بـ SEO من اليوم الأول.</p>
                     
-                    <h2>3. سرعة الموقع</h2>
-                    <p>جوجل يعطي أولوية للمواقع السريعة. استخدم أدوات مثل Google PageSpeed Insights.</p>
+                    <h2>الخطأ 3: اختيار منتجات بدون دراسة الطلب</h2>
+                    <p>لا تفتح متجراً وتعرض منتجات عشوائية. ادرس السوق، اعرف ما يبحث عنه الناس، وابحث عن منتج له طلب وهامش ربح جيد.</p>
+                    
+                    <h2>الخطأ 4: صور منتجات رديئة</h2>
+                    <p>في المتاجر الإلكترونية، العميل لا يلمس المنتج. صورك هي البائع الصامت. استثمر في صور احترافية عالية الجودة من زوايا متعددة.</p>
+                    
+                    <h2>الخطأ 5: أوصاف منتجات مكررة أو ضعيفة</h2>
+                    <p>لا تنسخ أوصاف المنتجات من المصنع أو المنافسين. اكتب أوصافاً فريدة تشرح فوائد المنتج ولماذا يجب أن يشتريه العميل.</p>
+                    
+                    <h2>الخطأ 6: تعقيد عملية الدفع</h2>
+                    <p>كلما زادت خطوات الدفع، زادت نسبة التخلي عن السلة. وفر خيارات دفع متعددة واجعل عملية الدفع بسيطة وسريعة.</p>
+                    
+                    <h2>الخطأ 7: تجاهل تجربة الجوال</h2>
+                    <p>أكثر من 70% من المتسوقين في المغرب يستخدمون الجوال. تأكد أن متجرك سريع وسهل التصفح على الجوال.</p>
+                    
+                    <h2>الخطأ 8: عدم الاهتمام بسياسات الشحن والإرجاع</h2>
+                    <p>الزبون يريد أن يعرف كم سيكلفه الشحن وماذا لو لم يعجبه المنتج. اجعل سياساتك واضحة وسهلة الفهم.</p>
+                    
+                    <h2>الخطأ 9: إهمال خدمة العملاء</h2>
+                    <p>الرد السريع على استفسارات العملاء يبني الثقة. خصص وسيلة تواصل سريعة (واتساب، فيسبوك ماسنجر) وكن متجاوباً.</p>
+                    
+                    <h2>الخطأ 10: الاستسلام السريع</h2>
+                    <p>النجاح لا يأتي بين ليلة وضحاها. كثير من المتاجر تغلق بعد أشهر قليلة. تعلم من أخطائك، طور متجرك، واستمر في التحسين.</p>
                     
                     <div class="blog-cta">
-                        <h3>🚀 حقق أفضل أداء لمتجرك!</h3>
-                        <button onclick="window.parent.openOrderModal ? window.parent.openOrderModal('طلب خدمة تحسين SEO') : window.open('index.html#services', '_blank')" class="btn-primary" style="background: var(--accent); color: #000; border: none; padding: 12px 30px; border-radius: 50px; font-weight: bold; cursor: pointer;">
-                            اطلب خدمة SEO الآن
+                        <h3>💡 تريد مساعدة في إنشاء متجر ناجح؟</h3>
+                        <button onclick="window.parent.openOrderModal ? window.parent.openOrderModal('طلب إنشاء متجر إلكتروني') : window.open('index.html#services', '_blank')" class="btn-primary">
+                            اطلب متجرك الآن
                         </button>
                     </div>
                 `
             },
             {
                 id: 3,
-                title: 'مقارنة شاملة: YouCan vs Shopify للمتاجر العربية',
-                excerpt: 'إذا كنت تفكر في إنشاء متجر إلكتروني في العالم العربي، فأكبر منصتين هما YouCan و Shopify. أيهما تختار؟',
-                category: 'comparison',
-                categoryName: 'مقارنات',
-                categoryIcon: 'fa-balance-scale',
-                image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500',
-                author: 'عيسى الداهيل',
+                title: 'الدليل الكامل لتحسين محركات البحث (SEO) للمواقع العربية',
+                excerpt: 'خطوات عملية لتحسين ظهور موقعك في نتائج البحث. من البحث عن الكلمات المفتاحية إلى بناء الروابط، كل ما تحتاج معرفته.',
+                category: 'seo',
+                categoryName: 'تحسين محركات البحث',
+                categoryIcon: 'fa-chart-line',
+                image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=500',
+                author: 'محمد أيت صالح',
                 authorAvatar: 'https://i.ibb.co/4wwG4HN0/1445-10-11-23-06-46-ae7d0b7b.jpg',
-                date: '8 فبراير 2026',
-                views: '3.2k',
+                date: '9 فبراير 2026',
+                views: '2.1k',
                 featured: false,
                 content: `
-                    <h1>🛒 مقارنة شاملة: YouCan vs Shopify للمتاجر العربية</h1>
+                    <h1>🔍 الدليل الكامل لتحسين محركات البحث (SEO) للمواقع العربية</h1>
                     <div class="blog-post-meta">
-                        <span><i class="fas fa-calendar"></i> 8 فبراير 2026</span>
-                        <span><i class="fas fa-user"></i> عيسى الداهيل</span>
-                        <span><i class="fas fa-clock"></i> 6 دقائق قراءة</span>
+                        <span><i class="fas fa-calendar"></i> 9 فبراير 2026</span>
+                        <span><i class="fas fa-user"></i> محمد أيت صالح</span>
+                        <span><i class="fas fa-clock"></i> 7 دقائق قراءة</span>
                     </div>
-                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800" alt="YouCan vs Shopify">
+                    <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800" alt="SEO">
                     
-                    <h2>المقدمة</h2>
-                    <p>إذا كنت تفكر في إنشاء متجر إلكتروني في العالم العربي، فأكبر منصتين هما YouCan و Shopify. أيهما تختار؟</p>
+                    <h2>ما هو SEO ولماذا هو مهم؟</h2>
+                    <p>SEO (تحسين محركات البحث) هو عملية تحسين موقعك ليظهر في المراتب الأولى لنتائج البحث. أهميته تكمن في جلب زوار مجانيين (عضويين) لموقعك دون دفع إعلانات.</p>
                     
-                    <h2>YouCan: المميزات</h2>
+                    <h2>الجزء الأول: البحث عن الكلمات المفتاحية</h2>
+                    <p>قبل أي شيء، عليك معرفة ما يبحث عنه جمهورك. استخدم أدوات مثل:</p>
                     <ul>
-                        <li>✔️ منصة عربية 100%</li>
-                        <li>✔️ دعم اللغة العربية والدرهم المغربي</li>
-                        <li>✔️ أسعار مناسبة للمبتدئين</li>
-                        <li>✔️ دعم فني بالعربية</li>
+                        <li>Google Keyword Planner (مجاني)</li>
+                        <li>Ahrefs أو SEMrush (مدفوع)</li>
+                        <li>Ubersuggest (مجاني مع حدود)</li>
+                    </ul>
+                    <p>ابحث عن كلمات ذات حجم بحث جيد ومنافسة متوسطة. ركز على الكلمات الطويلة (Long-tail keywords) فهي أسهل في التصدر.</p>
+                    
+                    <h2>الجزء الثاني: التحسين الداخلي (On-Page SEO)</h2>
+                    <ul>
+                        <li><strong>العناوين (Title Tags):</strong> اجعلها فريدة لكل صفحة، تحتوي على الكلمة المفتاحية، وطولها بين 50-60 حرفاً.</li>
+                        <li><strong>الوصف (Meta Description):</strong> وصف مختصر وجذاب يشجع على النقر، بين 150-160 حرفاً.</li>
+                        <li><strong>الروابط (URLs):</strong> روابط قصيرة وواضحة تحتوي على الكلمة المفتاحية (مثال: /seo-guide)</li>
+                        <li><strong>العناوين الفرعية (Headings):</strong> استخدم H1 مرة واحدة، وH2، H3 لتنظيم المحتوى.</li>
+                        <li><strong>النص البديل للصور (Alt Text):</strong> صف الصورة بكلمات مفتاحية مناسبة.</li>
+                        <li><strong>الروابط الداخلية:</strong> اربط مقالاتك ببعضها البعض.</li>
                     </ul>
                     
-                    <h2>Shopify: المميزات</h2>
+                    <h2>الجزء الثالث: تحسين الجوانب التقنية (Technical SEO)</h2>
                     <ul>
-                        <li>✔️ منصة عالمية بتقنيات متطورة</li>
-                        <li>✔️ آلاف التطبيقات والإضافات</li>
-                        <li>✔️ مثالي للدروبشيبينغ</li>
-                        <li>✔️ قابلية توسع غير محدودة</li>
+                        <li><strong>سرعة الموقع:</strong> استخدم أدوات مثل Google PageSpeed Insights لتحسين السرعة.</li>
+                        <li><strong>التجاوب مع الجوال:</strong> تأكد أن موقعك يعمل بشكل مثالي على جميع الأجهزة.</li>
+                        <li><strong>شهادة SSL:</strong> موقعك يجب أن يكون آمناً (https://).</li>
+                        <li><strong>خريطة الموقع (Sitemap):</strong> أرسلها لجوجل عبر Search Console.</li>
                     </ul>
                     
-                    <h2>الخلاصة</h2>
-                    <p>إذا كنت تستهدف السوق المغربي والعربي فقط، ابدأ مع YouCan. إذا كنت تخطط للتوسع عالمياً، اختر Shopify.</p>
+                    <h2>الجزء الرابع: بناء الروابط (Link Building)</h2>
+                    <p>الروابط من مواقع أخرى تعتبر "تصويتاً بثقة" لموقعك. حاول الحصول على روابط من:</p>
+                    <ul>
+                        <li>مواقع ذات صلة بمجالك</li>
+                        <li>النشر كضيف (Guest Posting)</li>
+                        <li>الدلائل المحلية (Local directories)</li>
+                    </ul>
+                    
+                    <h2>نصائح خاصة بالمواقع العربية</h2>
+                    <ul>
+                        <li>اهتم بالتشكيل في النصوص العربية</li>
+                        <li>استخدم خطوطاً واضحة وسهلة القراءة</li>
+                        <li>ركز على المحتوى القيم والمفيد للمستخدم العربي</li>
+                        <li>استهدف كلمات مفتاحية بالعامية إذا كان جمهورك يبحث بها</li>
+                    </ul>
                     
                     <div class="blog-cta">
-                        <h3>🤔 محتار؟ خذ استشارة مجانية!</h3>
-                        <button onclick="window.parent.openFreeConsult ? window.parent.openFreeConsult() : window.open('index.html#consultModal', '_blank')" class="btn-primary" style="background: var(--accent); color: #000; border: none; padding: 12px 30px; border-radius: 50px; font-weight: bold; cursor: pointer;">
-                            احصل على استشارة
+                        <h3>📈 حقق أفضل أداء لموقعك مع خدمات SEO</h3>
+                        <button onclick="window.parent.openOrderModal ? window.parent.openOrderModal('طلب خدمة تحسين SEO') : window.open('index.html#services', '_blank')" class="btn-primary">
+                            اطلب تحسين SEO الآن
                         </button>
                     </div>
                 `
             },
             {
                 id: 4,
-                title: 'الدليل الكامل لبدء الدروبشيبينغ في المغرب',
-                excerpt: 'أفضل الموردين، منصات موثوقة، ونصائح لتجنب الاحتيال. كل ما تحتاج معرفته لبدء مشروع دروبشيبينغ ناجح...',
+                title: 'كيف تبدأ مشروع دروبشيبينغ ناجح في المغرب (دليل 2026)',
+                excerpt: 'شرح مبسط لبدء الدروبشيبينغ في المغرب: أفضل الموردين، منصات موثوقة، شركات الشحن، ونصائح لتجنب الاحتيال.',
                 category: 'dropshipping',
                 categoryName: 'دروبشيبينغ',
                 categoryIcon: 'fa-box-open',
                 image: 'https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=500',
-                author: 'حسن أوميمة',
+                author: 'محمد أيت صالح',
                 authorAvatar: 'https://i.ibb.co/4wwG4HN0/1445-10-11-23-06-46-ae7d0b7b.jpg',
-                date: '5 فبراير 2026',
-                views: '2.1k',
+                date: '6 فبراير 2026',
+                views: '3.5k',
                 featured: false,
                 content: `
-                    <h1>📦 الدليل الكامل لبدء الدروبشيبينغ في المغرب</h1>
+                    <h1>📦 كيف تبدأ مشروع دروبشيبينغ ناجح في المغرب (دليل 2026)</h1>
                     <div class="blog-post-meta">
-                        <span><i class="fas fa-calendar"></i> 5 فبراير 2026</span>
-                        <span><i class="fas fa-user"></i> حسن أوميمة</span>
+                        <span><i class="fas fa-calendar"></i> 6 فبراير 2026</span>
+                        <span><i class="fas fa-user"></i> محمد أيت صالح</span>
                         <span><i class="fas fa-clock"></i> 7 دقائق قراءة</span>
                     </div>
                     <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=800" alt="Dropshipping">
                     
                     <h2>ما هو الدروبشيبينغ؟</h2>
-                    <p>نموذج تجاري تبيع منتجات بدون تخزينها. المورد يشحنها مباشرة للزبون.</p>
+                    <p>الدروبشيبينغ هو نموذج تجاري تبيع فيه منتجات بدون تخزينها. عندما يشتري منك زبون، تقوم بشراء المنتج من مورد (مثل AliExpress) ويقوم المورد بشحنه مباشرة للزبون. أنت تدفع سعر الجملة وتأخذ الفرق.</p>
                     
-                    <h2>أفضل منصات الدروبشيبينغ</h2>
+                    <h2>مميزات الدروبشيبينغ</h2>
                     <ul>
-                        <li>AliExpress - الأكثر شهرة</li>
-                        <li>Spocket - منتجات من أوروبا والولايات المتحدة</li>
-                        <li>CJ Dropshipping - شحن أسرع</li>
+                        <li>✔️ لا تحتاج رأس مال كبير للتخزين</li>
+                        <li>✔️ يمكنك البدء من المنزل</li>
+                        <li>✔️ آلاف المنتجات للاختيار بينها</li>
+                        <li>✔️ مرونة عالية في تغيير المنتجات</li>
                     </ul>
                     
-                    <h2>نصائح للنجاح في المغرب</h2>
+                    <h2>التحديات التي تواجه الدروبشيبينغ في المغرب</h2>
                     <ul>
-                        <li>اختر منتجات خفيفة الوزن لتقليل تكاليف الشحن</li>
-                        <li>تعاون مع شركات شحن محلية موثوقة</li>
-                        <li>قدم طرق دفع متنوعة (CMI، Cash Plus، الدفع عند الاستلام)</li>
+                        <li>❌ أوقات شحن طويلة (2-4 أسابيع من الصين)</li>
+                        <li>❌ جودة المنتج غير مضمونة 100%</li>
+                        <li>❌ مشاكل محتملة مع الجمارك</li>
+                        <li>❌ إدارة مرتجعات صعبة</li>
+                    </ul>
+                    
+                    <h2>خطوات البدء في الدروبشيبينغ</h2>
+                    
+                    <h3>الخطوة 1: اختيار مجال (Niche)</h3>
+                    <p>لا تبيع كل شيء للجميع. اختر مجالاً محدداً (مثل: إكسسوارات الهواتف، منتجات الحيوانات الأليفة، مستلزمات الرياضة). ادرس الطلب والمنافسة.</p>
+                    
+                    <h3>الخطوة 2: البحث عن موردين موثوقين</h3>
+                    <ul>
+                        <li><strong>AliExpress:</strong> الخيار الأكثر شيوعاً، ابحث عن موردين بتقييمات عالية (>4.5) وعدد طلبات كبير.</li>
+                        <li><strong>Spocket:</strong> منتجات من أوروبا والولايات المتحدة (شحن أسرع لكن أسعار أعلى).</li>
+                        <li><strong>CJ Dropshipping:</strong> يوفر خدمات شحن أسرع وتخزين.</li>
+                    </ul>
+                    
+                    <h3>الخطوة 3: إنشاء المتجر الإلكتروني</h3>
+                    <p>أفضل منصة للدروبشيبينغ هي Shopify لتكامله مع تطبيقات مثل Oberlo و DSers. يمكنك أيضاً استخدام YouCan مع تطبيق Dropshipman.</p>
+                    
+                    <h3>الخطوة 4: إضافة المنتجات</h3>
+                    <p>عند إضافة منتج:</p>
+                    <ul>
+                        <li>اكتب وصفاً خاصاً بك (لا تنسخ وصف المورد)</li>
+                        <li>استخدم صوراً عالية الجودة</li>
+                        <li>حدد سعراً تنافسياً (ضع في الاعتبار تكاليف الشحن)</li>
+                    </ul>
+                    
+                    <h3>الخطوة 5: التسويق للمتجر</h3>
+                    <p>في الدروبشيبينغ، التسويق هو كل شيء. استخدم:</p>
+                    <ul>
+                        <li>إعلانات فيسبوك وإنستغرام (الأكثر فعالية)</li>
+                        <li>التسويق بالمؤثرين (خاصة في مجالك)</li>
+                        <li>تحسين محركات البحث (SEO)</li>
+                        <li>محتوى قيم على تيك توك ويوتيوب</li>
+                    </ul>
+                    
+                    <h2>أفضل شركات الشحن في المغرب للدروبشيبينغ</h2>
+                    <ul>
+                        <li>Amana (بريد المغرب) - الأرخص</li>
+                        <li>Chronopost - أسرع وأغلى</li>
+                        <li>Aramex - خيار جيد للمتوسط</li>
+                    </ul>
+                    
+                    <h2>نصائح ذهبية من تجربتي</h2>
+                    <ul>
+                        <li>ابدأ بمنتجات قليلة (5-10) وطور استراتيجيتك قبل التوسع</li>
+                        <li>اختبر المنتج بنفسك (اطلب عينة) لتتأكد من جودته</li>
+                        <li>كن صريحاً مع الزبائن بخصوص وقت الشحن</li>
+                        <li>ركز على بناء علامة تجارية وليس مجرد متجر عابر</li>
+                        <li>تعلم من منافسيك الناجحين</li>
                     </ul>
                     
                     <div class="blog-cta">
-                        <h3>🚀 ابدأ مشروعك اليوم!</h3>
-                        <button onclick="window.parent.openOrderModal ? window.parent.openOrderModal('طلب دورة الدروبشيبينغ') : window.open('index.html#coursesModal', '_blank')" class="btn-primary" style="background: var(--accent); color: #000; border: none; padding: 12px 30px; border-radius: 50px; font-weight: bold; cursor: pointer;">
+                        <h3>🚀 جاهز لبدء مشروع الدروبشيبينغ؟</h3>
+                        <button onclick="window.parent.openOrderModal ? window.parent.openOrderModal('طلب دورة الدروبشيبينغ') : window.open('index.html#coursesModal', '_blank')" class="btn-primary">
                             سجل في الدورة التدريبية
                         </button>
                     </div>
@@ -1169,125 +1398,250 @@
             },
             {
                 id: 5,
-                title: 'أحدث اتجاهات تصميم المواقع في 2026',
-                excerpt: 'تعرف على أحدث الصيحات في عالم التصميم وتجربة المستخدم، من الوضع المظلم إلى التصميم ثلاثي الأبعاد...',
-                category: 'webdesign',
-                categoryName: 'تصميم مواقع',
-                categoryIcon: 'fa-paint-brush',
-                image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=500',
-                author: 'حميد بوشوافة',
+                title: 'دليل العمل الحر للمطورين والمصممين: كيف تحصل على أول مشروع',
+                excerpt: 'من واقع تجربتي في العمل الحر (Freelancing) لسنوات، أشارك معك استراتيجيات مجربة لبدء مسيرتك وكسب أول عميل.',
+                category: 'freelancing',
+                categoryName: 'العمل الحر',
+                categoryIcon: 'fa-laptop',
+                image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=500',
+                author: 'محمد أيت صالح',
                 authorAvatar: 'https://i.ibb.co/4wwG4HN0/1445-10-11-23-06-46-ae7d0b7b.jpg',
-                date: '2 فبراير 2026',
-                views: '1.5k',
+                date: '3 فبراير 2026',
+                views: '1.9k',
                 featured: false,
                 content: `
-                    <h1>🎨 أحدث اتجاهات تصميم المواقع في 2026</h1>
+                    <h1>💼 دليل العمل الحر للمطورين والمصممين: كيف تحصل على أول مشروع</h1>
                     <div class="blog-post-meta">
-                        <span><i class="fas fa-calendar"></i> 2 فبراير 2026</span>
-                        <span><i class="fas fa-user"></i> حميد بوشوافة</span>
-                        <span><i class="fas fa-clock"></i> 5 دقائق قراءة</span>
+                        <span><i class="fas fa-calendar"></i> 3 فبراير 2026</span>
+                        <span><i class="fas fa-user"></i> محمد أيت صالح</span>
+                        <span><i class="fas fa-clock"></i> 6 دقائق قراءة</span>
                     </div>
-                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800" alt="Web Design">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800" alt="العمل الحر">
                     
-                    <h2>1. الوضع المظلم (Dark Mode)</h2>
-                    <p>أصبح أساسياً لتجربة مستخدم مريحة وتوفير طاقة البطارية.</p>
+                    <h2>لماذا العمل الحر؟</h2>
+                    <p>العمل الحر (Freelancing) يمنحك حرية اختيار المشاريع، العمل من أي مكان، وتحديد دخلك بنفسك. في المغرب، الطلب على المطورين والمصممين في تزايد مستمر.</p>
                     
-                    <h2>2. التصميم ثلاثي الأبعاد</h2>
-                    <p>استخدام عناصر 3D خفيفة يضيف عمقاً وتفاعلاً.</p>
+                    <h2>الخطوة 1: جهز نفسك قبل البدء</h2>
+                    <h3>أ. طور مهاراتك</h3>
+                    <p>لا تبدأ العمل الحر وأنت مبتدئ. خذ وقتك لتعلم الأساسيات وبناء مشاريع تدريبية. المهارات الأكثر طلباً:</p>
+                    <ul>
+                        <li>تطوير الويب (HTML, CSS, JavaScript, React, WordPress)</li>
+                        <li>تصميم المواقع (Figma, Adobe XD)</li>
+                        <li>تحسين محركات البحث (SEO)</li>
+                        <li>إدارة منصات التجارة الإلكترونية (Shopify, YouCan)</li>
+                    </ul>
                     
-                    <h2>3. الخطوط العربية الإبداعية</h2>
-                    <p>تصاميم خطوط عربية مبتكرة تبرز الهوية.</p>
+                    <h3>ب. ابنِ معرض أعمال (Portfolio)</h3>
+                    <p>معرض الأعمال هو أهم أداة تسويقية لك. اعرض أفضل مشاريعك (حتى لو كانت تدريبية أو تطوعية). اشرح دورك في كل مشروع والتحديات التي واجهتها.</p>
                     
-                    <h2>4. التمرير السردي (Scrollytelling)</h2>
-                    <p>سرد القصص عبر التمرير يجذب الزوار.</p>
+                    <h3>ج. حدد أسعارك</h3>
+                    <p>ابحث عن أسعار السوق. كمبتدئ، يمكنك البدء بأسعار تنافسية ثم رفعها مع الخبرة. حدد إذا كنت ستتقاضى بالساعة أم بالمشروع.</p>
+                    
+                    <h2>الخطوة 2: أين تجد العملاء؟</h2>
+                    
+                    <h3>منصات العمل الحر العالمية:</h3>
+                    <ul>
+                        <li><strong>Upwork:</strong> أكبر منصة، منافسة عالية لكن فرص جيدة</li>
+                        <li><strong>Freelancer.com:</strong> مشاريع متنوعة</li>
+                        <li><strong>Fiverr:</strong> تقدم خدمات (Gigs) بأسعار تبدأ من 5$</li>
+                        <li><strong>Toptal:</strong> للمحترفين ذوي الخبرة العالية</li>
+                    </ul>
+                    
+                    <h3>منصات عربية:</h3>
+                    <ul>
+                        <li><strong>مستقل:</strong> أكبر منصة عربية، مناسبة للمبتدئين</li>
+                        <li><strong>خمسات:</strong> مشابهة لـ Fiverr</li>
+                        <li><strong>بعيد:</strong> للوظائف عن بعد</li>
+                    </ul>
+                    
+                    <h3>التسويق المباشر (الأكثر فعالية):</h3>
+                    <ul>
+                        <li>تواصل مع أصحاب المشاريع المحليين عبر LinkedIn</li>
+                        <li>انضم لمجموعات فيسبوك الخاصة بريادة الأعمال في مدينتك</li>
+                        <li>اعرض خدماتك على أصحاب المحلات التجارية الصغيرة</li>
+                        <li>استخدم الإحالات (اطلب من عملائك السابقين ترشيحك)</li>
+                    </ul>
+                    
+                    <h2>الخطوة 3: كيف تكسب أول مشروع؟</h2>
+                    
+                    <h3>نصائح لكتابة عرض مقنع:</h3>
+                    <ul>
+                        <li>خصص العرض للعميل وليس نسخاً ولصقاً</li>
+                        <li>أظهر فهمك للمشروع واقترح حلولاً</li>
+                        <li>أرفق أمثلة من أعمالك السابقة</li>
+                        <li>كن واضحاً في عرض سعرك والجدول الزمني</li>
+                        <li>أضف لمسة شخصية (أسأل عن تفاصيل إضافية)</li>
+                    </ul>
+                    
+                    <h3>لا تبدأ بمشاريع كبيرة:</h3>
+                    <p>ابدأ بمشاريع صغيرة، أنجزها بامتياز، واطلب من العميل تقييماً إيجابياً. هذه التقييمات ستفتح لك أبواباً لمشاريع أكبر.</p>
+                    
+                    <h2>الخطوة 4: بعد الحصول على المشروع</h2>
+                    <ul>
+                        <li><strong>تواصل مستمر:</strong> أبق العميل على اطلاع بمراحل العمل.</li>
+                        <li><strong>التسليم في الوقت المحدد:</strong> احترم المواعيد النهائية.</li>
+                        <li><strong>التعامل مع التعديلات:</strong> حدد عدد التعديلات المجانية في العقد.</li>
+                        <li><strong>استلام الدفعات:</strong> استخدم PayPal أو Payoneer أو التحويل البنكي.</li>
+                    </ul>
+                    
+                    <h2>أخطاء شائعة في العمل الحر</h2>
+                    <ul>
+                        <li>❌ قبول مشاريع بأقل من سعر السوق (يستغلونك)</li>
+                        <li>❌ العمل بدون عقد واضح</li>
+                        <li>❌ التسليم المتأخر</li>
+                        <li>❌ عدم تخصيص وقت لتطوير الذات</li>
+                    </ul>
                     
                     <div class="blog-cta">
-                        <h3>💡 نريد موقعاً بتصميم عصري!</h3>
-                        <button onclick="window.parent.openOrderModal ? window.parent.openOrderModal('طلب تصميم موقع') : window.open('index.html#services', '_blank')" class="btn-primary" style="background: var(--accent); color: #000; border: none; padding: 12px 30px; border-radius: 50px; font-weight: bold; cursor: pointer;">
-                            اطلب تصميم موقعك
+                        <h3>💡 تحتاج استشارة في مسيرتك المهنية؟</h3>
+                        <button onclick="window.parent.openConsultModal ? window.parent.openConsultModal() : window.open('index.html#consultModal', '_blank')" class="btn-primary">
+                            تواصل معي مباشرة
                         </button>
                     </div>
                 `
             },
             {
                 id: 6,
-                title: '5 طرق مجانية لتسويق متجرك الإلكتروني',
-                excerpt: 'استراتيجيات فعالة بدون ميزانية لجذب الزبائن. تعرف على أفضل الطرق المجانية للتسويق...',
-                category: 'marketing',
-                categoryName: 'تسويق',
-                categoryIcon: 'fa-bullhorn',
+                title: 'دليل اختيار منصة التجارة الإلكترونية: Shopify vs WooCommerce vs YouCan',
+                excerpt: 'مقارنة شاملة بين أشهر منصات التجارة الإلكترونية لمساعدتك في اختيار الأنسب لمشروعك حسب ميزانيتك وخبرتك التقنية.',
+                category: 'ecommerce',
+                categoryName: 'تجارة إلكترونية',
+                categoryIcon: 'fa-store',
                 image: 'https://images.unsplash.com/photo-1556740714-a8395b3bf30f?w=500',
                 author: 'محمد أيت صالح',
                 authorAvatar: 'https://i.ibb.co/4wwG4HN0/1445-10-11-23-06-46-ae7d0b7b.jpg',
                 date: '30 يناير 2026',
-                views: '1.9k',
+                views: '2.3k',
                 featured: false,
                 content: `
-                    <h1>📈 5 طرق مجانية لتسويق متجرك الإلكتروني</h1>
+                    <h1>🛒 دليل اختيار منصة التجارة الإلكترونية: Shopify vs WooCommerce vs YouCan</h1>
                     <div class="blog-post-meta">
                         <span><i class="fas fa-calendar"></i> 30 يناير 2026</span>
                         <span><i class="fas fa-user"></i> محمد أيت صالح</span>
-                        <span><i class="fas fa-clock"></i> 4 دقائق قراءة</span>
+                        <span><i class="fas fa-clock"></i> 6 دقائق قراءة</span>
                     </div>
-                    <img src="https://images.unsplash.com/photo-1556740714-a8395b3bf30f?w=800" alt="Marketing">
+                    <img src="https://images.unsplash.com/photo-1556740714-a8395b3bf30f?w=800" alt="منصات التجارة الإلكترونية">
                     
-                    <h2>1. تحسين محركات البحث (SEO)</h2>
-                    <p>اجلب زواراً بدون دفع إعلانات عبر تحسين موقعك لمحركات البحث.</p>
+                    <h2>المقدمة</h2>
+                    <p>اختيار المنصة المناسبة لمتجرك الإلكتروني هو أول وأهم قرار في رحلتك. في هذا الدليل، سأشرح لك مميزات وعيوب أشهر ثلاث منصات: Shopify, WooCommerce, و YouCan.</p>
                     
-                    <h2>2. وسائل التواصل الاجتماعي</h2>
-                    <p>أنشئ محتوى قيماً على إنستغرام، تيك توك، وفيسبوك.</p>
+                    <h2>أولاً: منصة Shopify</h2>
+                    <p><strong>المميزات:</strong></p>
+                    <ul>
+                        <li>✔️ سهولة الاستخدام، لا تحتاج خبرة تقنية</li>
+                        <li>✔️ استضافة آمنة وسريعة (مدفوعة ضمن الاشتراك)</li>
+                        <li>✔️ آلاف التطبيقات والإضافات</li>
+                        <li>✔️ مثالي للدروبشيبينغ (متكامل مع Oberlo, DSers)</li>
+                        <li>✔️ دعم فني على مدار الساعة</li>
+                    </ul>
+                    <p><strong>العيوب:</strong></p>
+                    <ul>
+                        <li>❌ تكلفة شهرية (ابتداءً من 29$)</li>
+                        <li>❌ عمولة إضافية على المبيعات إذا استخدمت بوابات دفع خارجية</li>
+                        <li>❌ التحكم في الكود محدود (إلا في الباقات الأعلى)</li>
+                    </ul>
                     
-                    <h2>3. التسويق بالمحتوى</h2>
-                    <p>اكتب مقالات و أنشئ فيديوهات تعليمية تهم جمهورك.</p>
+                    <h2>ثانياً: WooCommerce (إضافة لووردبريس)</h2>
+                    <p><strong>المميزات:</strong></p>
+                    <ul>
+                        <li>✔️ مجاني (لكن تحتاج استضافة و دومين)</li>
+                        <li>✔️ تحكم كامل في كل تفاصيل المتجر</li>
+                        <li>✔️ آلاف القوالب والإضافات المجانية والمدفوعة</li>
+                        <li>✔️ مناسب للمواقع التي تعتمد على المحتوى</li>
+                    </ul>
+                    <p><strong>العيوب:</strong></p>
+                    <ul>
+                        <li>❌ تحتاج خبرة تقنية (أو مطور) للتثبيت والإعداد</li>
+                        <li>❌ أنت مسؤول عن الاستضافة والتحديثات الأمنية</li>
+                        <li>❌ قد تكون سرعة الموقع أقل إذا لم تضبط الإعدادات جيداً</li>
+                    </ul>
                     
-                    <h2>4. البريد الإلكتروني</h2>
-                    <p>اجمع عناوين البريد وأرسل عروضاً حصرية.</p>
+                    <h2>ثالثاً: منصة YouCan</h2>
+                    <p><strong>المميزات:</strong></p>
+                    <ul>
+                        <li>✔️ منصة عربية 100% (مناسبة للسوق المحلي)</li>
+                        <li>✔️ دعم اللغة العربية والدرهم المغربي والدينار</li>
+                        <li>✔️ سهولة الاستخدام مثل Shopify</li>
+                        <li>✔️ أسعار مناسبة للمبتدئين</li>
+                        <li>✔️ دعم فني بالعربية</li>
+                    </ul>
+                    <p><strong>العيوب:</strong></p>
+                    <ul>
+                        <li>❌ عدد التطبيقات أقل مقارنة بـ Shopify</li>
+                        <li>❌ أقل شهرة عالمياً</li>
+                        <li>❌ بعض الميزات المتقدمة غير موجودة بعد</li>
+                    </ul>
                     
-                    <h2>5. الشراكات والتعاون</h2>
-                    <p>تعاون مع مؤثرين أو متاجر مكملة لمتجرك.</p>
+                    <h2>مقارنة سريعة للأسعار (للمتاجر المغربية)</h2>
+                    <ul>
+                        <li><strong>Shopify:</strong> 29$ شهرياً + عمولات</li>
+                        <li><strong>WooCommerce:</strong> استضافة 50-150 درهم شهرياً + دومين 100 درهم سنوياً</li>
+                        <li><strong>YouCan:</strong> 199 درهم شهرياً (الباقة الأساسية)</li>
+                    </ul>
+                    
+                    <h2>الخلاصة: ماذا تختار؟</h2>
+                    <ul>
+                        <li><strong>اختر Shopify إذا:</strong> كنت مبتدئاً تماماً، تريد حلاً متكاملاً وجاهزاً، وتهتم بالدروبشيبينغ العالمي.</li>
+                        <li><strong>اختر WooCommerce إذا:</strong> لديك خبرة تقنية أو ميزانية لتوظيف مطور، وتريد تحكماً كاملاً بمتجرك.</li>
+                        <li><strong>اختر YouCan إذا:</strong> تستهدف السوق المغربي والعربي حصراً، وتريد منصة عربية سهلة وبأسعار مناسبة.</li>
+                    </ul>
+                    
+                    <p>في Web Forge، نوفر لك خدمات تصميم وتطوير المتاجر على جميع هذه المنصات حسب احتياجك. تواصل معنا للحصول على استشارة مجانية.</p>
                     
                     <div class="blog-cta">
-                        <h3>🚀 جهز متجرك للتسويق!</h3>
-                        <button onclick="window.parent.openOrderModal ? window.parent.openOrderModal('طلب استشارة تسويق') : window.open('index.html#consultModal', '_blank')" class="btn-primary" style="background: var(--accent); color: #000; border: none; padding: 12px 30px; border-radius: 50px; font-weight: bold; cursor: pointer;">
-                            تواصل مع خبير تسويق
+                        <h3>🤔 محتار؟ خذ استشارة مجانية!</h3>
+                        <button onclick="window.parent.openFreeConsult ? window.parent.openFreeConsult() : window.open('index.html#consultModal', '_blank')" class="btn-primary">
+                            احصل على استشارة
                         </button>
                     </div>
                 `
             },
             {
                 id: 7,
-                title: 'كيف تختار اسم النطاق (الدومين) المثالي لمشروعك',
-                excerpt: 'دليل شامل لاختيار اسم نطاق يعبر عن علامتك التجارية ويسهل تذكره. نصائح ذهبية...',
-                category: 'webdesign',
-                categoryName: 'تصميم مواقع',
-                categoryIcon: 'fa-paint-brush',
-                image: 'https://images.unsplash.com/photo-1562577309-4932fdd64cd3?w=500',
+                title: '5 استراتيجيات مجانية لتسويق متجرك الإلكتروني في 2026',
+                excerpt: 'استراتيجيات فعالة بدون ميزانية لجذب الزبائن: تحسين SEO، التسويق بالمحتوى، وسائل التواصل الاجتماعي، وأكثر.',
+                category: 'marketing',
+                categoryName: 'تسويق رقمي',
+                categoryIcon: 'fa-bullhorn',
+                image: 'https://images.unsplash.com/photo-1556740714-a8395b3bf30f?w=500',
                 author: 'محمد أيت صالح',
                 authorAvatar: 'https://i.ibb.co/4wwG4HN0/1445-10-11-23-06-46-ae7d0b7b.jpg',
-                date: '25 يناير 2026',
-                views: '1.2k',
+                date: '27 يناير 2026',
+                views: '1.7k',
                 featured: false,
                 content: `
-                    <h1>🌐 كيف تختار اسم النطاق (الدومين) المثالي لمشروعك</h1>
+                    <h1>📈 5 استراتيجيات مجانية لتسويق متجرك الإلكتروني في 2026</h1>
                     <div class="blog-post-meta">
-                        <span><i class="fas fa-calendar"></i> 25 يناير 2026</span>
+                        <span><i class="fas fa-calendar"></i> 27 يناير 2026</span>
                         <span><i class="fas fa-user"></i> محمد أيت صالح</span>
                         <span><i class="fas fa-clock"></i> 4 دقائق قراءة</span>
                     </div>
-                    <img src="https://images.unsplash.com/photo-1562577309-4932fdd64cd3?w=800" alt="Domain Name">
+                    <img src="https://images.unsplash.com/photo-1556740714-a8395b3bf30f?w=800" alt="Marketing">
                     
-                    <h2>نصائح لاختيار اسم نطاق ممتاز:</h2>
+                    <h2>1. تحسين محركات البحث (SEO)</h2>
+                    <p>اجلب زواراً بدون دفع إعلانات عبر تحسين موقعك لمحركات البحث. ركز على الكلمات المفتاحية التي يبحث بها جمهورك، واكتب محتوى قيماً يجيب عن أسئلتهم.</p>
+                    
+                    <h2>2. التسويق بالمحتوى</h2>
+                    <p>أنشئ مدونة لمتجرك واكتب مقالات مفيدة تتعلق بمنتجاتك. مثلاً، إذا كنت تبيع مستلزمات رياضية، اكتب مقالات عن "كيف تبدأ تمارينك اليومية" أو "أفضل نظام غذائي للرياضيين". هذا يبني ثقة ويساعد في تحسين SEO.</p>
+                    
+                    <h2>3. وسائل التواصل الاجتماعي</h2>
+                    <p>لا تحتاج أن تكون في كل المنصات. اختر منصة أو منصتين حيث يتواجد جمهورك بكثافة:</p>
                     <ul>
-                        <li>اجعل الاسم قصيراً وسهل النطق</li>
-                        <li>استخدم كلمات مفتاحية تعبر عن نشاطك</li>
-                        <li>تجنب الأرقام والرموز الصعبة</li>
-                        <li>اختر الامتداد المناسب (.com, .ma, .store)</li>
+                        <li><strong>إنستغرام:</strong> للمنتجات البصرية (موضة، إكسسوارات، ديكور)</li>
+                        <li><strong>تيك توك:</strong> لفيديوهات قصيرة ممتعة، الوصول واسع وسريع</li>
+                        <li><strong>فيسبوك:</strong> لبناء مجتمع والتفاعل مع الجمهور المحلي</li>
                     </ul>
                     
+                    <h2>4. البريد الإلكتروني</h2>
+                    <p>اجمع عناوين البريد الإلكتروني للزوار (عبر تقديم خصم أو كتاب مجاني) وأرسل لهم نشرات دورية بأحدث المنتجات والعروض. البريد الإلكتروني لا يزال من أعلى القنوات في نسبة التحويل.</p>
+                    
+                    <h2>5. الشراكات والتعاون مع المؤثرين الصغار</h2>
+                    <p>بدلاً من دفع آلاف الدراهم لمؤثرين كبار، تعاون مع مؤثرين صغار (Micro-influencers) لديهم متابعون مخلصون في مجالك. قدم لهم منتجات مجانية مقابل مراجعة أو فيديو. هذه الاستراتيجية فعالة جداً ومجانية.</p>
+                    
                     <div class="blog-cta">
-                        <h3>💡 تحتاج مساعدة في اختيار الدومين؟</h3>
-                        <button onclick="window.parent.openConsultModal ? window.parent.openConsultModal() : window.open('index.html#consultModal', '_blank')" class="btn-primary" style="background: var(--accent); color: #000; border: none; padding: 12px 30px; border-radius: 50px; font-weight: bold; cursor: pointer;">
-                            استشرنا الآن
+                        <h3>🚀 جهز متجرك للتسويق مع Web Forge</h3>
+                        <button onclick="window.parent.openOrderModal ? window.parent.openOrderModal('طلب استشارة تسويق') : window.open('index.html#consultModal', '_blank')" class="btn-primary">
+                            تواصل مع خبير تسويق
                         </button>
                     </div>
                 `
@@ -1371,7 +1725,7 @@
                 const matchesCategory = currentCategory === 'all' || post.category === currentCategory;
                 const matchesSearch = post.title.includes(currentSearch) || 
                                      post.excerpt.includes(currentSearch) ||
-                                     post.author.includes(currentSearch);
+                                     post.categoryName.includes(currentSearch);
                 return matchesCategory && matchesSearch;
             });
             
@@ -1380,7 +1734,7 @@
                     <div class="no-results">
                         <i class="fas fa-search"></i>
                         <p>عذراً، لا توجد مقالات تطابق بحثك</p>
-                        <button onclick="resetFilters()" style="margin-top: 20px; padding: 12px 30px; background: var(--accent); border: none; border-radius: 30px; color: #000; font-weight: bold; cursor: pointer;">
+                        <button onclick="resetFilters()" class="reset-btn">
                             عرض الكل
                         </button>
                     </div>
@@ -1516,7 +1870,6 @@
                 return;
             }
             
-            // هنا يمكن إضافة كود إرسال البريد إلى الخادم
             alert('شكراً لاشتراكك! سيصلك تأكيد على بريدك الإلكتروني قريباً.');
             document.getElementById('newsletterEmail').value = '';
         }
