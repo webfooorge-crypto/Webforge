@@ -1450,7 +1450,7 @@
     <!-- أزرار مشاركة ثابتة -->
     <div class="share-sidebar" id="shareSidebar">
         <a href="#" onclick="shareOnFacebook(); return false;" class="share-fb"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" onclick="shareOnTwitter(); return false;" class="share-twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" onclick="shareOnTwitter(); return false;" class="share-twitter"><i class="fab fa-x-twitter"></i></a>
         <a href="#" onclick="shareOnWhatsApp(); return false;" class="share-whatsapp"><i class="fab fa-whatsapp"></i></a>
         <button onclick="copyPageLink()" class="share-copy"><i class="fas fa-link"></i></button>
     </div>
@@ -1540,6 +1540,8 @@
         </div>
         <p>جميع الحقوق محفوظة © 2026 Web Forge | بإدارة محمد أيت صالح</p>
         <div class="social-links">
+            <a href="https://www.facebook.com/mhmd.ayt.salh.954282" target="_blank" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://x.com/ait_saleh769?t=tp39XWlZ017Nem5_K98awA&s=09" target="_blank" class="social-btn"><i class="fab fa-x-twitter"></i></a>
             <a href="https://www.instagram.com/web_forge4" target="_blank" class="social-btn"><i class="fab fa-instagram"></i></a>
             <a href="https://www.tiktok.com/@webfoorge" target="_blank" class="social-btn"><i class="fab fa-tiktok"></i></a>
         </div>
@@ -1556,7 +1558,7 @@
     <script>
         // ========== الإعدادات ==========
         const CONFIG = {
-            whatsappNumber: '212627713979',
+            whatsappNumber: '212712789329', // 0712789329 بصيغة دولية
             postsPerPage: 6
         };
 
@@ -1898,7 +1900,7 @@
                                 <h4>محمد أيت صالح</h4>
                                 <p>مطور ويب متكامل ومؤسس Web Forge. خبرة +5 سنوات في تطوير المشاريع الرقمية وتعليم البرمجة. عملت مع أكثر من 50 عميل حول العالم وساعدت المئات في بدء مسيرتهم البرمجية.</p>
                                 <div class="author-contact">
-                                    <a href="https://wa.me/212627713979"><i class="fab fa-whatsapp"></i></a>
+                                    <a href="https://wa.me/212712789329"><i class="fab fa-whatsapp"></i></a>
                                     <a href="mailto:webfooorge@gmail.com"><i class="fas fa-envelope"></i></a>
                                     <a href="#"><i class="fab fa-linkedin-in"></i></a>
                                     <a href="#"><i class="fab fa-github"></i></a>
@@ -1970,7 +1972,6 @@
                         <div class="comments-section">
                             <h3><i class="fab fa-facebook"></i> 34 تعليقاً</h3>
                             <p>شاركنا رأيك واستفساراتك حول دليل تعلم البرمجة</p>
-                            <!-- سيتم إضافة تعليقات فيسبوك ديناميكياً -->
                         </div>
                     </div>
                 `
@@ -2370,7 +2371,7 @@
                                 <h4>محمد أيت صالح</h4>
                                 <p>خبير تحسين محركات بحث معتمد، ساعدت أكثر من 30 موقعاً في الوصول للصفحة الأولى على جوجل. مؤسس Web Forge ومدرب SEO محترف.</p>
                                 <div class="author-contact">
-                                    <a href="https://wa.me/212627713979"><i class="fab fa-whatsapp"></i></a>
+                                    <a href="https://wa.me/212712789329"><i class="fab fa-whatsapp"></i></a>
                                     <a href="mailto:webfooorge@gmail.com"><i class="fas fa-envelope"></i></a>
                                 </div>
                             </div>
@@ -2869,7 +2870,7 @@
                                 <h4>محمد أيت صالح</h4>
                                 <p>مستقل محترف منذ 5 سنوات، عملت مع أكثر من 50 عميل حول العالم. حققت دخلاً من العمل الحر يفوق 100,000 درهم، وأساعد الآن مطورين آخرين في بناء مسيرتهم الحرة.</p>
                                 <div class="author-contact">
-                                    <a href="https://wa.me/212627713979"><i class="fab fa-whatsapp"></i></a>
+                                    <a href="https://wa.me/212712789329"><i class="fab fa-whatsapp"></i></a>
                                     <a href="mailto:webfooorge@gmail.com"><i class="fas fa-envelope"></i></a>
                                 </div>
                             </div>
@@ -3372,7 +3373,7 @@
                                 <h4>محمد أيت صالح</h4>
                                 <p>خبرة 5 سنوات في التسويق الرقمي. ساعدت أكثر من 30 مشروعاً في النمو بدون ميزانيات ضخمة. أؤمن أن الإبداع والاستمرارية أهم من المال.</p>
                                 <div class="author-contact">
-                                    <a href="https://wa.me/212627713979"><i class="fab fa-whatsapp"></i></a>
+                                    <a href="https://wa.me/212712789329"><i class="fab fa-whatsapp"></i></a>
                                     <a href="mailto:webfooorge@gmail.com"><i class="fas fa-envelope"></i></a>
                                 </div>
                             </div>
@@ -3625,7 +3626,6 @@
         function closeBlogModal() {
             document.getElementById('blogModal').style.display = 'none';
             document.body.style.overflow = 'auto';
-            // إيقاف تشغيل الصوت إذا كان يعمل
             if (window.speechSynthesis.speaking) {
                 window.speechSynthesis.cancel();
             }
@@ -3651,7 +3651,6 @@
 
         // ========== وظائف المقال ==========
         function speakArticle(btn) {
-            // إيقاف أي تشغيل سابق
             if (window.speechSynthesis.speaking) {
                 window.speechSynthesis.cancel();
             }
@@ -3659,17 +3658,15 @@
             const article = document.querySelector('.blog-full-post');
             if (!article) return;
             
-            // نأخذ أول 1000 كلمة فقط
             const text = article.innerText.substring(0, 3000);
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'ar-SA';
-            utterance.rate = 0.9; // سرعة مناسبة للاستماع
+            utterance.rate = 0.9;
             window.speechSynthesis.speak(utterance);
             
             btn.innerHTML = '<i class="fas fa-volume-up"></i> جاري التشغيل...';
             setTimeout(() => btn.innerHTML = '<i class="fas fa-headphones"></i> استمع للمقال', 3000);
             
-            // إيقاف عند إغلاق المودال
             utterance.onend = function() {
                 btn.innerHTML = '<i class="fas fa-headphones"></i> استمع للمقال';
             };
@@ -3693,21 +3690,17 @@
         }
         
         function reactToPost(type) { 
-            if (type === 'like') {
-                alert('👍 شكراً لتقييمك الإيجابي!');
-            } else if (type === 'dislike') {
-                alert('👎 نشكر ملاحظتك، سنعمل على تحسين المحتوى');
-            } else if (type === 'save') {
-                alert('🔖 تم حفظ المقال في مفضلتك');
-            } else if (type === 'share') {
-                alert('📤 شكراً للمشاركة');
-            } else if (type === 'content') {
-                alert('خيار ممتاز! ابدأ بكتابة أول مقال اليوم');
-            } else if (type === 'social') {
-                alert('تواصل مع جمهورك يومياً وسترى النتائج');
-            } else if (type === 'email') {
-                alert('ابنِ قائمتك البريدية من اليوم');
-            }
+            const messages = {
+                'like': '👍 شكراً لتقييمك الإيجابي!',
+                'dislike': '👎 نشكر ملاحظتك، سنعمل على تحسين المحتوى',
+                'save': '🔖 تم حفظ المقال في مفضلتك',
+                'share': '📤 شكراً للمشاركة',
+                'content': 'خيار ممتاز! ابدأ بكتابة أول مقال اليوم',
+                'social': 'تواصل مع جمهورك يومياً وسترى النتائج',
+                'email': 'ابنِ قائمتك البريدية من اليوم',
+                'question': 'يسعدنا الإجابة على استفسارك'
+            };
+            alert(messages[type] || 'شكراً لتفاعلك!');
         }
         
         function sendQuestion(postId) { 
@@ -3766,7 +3759,6 @@
                 if (e.key === 'Enter') searchPosts();
             });
             
-            // إظهار النشرة العائمة بعد 10 ثوانٍ
             setTimeout(() => {
                 if (!localStorage.getItem('newsletterShown')) {
                     document.getElementById('newsletterFloat').classList.add('show');
